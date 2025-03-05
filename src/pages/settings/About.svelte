@@ -28,7 +28,7 @@
             <div class="divider"></div>
 
             {#await getVersion() then value}
-                <li>UMDA_UI: <span class="badge badge-info">v{value}</span></li>
+                <li>ChemXploreML: <span class="badge badge-info">v{value}</span></li>
             {/await}
 
             {#await getTauriVersion() then value}

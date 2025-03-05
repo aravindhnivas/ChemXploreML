@@ -23,6 +23,8 @@ fn get_sysinfo() -> (u64, usize) {
     (total_memory, cpu_count)
 }
 
+use tauri::Manager;
+use std::fs;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -47,6 +49,20 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![get_tcp_port, get_sysinfo])
         .plugin(tauri_plugin_window_state::Builder::default().build())
         .plugin(tauri_plugin_websocket::init())
+        .setup(|app| {
+            let app_handle = app.handle();
+            let app_local_data_dir = app_handle
+                .path()
+                .app_local_data_dir()
+                .expect("Failed to resolve AppLocalData directory");
+
+            if !app_local_data_dir.exists() {
+                fs::create_dir_all(&app_local_data_dir)
+                    .expect("Failed to create AppLocalData directory");
+            }
+
+            Ok(())
+        })
         .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .expect("Error while running Tauri application");
 }

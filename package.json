@@ -1,7 +1,7 @@
 {
-  "name": "umda_ui",
+  "name": "chem_xplore_ml",
   "private": true,
-  "version": "3.1.6",
+  "version": "4.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

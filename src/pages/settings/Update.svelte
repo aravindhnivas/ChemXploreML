@@ -196,7 +196,7 @@
         // const unlisten2 = await listen_download_progress;
         // unlisten2();
     });
-    let url = 'https://github.com/aravindhnivas/UMDA_UI/releases/download/v2.5.0/umda_ui_2.5.0_aarch64.dmg';
+    let url = '';
 </script>
 
 <Layout id="Update" class="pl-5">

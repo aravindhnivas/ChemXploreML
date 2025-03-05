@@ -9,8 +9,8 @@
             <div class="hero h-full">
                 <div class="hero-content text-center">
                     <div class="max-w-md">
-                        <h1 class="text-5xl font-bold">UMDA - UI</h1>
-                        <p class="py-6">Unsupervised Molecule Discovery in Astrophysics - User Interface</p>
+                        <h1 class="text-5xl font-bold">ChemXploreML</h1>
+                        <p class="py-6">A general-purpose desktop application for molecular property prediction</p>
                         <button
                             class="btn btn-sm btn-outline"
                             on:click={() => {
