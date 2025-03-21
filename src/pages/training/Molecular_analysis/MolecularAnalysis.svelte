@@ -28,7 +28,7 @@
         if (!smiles) return toast.error('Please provide a SMILES string');
         // console.log('Analyse', smiles);
         return {
-            pyfile: 'utils.molecular_analyzer',
+            pyfile: 'training.molecular_analysis_single_mode',
             args: {
                 smiles,
             },
