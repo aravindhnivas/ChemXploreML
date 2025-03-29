@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { background_color, text_color } from './pages/settings/stores';
     import { RAM_SIZE, CPU_COUNT, NPARTITIONS, fontSize } from '$lib/stores/system';
     import { Toaster } from 'svelte-sonner';
     import * as pages from './pages';
@@ -46,6 +47,17 @@
         } else if (cond && event.key === '-') {
             $fontSize -= 1;
         }
+    }
+
+    // $: applyGlobalStyles($background_color, $text_color);
+
+    function applyGlobalStyles(bg_color: string, text_color: string = 'black') {
+        console.log('applyGlobalStyles', bg_color, text_color);
+        document.body.style.backgroundColor = $background_color;
+        document.body.style.color = $text_color;
+        const html_el = document.documentElement;
+        html_el.style.setProperty('--background-color', $background_color);
+        html_el.style.setProperty('--text-color', $text_color);
     }
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { background_color, text_color } from './stores';
     import {
         developerMode,
         serverCurrentStatus,
@@ -78,6 +79,8 @@
             </svelte:fragment>
         </CustomInput>
         <CustomInput lock bind:value={$server_timeout_in_minutes} label="server-timeout" type="number" max="25" />
+        <CustomInput bind:value={$background_color} label="background color" />
+        <CustomInput bind:value={$text_color} label="text color" />
     </div>
     <div class="divider"></div>
     <div class="flex-center justify-between">
