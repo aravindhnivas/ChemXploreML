@@ -24,6 +24,7 @@
         <!-- <div class="text-lg">Molecular structure</div> -->
         <button class="btn btn-sm btn-outline" on:click={() => (show_controls = !show_controls)}>
             <!-- Adjust proportions -->
+            <span>{show_controls ? 'Hide' : 'Show'} Controller</span>
             <Proportions size="20" />
         </button>
     </div>

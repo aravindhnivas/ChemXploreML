@@ -7,12 +7,13 @@
     import PreModal from '$utils/PreModal.svelte';
     import { active_tab } from '$utils/stores';
     import { typeSafeObjectKeys } from '$lib/utils';
-    import { Home, Settings, Binary } from 'lucide-svelte/icons';
+    import { Home, Settings, Binary, Atom } from 'lucide-svelte/icons';
     import type { SvelteComponent } from 'svelte';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
 
     const nav_tabs = [
         { tab: 'Home', component: Home },
+        { tab: 'Molecular Analysis', component: Atom },
         { tab: 'Training', component: Binary },
         { tab: 'Settings', component: Settings },
     ] as { tab: string; component: typeof SvelteComponent }[];
