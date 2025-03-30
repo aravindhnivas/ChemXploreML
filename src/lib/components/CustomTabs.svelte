@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { SvelteComponent } from 'svelte';
+    import { type Icon as IconType } from 'lucide-svelte/icons';
 
-    export let tabs: { tab: string; component?: typeof SvelteComponent }[];
+    export let tabs: { tab: string; component?: typeof IconType }[];
     export let active: string;
 
     let className = 'boxed';

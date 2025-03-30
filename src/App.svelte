@@ -7,8 +7,7 @@
     import PreModal from '$utils/PreModal.svelte';
     import { active_tab } from '$utils/stores';
     import { typeSafeObjectKeys } from '$lib/utils';
-    import { Home, Settings, Binary, Atom, Bot } from 'lucide-svelte/icons';
-    import type { SvelteComponent } from 'svelte';
+    import { Home, Settings, Binary, Atom, Bot, type Icon as IconType } from 'lucide-svelte/icons';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
 
     const nav_tabs = [
@@ -17,7 +16,7 @@
         { tab: 'Train Embedder', component: Bot },
         { tab: 'ML Training', component: Binary },
         { tab: 'Settings', component: Settings },
-    ] as { tab: string; component: typeof SvelteComponent }[];
+    ] as { tab: string; component: typeof IconType }[];
 
     let html: HTMLElement;
 
