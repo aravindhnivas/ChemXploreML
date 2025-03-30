@@ -2,7 +2,8 @@
     import BrowseFile from '$lib/components/BrowseFile.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import CustomSelect from '$lib/components/CustomSelect.svelte';
-    import { embeddings } from '../embedding/stores';
+    // import { embeddings } from '../embedding/stores';
+    import { embeddings } from '$pages/training/embedding/stores';
     import Plot from 'svelte-plotly.js';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomTabs from '$lib/components/CustomTabs.svelte';

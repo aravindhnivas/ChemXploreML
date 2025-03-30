@@ -21,13 +21,12 @@
 
 <div class="grid gap-1">
     <div class="flex gap-2">
-        <!-- <div class="text-lg">Molecular structure</div> -->
         <button class="btn btn-sm btn-outline" on:click={() => (show_controls = !show_controls)}>
-            <!-- Adjust proportions -->
             <span>{show_controls ? 'Hide' : 'Show'} Controller</span>
             <Proportions size="20" />
         </button>
     </div>
+
     {#if show_controls}
         <div class="grid grid-cols-5 gap-2">
             <div class="col-span-2 grid gap-1">
