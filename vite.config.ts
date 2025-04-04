@@ -56,6 +56,7 @@ export default defineConfig(async () => ({
                         'installUpdate',
                         'relaunch',
                         'listen',
+                        'open_filepath',
                     ],
                 },
             ],

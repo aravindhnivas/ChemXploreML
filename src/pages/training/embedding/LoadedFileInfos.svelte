@@ -76,9 +76,13 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={async () => {
-            if (!loaded_files) return;
-            const dir = await path.dirname(loaded_files['embedded_file'].value);
-            await shell.open(await path.dirname(dir));
+            try {
+                if (!loaded_files) return;
+                const dir = await path.dirname(loaded_files['embedded_file'].value);
+                await open_filepath(await path.dirname(dir));
+            } catch (error) {
+                toast.error(error);
+            }
         }}
     >
         <span>Open folder</span>

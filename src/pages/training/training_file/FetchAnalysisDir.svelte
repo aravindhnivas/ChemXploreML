@@ -61,11 +61,8 @@
         <div class="flex-gap">
             <div class="text-sm">Analysis dir:</div>
             <div class="text-sm">{analysis_dir}</div>
-            <button
-                class="btn btn-sm btn-outline"
-                on:click={async () => {
-                    await shell.open(analysis_dir);
-                }}>Open Folder <ExternalLink size="20" /></button
+            <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath(analysis_dir)}
+                >Open Folder <ExternalLink size="20" /></button
             >
         </div>
         <div class="flex-gap">

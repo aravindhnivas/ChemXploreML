@@ -150,6 +150,7 @@ export const writeJSON = async (file: string, data: any, append: boolean = false
         toast.success(`Data saved to ${file}`);
     }
 };
+
 export const read_csv = async (file: string) => {
     if (!(await fs.exists(file))) return { columns: [], data: [] };
     const contents = await fs.readTextFile(file);
@@ -161,4 +162,26 @@ export const read_csv = async (file: string) => {
         .map(line => line.split(','))
         .filter(f => f.length === columns.length);
     return { columns, data };
+};
+
+export const open_filepath = async (file: string | Promise<string>) => {
+    try {
+        if (typeof file === 'object' && file instanceof Promise) {
+            file = await file;
+        }
+
+        if (!file || file?.trim() === '') {
+            toast.error('File path is empty');
+            return;
+        }
+
+        if (!(await fs.exists(file))) {
+            toast.error('File does not exist');
+            return;
+        }
+        await shell.open(`file://${file}`);
+    } catch (error) {
+        console.error('Error opening file:', error);
+        toast.error(error);
+    }
 };

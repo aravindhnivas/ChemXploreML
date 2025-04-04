@@ -35,12 +35,8 @@
 
 <div class="flex-gap border border-solid border-black p-1">
     <div class="text-sm">{$best_metrics_loc}</div>
-    <button
-        class="btn btn-sm btn-outline"
-        on:click={async () => {
-            if (!(await fs.exists($best_metrics_loc))) return toast.error('Folder does not exist');
-            await shell.open($best_metrics_loc);
-        }}>Open Folder <ExternalLink size="20" /></button
+    <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath($best_metrics_loc)}
+        >Open Folder <ExternalLink size="20" /></button
     >
 </div>
 

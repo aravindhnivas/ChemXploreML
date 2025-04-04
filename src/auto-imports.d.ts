@@ -46,6 +46,7 @@ declare global {
   const oO: typeof import('@zmotivat0r/o0')['oO']
   const onDestroy: typeof import('svelte')['onDestroy']
   const onMount: typeof import('svelte')['onMount']
+  const open_filepath: typeof import('$lib/utils/index')['open_filepath']
   const os: typeof import('$lib/utils/index')['os']
   const path: typeof import('$lib/utils/index')['path']
   const platform: typeof import('$lib/utils/index')['platform']

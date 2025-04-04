@@ -28,26 +28,6 @@
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import { asset_download_required } from './utils/stores';
 
-    const get_local_dir = async () => {
-        try {
-            const localdir = await path.appLocalDataDir();
-            console.log(localdir);
-            await shell.open(localdir);
-        } catch (error) {
-            toast.error(error as string);
-        }
-    };
-
-    const get_log_dir = async () => {
-        try {
-            const dir = await path.appLogDir();
-            console.log(dir);
-            await shell.open(dir);
-        } catch (error) {
-            toast.error(error as string);
-        }
-    };
-
     onMount(async () => {
         if (import.meta.env.DEV) {
             if (!$umdapy.includes('dev')) {
@@ -138,8 +118,16 @@
             }}>check-umdapy-assets</button
         >
 
-        <button class="btn btn-sm btn-outline" on:click={get_local_dir}>APP Local data <ExternalLink /></button>
-        <button class="btn btn-sm btn-outline" on:click={get_log_dir}>logs folder<ExternalLink /></button>
+        <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath(await path.appLocalDataDir())}>
+            APP Local data <ExternalLink />
+        </button>
+        <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath(await path.appLogDir())}>
+            Logs <ExternalLink />
+        </button>
+
+        <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath(await path.resourceDir())}>
+            ResourceDir <ExternalLink />
+        </button>
 
         <button
             class="btn btn-sm btn-outline ml-auto"
