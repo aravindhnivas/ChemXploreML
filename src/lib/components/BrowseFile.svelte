@@ -90,9 +90,13 @@
         <button
             class="btn btn-sm btn-outline join-item"
             on:click={async () => {
-                if (!filename) return toast.error('No file selected');
-                if (directory) await shell.open(filename);
-                else await shell.open(await path.dirname(filename));
+                try {
+                    if (!filename) return toast.error('No file selected');
+                    if (directory) await shell.open(filename);
+                    else await shell.open(await path.dirname(filename));
+                } catch (error) {
+                    toast.error(error);
+                }
             }}><ExternalLink /></button
         >
     </div>
