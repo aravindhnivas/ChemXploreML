@@ -18,31 +18,36 @@
 
 <Layout id="About" class="pl-5">
     <h1>About</h1>
-    <div class="content">
-        <ul class="ml-0 flex flex-col gap-1">
-            <li>
-                Platform: <span class="badge badge-info">{system_info.platform}-{system_info.arch}</span>
-            </li>
-            <li class="text-sm">RAM: <span class="badge badge-info">{$RAM_SIZE.toFixed(0)} GB RAM</span></li>
-            <li class="text-sm">CPU: <span class="badge badge-info">{$CPU_COUNT.toFixed(0)} core</span></li>
-            <div class="divider"></div>
+    <div class="grid grid-cols-5 w-[350px] gap-2">
+        <div class="col-span-3">Platform</div>
+        <span class="col-span-2 badge badge-info">{system_info.platform}-{system_info.arch}</span>
 
-            {#await getVersion() then value}
-                <li>ChemXploreML: <span class="badge badge-info">v{value}</span></li>
-            {/await}
+        <div class="col-span-3">RAM</div>
+        <span class="col-span-2 badge badge-info">{$RAM_SIZE.toFixed(0)} GB</span>
 
-            {#await getTauriVersion() then value}
-                <li>Tauri: <span class="badge badge-info">v{value}</span></li>
-            {/await}
-            <li>
-                Python: <span class="badge badge-info" class:badge-error={!$pyVersion}>{$pyVersion || 'unknown'}</span>
-            </li>
-            <li>
-                umdapy: <span class="badge badge-info" class:badge-error={!$umdapyVersion}
-                    >v{$umdapyVersion || 'unknown'}</span
-                >
-            </li>
-            <div class="divider"></div>
-        </ul>
+        <div class="col-span-3">CPU</div>
+        <span class="col-span-2 badge badge-info">{$CPU_COUNT.toFixed(0)} core</span>
+
+        <div class="col-span-5 divider"></div>
+
+        <div class="col-span-3">ChemXploreML</div>
+        {#await getVersion() then value}
+            <span class="col-span-2 badge badge-info">v{value}</span>
+        {/await}
+
+        <div class="col-span-3">Tauri</div>
+        {#await getTauriVersion() then value}
+            <span class="col-span-2 badge badge-info">v{value}</span>
+        {/await}
+
+        <div class="col-span-3">Python</div>
+        <span class="col-span-2 badge badge-info" class:badge-error={!$pyVersion}>{$pyVersion || 'unknown'}</span>
+
+        <div class="col-span-3">umdapy</div>
+        <span class="col-span-2 badge badge-info" class:badge-error={!$umdapyVersion}
+            >v{$umdapyVersion || 'unknown'}</span
+        >
     </div>
+
+    <img src="/icons/icon.png" alt="ChemXploreML Logo" class="w-32 h-32 m-auto" />
 </Layout>
