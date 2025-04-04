@@ -34,11 +34,8 @@
                         class="btn btn-sm btn-outline w-max ml-auto"
                         on:click={async () => {
                             if (!save_loc_name) return;
-                            try {
-                                await shell.open(save_loc_name);
-                            } catch (error) {
-                                if (error instanceof Error) toast.error(error?.message);
-                            }
+                            await open_filepath(save_loc_name);
+                            toast.success('Folder opened');
                         }}
                     >
                         <span>Open folder</span>

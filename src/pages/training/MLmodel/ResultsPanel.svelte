@@ -686,13 +686,7 @@
                                     </span>
                                     <button
                                         class="btn btn-sm btn-outline"
-                                        on:click={async () => {
-                                            try {
-                                                await shell.open(await path.dirname(plotted_pkl_file));
-                                            } catch (error) {
-                                                toast.error(error);
-                                            }
-                                        }}
+                                        on:click={async () => await open_filepath(await path.dirname(plotted_pkl_file))}
                                     >
                                         <span>Open folder</span>
                                         <ExternalLink size="20" />
