@@ -83,6 +83,8 @@ export async function startServer() {
             console.log(last_traceback);
             serverInfo.error(last_traceback);
             serverInfo.error('Server closed with error');
+
+            Alert.error(last_traceback);
         }
         pyServerFailed.set(true);
         pyServerReady.set(false);
