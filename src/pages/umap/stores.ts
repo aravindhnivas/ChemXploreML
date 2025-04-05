@@ -23,3 +23,5 @@ export const umap_metrics = [
     'sokalsneath',
     'yule',
 ];
+
+export const loaded_files = writable<LoadedInfosFile>({});

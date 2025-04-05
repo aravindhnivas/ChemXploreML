@@ -1,6 +1,6 @@
 <script lang="ts">
     import { cleanlab } from '$pages/training/MLmodel/stores';
-    import { umap_metrics } from './stores';
+    import { umap_metrics, loaded_files } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import CustomSelect from '$lib/components/CustomSelect.svelte';
@@ -13,7 +13,7 @@
     export let id: string = 'umap-embedder-container';
     export let display: string = 'none';
 
-    let loaded_files: LoadedInfosFile;
+    // let loaded_files: LoadedInfosFile;
 
     const params_description: Record<keyof UMAPParams, string> = {
         n_neighbors:
@@ -28,17 +28,17 @@
 
     async function compute_umap_embedding() {
         console.log('UMAP embedding');
-        if (!loaded_files) {
+        if (!$loaded_files) {
             toast.error('Please load the necessary files');
             return;
         }
 
-        if (!(await fs.exists(loaded_files.final_processed_file.value))) {
+        if (!(await fs.exists($loaded_files.final_processed_file.value))) {
             toast.error('Processed file not found');
             return;
         }
 
-        const vec_processed_dir = await path.dirname(loaded_files.final_processed_file.value);
+        const vec_processed_dir = await path.dirname($loaded_files.final_processed_file.value);
         const label_issues_file = await path.join(vec_processed_dir, `label_issues_${$cleanlab.model}.parquet`);
         if (params.use_cleaned_data && !(await fs.exists(label_issues_file))) {
             toast.error('Label issues file not found. Or Turn off "Use cleaned data"');
@@ -56,20 +56,20 @@
                 scale_embedding: params.scale_embedding,
                 annotate_clusters: params.annotate_clusters,
                 label_issues_file: params.use_cleaned_data ? label_issues_file : null,
-                processed_df_file: loaded_files.final_processed_file.value,
-                columnX: loaded_files.columnX.value,
+                processed_df_file: $loaded_files.final_processed_file.value,
+                columnX: $loaded_files.columnX.value,
                 dbscan_eps: params.dbscan_eps,
                 dbscan_min_samples: params.dbscan_min_samples,
                 random_state: params.random_state_locked ? null : params.random_state,
-                training_filename: loaded_files.training_file.basename,
+                training_filename: $loaded_files.training_file.basename,
                 fig_title: params.fig_title,
             },
         };
     }
 
     const get_save_fname = async (params: UMAP_DBSCAN_Cluster_PARAMS) => {
-        const extname = await path.extname(loaded_files.training_file.basename);
-        save_fname = loaded_files.training_file.basename.replace(`.${extname}`, '');
+        const extname = await path.extname($loaded_files.training_file.basename);
+        save_fname = $loaded_files.training_file.basename.replace(`.${extname}`, '');
         if (params.scale_embedding) save_fname += '_scaled';
         if (!params.random_state_locked) save_fname += `_random_state_${params.random_state}`;
         save_fname += `_umap_${params.n_neighbors}_${params.min_dist}_${params.n_components}`;
@@ -87,10 +87,10 @@
     };
 
     let save_fname: string = '';
-    $: loaded_files?.training_file?.basename && get_save_fname(params);
+    $: $loaded_files?.training_file?.basename && get_save_fname(params);
     let umap_dir: string = '';
-    $: loaded_files?.final_processed_file?.value &&
-        get_umap_dir(loaded_files.final_processed_file.value, params.use_cleaned_data);
+    $: $loaded_files?.final_processed_file?.value &&
+        get_umap_dir($loaded_files.final_processed_file.value, params.use_cleaned_data);
 
     $: path.join(umap_dir, `[plotly_data]_${save_fname}.json`).then(res => {
         plotly_data_file = res;
@@ -123,7 +123,7 @@
         if (!(await fs.exists(umap_loc))) return;
     };
 
-    $: get_umap_loc(loaded_files?.final_processed_file?.value);
+    $: get_umap_loc($loaded_files?.final_processed_file?.value);
 
     let plotly_data: Plotly.Data[];
     let plotly_layout: Plotly.Layout;
@@ -151,11 +151,7 @@
 
 <div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]" {id} style:display>
     <h2>UMAP</h2>
-
-    <LoadedFileInfos on:refresh={e => (loaded_files = e.detail)} />
-    <div class="divider"></div>
     <SaveAndLoadState loc={umap_loc} {default_params} bind:params unique_ext={'.umap.json'} />
-
     <CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
 
     <div class="text-xl">Basic UMAP Parameters</div>
