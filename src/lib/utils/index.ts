@@ -83,6 +83,7 @@ export const safeJsonParse = <T>(str: string) => {
         const jsonValue: T = JSON.parse(str);
         return jsonValue;
     } catch (error) {
+        console.error('Error parsing JSON:', error);
         toast.error(error);
         return undefined;
     }

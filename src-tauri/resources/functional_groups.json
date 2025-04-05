@@ -1,0 +1,22 @@
+{
+	"alcohol": "[OX2H]",
+	"aldehyde": "[CX3H1](=O)",
+	"ketone": "[CX3](=[OX1])",
+	"carboxylic_acid": "[CX3](=O)[OX2H1]",
+	"ester": "[CX3](=O)[OX2][#6]",
+	"ether": "[OD2]([#6])[#6]",
+	"amine": "[NX3;H2,H1,H0;!$(NC=O)]",
+	"amide": "[NX3][CX3](=[OX1])",
+	"nitro": "[$([NX3](=O)=O),$([NX3+](=O)[O-])]",
+	"nitrile": "[NX1]#[CX2]",
+	"sulfide": "[#16X2H0]",
+	"sulfoxide": "[#16X3](=[OX1])",
+	"sulfone": "[#16X4](=[OX1])(=[OX1])",
+	"thiol": "[#16X2H]",
+	"alkene": "[CX3]=[CX3]",
+	"alkyne": "[CX2]#[CX2]",
+	"aromatic": "a",
+	"halide_alkyl": "[#6][F,Cl,Br,I]",
+	"halide_aryl": "[c][F,Cl,Br,I]",
+	"phenol": "[OX2H][c]"
+}
