@@ -48,7 +48,7 @@
 <Page {id}>
     <svelte:fragment slot="body">
         <Pane class="p-2">
-            <div class="grid content-start gap-2 p-5" {id}>
+            <div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]" {id}>
                 <CustomInput
                     label="SMILES"
                     bind:value={smiles}
@@ -78,7 +78,6 @@
                 </Set>
 
                 <div class="divider"></div>
-
                 {#if !isEmpty(full_analysis)}
                     <PropertiesBox {selected_properties} {full_analysis} {all_properties} />
                 {:else}
