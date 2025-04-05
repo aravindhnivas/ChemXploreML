@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { background_color, text_color } from './pages/settings/stores';
+    import { background_color, text_color } from '$pages/settings/stores';
     import { RAM_SIZE, CPU_COUNT, NPARTITIONS, fontSize } from '$lib/stores/system';
     import { Toaster } from 'svelte-sonner';
     import * as pages from './pages';
@@ -7,7 +7,7 @@
     import PreModal from '$utils/PreModal.svelte';
     import { active_tab } from '$utils/stores';
     import { typeSafeObjectKeys } from '$lib/utils';
-    import { Home, Settings, Binary, Atom, Bot, type Icon as IconType } from 'lucide-svelte/icons';
+    import { Home, Settings, Binary, Atom, Bot, Layers2, type Icon as IconType } from 'lucide-svelte/icons';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
 
     const nav_tabs = [
@@ -15,6 +15,7 @@
         { tab: 'Molecular Analysis', component: Atom },
         { tab: 'Train Embedder', component: Bot },
         { tab: 'ML Training', component: Binary },
+        { tab: 'UMAP/t-SNE', component: Layers2 },
         { tab: 'Settings', component: Settings },
     ] as { tab: string; component: typeof IconType }[];
 

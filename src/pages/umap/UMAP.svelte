@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { cleanlab } from './../MLmodel/stores';
+    import { cleanlab } from '$pages/training/MLmodel/stores';
     import { umap_metrics } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import CustomSelect from '$lib/components/CustomSelect.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
-    import LoadedFileInfos from '../embedding/LoadedFileInfos.svelte';
+    import LoadedFileInfos from '$pages/training/embedding/LoadedFileInfos.svelte';
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
     import Plot from 'svelte-plotly.js';
-    import { embedding, embeddings } from '../embedding/stores';
+    import { embedding, embeddings } from '$pages/training/embedding/stores';
 
     export let id: string = 'umap-embedder-container';
     export let display: string = 'none';
@@ -149,8 +149,8 @@
     };
 </script>
 
-<div class="grid content-start gap-2" {id} style:display>
-    <h2>UMAP - embedder</h2>
+<div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]" {id} style:display>
+    <h2>UMAP</h2>
 
     <LoadedFileInfos on:refresh={e => (loaded_files = e.detail)} />
     <div class="divider"></div>
