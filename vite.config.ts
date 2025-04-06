@@ -57,6 +57,7 @@ export default defineConfig(async () => ({
                         'relaunch',
                         'listen',
                         'open_filepath',
+                        'btn_dispatch_event',
                     ],
                 },
             ],
