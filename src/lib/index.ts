@@ -1,4 +1,4 @@
-import { Home, Settings, Binary, Atom, Bot, Layers2 } from 'lucide-svelte/icons';
+import { Home, Settings, Binary, Atom, Bot, Layers2, Rss, MonitorDown } from 'lucide-svelte/icons';
 
 export const APP_IDS = writable<AppIds>({
     Home: {
@@ -26,7 +26,7 @@ export const APP_IDS = writable<AppIds>({
         icon: Binary,
         id: 'ml_training',
         children: [
-            { name: 'Load file', id: 'load_file' },
+            { name: 'Load file', id: 'load_file', icon: MonitorDown },
             { name: 'Embedding', id: 'embedding' },
             { name: 'ML Model', id: 'ml_model' },
             { name: 'ML Prediction', id: 'ml_prediction' },
@@ -47,7 +47,7 @@ export const APP_IDS = writable<AppIds>({
         icon: Settings,
         id: 'settings',
         children: [
-            { name: 'Configuration', id: 'configuration' },
+            { name: 'Configuration', id: 'configuration', icon: Settings },
             { name: 'Update', id: 'update' },
             { name: 'Console', id: 'console' },
             { name: 'Process-Monitor', id: 'process-monitor' },

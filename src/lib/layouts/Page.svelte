@@ -27,9 +27,14 @@
     {#if page_children}
         <Pane class="p-2" size={pane_size} minSize={pane_min_size} maxSize={pane_max_size}>
             <ul class="menu rounded-box gap-2">
-                {#each page_children as { name, id } (id)}
+                {#each page_children as { name, id, icon } (id)}
                     <li on:click={() => ($active_page_child_id[page_name] = id)}>
-                        <span class:active={$active_page_child_id[page_name] == id}>{name}</span>
+                        <span class:active={$active_page_child_id[page_name] == id}>
+                            {#if icon}
+                                <svelte:component this={icon} class="w-4 h-4 mr-2" />
+                            {/if}
+                            {name}
+                        </span>
                     </li>
                 {/each}
             </ul>

@@ -20,6 +20,7 @@ type AppIds = Record<
         children?: {
             name: string;
             id: string;
+            icon?: any;
         }[];
     }
 >;
