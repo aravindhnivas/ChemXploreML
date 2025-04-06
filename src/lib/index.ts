@@ -1,4 +1,4 @@
-import { Home, Settings, Binary, Atom, Bot, Layers2, Rss, MonitorDown, Wand } from 'lucide-svelte/icons';
+import { Home, Settings, Binary, Atom, Bot, Layers2, MonitorDown, Wand } from 'lucide-svelte/icons';
 
 export const APP_IDS = writable<AppIds>({
     Home: {
