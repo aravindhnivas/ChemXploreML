@@ -6,6 +6,7 @@
     import { initializeSocket } from '$lib/websocket/utils';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
+    import StartStopServerControl from '$lib/start_stop_server/StartStopServerControl.svelte';
 
     export let display = 'grid';
 
@@ -59,64 +60,9 @@
         <div class="status-indicator error">Connection error</div>
     {/if}
 
-    <!-- {#if Object.keys($jobStatus).length > 0}
-        <button
-            class="m-auto btn btn-sm btn-error"
-            on:click={() => {
-                $jobStatus = Object.fromEntries(
-                    Object.entries($jobStatus).filter(([_jobId, status]) => status.status !== 'completed'),
-                );
-            }}
-        >
-            Clear all <Trash2 size="20" />
-        </button>
+    {#if import.meta.env.DEV}
+        <StartStopServerControl id="start-stop-server-control-redis" />
     {/if}
-
-    <div style="overflow-y: auto; max-height: 500px;">
-        <div class="grid gap-2">
-            {#each Object.entries($jobStatus) as [jobId, status]}
-                <div class="grid border border-black p-2 gap-1 mr-5">
-                    <div class="flex items-center justify-between">
-                        <div class="text-lg font-bold">Job: {jobId}</div>
-                        <button
-                            class="btn btn-xs btn-error"
-                            on:click={() => {
-                                $jobStatus = Object.fromEntries(
-                                    Object.entries($jobStatus).filter(([id, _status]) => id !== jobId),
-                                );
-                            }}>Close <XCircle size="20" /></button
-                        >
-                    </div>
-                    <div>
-                        <pre>Status: {status.status}</pre>
-                    </div>
-
-                    <div class="flex-gap">
-                        {#if status.status === 'completed'}
-                            <button
-                                class="btn btn-sm btn-success"
-                                on:click={async () => {
-                                    const data = await redis_job_controller(jobId, 'job_result');
-                                    if (!data) return;
-                                    console.warn(data.result);
-                                }}>Show result</button
-                            >
-                        {/if}
-                        {#if status.status !== 'completed'}
-                            <button
-                                class="btn btn-sm btn-error"
-                                on:click={async () => {
-                                    const data = await redis_job_controller(jobId, 'cancel_job');
-                                    if (!data) return;
-                                    console.warn(data.message);
-                                }}>Cancel job</button
-                            >
-                        {/if}
-                    </div>
-                </div>
-            {/each}
-        </div>
-    </div> -->
 </Layout>
 
 <style>
