@@ -1,1 +1,1 @@
-export { default } from './MolecularAnalysis.svelte';
+export { default } from './Index.svelte';

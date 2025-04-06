@@ -44,7 +44,7 @@
     let compute_btn: HTMLButtonElement | undefined = undefined;
 </script>
 
-<Page id={$APP_IDS.MolecularAnalysis.id}>
+<Page page_name="MolecularAnalysis">
     <svelte:fragment slot="body">
         <Pane class="p-2">
             <div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]">

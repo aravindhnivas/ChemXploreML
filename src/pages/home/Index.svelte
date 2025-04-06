@@ -4,7 +4,7 @@
     import { Pane } from 'svelte-splitpanes';
 </script>
 
-<Page id={$APP_IDS.Home.id}>
+<Page page_name="Home">
     <svelte:fragment slot="body">
         <Pane class="p-2">
             <div class="hero h-full">
