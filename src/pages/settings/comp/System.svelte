@@ -9,7 +9,7 @@
         logger.info('About page mounted');
         system_info.platform = await platform();
         system_info.arch = await arch();
-        logger.info(JSON.stringify(system_info));
+        logger.info(system_info);
     });
 
     const system_info = {
