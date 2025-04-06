@@ -186,3 +186,9 @@ export const open_filepath = async (file: string | Promise<string>) => {
         toast.error(error);
     }
 };
+
+export const btn_dispatch_event = (target: HTMLButtonElement, detail: Object, eventName: string) => {
+    if (!target) return console.warn('No target to dispatch event');
+    const event = new CustomEvent(eventName, { bubbles: false, detail });
+    target.dispatchEvent(event);
+};
