@@ -73,7 +73,7 @@ export const APP_IDS = writable<AppIds>({
     },
 });
 
-export const active_page_id = localWritable<string>('active_page_id', 'Home');
+export const active_page_id = localWritable<string>('active_page_id', 'home');
 
 export const active_page_child_id = localWritable<{ [key in PAGES]: string }>('active_page_child_id', {
     Home: '',
