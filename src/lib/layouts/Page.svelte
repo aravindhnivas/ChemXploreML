@@ -3,6 +3,9 @@
     import { Pane, Splitpanes } from 'svelte-splitpanes';
 
     export let page_name: PAGES = 'Home';
+    export let pane_size = 10;
+    export let pane_min_size = 5;
+    export let pane_max_size = 20;
 
     const id = $APP_IDS[page_name].id;
     const page_children = $APP_IDS[page_name].children;
@@ -22,7 +25,7 @@
     class="card  shadow-xl animate__animated animate__fadeIn h-full w-full overflow-hidden rounded-none py-2"
 >
     {#if page_children}
-        <Pane class="p-2" size={10} minSize={5} maxSize={20}>
+        <Pane class="p-2" size={pane_size} minSize={pane_min_size} maxSize={pane_max_size}>
             <ul class="menu rounded-box gap-2">
                 {#each page_children as { name, id } (id)}
                     <li on:click={() => ($active_page_child_id[page_name] = id)}>

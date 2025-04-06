@@ -4,7 +4,7 @@
     import { Configuration, Console, About, Update, ProcessManager } from '.';
 </script>
 
-<Page page_name="Settings">
+<Page page_name="Settings" pane_size={20}>
     <svelte:fragment slot="body" let:active_children>
         <Pane minSize={50} maxSize={90}>
             <Configuration display={active_children === 'configuration' ? 'grid' : 'none'} />
