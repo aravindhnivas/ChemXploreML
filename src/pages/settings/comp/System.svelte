@@ -19,7 +19,7 @@
 </script>
 
 <Layout {display} class="pl-5">
-    <h1>About</h1>
+    <h1>System</h1>
     <div class="grid grid-cols-5 w-[350px] gap-2">
         <div class="col-span-3">Platform</div>
         <span class="col-span-2 badge badge-dark">{system_info.platform}-{system_info.arch}</span>

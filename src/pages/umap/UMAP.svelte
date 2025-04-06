@@ -149,14 +149,15 @@
     };
 </script>
 
-<div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]" {id} style:display>
+<div class="grid content-start gap-2 px-5" {id} style:display>
     <h2>UMAP</h2>
     <SaveAndLoadState loc={umap_loc} {default_params} bind:params unique_ext={'.umap.json'} />
     <CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
+    <div class="divider"></div>
 
-    <div class="text-xl">Basic UMAP Parameters</div>
+    <div class="text-md">Basic UMAP Parameters</div>
 
-    <div class="flex-gap items-start">
+    <div class="flex-gap items-start flex-wrap">
         <CustomInput
             bind:value={params.n_neighbors}
             type="number"
@@ -198,10 +199,14 @@
         />
     </div>
 
+    <div class="divider"></div>
+
     <div class="flex-gap">
         <Checkbox bind:value={params.scale_embedding} label="Scale embedding" />
         <Checkbox bind:value={params.use_cleaned_data} label="Use cleaned data" />
     </div>
+
+    <div class="divider"></div>
 
     <div class="text-md">DBSCAN Clustering</div>
     <div class="flex-gap items-start">
@@ -223,10 +228,15 @@
         />
     </div>
 
+    <div class="divider"></div>
+
+    <div class="text-md">Plotting</div>
     <div class="flex-gap">
         <CustomInput bind:value={params.fig_title} label="title" helper={'Figure title'} />
         <Checkbox bind:value={params.annotate_clusters} label="Annotate clusters" />
     </div>
+
+    <div class="divider"></div>
 
     <div class="flex-gap m-auto">
         <Loadingbtn callback={compute_umap_embedding} subprocess={true} on:result={onResult} />
@@ -240,7 +250,7 @@
         >
             {#await fs.exists(plotly_data_file) then value}
                 {#if value}
-                    <span>Plot ready</span>
+                    <span>Show plot</span>
                 {:else}
                     <span>Plot not available</span>
                 {/if}
@@ -248,7 +258,7 @@
         </button>
     </div>
 
-    <div style="height: 800px;">
+    <div>
         {#if plotly_data && plotly_layout}
             <Plot data={plotly_data} layout={plotly_layout} fillParent={true} debounce={250} />
         {/if}

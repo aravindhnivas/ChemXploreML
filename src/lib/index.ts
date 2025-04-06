@@ -1,4 +1,19 @@
-import { Home, Settings, Binary, Atom, Bot, Layers2, MonitorDown, Wand } from 'lucide-svelte/icons';
+import {
+    Home,
+    Settings,
+    Binary,
+    Atom,
+    Bot,
+    Layers2,
+    MonitorDown,
+    Wand,
+    HardDriveDownload,
+    Terminal,
+    MonitorCheck,
+    WalletCards,
+    Info,
+    Scale,
+} from 'lucide-svelte/icons';
 
 export const APP_IDS = writable<AppIds>({
     Home: {
@@ -48,11 +63,12 @@ export const APP_IDS = writable<AppIds>({
         id: 'settings',
         children: [
             { name: 'Configuration', id: 'configuration', icon: Settings },
-            { name: 'Update', id: 'update' },
-            { name: 'Console', id: 'console' },
-            { name: 'Process-Monitor', id: 'process-monitor' },
-            { name: 'About', id: 'about' },
-            { name: 'Credit', id: 'credit' },
+            { name: 'Update', id: 'update', icon: HardDriveDownload },
+            { name: 'Console', id: 'console', icon: Terminal },
+            { name: 'Process-Monitor', id: 'process-monitor', icon: MonitorCheck },
+            { name: 'System', id: 'system', icon: Info },
+            { name: 'Credit', id: 'credit', icon: WalletCards },
+            { name: 'License', id: 'license', icon: Scale },
         ],
     },
 });
