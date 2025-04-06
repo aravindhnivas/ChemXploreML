@@ -7,7 +7,7 @@
     const page_name = 'Training';
 </script>
 
-<Page {page_name}>
+<Page {page_name} pane_size={20}>
     <svelte:fragment slot="body" let:active_children>
         <Pane minSize={80}>
             <div class="overflow-auto max-h-[100%] p-2">
