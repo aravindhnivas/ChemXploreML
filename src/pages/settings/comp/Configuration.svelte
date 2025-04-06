@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { background_color, text_color } from './stores';
+    import { background_color, text_color } from '$settings/stores';
     import {
         developerMode,
         serverCurrentStatus,
@@ -14,19 +14,19 @@
     } from '$lib/pyserver/stores';
     import { fontSize } from '$lib/stores/system';
     import { Checkbox } from '$components/index';
-    import Layout from './comp/Layout.svelte';
+    import Layout from './Layout.svelte';
     import { fetchServerROOT, start_and_check_umdapy_with_toast } from '$lib/pyserver/umdapyServer';
-    import { install_umdapy_from_zipfile } from './utils/download-assets';
-    import { check_umdapy_assets_status } from './utils/assets-status';
-    import PyServerControl from './config/PyServerControl.svelte';
+    import { install_umdapy_from_zipfile } from '$settings/utils/download-assets';
+    import { check_umdapy_assets_status } from '$settings/utils/assets-status';
+    import PyServerControl from '$settings/config/PyServerControl.svelte';
     import Accordion from '@smui-extra/accordion';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
-    import { serverInfo } from './utils/stores';
+    import { serverInfo } from '$settings/utils/stores';
     import BrowseFile from '$lib/components/BrowseFile.svelte';
     import { Download, ExternalLink, RefreshCcw } from 'lucide-svelte/icons';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
-    import { asset_download_required } from './utils/stores';
+    import { asset_download_required } from '$settings/utils/stores';
 
     export let display = 'grid';
 

@@ -12,14 +12,14 @@
         download_assets,
     } from '$pages/settings/utils/download-assets';
     import { updateInterval } from '$utils/stores';
-    import Layout from './comp/Layout.svelte';
+    import Layout from './Layout.svelte';
     import { git_url } from '$lib/utils';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
     import { toggle_loading } from '$utils/index';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import { umdapyVersion } from '$lib/pyserver/stores';
     import { ExternalLink, WifiOff, X } from 'lucide-svelte/icons';
-    import { killPID } from './utils/network';
+    import { killPID } from '$settings/utils/network';
     import { download_url, assets_download_progress, assets_download_pid } from '$lib/utils/download';
 
     export let display = 'grid';

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { RAM_SIZE, CPU_COUNT } from '$lib/stores/system';
     import { pyVersion, umdapyVersion } from '$lib/pyserver/stores';
-    import Layout from './comp/Layout.svelte';
+    import Layout from './Layout.svelte';
 
     export let display = 'grid';
 

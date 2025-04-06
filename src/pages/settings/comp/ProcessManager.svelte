@@ -1,13 +1,11 @@
 <script lang="ts">
     import { redis_server_mode, pyServerReady, pyServerURL } from '$lib/pyserver/stores';
-    import { jobStatus, socket, socket_connection_status } from '$lib/websocket/stores';
-    import { redis_job_controller } from '$lib/pyserver/computefromServer';
-    import Layout from './comp/Layout.svelte';
+    import { socket, socket_connection_status } from '$lib/websocket/stores';
+    import Layout from './Layout.svelte';
     import Dashboard from '$pages/settings/dashboards/Dashboard.svelte';
     import { initializeSocket } from '$lib/websocket/utils';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
-    import { Trash2, XCircle } from 'lucide-svelte/icons';
 
     export let display = 'grid';
 
