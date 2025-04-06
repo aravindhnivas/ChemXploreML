@@ -5,19 +5,15 @@
     import * as pages from './pages';
     import Footer from '$lib/layouts/Footer.svelte';
     import PreModal from '$utils/PreModal.svelte';
-    import { active_tab } from '$utils/stores';
     import { typeSafeObjectKeys } from '$lib/utils';
-    import { Home, Settings, Binary, Atom, Bot, Layers2, type Icon as IconType } from 'lucide-svelte/icons';
-    import CustomTabs from '$lib/components/CustomTabs.svelte';
+    import { active_page_id, APP_IDS } from '$lib/index';
 
-    const nav_tabs = [
-        { tab: 'Home', component: Home },
-        { tab: 'Molecular Analysis', component: Atom },
-        { tab: 'Train Embedder', component: Bot },
-        { tab: 'ML Training', component: Binary },
-        { tab: 'UMAP/t-SNE', component: Layers2 },
-        { tab: 'Settings', component: Settings },
-    ] as { tab: string; component: typeof IconType }[];
+    let nav_tabs: { tab: string; component: any; id: string }[] = [];
+    Object.values($APP_IDS).forEach(value => {
+        const { name, icon, id } = value;
+        nav_tabs.push({ tab: name, component: icon, id });
+    });
+    console.log('nav_tabs', nav_tabs);
 
     let html: HTMLElement;
 
@@ -52,7 +48,6 @@
     }
 
     // $: applyGlobalStyles($background_color, $text_color);
-
     function applyGlobalStyles(bg_color: string, text_color: string = 'black') {
         console.log('applyGlobalStyles', bg_color, text_color);
         document.body.style.backgroundColor = $background_color;
@@ -69,10 +64,28 @@
 <PreModal />
 <div class="parent w-full h-full">
     <header class=" shadow-xl p-2">
-        <CustomTabs tabs={nav_tabs} bind:active={$active_tab} />
+        <div role="tablist" class="tabs tabs-boxed w-max rounded-xl bg-base-200/50">
+            {#each nav_tabs as { tab, component, id } (id)}
+                <!-- svelte-ignore a11y-interactive-supports-focus -->
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div
+                    on:click={() => {
+                        $active_page_id = id;
+                    }}
+                    role="tab"
+                    class="flex-center tab transition-all duration-300 ease-in-out"
+                    class:tab-active={$active_page_id === id}
+                >
+                    {#if component}
+                        <svelte:component this={component}></svelte:component>
+                    {/if}
+                    <span class="font-semibold">{tab.toLocaleUpperCase()}</span>
+                </div>
+            {/each}
+        </div>
     </header>
     <main>
-        {#each typeSafeObjectKeys(pages) as name}
+        {#each typeSafeObjectKeys($APP_IDS) as name}
             <svelte:component this={pages[name]} />
         {/each}
     </main>

@@ -22,7 +22,10 @@
     import { killPID } from './utils/network';
     import { download_url, assets_download_progress, assets_download_pid } from '$lib/utils/download';
 
+    export let display = 'grid';
+
     let install_dialog_active = false;
+
     export const check_for_update = async (log = false) => {
         if (!window.navigator.onLine) return;
         if (install_dialog_active) return;
@@ -199,7 +202,7 @@
     let url = '';
 </script>
 
-<Layout id="Update" class="pl-5">
+<Layout {display}>
     <h1>Update</h1>
     {#if !window.navigator.onLine}
         <div class="ml-auto" aria-label="No internet connection" data-cooltipz-dir="left">

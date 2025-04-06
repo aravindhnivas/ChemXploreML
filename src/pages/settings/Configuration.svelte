@@ -28,6 +28,8 @@
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import { asset_download_required } from './utils/stores';
 
+    export let display = 'grid';
+
     onMount(async () => {
         console.log('Mounting Configuration');
 
@@ -56,7 +58,7 @@
     });
 </script>
 
-<Layout id="Configuration">
+<Layout {display}>
     <h1>Configuration</h1>
     <div class="flex gap-2">
         <CustomInput bind:value={$fontSize} label="font-size" type="number" max="25">

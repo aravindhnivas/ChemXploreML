@@ -9,6 +9,8 @@
     import CustomInput from '$lib/components/CustomInput.svelte';
     import { Trash2, XCircle } from 'lucide-svelte/icons';
 
+    export let display = 'grid';
+
     $: if ($socket_connection_status !== 'connected' && $pyServerReady && $redis_server_mode) {
         initializeSocket();
     }
@@ -17,7 +19,7 @@
     let wait_time = 1;
 </script>
 
-<Layout id="Process-Manager" class="pl-5">
+<Layout {display} class="pl-5">
     <h1>Process-Manager</h1>
     {#if import.meta.env.DEV}
         <div class="flex-gap items-end">

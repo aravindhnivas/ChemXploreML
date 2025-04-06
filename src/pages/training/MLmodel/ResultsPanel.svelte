@@ -9,6 +9,7 @@
         results,
         current_model_pkl_files,
     } from './stores';
+    import { active_page_child_id } from '$lib/index';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomPanel from '$lib/components/CustomPanel.svelte';
     import { PlotlyColors } from '$lib/utils';
@@ -24,7 +25,6 @@
     import OptunaGridPlots from './results-subcomponents/OptunaGridPlots.svelte';
     import MetricsTable from './results-subcomponents/MetricsTable.svelte';
     import BestMetricsOverall from './results-subcomponents/BestMetricsOverall.svelte';
-    import { active_item } from '$pages/training/stores';
 
     export let data_file: string;
     export let plot_data_ready = false;
@@ -483,12 +483,14 @@
         plotted_pkl_file = pkl_file;
         await plot_from_datfile(pkl_file);
     };
+
+    const page_name = getContext<PAGES>('page_name');
 </script>
 
 <CustomPanel open={true} title="Results - {$model.toLocaleUpperCase()} Regressor">
     <div class="grid gap-2">
         <CustomTabs class="bordered" tabs={model_names.map(model => ({ tab: model }))} bind:active={$model} />
-        {#if $active_item == 'ML_Model'}
+        {#if $active_page_child_id[page_name] == 'ml_model'}
             {#await $current_pretrained_file then _}
                 {#key plot_data_ready}
                     <div class="grid gap-2" transition:fade>

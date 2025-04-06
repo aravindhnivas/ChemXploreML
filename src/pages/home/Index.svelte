@@ -1,9 +1,10 @@
 <script>
+    import { APP_IDS } from '$lib/index';
     import Page from '$lib/layouts/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
 </script>
 
-<Page id="Home">
+<Page id={$APP_IDS.Home.id}>
     <svelte:fragment slot="body">
         <Pane class="p-2">
             <div class="hero h-full">

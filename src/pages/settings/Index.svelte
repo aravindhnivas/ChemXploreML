@@ -1,23 +1,17 @@
 <script>
     import Page from '$lib/layouts/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
-    import Sidebar from './comp/Sidebar.svelte';
     import { Configuration, Console, About, Update, ProcessManager } from '.';
-
-    const partition = 20;
 </script>
 
-<Page id="Settings">
-    <svelte:fragment slot="body">
-        <Pane class="flex justify-center items-baseline" size={partition} minSize={15} maxSize={50}>
-            <Sidebar />
-        </Pane>
+<Page page_name="Settings">
+    <svelte:fragment slot="body" let:active_children>
         <Pane minSize={50} maxSize={90}>
-            <Configuration />
-            <Console />
-            <About />
-            <Update />
-            <ProcessManager />
+            <Configuration display={active_children === 'configuration' ? 'grid' : 'none'} />
+            <Console display={active_children === 'console' ? 'grid' : 'none'} />
+            <About display={active_children === 'about' ? 'grid' : 'none'} />
+            <Update display={active_children === 'update' ? 'grid' : 'none'} />
+            <ProcessManager display={active_children === 'process-monitor' ? 'grid' : 'none'} />
         </Pane>
     </svelte:fragment>
 </Page>

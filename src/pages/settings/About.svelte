@@ -3,6 +3,8 @@
     import { pyVersion, umdapyVersion } from '$lib/pyserver/stores';
     import Layout from './comp/Layout.svelte';
 
+    export let display = 'grid';
+
     onMount(async () => {
         logger.info('About page mounted');
         system_info.platform = await platform();
@@ -16,7 +18,7 @@
     };
 </script>
 
-<Layout id="About" class="pl-5">
+<Layout {display} class="pl-5">
     <h1>About</h1>
     <div class="grid grid-cols-5 w-[350px] gap-2">
         <div class="col-span-3">Platform</div>

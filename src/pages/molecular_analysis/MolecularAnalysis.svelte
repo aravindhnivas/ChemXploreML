@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { APP_IDS } from '$lib/index';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import Molecule from '$lib/components/Molecule.svelte';
@@ -6,8 +7,6 @@
     import PropertiesBox from './PropertiesBox.svelte';
     import Page from '$lib/layouts/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
-
-    const id = 'Molecular Analysis';
 
     let smiles = 'CCO';
     // let key_properties: string[] = [];
@@ -45,10 +44,10 @@
     let compute_btn: HTMLButtonElement | undefined = undefined;
 </script>
 
-<Page {id}>
+<Page id={$APP_IDS.MolecularAnalysis.id}>
     <svelte:fragment slot="body">
         <Pane class="p-2">
-            <div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]" {id}>
+            <div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]">
                 <CustomInput
                     label="SMILES"
                     bind:value={smiles}

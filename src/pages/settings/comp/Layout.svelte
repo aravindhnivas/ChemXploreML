@@ -1,16 +1,15 @@
 <script lang="ts">
-    import { active_settings_tab } from '../stores';
-    export let id = 'Configuration';
     export let display = 'grid';
 
     let className = '';
     export { className as class };
+
+    const active_page_child_id = getContext('page_children');
 </script>
 
 <div
-    id="Settings_{id}"
     class="p-5 w-ful h-full content-start gap-1 animate__animated animate__fadeIn overflow-auto {className}"
-    style="display: {$active_settings_tab === id ? display : 'none'};"
+    style:display
 >
     <slot />
 </div>
