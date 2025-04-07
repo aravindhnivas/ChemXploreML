@@ -9,7 +9,7 @@
 
     <div class="flex-gap">
         <Scale />
-        <a class="underline" href="https://opensource.org/license/mit">MIT License</a>
+        <a target="_blank" class="underline" href="https://opensource.org/license/mit">MIT License</a>
     </div>
 
     <p class="text-sm">
