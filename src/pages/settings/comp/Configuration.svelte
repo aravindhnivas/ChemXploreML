@@ -33,15 +33,6 @@
     onMount(async () => {
         console.log('Mounting Configuration');
 
-        const resourceDir = await path.resourceDir();
-        const resources_path = await path.join(resourceDir, 'resources');
-        console.log('Resources path:', resources_path);
-
-        const functional_groups_file = await path.join(resources_path, 'functional_groups.json');
-        console.warn({ functional_groups_file });
-        const functional_groups = await readJSON(functional_groups_file);
-        console.warn({ functional_groups });
-
         if (import.meta.env.DEV) {
             if (!$umdapy.includes('dev')) {
                 $umdapy += '-dev';
