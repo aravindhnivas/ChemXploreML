@@ -1,7 +1,6 @@
 <script lang="ts">
     import { python_asset_ready_to_install, install_update_without_promt } from '$pages/settings/utils/stores';
     import { updateError } from '$utils/stores';
-    import { activateChangelog } from '$utils/stores';
     import { stopServer } from '$lib/pyserver/umdapyServer';
     import { outputbox } from '$settings/utils/stores';
     import { footerMsg } from '$lib/utils/initialise';
@@ -230,14 +229,6 @@
                     }}
                 >
                     {updateReadyToInstall ? 'Quit and Install' : 'Check update'}
-                </button>
-
-                <button
-                    class="btn btn-sm btn-outline"
-                    on:click={() => {
-                        $activateChangelog = true;
-                    }}
-                    >What's New <ExternalLink class="ml-2" />
                 </button>
 
                 <div class="ml-auto">

@@ -42,4 +42,3 @@ export const active_tab = localWritable('active_tab', 'Home');
 export const updateInterval = localWritable('updateInterval', 15);
 export const updateError = writable('');
 export const updateStatus = writable('');
-export const activateChangelog = writable(false);
