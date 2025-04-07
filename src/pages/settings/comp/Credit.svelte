@@ -178,6 +178,14 @@
             // icon: 'https://cdn.simpleicons.org/optuna',
         },
     ];
+
+    const other_credits = [
+        {
+            name: 'GitHub',
+            url: 'https://github.com/',
+            icon: 'https://cdn.simpleicons.org/github',
+        },
+    ];
 </script>
 
 <Layout {display} class="pl-5">
@@ -204,6 +212,21 @@
 
     <div class="flex-gap items-center flex-wrap">
         {#each backend_credits as item}
+            <a
+                href={item.url}
+                target="_blank"
+                class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 bg-white"
+            >
+                <img src={item.icon} alt={item.name} class="w-6 h-6" />
+                <span>{item.name}</span>
+            </a>
+        {/each}
+    </div>
+
+    <div class="divider" />
+    <h2 class="text-lg font-semibold">Other Credits</h2>
+    <div class="flex-gap items-center flex-wrap">
+        {#each other_credits as item}
             <a
                 href={item.url}
                 target="_blank"
