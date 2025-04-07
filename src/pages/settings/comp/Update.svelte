@@ -12,7 +12,7 @@
         download_assets,
     } from '$pages/settings/utils/download-assets';
     import { updateInterval } from '$utils/stores';
-    import Layout from './Layout.svelte';
+    import Layout from './layout/Layout.svelte';
     import { git_url } from '$lib/utils';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
     import { toggle_loading } from '$utils/index';

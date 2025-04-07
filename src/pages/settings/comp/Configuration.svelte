@@ -14,7 +14,7 @@
     } from '$lib/pyserver/stores';
     import { fontSize } from '$lib/stores/system';
     import { Checkbox } from '$components/index';
-    import Layout from './Layout.svelte';
+    import Layout from './layout/Layout.svelte';
     import { fetchServerROOT, start_and_check_umdapy_with_toast } from '$lib/pyserver/umdapyServer';
     import { install_umdapy_from_zipfile } from '$settings/utils/download-assets';
     import { check_umdapy_assets_status } from '$settings/utils/assets-status';

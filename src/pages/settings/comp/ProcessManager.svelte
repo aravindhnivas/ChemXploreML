@@ -1,7 +1,7 @@
 <script lang="ts">
     import { redis_server_mode, pyServerReady, pyServerURL } from '$lib/pyserver/stores';
     import { socket, socket_connection_status } from '$lib/websocket/stores';
-    import Layout from './Layout.svelte';
+    import Layout from './layout/Layout.svelte';
     import Dashboard from '$pages/settings/dashboards/Dashboard.svelte';
     import { initializeSocket } from '$lib/websocket/utils';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';

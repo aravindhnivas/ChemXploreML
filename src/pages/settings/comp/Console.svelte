@@ -1,6 +1,6 @@
 <script lang="ts">
     import { terminal_log } from '$settings/utils/stores';
-    import Layout from './Layout.svelte';
+    import Layout from './layout/Layout.svelte';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
     export let display = 'grid';
 </script>
