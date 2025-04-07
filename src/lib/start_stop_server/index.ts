@@ -6,8 +6,8 @@ import type { Child } from '@tauri-apps/plugin-shell';
 const server_started_keyword = 'Redis worker running';
 const server_stopped_keyword = 'Redis worker stopped';
 
-export const genericStartServer = async (btn: HTMLButtonElement, pyfile: string, port: number) => {
-    const sendArgs = [pyfile, JSON.stringify({ port })];
+export const genericStartServer = async (btn: HTMLButtonElement, pyfile: string, args: Record<string, any>) => {
+    const sendArgs = [pyfile, JSON.stringify(args)];
     const mainPyFile = await path.join(get(pythonscript), 'main.py');
 
     const pyArgs = get(developerMode) ? [mainPyFile, ...sendArgs] : sendArgs;
@@ -30,7 +30,7 @@ export const genericStartServer = async (btn: HTMLButtonElement, pyfile: string,
     }
 
     if (!pyChild) return Promise.reject('pyChild not found');
-
+    console.log(`pid: ${pyChild.pid}`);
     btn_dispatch_event(btn, { py, pyfile, pyChild }, 'mount');
 
     let full_stderr = '';
@@ -54,7 +54,6 @@ export const genericStartServer = async (btn: HTMLButtonElement, pyfile: string,
 
     py.on('close', () => {
         terminal_log.warn('server closed');
-
         if (full_stderr.includes('Traceback (most recent call last):')) {
             const last_traceback =
                 '\nTraceback (most recent call last):' + full_stderr.split('Traceback (most recent call last):').pop();

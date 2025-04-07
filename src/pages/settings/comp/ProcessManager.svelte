@@ -61,7 +61,12 @@
     {/if}
 
     {#if import.meta.env.DEV}
-        <StartStopServerControl id="start-stop-server-control-redis" />
+        <StartStopServerControl
+            id="start-stop-server-control-redis"
+            pyfile="start_redis_worker"
+            args={{ listen: ['default'] }}
+            port={6379}
+        />
     {/if}
 </Layout>
 
