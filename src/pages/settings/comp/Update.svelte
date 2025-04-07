@@ -58,7 +58,7 @@
             const update = await checkUpdate();
             outputbox.info('Update response: ' + JSON.stringify(update, null, 2));
             if (!update) return outputbox.error('No update found');
-            if (log) outputbox.info(JSON.stringify(update));
+            // if (log) outputbox.info(JSON.stringify(update));
 
             if (import.meta.env.DEV) {
                 toast.error('Update installation is skipped in dev mode');
