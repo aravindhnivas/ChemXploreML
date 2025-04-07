@@ -29,7 +29,54 @@
     export let id: string = 'main-data-container';
     export let display: string = 'none';
 
-    $: if ($embedding && !$model_and_pipeline_files[$embedding]) {
+    let mol2vec_model = '';
+    let vicgae_model = '';
+    let use_built_in_models = true;
+
+    onMount(async () => {
+        const resource_dir = await path.join(await path.resourceDir(), 'resources');
+        // const model_dir = await path.join(resource_dir, 'models');
+
+        mol2vec_model = await path.join(resource_dir, 'mol2vec_model.pkl');
+        vicgae_model = await path.join(resource_dir, 'VICGAE.pkl');
+
+        // check if model files exist
+        const mol2vec_model_exists = await fs.exists(mol2vec_model);
+        const vicgae_model_exists = await fs.exists(vicgae_model);
+
+        if (!mol2vec_model_exists) {
+            console.warn('mol2vec_model.pkl not found in resources');
+        }
+        if (!vicgae_model_exists) {
+            console.warn('VICGAE.pkl not found in resources');
+        }
+        if (!mol2vec_model_exists && !vicgae_model_exists) {
+            toast.error('No model files found in resources');
+            return;
+        }
+        if (mol2vec_model_exists) {
+            $model_and_pipeline_files['mol2vec'] = {
+                model_file: mol2vec_model,
+                pipeline_file: '',
+            };
+        }
+        if (vicgae_model_exists) {
+            $model_and_pipeline_files['VICGAE'] = {
+                model_file: vicgae_model,
+                pipeline_file: '',
+            };
+        }
+        console.warn({ mol2vec_model, vicgae_model });
+    });
+
+    $: if (use_built_in_models) {
+        $model_and_pipeline_files['mol2vec'].model_file = mol2vec_model;
+        $model_and_pipeline_files['VICGAE'].model_file = vicgae_model;
+        $model_and_pipeline_files['mol2vec'].pipeline_file = '';
+        $model_and_pipeline_files['VICGAE'].pipeline_file = '';
+    }
+
+    $: if (!use_built_in_models && $embedding && !$model_and_pipeline_files[$embedding]) {
         $model_and_pipeline_files[$embedding] = {
             model_file: '',
             pipeline_file: '',
@@ -161,6 +208,7 @@
             }
         }
     };
+
     let dataFromPython = {} as Record<Embedding, EmbeddingState>;
 </script>
 
@@ -172,10 +220,21 @@
 
     <h3>Pre-trained model ({$embedding})</h3>
 
-    <BrowseFile bind:filename={$model_and_pipeline_files[$embedding].model_file} label="Model" />
+    <div class="flex-gap items-end">
+        <CustomSelect label="Choose embedder" bind:value={$embedding} items={embeddings} />
+        <Checkbox label="PCA" bind:value={$use_PCA} />
+    </div>
 
+    <Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} />
+
+    <BrowseFile
+        disabled={use_built_in_models}
+        bind:filename={$model_and_pipeline_files[$embedding].model_file}
+        label="Model"
+    />
     {#if $use_PCA}
         <BrowseFile
+            disabled={use_built_in_models}
             bind:filename={$model_and_pipeline_files[$embedding].pipeline_file}
             label="PCA pipeline"
             helper="Make sure to give a pipeline without kmeans clustering"
@@ -184,8 +243,6 @@
 
     {#if test_mode}
         <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2">
-            <Checkbox label="PCA" bind:value={$use_PCA} />
-            <CustomSelect label="embedding" bind:value={$embedding} items={embeddings} />
             <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
             <Loadingbtn callback={embedd_data} on:result={onResult} />
         </div>
@@ -203,9 +260,7 @@
             </div>
         </div>
     {:else}
-        <Checkbox label="PCA" bind:value={$use_PCA} />
         <div class="flex gap-2 items-end">
-            <CustomSelect label="embedding" bind:value={$embedding} items={embeddings} />
             <CustomInput label="Embeddings filename" bind:value={$embedd_savefile} lock={true} />
             <Loadingbtn callback={embedd_data} subprocess={true} on:result={onResult} />
         </div>
