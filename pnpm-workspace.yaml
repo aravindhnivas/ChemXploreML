@@ -1,4 +1,5 @@
 onlyBuiltDependencies:
-    - svelte-preprocess
+  - esbuild
+  - svelte-preprocess
 packages:
-    - '.' # include the root folder if your frontend is there
+  - .
