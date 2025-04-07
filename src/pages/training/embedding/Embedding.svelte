@@ -31,9 +31,20 @@
 
     let mol2vec_model = '';
     let vicgae_model = '';
+    let mol2vec_model_exists = false;
+    let vicgae_model_exists = false;
     let use_built_in_models = true;
 
     onMount(async () => {
+        $model_and_pipeline_files['mol2vec'] = {
+            model_file: '',
+            pipeline_file: '',
+        };
+        $model_and_pipeline_files['VICGAE'] = {
+            model_file: '',
+            pipeline_file: '',
+        };
+
         const resource_dir = await path.join(await path.resourceDir(), 'resources');
         // const model_dir = await path.join(resource_dir, 'models');
 
@@ -41,8 +52,8 @@
         vicgae_model = await path.join(resource_dir, 'VICGAE.pkl');
 
         // check if model files exist
-        const mol2vec_model_exists = await fs.exists(mol2vec_model);
-        const vicgae_model_exists = await fs.exists(vicgae_model);
+        mol2vec_model_exists = await fs.exists(mol2vec_model);
+        vicgae_model_exists = await fs.exists(vicgae_model);
 
         if (!mol2vec_model_exists) {
             console.warn('mol2vec_model.pkl not found in resources');
@@ -69,7 +80,7 @@
         console.warn({ mol2vec_model, vicgae_model });
     });
 
-    $: if (use_built_in_models) {
+    $: if (use_built_in_models && mol2vec_model_exists && vicgae_model_exists) {
         $model_and_pipeline_files['mol2vec'].model_file = mol2vec_model;
         $model_and_pipeline_files['VICGAE'].model_file = vicgae_model;
         $model_and_pipeline_files['mol2vec'].pipeline_file = '';
