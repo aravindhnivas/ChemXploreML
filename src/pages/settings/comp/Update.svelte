@@ -52,7 +52,7 @@
             if (log) outputbox.info('Checking for updates...');
             download_progress = 0;
             const update = await checkUpdate();
-            outputbox.info('Checking for updates...done' + JSON.stringify(update, null, 2));
+            outputbox.info('Update response: ' + JSON.stringify(update, null, 2));
             if (!update) return outputbox.error('No update found');
             if (log) outputbox.info(JSON.stringify(update));
 
