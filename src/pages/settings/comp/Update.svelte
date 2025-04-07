@@ -42,10 +42,14 @@
         outputbox.warn(`latest_version: ${latest_version}`);
         outputbox.warn(`current_version: v${currentVersion}`);
         lastUpdateCheck = new Date().toLocaleString();
+
         if (`v${currentVersion}` === latest_version) {
             version_info = 'latest version installed';
             outputbox.success(version_info);
             return;
+        } else if (`v${currentVersion}` < latest_version) {
+            version_info = 'New update available!';
+            outputbox.warn(version_info);
         }
 
         try {
