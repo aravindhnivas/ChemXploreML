@@ -7,7 +7,8 @@
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import StartStopServerControl from '$lib/start_stop_server/StartStopServerControl.svelte';
-
+    import TerminalBox from '$lib/components/TerminalBox.svelte';
+    import { redis_worker_log } from '$lib/start_stop_server/index';
     export let display = 'grid';
 
     $: if ($socket_connection_status !== 'connected' && $pyServerReady && $redis_server_mode) {
@@ -67,6 +68,8 @@
             args={{ listen: ['default'] }}
             port={6379}
         />
+
+        <TerminalBox bind:terminal={$redis_worker_log} />
     {/if}
 </Layout>
 
