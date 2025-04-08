@@ -19,7 +19,7 @@
   },
   "productName": "ChemXploreML",
   "mainBinaryName": "ChemXploreML",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "identifier": "com.chemxploreml.dev",
   "plugins": {
     "updater": {
