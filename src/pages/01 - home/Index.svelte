@@ -1,5 +1,4 @@
 <script>
-    import { APP_IDS } from '$lib/index';
     import Page from '$lib/layouts/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
 </script>

@@ -54,7 +54,7 @@
     };
 </script>
 
-<div class="divider"></div>
+<!-- <div class="divider"></div> -->
 
 {#await get_essential_files($current_post_analysis_files_directory, $current_training_data_file) then { analysis_dir, training_file }}
     <div class="grid gap-2">

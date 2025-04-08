@@ -46,18 +46,20 @@
 
 <Page page_name="MolecularAnalysis">
     <svelte:fragment>
-        <Pane class="p-2">
-            <div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]">
-                <CustomInput
-                    label="SMILES"
-                    bind:value={smiles}
-                    on:change={() => {
-                        if (!smiles) return;
-                        compute_btn?.click();
-                    }}
-                />
+        <Pane>
+            <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
+                <div class="grid gap-2">
+                    <CustomInput
+                        label="SMILES"
+                        bind:value={smiles}
+                        on:change={() => {
+                            if (!smiles) return;
+                            compute_btn?.click();
+                        }}
+                    />
 
-                <Molecule bind:smiles show_controls={true} />
+                    <Molecule bind:smiles show_controls={true} />
+                </div>
 
                 <div class="divider"></div>
                 <div class="m-auto">

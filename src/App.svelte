@@ -9,11 +9,11 @@
     import { active_page_id, APP_IDS } from '$lib/index';
 
     let nav_tabs: { tab: string; component: any; id: string }[] = [];
+
     Object.values($APP_IDS).forEach(value => {
         const { name, icon, id } = value;
         nav_tabs.push({ tab: name, component: icon, id });
     });
-    console.log('nav_tabs', nav_tabs);
 
     let html: HTMLElement;
 
@@ -46,7 +46,6 @@
             $fontSize -= 1;
         }
     }
-
     // $: applyGlobalStyles($background_color, $text_color);
     function applyGlobalStyles(bg_color: string, text_color: string = 'black') {
         console.log('applyGlobalStyles', bg_color, text_color);
@@ -63,8 +62,8 @@
 <Toaster position="bottom-left" richColors />
 <PreModal />
 <div class="parent w-full h-full">
-    <header class=" shadow-xl p-2">
-        <div role="tablist" class="tabs tabs-boxed w-max rounded-xl bg-base-200/50">
+    <header class="">
+        <div role="tablist" class="tabs tabs-sm tabs-boxed w-full rounded-none gap-2">
             {#each nav_tabs as { tab, component, id } (id)}
                 <!-- svelte-ignore a11y-interactive-supports-focus -->
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -73,13 +72,13 @@
                         $active_page_id = id;
                     }}
                     role="tab"
-                    class="flex-center tab transition-all duration-300 ease-in-out"
+                    class="flex-center tab transition-all duration-300 ease-in-out hover:tab-active"
                     class:tab-active={$active_page_id === id}
                 >
                     {#if component}
-                        <svelte:component this={component}></svelte:component>
+                        <svelte:component this={component} size="20"></svelte:component>
                     {/if}
-                    <span class="font-semibold">{tab.toLocaleUpperCase()}</span>
+                    <span class="font-semibold text-xs">{tab.toLocaleUpperCase()}</span>
                 </div>
             {/each}
         </div>

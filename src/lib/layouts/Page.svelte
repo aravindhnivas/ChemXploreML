@@ -22,7 +22,7 @@
     horizontal={false}
     {id}
     style="display: {$active_page_id === id ? 'flex' : 'none'};"
-    class="card  shadow-xl animate__animated animate__fadeIn h-full w-full overflow-hidden rounded-none py-2"
+    class="card shadow-xl animate__animated animate__fadeIn h-full w-full overflow-hidden rounded-none"
 >
     {#if page_children}
         <Pane class="p-2" size={pane_size} minSize={pane_min_size} maxSize={pane_max_size}>
