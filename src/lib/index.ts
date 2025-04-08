@@ -29,7 +29,7 @@ export const APP_IDS = writable<AppIds>({
         id: 'molecular_analysis',
     },
     LoadFile: {
-        name: 'Load File',
+        name: 'Load Molecules file',
         icon: MonitorDown,
         id: 'load_file',
         children: [
@@ -38,7 +38,7 @@ export const APP_IDS = writable<AppIds>({
         ],
     },
     EmbeddMolecule: {
-        name: 'Vectorize Molecule',
+        name: 'Vectorize Molecules',
         icon: Bot,
         id: 'embedd_molecules',
     },
