@@ -6,14 +6,14 @@
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import Molecule from '$lib/components/Molecule.svelte';
     import { NPARTITIONS, use_dask } from '$lib/stores/system';
-    import { current_training_data_file } from '$pages/load_file/plot-analysis/stores';
+    import { current_training_data_file } from '$pages/03 - load_file/plot-analysis/stores';
     import {
         training_column_name_X,
         training_file,
         loaded_df_columns,
         training_column_name_y,
         training_column_name_index,
-    } from '$pages/load_file/stores';
+    } from '$pages/03 - load_file/stores';
     import Results from './Results.svelte';
     import {
         embedd_savefile,
@@ -29,9 +29,6 @@
     import { BaseDirectory } from '@tauri-apps/plugin-fs';
     import DownloadModel from './DownloadModel.svelte';
 
-    export let id: string = 'main-data-container';
-    export let display: string = 'none';
-
     let mol2vec_model = '';
     let vicgae_model = '';
     let mol2vec_model_exists = false;
@@ -39,7 +36,6 @@
     let use_built_in_models = true;
 
     onMount(async () => {
-        q;
         $model_and_pipeline_files['mol2vec'] = {
             model_file: '',
             pipeline_file: '',
@@ -228,88 +224,86 @@
     let dataFromPython = {} as Record<Embedding, EmbeddingState>;
 </script>
 
-<div class="grid content-start gap-2 px-5" {id}>
-    <div class="flex justify-between">
-        <!-- <h2>Embeddings</h2> -->
-        <Checkbox label="Test mode" bind:value={test_mode} />
-    </div>
+<div class="flex justify-between">
+    <!-- <h2>Embeddings</h2> -->
+    <Checkbox label="Test mode" bind:value={test_mode} />
+</div>
 
-    <h3>Pre-trained model</h3>
+<h3>Pre-trained model</h3>
 
-    <div class="flex-gap items-end">
-        <CustomSelect label="Choose embedder" bind:value={$embedding} items={embeddings} />
-        <Checkbox label="PCA" bind:value={$use_PCA} />
-    </div>
+<div class="flex-gap items-end">
+    <CustomSelect label="Choose embedder" bind:value={$embedding} items={embeddings} />
+    <Checkbox label="PCA" bind:value={$use_PCA} />
+</div>
 
-    <Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} />
-    {#if use_built_in_models}
-        {#await fs.exists($model_and_pipeline_files[$embedding]?.model_file) then file_exists}
-            {#if !file_exists}
-                {#if $embedding_file_download_url[$embedding]}
-                    <DownloadModel />
-                {:else}
-                    <div class="badge badge-md badge-error">
-                        <div>
-                            <span>In-built model not available</span>
-                        </div>
+<Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} />
+{#if use_built_in_models}
+    {#await fs.exists($model_and_pipeline_files[$embedding]?.model_file) then file_exists}
+        {#if !file_exists}
+            {#if $embedding_file_download_url[$embedding]}
+                <DownloadModel />
+            {:else}
+                <div class="badge badge-md badge-error">
+                    <div>
+                        <span>In-built model not available</span>
                     </div>
-                {/if}
+                </div>
             {/if}
-        {/await}
-    {/if}
-    {#if !use_built_in_models}
+        {/if}
+    {/await}
+{/if}
+{#if !use_built_in_models}
+    <BrowseFile
+        disabled={use_built_in_models}
+        bind:filename={$model_and_pipeline_files[$embedding].model_file}
+        label="Model"
+    />
+    {#if $use_PCA}
         <BrowseFile
             disabled={use_built_in_models}
-            bind:filename={$model_and_pipeline_files[$embedding].model_file}
-            label="Model"
+            bind:filename={$model_and_pipeline_files[$embedding].pipeline_file}
+            label="PCA pipeline"
+            helper="Make sure to give a pipeline without kmeans clustering"
         />
-        {#if $use_PCA}
-            <BrowseFile
-                disabled={use_built_in_models}
-                bind:filename={$model_and_pipeline_files[$embedding].pipeline_file}
-                label="PCA pipeline"
-                helper="Make sure to give a pipeline without kmeans clustering"
-            />
-        {/if}
     {/if}
+{/if}
 
-    {#if test_mode}
-        <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2">
-            <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
-            <Loadingbtn callback={embedd_data} on:result={onResult} />
+{#if test_mode}
+    <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2">
+        <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
+        <Loadingbtn callback={embedd_data} on:result={onResult} />
+    </div>
+
+    <div class="grid items-center gap-1 overflow-auto">
+        <Molecule bind:smiles={$test_smiles} show_controls={true} />
+        <div>
+            <span class="text-lg pl-1">Embedded vector</span>
+            <textarea
+                class="textarea textarea-bordered h-[300px] w-full select-text"
+                placeholder="Embedded vector will be shown"
+                readonly
+                value={test_result}
+            ></textarea>
         </div>
+    </div>
+{:else}
+    <div class="flex gap-2 items-end">
+        <CustomInput label="Embeddings filename" bind:value={$embedd_savefile} lock={true} />
+        <Loadingbtn callback={embedd_data} subprocess={true} on:result={onResult} />
+    </div>
+{/if}
 
-        <div class="grid items-center gap-1 overflow-auto">
-            <Molecule bind:smiles={$test_smiles} show_controls={true} />
-            <div>
-                <span class="text-lg pl-1">Embedded vector</span>
-                <textarea
-                    class="textarea textarea-bordered h-[300px] w-full select-text"
-                    placeholder="Embedded vector will be shown"
-                    readonly
-                    value={test_result}
-                ></textarea>
-            </div>
-        </div>
-    {:else}
-        <div class="flex gap-2 items-end">
-            <CustomInput label="Embeddings filename" bind:value={$embedd_savefile} lock={true} />
-            <Loadingbtn callback={embedd_data} subprocess={true} on:result={onResult} />
-        </div>
-    {/if}
+{#if !test_mode}
+    <div class="divider"></div>
+    <h3>Loaded training file</h3>
+    <LoadedFileInfos />
+    <span class="badge badge-info">{$training_column_name_X} (train column X) will be used for embedding</span>
+    <div class="divider"></div>
+{/if}
 
-    {#if !test_mode}
-        <div class="divider"></div>
-        <h3>Loaded training file</h3>
-        <LoadedFileInfos />
-        <span class="badge badge-info">{$training_column_name_X} (train column X) will be used for embedding</span>
-        <div class="divider"></div>
+{#if dataFromPython[$embedding]}
+    {@const { file_mode, computed_time } = dataFromPython[$embedding]}
+    {#if file_mode}
+        <Results data={file_mode} {computed_time} />
     {/if}
-
-    {#if dataFromPython[$embedding]}
-        {@const { file_mode, computed_time } = dataFromPython[$embedding]}
-        {#if file_mode}
-            <Results data={file_mode} {computed_time} />
-        {/if}
-    {/if}
-</div>
+{/if}

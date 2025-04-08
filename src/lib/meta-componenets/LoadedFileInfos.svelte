@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { current_training_data_file } from '$pages/load_file/plot-analysis/stores';
-    import { embedd_savefile_path, processed_df } from '$pages/embedd_molecule/stores';
-    import { training_column_name_X, training_column_name_y } from '$pages/load_file/stores';
+    import { current_training_data_file } from '$pages/03 - load_file/plot-analysis/stores';
+    import { embedd_savefile_path, processed_df } from '$pages/04 - embedd_molecule/stores';
+    import { training_column_name_X, training_column_name_y } from '$pages/03 - load_file/stores';
     import { RefreshCcw, ExternalLink } from 'lucide-svelte/icons';
 
     let refresh = false;

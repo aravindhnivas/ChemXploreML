@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { cleanlab } from '$pages/ml_training/MLmodel/stores';
+    import { cleanlab } from '$pages/06 - ml_training/MLmodel/stores';
     import { umap_metrics, loaded_files } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
@@ -7,7 +7,7 @@
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
     import Plot from 'svelte-plotly.js';
-    import { embedding, embeddings } from '$pages/embedd_molecule/stores';
+    import { embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
 
     const params_description: Record<keyof UMAPParams, string> = {
         n_neighbors:

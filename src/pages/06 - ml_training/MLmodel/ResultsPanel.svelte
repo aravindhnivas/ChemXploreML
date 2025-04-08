@@ -20,7 +20,7 @@
     import FileExists from '$lib/components/FileExists.svelte';
     import { RefreshCcw } from 'lucide-svelte/icons';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
-    import { current_training_processed_data_directory, ROOT_DIR } from '$pages/load_file/plot-analysis/stores';
+    import { current_training_processed_data_directory, ROOT_DIR } from '$pages/03 - load_file/plot-analysis/stores';
     import ResultsPlots from './results-subcomponents/ResultsPlots.svelte';
     import OptunaGridPlots from './results-subcomponents/OptunaGridPlots.svelte';
     import MetricsTable from './results-subcomponents/MetricsTable.svelte';

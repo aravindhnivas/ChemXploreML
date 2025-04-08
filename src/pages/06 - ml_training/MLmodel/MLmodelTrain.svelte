@@ -3,15 +3,15 @@
     import { NPARTITIONS, use_dask } from '$lib/stores/system';
     import Accordion from '@smui-extra/accordion';
     import { copyText } from 'svelte-copy';
-    import { embedd_savefile_path, embedding, use_PCA } from '$pages/embedd_molecule/stores';
-    import { current_training_data_file } from '$pages/load_file/plot-analysis/stores';
+    import { embedd_savefile_path, embedding, use_PCA } from '$pages/04 - embedd_molecule/stores';
+    import { current_training_data_file } from '$pages/03 - load_file/plot-analysis/stores';
     import {
         loaded_df_columns,
         training_column_name_index,
         training_column_name_X,
         training_column_name_y,
         training_file,
-    } from '$pages/load_file/stores';
+    } from '$pages/03 - load_file/stores';
     import ControlPanel from './ControlPanel.svelte';
     import Effects from './Effects.svelte';
     import ModelPanel from './ModelPanel.svelte';

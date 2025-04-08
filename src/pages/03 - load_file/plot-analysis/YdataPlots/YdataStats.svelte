@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { filtered_dir, YDistributionFilter } from './../stores';
+    import { filtered_dir, YDistributionFilter } from '../stores';
     import { CustomInput, Loadingbtn } from '$lib/components';
     import { training_column_name_y, training_file } from '../../stores';
     import { use_dask } from '$lib/stores/system';

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { training_file } from '$pages/load_file/stores';
+    import { training_file } from '$pages/03 - load_file/stores';
     import {
         model,
         current_model,
@@ -23,13 +23,13 @@
     import supervised_ml_models from '$lib/config/ml_model/ml_models_parameters';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
-    import { embedd_savefile, embedding, embeddings } from '$pages/embedd_molecule/stores';
+    import { embedd_savefile, embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
     import {
         best_metrics_loc,
         current_training_processed_data_directory,
         metrics_loc,
         ROOT_DIR,
-    } from '$pages/load_file/plot-analysis/stores';
+    } from '$pages/03 - load_file/plot-analysis/stores';
 
     let savedfile: string;
     let uploadedfile: { fullname: string; name: string; model: string } | null = null;
@@ -98,6 +98,7 @@
         uploadedfile = null;
 
         try {
+            if (!filename) return;
             const parsed = await readJSON<SavedParams>(filename);
             if (!parsed) return;
 

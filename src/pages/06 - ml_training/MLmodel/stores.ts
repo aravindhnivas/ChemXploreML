@@ -1,7 +1,7 @@
 import supervised_ml_models from '$lib/config/ml_model/ml_models_parameters';
-import { training_save_directory, training_file } from '$pages/load_file/stores';
-import { current_training_processed_data_directory } from '$pages/load_file/plot-analysis/stores';
-import { embedd_savefile } from '$pages/embedd_molecule/stores';
+import { training_save_directory, training_file } from '$pages/03 - load_file/stores';
+import { current_training_processed_data_directory } from '$pages/03 - load_file/plot-analysis/stores';
+import { embedd_savefile } from '$pages/04 - embedd_molecule/stores';
 
 export const current_model_pkl_files = writable({} as Record<string, { name: string; pkl_file: string }[]>);
 

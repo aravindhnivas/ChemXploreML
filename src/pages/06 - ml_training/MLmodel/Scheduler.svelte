@@ -12,7 +12,7 @@
         yscaling,
         ytransformation,
     } from './stores';
-    import { embedding, embeddings } from '$pages/embedd_molecule/stores';
+    import { embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import { CalendarCheck } from 'lucide-svelte/icons';

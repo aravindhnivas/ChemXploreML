@@ -1,6 +1,6 @@
 <script lang="ts">
     import { CheckCheck } from 'lucide-svelte/icons';
-    import { training_column_name_X } from '$pages/load_file/stores';
+    import { training_column_name_X } from '$pages/03 - load_file/stores';
     import VirtualList from '@sveltejs/svelte-virtual-list';
 
     export let computed_time: string;

@@ -1,4 +1,4 @@
-import { current_training_processed_data_directory } from '$pages/load_file/plot-analysis/stores';
+import { current_training_processed_data_directory } from '$pages/03 - load_file/plot-analysis/stores';
 
 export const embeddings_computed = writable(false);
 export const embeddings = ['mol2vec', 'VICGAE'];

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { current_training_data_file } from '$pages/load_file/plot-analysis/stores';
+    import { current_training_data_file } from '$pages/03 - load_file/plot-analysis/stores';
     import { plot_data, results, model } from '../stores';
     import Plot from 'svelte-plotly.js';
 

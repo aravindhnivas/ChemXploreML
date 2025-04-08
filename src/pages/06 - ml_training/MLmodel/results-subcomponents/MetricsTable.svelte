@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Loadingbtn } from '$lib/components';
     import CustomSelect from '$lib/components/CustomSelect.svelte';
-    import { ROOT_DIR } from '$pages/load_file/plot-analysis/stores';
+    import { ROOT_DIR } from '$pages/03 - load_file/plot-analysis/stores';
     import { current_model_pkl_files, cv_fold, model } from '../stores';
     import CustomInput from '$lib/components/CustomInput.svelte';
 

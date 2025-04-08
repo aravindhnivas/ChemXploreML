@@ -1,6 +1,6 @@
 <script lang="ts">
     import { read_csv } from '$lib/utils';
-    import { best_metrics_loc } from '$pages/load_file/plot-analysis/stores';
+    import { best_metrics_loc } from '$pages/03 - load_file/plot-analysis/stores';
     import { ExternalLink } from 'lucide-svelte/icons';
 
     let csv_filenames: string[] = [];

@@ -2,7 +2,7 @@
     import BrowseFile from '$lib/components/BrowseFile.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import CustomSelect from '$lib/components/CustomSelect.svelte';
-    import { embeddings } from '$pages/embedd_molecule/stores';
+    import { embeddings } from '$pages/04 - embedd_molecule/stores';
     import Plot from 'svelte-plotly.js';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
@@ -11,6 +11,7 @@
 
     let explained_variance_data: { x: number[]; y: number[] }[] = [];
     let cumulative_variance_data: { x: number[]; y: number[] }[] = [];
+
     const explained_variance_file = localWritable('pca-explained-variance-file', '');
 
     const read_file = async (filename: string) => {
@@ -171,7 +172,6 @@
             </div>
         </div>
     </div>
-    <!-- </div> -->
 {/if}
 
 <style>
