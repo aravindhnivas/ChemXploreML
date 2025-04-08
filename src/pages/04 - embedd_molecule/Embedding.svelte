@@ -47,7 +47,7 @@
         }
     };
 
-    $: refresh_built_in_models($embedding);
+    $: if (use_built_in_models) refresh_built_in_models($embedding);
 
     $: if (!use_built_in_models && $embedding && !$model_and_pipeline_files[$embedding]) {
         $model_and_pipeline_files[$embedding] = {
