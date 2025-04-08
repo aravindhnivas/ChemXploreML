@@ -1,6 +1,10 @@
-export { default as Home } from './home';
-export { default as MolecularAnalysis } from './molecular_analysis';
-export { default as MolecularEmbedder } from './molecular_embedder';
-export { default as Training } from './training';
-export { default as UMAP } from './umap';
+export { default as Home } from './home/Index.svelte';
+export { default as MolecularAnalysis } from './molecular_analysis/Index.svelte';
+export { default as LoadFile } from './load_file/Index.svelte';
+export { default as EmbeddMolecule } from './embedd_molecule/Index.svelte';
+export { default as DimenstionalityReduction } from './dimensionality_reduction/Index.svelte';
+export { default as MLTraining } from './ml_training/Index.svelte';
+// export { default as MolecularEmbedder } from './molecular_embedder';
+// export { default as Training } from './training';
+// export { default as UMAP } from './umap';
 export { default as Settings } from './settings';

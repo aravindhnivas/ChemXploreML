@@ -2,7 +2,6 @@ interface Exposed {
     sleep: (ms: number) => Promise<void>;
     getID: () => string;
 }
-
 interface Window extends Exposed {}
 
 interface OutputBoxtype {
@@ -10,7 +9,17 @@ interface OutputBoxtype {
     type: 'info' | 'error' | 'warning' | 'success';
 }
 
-type PAGES = 'Home' | 'MolecularAnalysis' | 'MolecularEmbedder' | 'Training' | 'UMAP' | 'Settings';
+// type PAGES = 'Home' | 'MolecularAnalysis' | 'MolecularEmbedder' | 'Training' | 'UMAP' | 'Settings';
+//
+type PAGES =
+    | 'Home'
+    | 'MolecularAnalysis'
+    | 'LoadFile'
+    | 'EmbeddMolecule'
+    | 'DimenstionalityReduction'
+    | 'MLTraining'
+    | 'Settings';
+
 type AppIds = Record<
     PAGES,
     {
