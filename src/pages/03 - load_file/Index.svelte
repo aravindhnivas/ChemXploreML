@@ -12,7 +12,7 @@
 </script>
 
 <Page {page_name}>
-    <svelte:fragment slot="body" let:active_children>
+    <svelte:fragment let:active_children>
         <Pane minSize={80}>
             <div class="overflow-auto max-h-[100%] p-2">
                 {#each child_components as { id, component }}

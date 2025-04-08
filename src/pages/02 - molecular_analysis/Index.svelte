@@ -45,7 +45,7 @@
 </script>
 
 <Page page_name="MolecularAnalysis">
-    <svelte:fragment slot="body">
+    <svelte:fragment>
         <Pane class="p-2">
             <div class="grid content-start gap-2 p-5 overflow-auto max-h-[90vh]">
                 <CustomInput

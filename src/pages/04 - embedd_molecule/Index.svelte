@@ -6,7 +6,7 @@
 </script>
 
 <Page {page_name}>
-    <svelte:fragment slot="body">
+    <svelte:fragment>
         <Pane minSize={80}>
             <div class="overflow-auto max-h-[100%] p-5">
                 <Embedding />

@@ -5,7 +5,7 @@
 </script>
 
 <Page page_name="Settings" pane_size={20}>
-    <svelte:fragment slot="body" let:active_children>
+    <svelte:fragment let:active_children>
         <Pane minSize={50} maxSize={90}>
             <Configuration display={active_children === 'configuration' ? 'grid' : 'none'} />
             <Console display={active_children === 'console' ? 'grid' : 'none'} />

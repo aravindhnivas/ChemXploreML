@@ -5,7 +5,7 @@
 </script>
 
 <Page page_name="Home">
-    <svelte:fragment slot="body">
+    <svelte:fragment>
         <Pane class="p-2">
             <div class="hero h-full">
                 <div class="hero-content text-center">

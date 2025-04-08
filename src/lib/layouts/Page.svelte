@@ -40,5 +40,5 @@
             </ul>
         </Pane>
     {/if}
-    <slot name="body" active_children={$active_page_child_id[page_name]} />
+    <slot active_children={$active_page_child_id[page_name]} />
 </Splitpanes>
