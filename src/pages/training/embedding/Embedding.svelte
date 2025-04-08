@@ -19,12 +19,16 @@
         embedd_savefile,
         embedd_savefile_path,
         embedding,
+        embedding_file_download_url,
         embeddings,
         embeddings_computed,
         model_and_pipeline_files,
         use_PCA,
     } from './stores';
     import LoadedFileInfos from './LoadedFileInfos.svelte';
+    import { BaseDirectory } from '@tauri-apps/plugin-fs';
+    import { Download } from 'lucide-svelte/icons';
+    import DownloadModel from './DownloadModel.svelte';
 
     export let id: string = 'main-data-container';
     export let display: string = 'none';
@@ -36,6 +40,7 @@
     let use_built_in_models = true;
 
     onMount(async () => {
+        q;
         $model_and_pipeline_files['mol2vec'] = {
             model_file: '',
             pipeline_file: '',
@@ -45,11 +50,14 @@
             pipeline_file: '',
         };
 
-        const resource_dir = await path.join(await path.resourceDir(), 'resources');
+        const embedding_models = await path.join(await path.appLocalDataDir(), 'embedding_models');
+        if (!(await fs.exists(embedding_models))) {
+            await fs.mkdir('embedding_models', { baseDir: BaseDirectory.AppLocalData, recursive: true });
+        }
         // const model_dir = await path.join(resource_dir, 'models');
 
-        mol2vec_model = await path.join(resource_dir, 'mol2vec_model.pkl');
-        vicgae_model = await path.join(resource_dir, 'VICGAE.pkl');
+        mol2vec_model = await path.join(embedding_models, 'mol2vec_model.pkl');
+        vicgae_model = await path.join(embedding_models, 'VICGAE.pkl');
 
         // check if model files exist
         mol2vec_model_exists = await fs.exists(mol2vec_model);
@@ -77,7 +85,6 @@
                 pipeline_file: '',
             };
         }
-        console.warn({ mol2vec_model, vicgae_model });
     });
 
     $: if (use_built_in_models && mol2vec_model_exists && vicgae_model_exists) {
@@ -219,7 +226,6 @@
             }
         }
     };
-
     let dataFromPython = {} as Record<Embedding, EmbeddingState>;
 </script>
 
@@ -237,19 +243,35 @@
     </div>
 
     <Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} />
-
-    <BrowseFile
-        disabled={use_built_in_models}
-        bind:filename={$model_and_pipeline_files[$embedding].model_file}
-        label="Model"
-    />
-    {#if $use_PCA}
+    {#if use_built_in_models}
+        {#await fs.exists($model_and_pipeline_files[$embedding]?.model_file) then file_exists}
+            {#if !file_exists}
+                {#if $embedding_file_download_url[$embedding]}
+                    <DownloadModel />
+                {:else}
+                    <div class="badge badge-md badge-error">
+                        <div>
+                            <span>In-built model not available</span>
+                        </div>
+                    </div>
+                {/if}
+            {/if}
+        {/await}
+    {/if}
+    {#if !use_built_in_models}
         <BrowseFile
             disabled={use_built_in_models}
-            bind:filename={$model_and_pipeline_files[$embedding].pipeline_file}
-            label="PCA pipeline"
-            helper="Make sure to give a pipeline without kmeans clustering"
+            bind:filename={$model_and_pipeline_files[$embedding].model_file}
+            label="Model"
         />
+        {#if $use_PCA}
+            <BrowseFile
+                disabled={use_built_in_models}
+                bind:filename={$model_and_pipeline_files[$embedding].pipeline_file}
+                label="PCA pipeline"
+                helper="Make sure to give a pipeline without kmeans clustering"
+            />
+        {/if}
     {/if}
 
     {#if test_mode}

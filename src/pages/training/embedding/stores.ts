@@ -36,3 +36,8 @@ export const model_and_pipeline_files = localWritable<{
         pipeline_file: string;
     };
 }>('model_and_pipeline_files', {});
+
+export const embedding_file_download_url = writable<Record<Embedding, string>>({
+    mol2vec: 'https://drive.google.com/uc?export=download&id=1Tx12wmiNdFHKGe3uSJn6IPwCnx18eE6O',
+    VICGAE: 'https://drive.google.com/uc?export=download&id=17peb0K6tGP0HbLG83I41ZJ1-wYVjEvmm',
+});
