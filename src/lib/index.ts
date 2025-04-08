@@ -28,37 +28,6 @@ export const APP_IDS = writable<AppIds>({
         icon: Atom,
         id: 'molecular_analysis',
     },
-    // MolecularEmbedder: {
-    //     name: 'Train Embedder',
-    //     icon: Bot,
-    //     id: 'molecular_embedder',
-    //     children: [
-    //         { name: 'Mol2Vec', id: 'Mol2Vec' },
-    //         { name: 'VICGAE', id: 'VICGAE' },
-    //         { name: 'PCA', id: 'PCA' },
-    //     ],
-    // },
-    // Training: {
-    //     name: 'ML Training',
-    //     icon: Binary,
-    //     id: 'ml_training',
-    //     children: [
-    //         { name: 'Load file', id: 'load_file', icon: MonitorDown },
-    //         { name: 'Embedding', id: 'embedding', icon: Bot },
-    //         { name: 'ML Model', id: 'ml_model', icon: Binary },
-    //         { name: 'ML Prediction', id: 'ml_prediction', icon: Wand },
-    //     ],
-    // },
-    // UMAP: {
-    //     name: 'UMAP/t-SNE',
-    //     icon: Layers2,
-    //     id: 'umap_tsne',
-    //     children: [
-    //         { name: 'Meta Infos', id: 'meta_infos' },
-    //         { name: 'UMAP', id: 'umap_embedder' },
-    //         { name: 't-SNE', id: 'tsne_embedder' },
-    //     ],
-    // },
     LoadFile: {
         name: 'Load File',
         icon: MonitorDown,
@@ -69,7 +38,7 @@ export const APP_IDS = writable<AppIds>({
         ],
     },
     EmbeddMolecule: {
-        name: 'Embedd Molecule',
+        name: 'Vectorize Molecule',
         icon: Bot,
         id: 'embedd_molecules',
     },
@@ -88,8 +57,6 @@ export const APP_IDS = writable<AppIds>({
         icon: Binary,
         id: 'ml_training',
         children: [
-            // { name: 'Load file', id: 'load_file', icon: MonitorDown },
-            // { name: 'Embedding', id: 'embedding', icon: Bot },
             { name: 'ML Model', id: 'ml_model', icon: Binary },
             { name: 'ML Prediction', id: 'ml_prediction', icon: Wand },
         ],
@@ -115,9 +82,6 @@ export const active_page_id = localWritable<string>('active_page_id', 'home');
 export const active_page_child_id = localWritable<{ [key in PAGES]: string }>('active_page_child_id', {
     Home: '',
     MolecularAnalysis: '',
-    // MolecularEmbedder: 'Mol2Vec',
-    // Training: 'load_file',
-    // UMAP: 'UMAP',
     LoadFile: 'load_data',
     EmbeddMolecule: '',
     DimenstionalityReduction: 'pca_embedder',
