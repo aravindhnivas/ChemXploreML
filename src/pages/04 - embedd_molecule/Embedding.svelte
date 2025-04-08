@@ -29,65 +29,25 @@
     import { BaseDirectory } from '@tauri-apps/plugin-fs';
     import DownloadModel from './DownloadModel.svelte';
 
-    let mol2vec_model = '';
-    let vicgae_model = '';
-    let mol2vec_model_exists = false;
-    let vicgae_model_exists = false;
     let use_built_in_models = true;
 
-    onMount(async () => {
-        $model_and_pipeline_files['mol2vec'] = {
-            model_file: '',
-            pipeline_file: '',
-        };
-        $model_and_pipeline_files['VICGAE'] = {
-            model_file: '',
-            pipeline_file: '',
-        };
-
+    const refresh_built_in_models = async (embedder: Embedding) => {
         const embedding_models = await path.join(await path.appLocalDataDir(), 'embedding_models');
         if (!(await fs.exists(embedding_models))) {
             await fs.mkdir('embedding_models', { baseDir: BaseDirectory.AppLocalData, recursive: true });
         }
-        // const model_dir = await path.join(resource_dir, 'models');
 
-        mol2vec_model = await path.join(embedding_models, 'mol2vec_model.pkl');
-        vicgae_model = await path.join(embedding_models, 'VICGAE.pkl');
+        const model_file = await path.join(embedding_models, `${embedder}.pkl`);
 
-        // check if model files exist
-        mol2vec_model_exists = await fs.exists(mol2vec_model);
-        vicgae_model_exists = await fs.exists(vicgae_model);
-
-        if (!mol2vec_model_exists) {
-            console.warn('mol2vec_model.pkl not found in resources');
-        }
-        if (!vicgae_model_exists) {
-            console.warn('VICGAE.pkl not found in resources');
-        }
-        if (!mol2vec_model_exists && !vicgae_model_exists) {
-            toast.error('No model files found in resources');
-            return;
-        }
-        if (mol2vec_model_exists) {
-            $model_and_pipeline_files['mol2vec'] = {
-                model_file: mol2vec_model,
+        if (await fs.exists(model_file)) {
+            $model_and_pipeline_files[embedder] = {
+                model_file,
                 pipeline_file: '',
             };
         }
-        if (vicgae_model_exists) {
-            $model_and_pipeline_files['VICGAE'] = {
-                model_file: vicgae_model,
-                pipeline_file: '',
-            };
-        }
-    });
+    };
 
-    $: if (use_built_in_models && mol2vec_model_exists && vicgae_model_exists) {
-        $model_and_pipeline_files['mol2vec'].model_file = mol2vec_model;
-        $model_and_pipeline_files['VICGAE'].model_file = vicgae_model;
-        $model_and_pipeline_files['mol2vec'].pipeline_file = '';
-        $model_and_pipeline_files['VICGAE'].pipeline_file = '';
-    }
+    $: refresh_built_in_models($embedding);
 
     $: if (!use_built_in_models && $embedding && !$model_and_pipeline_files[$embedding]) {
         $model_and_pipeline_files[$embedding] = {
@@ -224,12 +184,9 @@
     let dataFromPython = {} as Record<Embedding, EmbeddingState>;
 </script>
 
-<div class="flex justify-between">
-    <!-- <h2>Embeddings</h2> -->
-    <Checkbox label="Test mode" bind:value={test_mode} />
-</div>
-
 <h3>Pre-trained model</h3>
+
+<Checkbox label="Test mode" bind:value={test_mode} />
 
 <div class="flex-gap items-end">
     <CustomSelect label="Choose embedder" bind:value={$embedding} items={embeddings} />
@@ -237,21 +194,24 @@
 </div>
 
 <Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} />
+
 {#if use_built_in_models}
     {#await fs.exists($model_and_pipeline_files[$embedding]?.model_file) then file_exists}
         {#if !file_exists}
             {#if $embedding_file_download_url[$embedding]}
                 <DownloadModel />
+                <span class="text-xl">{$model_and_pipeline_files[$embedding]?.model_file || 'model'}</span>
             {:else}
                 <div class="badge badge-md badge-error">
                     <div>
-                        <span>In-built model not available</span>
+                        <span>In-built model not available to download</span>
                     </div>
                 </div>
             {/if}
         {/if}
     {/await}
 {/if}
+
 {#if !use_built_in_models}
     <BrowseFile
         disabled={use_built_in_models}
