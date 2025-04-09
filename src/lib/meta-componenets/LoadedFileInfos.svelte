@@ -36,13 +36,13 @@
                 final_processed_file: { value: '', valid: false, basename: '' },
             };
             const [_training_file, _embedded_file, _processed_df] = await Promise.all([tfile, vfile, processed_df]);
-            console.log(JSON.stringify({ _training_file, _embedded_file, _processed_df }, null, 2));
+            // console.log(JSON.stringify({ _training_file, _embedded_file, _processed_df }, null, 2));
             const vector_metadata_file = _embedded_file.replace('.npy', '.metadata.json');
-            console.log(vector_metadata_file);
+            // console.log(vector_metadata_file);
             if (!(await fs.exists(vector_metadata_file))) return loaded_files;
             const _metadata = await readJSON<{ data_shape: number[]; invalid_smiles: number }>(vector_metadata_file);
             if (_metadata) metadata = _metadata;
-            console.log(metadata);
+            // console.log(metadata);
 
             loaded_files.training_file = {
                 value: _training_file,
