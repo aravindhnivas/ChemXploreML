@@ -1,101 +1,14 @@
 <script lang="ts">
-    import { APP_IDS } from '$pages/pages';
-    import CustomInput from '$lib/components/CustomInput.svelte';
-    import Loadingbtn from '$lib/components/Loadingbtn.svelte';
-    import Molecule from '$lib/components/Molecule.svelte';
-    import Chip, { Set, Text } from '@smui/chips';
-    import PropertiesBox from './PropertiesBox.svelte';
     import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
-    import { Settings } from 'lucide-svelte/icons';
-
-    let smiles = 'CCO';
-    // let key_properties: string[] = [];
-
-    const all_properties = [
-        'basic_properties',
-        'ring_information',
-        'chain_information',
-        'aromaticity',
-        'functional_groups',
-        'physicochemical_properties',
-        'heterocyclicity',
-    ];
-    let selected_properties: string[] = ['basic_properties', 'ring_information', 'chain_information'];
-
-    let full_analysis: Record<string, any> = {};
-
-    const compute_molecular_analysis = async () => {
-        if (!smiles) return toast.error('Please provide a SMILES string');
-        // console.log('Analyse', smiles);
-        return {
-            pyfile: 'training.molecular_analysis_single_mode',
-            args: {
-                smiles,
-            },
-        };
-    };
-
-    const onResult = (e: CustomEvent) => {
-        if (!e.detail) return;
-        const { dataFromPython } = e.detail;
-        full_analysis = dataFromPython.full_analysis;
-    };
-
-    let compute_btn: HTMLButtonElement | undefined = undefined;
+    import MoleculeAnalysis from './MoleculeAnalysis.svelte';
 </script>
 
 <Page page_name="MolecularAnalysis">
     <svelte:fragment let:page_title>
         <Pane>
             <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
-                <div class="grid gap-1">
-                    <div class="flex justify-between">
-                        <h1 class="text-xl">{page_title}</h1>
-                        <button class="btn btn-sm btn-outline btn-square">
-                            <Settings />
-                        </button>
-                    </div>
-                    <div class="text-sm">Explore molecular structures and perform basic chemical analysis</div>
-                </div>
-                <div class="divider"></div>
-
-                <div class="grid gap-2">
-                    <CustomInput
-                        label="SMILES"
-                        bind:value={smiles}
-                        on:change={() => {
-                            if (!smiles) return;
-                            compute_btn?.click();
-                        }}
-                    />
-
-                    <Molecule bind:smiles show_controls={false} />
-                </div>
-
-                <div class="divider"></div>
-                <div class="m-auto">
-                    <Loadingbtn
-                        bind:btn={compute_btn}
-                        name="Analyse"
-                        callback={compute_molecular_analysis}
-                        on:result={onResult}
-                    />
-                </div>
-                <div class="divider"></div>
-
-                <Set chips={all_properties} let:chip filter bind:selected={selected_properties}>
-                    <Chip {chip} touch>
-                        <Text>{chip}</Text>
-                    </Chip>
-                </Set>
-
-                <div class="divider"></div>
-                {#if !isEmpty(full_analysis)}
-                    <PropertiesBox {selected_properties} {full_analysis} {all_properties} />
-                {:else}
-                    <div class="text-center">No data to display</div>
-                {/if}
+                <MoleculeAnalysis />
             </div>
         </Pane>
     </svelte:fragment>

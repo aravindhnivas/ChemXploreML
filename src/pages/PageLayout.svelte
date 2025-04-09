@@ -1,5 +1,6 @@
 <script lang="ts">
     import Page from '$pages/Page.svelte';
+    import { Settings } from 'lucide-svelte/icons';
     import type { SvelteComponent } from 'svelte';
     import { Pane } from 'svelte-splitpanes';
 
@@ -11,6 +12,17 @@
     <svelte:fragment let:active_children let:page_children>
         <Pane minSize={50} maxSize={90}>
             <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
+                <div class="grid gap-1">
+                    <div class="flex justify-between">
+                        <h1 class="text-xl">Title</h1>
+                        <button class="btn btn-sm btn-outline btn-square">
+                            <Settings />
+                        </button>
+                    </div>
+                    <div class="text-sm">Explore molecular structures and perform basic chemical analysis</div>
+                </div>
+                <div class="divider"></div>
+
                 {#each child_components as { id, component } (component)}
                     <div {id} style:display={active_children === id ? '' : 'none'} class="grid gap-2">
                         <h1>{page_children.find(o => (o.id = id))?.title}</h1>
