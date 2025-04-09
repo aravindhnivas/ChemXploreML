@@ -182,7 +182,6 @@
         }
     };
     let dataFromPython = {} as Record<Embedding, EmbeddingState>;
-    let open = false;
 </script>
 
 <h3>Pre-trained model</h3>
@@ -203,7 +202,6 @@
         {#if !file_exists}
             {#if $embedding_file_download_url[$embedding]}
                 <DownloadModel />
-                <span class="text-xl">{$model_and_pipeline_files[$embedding]?.model_file || 'model'}</span>
             {:else}
                 <div class="badge badge-md badge-error">
                     <div>
