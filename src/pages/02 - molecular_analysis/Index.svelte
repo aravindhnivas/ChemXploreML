@@ -7,6 +7,7 @@
     import PropertiesBox from './PropertiesBox.svelte';
     import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
+    import { Settings } from 'lucide-svelte/icons';
 
     let smiles = 'CCO';
     // let key_properties: string[] = [];
@@ -45,9 +46,20 @@
 </script>
 
 <Page page_name="MolecularAnalysis">
-    <svelte:fragment>
+    <svelte:fragment let:page_title>
         <Pane>
             <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
+                <div class="grid gap-1">
+                    <div class="flex justify-between">
+                        <h1 class="text-xl">{page_title}</h1>
+                        <button class="btn btn-sm btn-outline btn-square">
+                            <Settings />
+                        </button>
+                    </div>
+                    <div class="text-sm">Explore molecular structures and perform basic chemical analysis</div>
+                </div>
+                <div class="divider"></div>
+
                 <div class="grid gap-2">
                     <CustomInput
                         label="SMILES"
@@ -58,7 +70,7 @@
                         }}
                     />
 
-                    <Molecule bind:smiles show_controls={true} />
+                    <Molecule bind:smiles show_controls={false} />
                 </div>
 
                 <div class="divider"></div>

@@ -26,10 +26,25 @@ type AppIds = Record<
         name: string;
         icon: any;
         id: string;
-        children?: {
+        title: string;
+        description: string;
+        children: {
             name: string;
             id: string;
             icon?: any;
+            title: string;
+            description: string;
+        }[];
+    }
+>;
+type AppDescription = Record<
+    PAGES,
+    {
+        title: string;
+        description: string;
+        children: {
+            title: string;
+            description: string;
         }[];
     }
 >;

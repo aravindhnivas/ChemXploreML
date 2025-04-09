@@ -11,17 +11,14 @@
         download_assets,
     } from '$pages/settings/utils/download-assets';
     import { updateInterval } from '$utils/stores';
-    import Layout from './layout/Layout.svelte';
     import { git_url } from '$lib/utils';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
     import { toggle_loading } from '$utils/index';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import { umdapyVersion } from '$lib/pyserver/stores';
-    import { ExternalLink, WifiOff, X } from 'lucide-svelte/icons';
+    import { WifiOff, X } from 'lucide-svelte/icons';
     import { killPID } from '$settings/utils/network';
     import { download_url, assets_download_progress, assets_download_pid } from '$lib/utils/download';
-
-    export let display = 'grid';
 
     let install_dialog_active = false;
 
@@ -199,143 +196,138 @@
 
     onDestroy(async () => {
         if (unlisten_check_for_update) clearInterval(unlisten_check_for_update);
-        // const unlisten2 = await listen_download_progress;
-        // unlisten2();
     });
     let url = '';
 </script>
 
-<Layout {display}>
-    <h1>Update</h1>
-    {#if !window.navigator.onLine}
-        <div class="ml-auto" aria-label="No internet connection" data-cooltipz-dir="left">
-            <WifiOff />
+{#if !window.navigator.onLine}
+    <div class="ml-auto" aria-label="No internet connection" data-cooltipz-dir="left">
+        <WifiOff />
+    </div>
+{/if}
+
+<div class="align">
+    <div class="text-sm" style="width: 100%;">
+        Current version: <span class="badge text-sm">v{currentVersion}</span>
+        {#if version_info}
+            <span class="badge badge-success">{version_info}</span>
+        {/if}
+    </div>
+
+    <div class="align">
+        <div class="align">
+            <button
+                class="btn btn-sm btn-outline"
+                class:is-warning={updateReadyToInstall}
+                id="updateCheckBtn"
+                on:click={async () => {
+                    if (!window.navigator.onLine) return outputbox.warn('No internet connection');
+                    await check_for_update(true);
+                }}
+            >
+                {updateReadyToInstall ? 'Quit and Install' : 'Check update'}
+            </button>
+
+            <div class="ml-auto">
+                <CustomInput
+                    bind:value={$updateInterval}
+                    label="update interval (in min)"
+                    type="number"
+                    on:change={() => {
+                        $updateInterval = Number($updateInterval);
+                        set_update_interval($updateInterval);
+                    }}
+                />
+            </div>
+        </div>
+
+        <div class="updateCheck_status_div">
+            <span>Last checked</span>
+            <span class="badge badge-info" id="update-check-status">{lastUpdateCheck}</span>
+        </div>
+    </div>
+
+    {#if import.meta.env.DEV}
+        <div class="grid w-full grid-cols-[1fr_auto_auto] gap-2 items-end">
+            <CustomInput bind:value={url} label="URL" />
+            <button class="btn btn-sm btn-outline" on:click={() => download_url(url)}> Download test </button>
+            <button class="btn btn-sm btn-error" on:click={async () => await killPID([`${$assets_download_pid}`])}
+                ><X /></button
+            >
         </div>
     {/if}
 
+    {#if download_progress}
+        <div class="progress__div">
+            <span class="badge badge-info">updating...</span>
+            <progress class="progress w-full" value={download_progress} max="1"></progress>
+        </div>
+    {/if}
+
+    <h3>Python assets download</h3>
+
     <div class="align">
-        <div class="text-sm" style="width: 100%;">
-            Current version: <span class="badge text-sm">v{currentVersion}</span>
-            {#if version_info}
-                <span class="badge badge-success">{version_info}</span>
-            {/if}
-        </div>
+        <button
+            id="btn-check-asset-update"
+            class="btn btn-sm btn-outline ld-ext-right"
+            on:click={async ({ currentTarget }) => {
+                if (!window.navigator.onLine) return outputbox.warn('No internet connection');
+                toggle_loading(currentTarget);
+                const [_err] = await oO(check_assets_update({ download_request: true }));
+                toggle_loading(currentTarget);
+            }}
+        >
+            Check assets update
+            <div class="ld ld-ring ld-spin"></div>
+        </button>
 
-        <div class="align">
-            <div class="align">
-                <button
-                    class="btn btn-sm btn-outline"
-                    class:is-warning={updateReadyToInstall}
-                    id="updateCheckBtn"
-                    on:click={async () => {
-                        if (!window.navigator.onLine) return outputbox.warn('No internet connection');
-                        await check_for_update(true);
-                    }}
-                >
-                    {updateReadyToInstall ? 'Quit and Install' : 'Check update'}
-                </button>
-
-                <div class="ml-auto">
-                    <CustomInput
-                        bind:value={$updateInterval}
-                        label="update interval (in min)"
-                        type="number"
-                        on:change={() => {
-                            $updateInterval = Number($updateInterval);
-                            set_update_interval($updateInterval);
-                        }}
-                    />
-                </div>
-            </div>
-
-            <div class="updateCheck_status_div">
-                <span>Last checked</span>
-                <span class="badge badge-info" id="update-check-status">{lastUpdateCheck}</span>
-            </div>
-        </div>
-
-        {#if import.meta.env.DEV}
-            <div class="grid w-full grid-cols-[1fr_auto_auto] gap-2 items-end">
-                <CustomInput bind:value={url} label="URL" />
-                <button class="btn btn-sm btn-outline" on:click={() => download_url(url)}> Download test </button>
-                <button class="btn btn-sm btn-error" on:click={async () => await killPID([`${$assets_download_pid}`])}
-                    ><X /></button
-                >
-            </div>
-        {/if}
-
-        {#if download_progress}
-            <div class="progress__div">
-                <span class="badge badge-info">updating...</span>
-                <progress class="progress w-full" value={download_progress} max="1"></progress>
-            </div>
-        {/if}
-
-        <h3>Python assets download</h3>
-
-        <div class="align">
-            <button
-                id="btn-check-asset-update"
-                class="btn btn-sm btn-outline ld-ext-right"
-                on:click={async ({ currentTarget }) => {
-                    if (!window.navigator.onLine) return outputbox.warn('No internet connection');
-                    toggle_loading(currentTarget);
-                    const [_err] = await oO(check_assets_update({ download_request: true }));
-                    toggle_loading(currentTarget);
-                }}
-            >
-                Check assets update
-                <div class="ld ld-ring ld-spin"></div>
-            </button>
-
-            <button
-                id="btn-download-asset"
-                class="btn btn-sm btn-outline ld-ext-right"
-                class:running={$assets_download_progress > 0 && $assets_download_progress < 1}
-                disabled={$assets_download_progress > 0 && $assets_download_progress < 1}
-                on:click={async () => {
-                    const [_err] = await oO(download_assets());
-                }}
-                >Download assets {$python_asset_ready_to_install ? 'again' : ''}
-                <div class="ld ld-ring ld-spin"></div></button
-            >
-
-            {#if $assets_download_progress > 0 && $assets_download_progress < 1}
-                <button
-                    class="btn btn-sm btn-error"
-                    on:click={async () => {
-                        await killPID([`${$assets_download_pid}`]);
-                        $assets_download_progress = 0;
-                        $assets_download_pid = 0;
-                    }}
-                    >Cancel <X />
-                </button>
-            {/if}
-
-            {#if $python_asset_ready_to_install}
-                <button
-                    id="install-asset-btn"
-                    class="btn btn-sm ld-ext-right"
-                    on:click={async ({ currentTarget }) => {
-                        toggle_loading(currentTarget);
-                        const [_err] = await oO(unZIP(false));
-                        toggle_loading(currentTarget);
-                    }}
-                    >Install assets
-                    <div class="ld ld-ring ld-spin"></div></button
-                >
-            {/if}
-        </div>
+        <button
+            id="btn-download-asset"
+            class="btn btn-sm btn-outline ld-ext-right"
+            class:running={$assets_download_progress > 0 && $assets_download_progress < 1}
+            disabled={$assets_download_progress > 0 && $assets_download_progress < 1}
+            on:click={async () => {
+                const [_err] = await oO(download_assets());
+            }}
+            >Download assets {$python_asset_ready_to_install ? 'again' : ''}
+            <div class="ld ld-ring ld-spin"></div></button
+        >
 
         {#if $assets_download_progress > 0 && $assets_download_progress < 1}
-            <div class="progress__div">
-                <span class="badge badge-info">update-progress</span>
-                <progress class="progress w-full" value={$assets_download_progress} max="1"></progress>
-            </div>
+            <button
+                class="btn btn-sm btn-error"
+                on:click={async () => {
+                    await killPID([`${$assets_download_pid}`]);
+                    $assets_download_progress = 0;
+                    $assets_download_pid = 0;
+                }}
+                >Cancel <X />
+            </button>
+        {/if}
+
+        {#if $python_asset_ready_to_install}
+            <button
+                id="install-asset-btn"
+                class="btn btn-sm ld-ext-right"
+                on:click={async ({ currentTarget }) => {
+                    toggle_loading(currentTarget);
+                    const [_err] = await oO(unZIP(false));
+                    toggle_loading(currentTarget);
+                }}
+                >Install assets
+                <div class="ld ld-ring ld-spin"></div></button
+            >
         {/if}
     </div>
-    <TerminalBox bind:terminal={$outputbox} />
-</Layout>
+
+    {#if $assets_download_progress > 0 && $assets_download_progress < 1}
+        <div class="progress__div">
+            <span class="badge badge-info">update-progress</span>
+            <progress class="progress w-full" value={$assets_download_progress} max="1"></progress>
+        </div>
+    {/if}
+</div>
+<TerminalBox bind:terminal={$outputbox} />
 
 <style lang="scss">
     .progress__div {

@@ -16,9 +16,11 @@
 
     onMount(() => {
         if (!$active_page_child_id[page_name]) {
-            $active_page_child_id[page_name] = page_children?.[0].id ?? '';
+            $active_page_child_id[page_name] = page_children?.[0]?.id ?? '';
         }
     });
+
+    const page_title = $APP_IDS[page_name].name;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -30,7 +32,7 @@
     style="display: {$active_page_id === id ? 'flex' : 'none'};"
     class="card shadow-xl animate__animated animate__fadeIn h-full w-full overflow-hidden rounded-none"
 >
-    {#if page_children}
+    {#if page_children.length > 0}
         <Pane class="p-2" size={pane_size} minSize={pane_min_size} maxSize={pane_max_size}>
             <ul class="menu rounded-box gap-2">
                 {#each page_children as { name, id, icon } (id)}
@@ -46,5 +48,5 @@
             </ul>
         </Pane>
     {/if}
-    <slot active_children={$active_page_child_id[page_name]} />
+    <slot active_children={$active_page_child_id[page_name]} {page_title} {page_children} />
 </Splitpanes>

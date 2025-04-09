@@ -1,7 +1,6 @@
 <script lang="ts">
     import { redis_server_mode, pyServerReady, pyServerURL } from '$lib/pyserver/stores';
     import { socket, socket_connection_status } from '$lib/websocket/stores';
-    import Layout from './layout/Layout.svelte';
     import Dashboard from '$pages/settings/dashboards/Dashboard.svelte';
     import { initializeSocket } from '$lib/websocket/utils';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
@@ -9,7 +8,6 @@
     import StartStopServerControl from '$lib/start_stop_server/StartStopServerControl.svelte';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
     import { redis_worker_log } from '$lib/start_stop_server/index';
-    export let display = 'grid';
 
     $: if ($socket_connection_status !== 'connected' && $pyServerReady && $redis_server_mode) {
         initializeSocket();
@@ -19,59 +17,56 @@
     let wait_time = 1;
 </script>
 
-<Layout {display} class="pl-5">
-    <h1>Process-Manager</h1>
-    {#if import.meta.env.DEV}
-        <div class="flex-gap items-end">
-            <CustomInput bind:value={wait_time} label="Wait Time (s)" type="number" />
-            <Loadingbtn
-                subprocess={true}
-                callback={() => {
-                    return {
-                        pyfile: 'wait_timer',
-                        args: {
-                            wait_time: Number(wait_time),
-                        },
-                    };
-                }}
-            />
-        </div>
-    {/if}
-
-    <div class="flex gap-2 my-2">
-        <button
-            class="btn btn-sm btn-outline"
-            class:btn-disabled={$socket_connection_status === 'connected'}
-            on:click={() => initializeSocket()}>Connect</button
-        >
-        <button
-            class="btn btn-sm btn-error"
-            class:btn-disabled={$socket_connection_status !== 'connected'}
-            on:click={() => $socket.disconnect()}>Disconnect</button
-        >
-
-        <Dashboard name="RQ-Dashboard" url={$pyServerURL + '/rq'} />
-    </div>
-
-    {#if $socket_connection_status === 'connected'}
-        <div class="status-indicator connected">Connected to server</div>
-    {:else if $socket_connection_status === 'disconnected'}
-        <div class="status-indicator disconnected">Disconnected from server</div>
-    {:else}
-        <div class="status-indicator error">Connection error</div>
-    {/if}
-
-    {#if import.meta.env.DEV}
-        <StartStopServerControl
-            id="start-stop-server-control-redis"
-            pyfile="start_redis_worker"
-            args={{ listen: ['default'] }}
-            port={6379}
+{#if import.meta.env.DEV}
+    <div class="flex-gap items-end">
+        <CustomInput bind:value={wait_time} label="Wait Time (s)" type="number" />
+        <Loadingbtn
+            subprocess={true}
+            callback={() => {
+                return {
+                    pyfile: 'wait_timer',
+                    args: {
+                        wait_time: Number(wait_time),
+                    },
+                };
+            }}
         />
+    </div>
+{/if}
 
-        <TerminalBox bind:terminal={$redis_worker_log} />
-    {/if}
-</Layout>
+<div class="flex gap-2 my-2">
+    <button
+        class="btn btn-sm btn-outline"
+        class:btn-disabled={$socket_connection_status === 'connected'}
+        on:click={() => initializeSocket()}>Connect</button
+    >
+    <button
+        class="btn btn-sm btn-error"
+        class:btn-disabled={$socket_connection_status !== 'connected'}
+        on:click={() => $socket.disconnect()}>Disconnect</button
+    >
+
+    <Dashboard name="RQ-Dashboard" url={$pyServerURL + '/rq'} />
+</div>
+
+{#if $socket_connection_status === 'connected'}
+    <div class="status-indicator connected">Connected to server</div>
+{:else if $socket_connection_status === 'disconnected'}
+    <div class="status-indicator disconnected">Disconnected from server</div>
+{:else}
+    <div class="status-indicator error">Connection error</div>
+{/if}
+
+{#if import.meta.env.DEV}
+    <StartStopServerControl
+        id="start-stop-server-control-redis"
+        pyfile="start_redis_worker"
+        args={{ listen: ['default'] }}
+        port={6379}
+    />
+
+    <TerminalBox bind:terminal={$redis_worker_log} />
+{/if}
 
 <style>
     .status-indicator {

@@ -1,7 +1,4 @@
 <script lang="ts">
-    import Layout from './layout/Layout.svelte';
-    export let display = 'grid';
-
     const frontend_credits = [
         {
             name: 'Javascript',
@@ -188,53 +185,48 @@
     ];
 </script>
 
-<Layout {display} class="pl-5">
-    <h1>Credit</h1>
-
-    <h2 class="text-lg font-semibold">Frontend Technologies</h2>
-    <div class="flex-gap items-center flex-wrap">
-        <!-- title -->
-        {#each frontend_credits as item}
-            <a
-                href={item.url}
-                target="_blank"
-                class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 bg-white"
-            >
-                {#if item.icon}
-                    <img src={item.icon} alt={item.name} class="w-6 h-6" />
-                {/if}
-                <span>{item.name}</span>
-            </a>
-        {/each}
-    </div>
-    <div class="divider" />
-    <h2 class="text-lg font-semibold">Backend Technologies</h2>
-
-    <div class="flex-gap items-center flex-wrap">
-        {#each backend_credits as item}
-            <a
-                href={item.url}
-                target="_blank"
-                class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 bg-white"
-            >
+<h2 class="text-lg font-semibold">Frontend Technologies</h2>
+<div class="flex-gap items-center flex-wrap">
+    {#each frontend_credits as item}
+        <a
+            href={item.url}
+            target="_blank"
+            class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 bg-white"
+        >
+            {#if item.icon}
                 <img src={item.icon} alt={item.name} class="w-6 h-6" />
-                <span>{item.name}</span>
-            </a>
-        {/each}
-    </div>
+            {/if}
+            <span>{item.name}</span>
+        </a>
+    {/each}
+</div>
+<div class="divider" />
+<h2 class="text-lg font-semibold">Backend Technologies</h2>
 
-    <div class="divider" />
-    <h2 class="text-lg font-semibold">Other Credits</h2>
-    <div class="flex-gap items-center flex-wrap">
-        {#each other_credits as item}
-            <a
-                href={item.url}
-                target="_blank"
-                class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 bg-white"
-            >
-                <img src={item.icon} alt={item.name} class="w-6 h-6" />
-                <span>{item.name}</span>
-            </a>
-        {/each}
-    </div>
-</Layout>
+<div class="flex-gap items-center flex-wrap">
+    {#each backend_credits as item}
+        <a
+            href={item.url}
+            target="_blank"
+            class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 bg-white"
+        >
+            <img src={item.icon} alt={item.name} class="w-6 h-6" />
+            <span>{item.name}</span>
+        </a>
+    {/each}
+</div>
+
+<div class="divider" />
+<h2 class="text-lg font-semibold">Other Credits</h2>
+<div class="flex-gap items-center flex-wrap">
+    {#each other_credits as item}
+        <a
+            href={item.url}
+            target="_blank"
+            class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 bg-white"
+        >
+            <img src={item.icon} alt={item.name} class="w-6 h-6" />
+            <span>{item.name}</span>
+        </a>
+    {/each}
+</div>
