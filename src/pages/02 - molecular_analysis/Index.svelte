@@ -5,4 +5,8 @@
     const page_name: PAGES = 'MolecularAnalysis';
 </script>
 
-<PageLayout {page_name} component={MoleculeAnalysis} />
+<PageLayout {page_name} component={MoleculeAnalysis}>
+    <!-- <svelte:fragment slot="modal">
+        <div>Modal title</div>
+    </svelte:fragment> -->
+</PageLayout>

@@ -28,8 +28,6 @@
     import LoadedFileInfos from '$lib/meta-componenets/LoadedFileInfos.svelte';
     import { BaseDirectory } from '@tauri-apps/plugin-fs';
     import DownloadModel from './DownloadModel.svelte';
-    import Dialog, { Title, Content, Actions } from '@smui/dialog';
-    import { Settings } from 'lucide-svelte/icons';
 
     let use_built_in_models = true;
 
@@ -189,27 +187,8 @@
 
 <h3>Pre-trained model</h3>
 
-<div class="flex gap-2 justify-items-end">
+<div class="grid justify-items-end">
     <Checkbox label="Test mode" bind:value={test_mode} />
-    <button class="btn btn-sm btn-outline btn-square" on:click={() => (open = true)}><Settings size="20" /></button>
-    <Dialog
-        bind:open
-        aria-labelledby="large-scroll-title"
-        aria-describedby="large-scroll-content"
-        surface$style="width: 850px; max-width: calc(100vw - 32px);"
-    >
-        <Title>Modal</Title>
-        <Content>
-            {#each Array(10) as _item}
-                <!-- <LoremIpsum /> -->
-            {/each}
-        </Content>
-        <Actions>
-            <button class="btn btn-sm btn-outline" on:click={() => (open = false)}>
-                <span>Done</span>
-            </button>
-        </Actions>
-    </Dialog>
 </div>
 
 <div class="flex-gap items-end">
