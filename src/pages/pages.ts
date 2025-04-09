@@ -17,7 +17,7 @@ import {
     ChartBar,
 } from 'lucide-svelte/icons';
 
-export const APP_IDS = writable<NavigationConfig>({
+export const navigationConfig = writable<NavigationConfig>({
     Home: {
         name: 'Home',
         icon: Home,
