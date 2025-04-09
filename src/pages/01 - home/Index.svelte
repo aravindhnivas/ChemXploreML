@@ -8,9 +8,10 @@
             <div class="animate__animated animate__fadeInDown">
                 <img src="/icons/icon.png" alt="ChemXploreML Logo" class="w-32 h-32 m-auto" />
             </div>
-            <div class="animate__animated animate__fadeInUp">
+
+            <div class="grid gap-2 animate__animated animate__fadeInUp">
                 <h1 class="text-5xl font-bold">ChemXploreML</h1>
-                <p>A general-purpose desktop application for chemistry</p>
+                <p>A general-purpose desktop application for implementing machine-learning techniques for chemistry</p>
             </div>
             <div class="animate__animated animate__fadeInUp">
                 <button
