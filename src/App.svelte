@@ -6,11 +6,11 @@
     import Footer from '$lib/layouts/Footer.svelte';
     import PreModal from '$utils/PreModal.svelte';
     import { typeSafeObjectKeys } from '$lib/utils';
-    import { active_page_id, APP_IDS } from '$pages/pages';
+    import { active_page_id, navigationConfig } from '$pages/pages';
 
     let nav_tabs: { tab: string; component: any; id: string }[] = [];
 
-    Object.values($APP_IDS).forEach(value => {
+    Object.values($navigationConfig).forEach(value => {
         const { name, icon, id } = value;
         nav_tabs.push({ tab: name, component: icon, id });
     });
@@ -84,7 +84,7 @@
         </div>
     </header>
     <main>
-        {#each typeSafeObjectKeys($APP_IDS) as name}
+        {#each typeSafeObjectKeys($navigationConfig) as name}
             {#if name in pages}
                 <svelte:component this={pages[name]} />
             {/if}

@@ -20,31 +20,22 @@ type PAGES =
     | 'MLTraining'
     | 'Settings';
 
-type AppIds = Record<
-    PAGES,
-    {
-        name: string;
-        icon: any;
-        id: string;
-        title: string;
-        description: string;
-        children: {
-            name: string;
-            id: string;
-            icon?: any;
-            title: string;
-            description: string;
-        }[];
-    }
->;
-type AppDescription = Record<
-    PAGES,
-    {
-        title: string;
-        description: string;
-        children: {
-            title: string;
-            description: string;
-        }[];
-    }
->;
+interface NavigationChild {
+    name: string;
+    id: string;
+    icon?: typeof SvelteComponent; // optional icon for children
+    title: string;
+    description: string;
+}
+
+// Define a robust type for top-level navigation pages
+interface NavigationPage {
+    name: string;
+    id: string;
+    icon: typeof SvelteComponent; // required icon for main pages
+    title: string;
+    description: string;
+    children: NavigationChild[]; // each page has an array of child items
+}
+
+type NavigationConfig = Record<PAGES, NavigationPage>;
