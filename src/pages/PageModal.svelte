@@ -15,25 +15,20 @@
         dispatch('open');
     }}><Settings size="20" /></button
 >
-<Dialog
-    bind:open
-    aria-labelledby="large-scroll-title"
-    aria-describedby="large-scroll-content"
-    surface$style="width: 850px; max-width: calc(100vw - 32px);"
->
+<Dialog bind:open scrimClickAction="" surface$style="width: 850px; max-width: calc(100vw - 32px);">
     <Title>{title}</Title>
     <Content>
         <slot />
     </Content>
     <Actions>
         <button
-            class="btn btn-sm btn-outline"
+            class="btn btn-sm btn-outline btn-error"
             on:click={() => {
                 open = false;
                 dispatch('close');
             }}
         >
-            <span>close</span>
+            <span>Close</span>
         </button>
     </Actions>
 </Dialog>
