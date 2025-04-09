@@ -60,6 +60,9 @@ importers:
       '@smui/chips':
         specifier: ^7.0.0
         version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/dialog':
+        specifier: 7.0.0
+        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
       '@smui/menu-surface':
         specifier: ^7.0.0
         version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)

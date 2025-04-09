@@ -31,6 +31,7 @@
     "@modyfi/vite-plugin-yaml": "^1.1.1",
     "@smui-extra/accordion": "^7.0.0",
     "@smui/chips": "^7.0.0",
+    "@smui/dialog": "7.0.0",
     "@smui/menu-surface": "^7.0.0",
     "@smui/paper": "^7.0.0",
     "@sveltejs/svelte-virtual-list": "^3.0.1",
