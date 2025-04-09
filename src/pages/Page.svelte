@@ -3,7 +3,7 @@
     import { Pane, Splitpanes } from 'svelte-splitpanes';
 
     export let page_name: PAGES = 'Home';
-    export let pane_size = 10;
+    export let pane_size = 15;
     export let pane_min_size = 5;
     export let pane_max_size = 20;
 
@@ -33,19 +33,21 @@
     class="card shadow-xl animate__animated animate__fadeIn h-full w-full overflow-hidden rounded-none"
 >
     {#if page.children.length > 0}
-        <Pane class="p-2" size={pane_size} minSize={pane_min_size} maxSize={pane_max_size}>
-            <ul class="menu rounded-box gap-2">
-                {#each page.children as { name, id, icon } (id)}
-                    <li on:click={() => ($active_page_child_id[page_name] = id)}>
-                        <span class:active={$active_page_child_id[page_name] == id}>
-                            {#if icon}
-                                <svelte:component this={icon} class="w-4 h-4 mr-2" />
-                            {/if}
-                            {name}
-                        </span>
-                    </li>
-                {/each}
-            </ul>
+        <Pane size={pane_size} minSize={pane_min_size} maxSize={pane_max_size}>
+            <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
+                <ul class="menu rounded-box gap-2">
+                    {#each page.children as { name, id, icon } (id)}
+                        <li on:click={() => ($active_page_child_id[page_name] = id)}>
+                            <span class:active={$active_page_child_id[page_name] == id}>
+                                {#if icon}
+                                    <svelte:component this={icon} class="w-4 h-4 mr-2" />
+                                {/if}
+                                {name}
+                            </span>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
         </Pane>
     {/if}
     <slot active_children={$active_page_child_id[page_name]} {page_title} {page} />

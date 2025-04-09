@@ -16,7 +16,7 @@
     };
 </script>
 
-<Page {page_name} pane_size={20}>
+<Page {page_name}>
     <svelte:fragment let:active_children let:page>
         <Pane>
             <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
