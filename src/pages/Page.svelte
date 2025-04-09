@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { active_page_id, active_page_child_id, APP_IDS } from '$lib/index';
+    import { active_page_id, active_page_child_id, APP_IDS } from '$pages/pages';
     import { Pane, Splitpanes } from 'svelte-splitpanes';
 
     export let page_name: PAGES = 'Home';
@@ -13,6 +13,12 @@
     setContext('page_name', page_name);
     setContext('page_id', id);
     setContext('page_children', page_children);
+
+    onMount(() => {
+        if (!$active_page_child_id[page_name]) {
+            $active_page_child_id[page_name] = page_children?.[0].id ?? '';
+        }
+    });
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { APP_IDS } from '$lib/index';
+    import { APP_IDS } from '$pages/pages';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import Molecule from '$lib/components/Molecule.svelte';

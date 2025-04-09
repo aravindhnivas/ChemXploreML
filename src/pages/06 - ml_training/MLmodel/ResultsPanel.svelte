@@ -9,7 +9,7 @@
         results,
         current_model_pkl_files,
     } from './stores';
-    import { active_page_child_id } from '$lib/index';
+    import { active_page_child_id } from '$pages/pages';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomPanel from '$lib/components/CustomPanel.svelte';
     import { PlotlyColors } from '$lib/utils';

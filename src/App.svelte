@@ -6,7 +6,7 @@
     import Footer from '$lib/layouts/Footer.svelte';
     import PreModal from '$utils/PreModal.svelte';
     import { typeSafeObjectKeys } from '$lib/utils';
-    import { active_page_id, APP_IDS } from '$lib/index';
+    import { active_page_id, APP_IDS } from '$pages/pages';
 
     let nav_tabs: { tab: string; component: any; id: string }[] = [];
 
