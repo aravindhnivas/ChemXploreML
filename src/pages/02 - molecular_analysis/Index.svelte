@@ -5,7 +5,7 @@
     import Molecule from '$lib/components/Molecule.svelte';
     import Chip, { Set, Text } from '@smui/chips';
     import PropertiesBox from './PropertiesBox.svelte';
-    import Page from '$lib/layouts/Page.svelte';
+    import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
 
     let smiles = 'CCO';

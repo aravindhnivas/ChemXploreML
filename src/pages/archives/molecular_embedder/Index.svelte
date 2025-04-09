@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Page from '$lib/layouts/Page.svelte';
+    import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
     import { Mol2VecTrain, VICGAETrain, PCATrain } from '.';
 </script>

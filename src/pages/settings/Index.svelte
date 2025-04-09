@@ -1,5 +1,5 @@
 <script>
-    import Page from '$lib/layouts/Page.svelte';
+    import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
     import { Configuration, Console, System, Update, ProcessManager, Credit, License } from '.';
 </script>
