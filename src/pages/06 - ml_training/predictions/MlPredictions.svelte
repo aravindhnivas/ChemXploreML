@@ -4,9 +4,6 @@
     import CustomTabs from '$lib/components/CustomTabs.svelte';
     import { Binary, ChartCandlestick } from 'lucide-svelte/icons';
 
-    export let id: string = 'ml-predictions';
-    export let display: string = 'none';
-
     let active_tab = 'Predictions';
 
     const tabs = [

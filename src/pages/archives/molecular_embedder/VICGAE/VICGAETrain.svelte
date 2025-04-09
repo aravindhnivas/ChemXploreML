@@ -1,9 +1,6 @@
 <script lang="ts">
     import FileLoader from '$lib/components/fileloader/FileLoader.svelte';
 
-    export let id: string = 'vicgae-train-container';
-    export let display: string = 'none';
-
     const filename = localWritable('data_filename', '');
     let data: DataType | null = null;
 
@@ -30,7 +27,7 @@
     };
 </script>
 
-<div class="grid content-start gap-2" {id} style:display>
+<div class="grid content-start gap-2">
     <h2>VICGAE - embedder</h2>
 
     <h3>Load file containing SMILES</h3>

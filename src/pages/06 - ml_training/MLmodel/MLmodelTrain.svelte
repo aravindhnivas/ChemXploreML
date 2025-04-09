@@ -62,9 +62,6 @@
     import { CheckCheck, TriangleAlert } from 'lucide-svelte/icons';
     import Scheduler from './Scheduler.svelte';
 
-    export let id: string = 'ml_model-train-container';
-    export let display: string = 'none';
-
     const unique_id = getID();
 
     setContext('unique_id', unique_id);

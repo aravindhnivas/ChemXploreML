@@ -5,8 +5,6 @@
     import CustomSelect from '$lib/components/CustomSelect.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
-    export let id: string = 'mol2vec-train-container';
-    export let display: string = 'none';
 
     const filename = localWritable('data_filename', '');
     let data: DataType | null = null;
@@ -45,7 +43,7 @@
     };
 </script>
 
-<div class="grid content-start gap-2" {id} style:display>
+<div class="grid content-start gap-2">
     <h2>Mol2Vec - embedder</h2>
 
     <h3>Load file containing SMILES</h3>
