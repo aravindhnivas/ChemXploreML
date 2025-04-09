@@ -1,7 +1,7 @@
 <script lang="ts">
     import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
-    import { Configuration, Console, System, Update, ProcessManager, Credit, License } from '.';
+    import { Configuration, Console, System, Update, ProcessMonitor, Credit, License } from '.';
     import type { SvelteComponent } from 'svelte';
 
     const page_name: PAGES = 'Settings';
@@ -9,7 +9,7 @@
         { id: 'configuration', component: Configuration },
         { id: 'update', component: Update },
         { id: 'console', component: Console },
-        { id: 'process-monitor', component: ProcessManager },
+        { id: 'process-monitor', component: ProcessMonitor },
         { id: 'system', component: System },
         { id: 'credit', component: Credit },
         { id: 'license', component: License },
