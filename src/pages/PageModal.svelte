@@ -3,6 +3,7 @@
     import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
     export let open: boolean = false;
+    export let title: string = '';
 
     const dispatch = createEventDispatcher();
 </script>
@@ -20,7 +21,7 @@
     aria-describedby="large-scroll-content"
     surface$style="width: 850px; max-width: calc(100vw - 32px);"
 >
-    <Title>Title</Title>
+    <Title>{title}</Title>
     <Content>
         <slot />
     </Content>

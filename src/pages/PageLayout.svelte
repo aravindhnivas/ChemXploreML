@@ -33,6 +33,7 @@
                         <div class="flex justify-between">
                             <h1>{page.title}</h1>
                             <PageModal
+                                title="Settings"
                                 on:open={() => dispatch('open_modal', { page })}
                                 on:close={() => dispatch('close_modal', { page })}
                             >
