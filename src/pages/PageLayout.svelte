@@ -20,8 +20,8 @@
                     {#each page.children as { id, title, description, name } (id + title)}
                         <div {id} style:display={active_children === id ? '' : 'none'} class="grid gap-2">
                             <div class="grid gap-2">
-                                <h1>{page.title}</h1>
-                                <span class="text-md">{page.description}</span>
+                                <h1>{title}</h1>
+                                <span class="text-md">{description}</span>
                             </div>
 
                             <div class="divider"></div>
