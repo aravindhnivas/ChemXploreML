@@ -5,7 +5,7 @@
     import TSne from './T-SNE.svelte';
     import PCATrain from './PCATrain.svelte';
 
-    const page_name = 'DimenstionalityReduction';
+    const page_name: PAGES = 'DimenstionalityReduction';
     const child_components = [
         { id: 'pca_embedder', component: PCATrain },
         { id: 'umap_embedder', component: UMAP },

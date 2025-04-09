@@ -4,7 +4,7 @@
     import AnalysisData from './AnalysisData.svelte';
     import LoadData from './LoadData.svelte';
 
-    const page_name = 'LoadFile';
+    const page_name: PAGES = 'LoadFile';
     const child_components = [
         { id: 'load_data', component: LoadData },
         { id: 'analyse_data', component: AnalysisData },

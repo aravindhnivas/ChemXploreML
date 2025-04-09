@@ -2,7 +2,8 @@
     import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
     import Embedding from './Embedding.svelte';
-    const page_name = 'EmbeddMolecule';
+
+    const page_name: PAGES = 'EmbeddMolecule';
 </script>
 
 <Page {page_name}>
