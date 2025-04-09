@@ -2,13 +2,12 @@
     import Page from '$pages/Page.svelte';
     import { Pane } from 'svelte-splitpanes';
     import type { SvelteComponent } from 'svelte';
-    import { Settings } from 'lucide-svelte/icons';
     import PageModal from './PageModal.svelte';
 
     export let page_name: PAGES;
     export let child_components: Record<string, typeof SvelteComponent<any>> | null = null;
     export let component: typeof SvelteComponent<any> | null = null;
-
+    export let create_modal: boolean = false;
     const dispatch = createEventDispatcher();
 </script>
 
@@ -32,13 +31,15 @@
                     <div class="grid gap-2">
                         <div class="flex justify-between">
                             <h1>{page.title}</h1>
-                            <PageModal
-                                title="Settings"
-                                on:open={() => dispatch('open_modal', { page })}
-                                on:close={() => dispatch('close_modal', { page })}
-                            >
-                                <slot name="modal" />
-                            </PageModal>
+                            {#if create_modal}
+                                <PageModal
+                                    title="Settings"
+                                    on:open={() => dispatch('open_modal', { page })}
+                                    on:close={() => dispatch('close_modal', { page })}
+                                >
+                                    <slot name="modal" />
+                                </PageModal>
+                            {/if}
                         </div>
                         <span class="text-md">{page.description}</span>
                     </div>

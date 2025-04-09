@@ -5,7 +5,7 @@
     const page_name: PAGES = 'MolecularAnalysis';
 </script>
 
-<PageLayout {page_name} component={MoleculeAnalysis}>
+<PageLayout {page_name} component={MoleculeAnalysis} create_modal>
     <svelte:fragment slot="modal">
         <Checkbox label="Checking" />
     </svelte:fragment>
