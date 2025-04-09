@@ -5,7 +5,7 @@
     const page_name: PAGES = 'MolecularAnalysis';
 </script>
 
-<PageLayout {page_name} component={MoleculeAnalysis} create_modal>
+<PageLayout {page_name} component={MoleculeAnalysis} create_modal={import.meta.env.DEV}>
     <svelte:fragment slot="modal">
         <Checkbox label="Checking" />
     </svelte:fragment>
