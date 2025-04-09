@@ -9,7 +9,7 @@
 </script>
 
 <Page {page_name} pane_size={20}>
-    <svelte:fragment let:active_children let:page_children>
+    <svelte:fragment let:active_children let:page>
         <Pane minSize={50} maxSize={90}>
             <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
                 <div class="grid gap-1">
@@ -25,8 +25,8 @@
 
                 {#each child_components as { id, component } (component)}
                     <div {id} style:display={active_children === id ? '' : 'none'} class="grid gap-2">
-                        <h1>{page_children.find(o => (o.id = id))?.title}</h1>
-                        <div class="text-md">{page_children.find(o => (o.id = id))?.description}</div>
+                        <h1>{page.children.find(o => (o.id = id))?.title}</h1>
+                        <div class="text-md">{page.children.find(o => (o.id = id))?.description}</div>
                         <div class="divider"></div>
                         <svelte:component this={component} />
                     </div>

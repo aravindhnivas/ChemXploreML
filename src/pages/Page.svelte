@@ -8,15 +8,15 @@
     export let pane_max_size = 20;
 
     const id = $navigationConfig[page_name].id;
-    const page_children = $navigationConfig[page_name].children;
+    const page = $navigationConfig[page_name];
 
-    setContext('page_name', page_name);
-    setContext('page_id', id);
-    setContext('page_children', page_children);
+    setContext<PAGES>('page_name', page_name);
+    setContext<string>('page_id', id);
+    setContext<NavigationPage>('page', page);
 
     onMount(() => {
         if (!$active_page_child_id[page_name]) {
-            $active_page_child_id[page_name] = page_children?.[0]?.id ?? '';
+            $active_page_child_id[page_name] = page.children?.[0]?.id ?? '';
         }
     });
 
@@ -32,10 +32,10 @@
     style="display: {$active_page_id === id ? 'flex' : 'none'};"
     class="card shadow-xl animate__animated animate__fadeIn h-full w-full overflow-hidden rounded-none"
 >
-    {#if page_children.length > 0}
+    {#if page.children.length > 0}
         <Pane class="p-2" size={pane_size} minSize={pane_min_size} maxSize={pane_max_size}>
             <ul class="menu rounded-box gap-2">
-                {#each page_children as { name, id, icon } (id)}
+                {#each page.children as { name, id, icon } (id)}
                     <li on:click={() => ($active_page_child_id[page_name] = id)}>
                         <span class:active={$active_page_child_id[page_name] == id}>
                             {#if icon}
@@ -48,5 +48,5 @@
             </ul>
         </Pane>
     {/if}
-    <slot active_children={$active_page_child_id[page_name]} {page_title} {page_children} />
+    <slot active_children={$active_page_child_id[page_name]} {page_title} {page} />
 </Splitpanes>

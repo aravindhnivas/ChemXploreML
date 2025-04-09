@@ -22,7 +22,7 @@ export const navigationConfig = writable<NavigationConfig>({
         name: 'Home',
         icon: Home,
         id: 'home',
-        title: 'Dashboard',
+        title: 'Home',
         description: 'Overview of your workspace and quick access to recent activities.',
         children: [],
     },
@@ -35,7 +35,7 @@ export const navigationConfig = writable<NavigationConfig>({
         children: [],
     },
     LoadFile: {
-        name: 'Load Molecules file',
+        name: 'Load file',
         icon: MonitorDown,
         id: 'load_file',
         title: 'Load Molecule Files',
@@ -46,7 +46,7 @@ export const navigationConfig = writable<NavigationConfig>({
                 id: 'load_data',
                 icon: FileText,
                 title: 'Load',
-                description: 'Upload and parse molecule datasets for processing.',
+                description: 'Upload and parse molecule datasets (in smiles) for processing.',
             },
             {
                 name: 'Analyse',
@@ -127,7 +127,7 @@ export const navigationConfig = writable<NavigationConfig>({
                 id: 'configuration',
                 icon: Settings,
                 title: 'Configuration',
-                description: 'Customize settings like theme, performance, or storage.',
+                description: 'Customize settings like server and logs.',
             },
             {
                 name: 'Update',
@@ -148,7 +148,8 @@ export const navigationConfig = writable<NavigationConfig>({
                 id: 'process-monitor',
                 icon: MonitorCheck,
                 title: 'Process Monitor',
-                description: 'Monitor background tasks and running jobs.',
+                description:
+                    'Monitor background tasks and running jobs (redis-server should be turned on macOS/linux only).',
             },
             {
                 name: 'System',
