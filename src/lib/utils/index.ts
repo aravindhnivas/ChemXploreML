@@ -180,7 +180,7 @@ export const open_filepath = async (file: string | Promise<string>) => {
             toast.error('File does not exist');
             return;
         }
-        await shell.open(`file://${file}`);
+        await shell.open(`file:///${file}`);
     } catch (error) {
         console.error('Error opening file:', error);
         toast.error(error);

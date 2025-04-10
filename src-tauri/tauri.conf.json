@@ -35,7 +35,7 @@
       }
     },
     "shell": {
-      "open": "^((mailto:\\w+)|(tel:\\w+)|(https?://\\w+)|(file:///[\\w/._-]+)).+"
+      "open": "^((mailto:\\w+)|(tel:\\w+)|(https?://\\w+)|(file:///(?:[A-Za-z]:/)?[^\\s]+)).+"
     }
   },
   "app": {
