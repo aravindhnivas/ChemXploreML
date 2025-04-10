@@ -3,7 +3,7 @@
     import { Pane, Splitpanes } from 'svelte-splitpanes';
 
     export let page_name: PAGES = 'Home';
-    export let pane_size = 15;
+    export let pane_size = 20;
     export let pane_min_size = 5;
     export let pane_max_size = 20;
 
