@@ -48,12 +48,10 @@
     // read_file().then(() => console.log('done'));
     const active = localWritable('pca-active-tab', 'Training');
     const embeddings_save_loc = localWritable('pca_embeddings_save_loc', '');
-    // const embedding_pipeline_loc = localWritable('pca_embedding_pipeline_loc', '');
 
     let radius = 1;
     let pca_dim = 70;
     let n_clusters = 20;
-    // let use_embedding_pipeline = false;
     let compute_kmeans = false;
     let original_model = embeddings[0];
 
