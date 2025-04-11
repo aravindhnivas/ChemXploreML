@@ -36,13 +36,7 @@
                 final_processed_file: { value: '', valid: false, basename: '' },
             };
             const [_training_file, _embedded_file, _processed_df] = await Promise.all([tfile, vfile, processed_df]);
-            // console.log(JSON.stringify({ _training_file, _embedded_file, _processed_df }, null, 2));
             const vector_metadata_file = _embedded_file.replace('.npy', '.metadata.json');
-            // console.log(vector_metadata_file);
-            if (!(await fs.exists(vector_metadata_file))) return loaded_files;
-            const _metadata = await readJSON<{ data_shape: number[]; invalid_smiles: number }>(vector_metadata_file);
-            if (_metadata) metadata = _metadata;
-            // console.log(metadata);
 
             loaded_files.training_file = {
                 value: _training_file,
@@ -62,6 +56,11 @@
                 valid: await fs.exists(_processed_df),
                 basename: await path.basename(_processed_df),
             };
+
+            if (!(await fs.exists(vector_metadata_file))) return loaded_files;
+            const _metadata = await readJSON<{ data_shape: number[]; invalid_smiles: number }>(vector_metadata_file);
+            if (_metadata) metadata = _metadata;
+
             dispatch('refresh', loaded_files);
             return loaded_files;
         } catch (error) {
@@ -119,6 +118,8 @@
                     <div>Total valid SMILES embedding:</div>
                     <div>{metadata.data_shape[0] - metadata.invalid_smiles}</div>
                 {/if}
+            {:else}
+                <div class="badge badge-sm badge-error">No metadata file available</div>
             {/if}
         </div>
     {/await}
