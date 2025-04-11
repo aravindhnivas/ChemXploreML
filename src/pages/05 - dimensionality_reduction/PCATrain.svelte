@@ -1,10 +1,9 @@
 <script lang="ts">
+    import { current_embedder_model_filepath, embedd_savefile_path } from '$pages/04 - embedd_molecule/stores';
     import BrowseFile from '$lib/components/BrowseFile.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
-    import CustomSelect from '$lib/components/CustomSelect.svelte';
     import { embeddings } from '$pages/04 - embedd_molecule/stores';
     import Plot from 'svelte-plotly.js';
-    import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
     import { Binary, ChartCandlestick } from 'lucide-svelte/icons';
     import CustomInput from '$lib/components/CustomInput.svelte';
@@ -64,20 +63,21 @@
     let original_model = embeddings[0];
 
     const generate_pca = async () => {
-        if (!$pca_model_and_npy_files[original_model].model_file) {
+        if (!$current_embedder_model_filepath) {
             toast.error('Please select a model_file');
             return;
         }
 
-        if (!$pca_model_and_npy_files[original_model].npy_file) {
+        const npy_file = await $embedd_savefile_path;
+        if (!(await fs.exists(npy_file))) {
             toast.error('Please select a .npy vectors file');
             return;
         }
 
-        if (!$embeddings_save_loc) {
-            toast.error('Please select a embeddings save location');
-            return;
-        }
+        // if (!$embeddings_save_loc) {
+        //     toast.error('Please select a embeddings save location');
+        //     return;
+        // }
 
         return {
             pyfile: 'training.pca',
@@ -86,20 +86,15 @@
                 n_clusters,
                 radius,
                 embeddings_save_loc: $embeddings_save_loc,
-                model_file: $pca_model_and_npy_files[original_model].model_file,
-                npy_file: $pca_model_and_npy_files[original_model].npy_file,
+                model_file: $current_embedder_model_filepath,
+                npy_file: npy_file,
                 compute_kmeans,
                 original_model,
             },
         };
     };
 
-    $: if (original_model && !$pca_model_and_npy_files[original_model]) {
-        $pca_model_and_npy_files[original_model] = {
-            model_file: '',
-            npy_file: '',
-        };
-    }
+    // $:
 </script>
 
 <CustomTabs
@@ -112,26 +107,11 @@
 />
 
 {#if $active === 'Training'}
-    <div class="grid">
-        <h2>Principal component analysis</h2>
-        <span class="text-sm">A linear dimensionality reduction technique</span>
-    </div>
-
-    <CustomSelect class="w-max" label="Choose model" bind:value={original_model} items={embeddings} />
-    <BrowseFile bind:filename={$pca_model_and_npy_files[original_model].model_file} btn_name={'Browse model (.pkl)'} />
-    <BrowseFile bind:filename={$pca_model_and_npy_files[original_model].npy_file} btn_name={'Browse vectors (.npy)'} />
-
-    <Checkbox label="Compute KMeans clustering" bind:value={compute_kmeans} />
-
-    <div class="flex gap-1">
+    <div class="flex gap-1 items-center">
         <CustomInput bind:value={radius} label="radius" type="number" helper="Radius of morgan fingerprint" />
         <CustomInput bind:value={pca_dim} label="pca_dim" type="number" helper="PCA dimensions" />
-        {#if compute_kmeans}
-            <CustomInput bind:value={n_clusters} label="n_clusters" type="number" helper="KMeans cluster" />
-        {/if}
+        <Loadingbtn callback={generate_pca} subprocess={true} />
     </div>
-    <BrowseFile directory={true} bind:filename={$embeddings_save_loc} btn_name={'Browse Save location'} />
-    <Loadingbtn class="m-auto" callback={generate_pca} subprocess={true} name="generate_pca" />
 {:else if $active === 'Analysis'}
     <BrowseFile bind:filename={$explained_variance_file} btn_name={'Browse explained_variance'} callback={read_file} />
     <div class="plot__div">

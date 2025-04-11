@@ -23,6 +23,7 @@
         embeddings,
         embeddings_computed,
         embedder_model_filepath,
+        current_embedder_model_filepath,
     } from './stores';
     import LoadedFileInfos from '$lib/meta-componenets/LoadedFileInfos.svelte';
     import { BaseDirectory } from '@tauri-apps/plugin-fs';
@@ -45,10 +46,10 @@
 
     $: if (use_built_in_models) refresh_built_in_models($embedding);
 
-    const set_embedd_savefile = async (embedding_name: string) => {
-        $embedd_savefile = `${embedding_name}_embeddings`;
-    };
-    $: set_embedd_savefile($embedding);
+    // const set_embedd_savefile = async (embedding_name: string) => {
+    //     $embedd_savefile = `${embedding_name}_embeddings`;
+    // };
+    // $: set_embedd_savefile($embedding);
 
     let test_mode = false;
     const test_smiles = localWritable('test_smiles', 'CCO');
@@ -60,7 +61,7 @@
             return;
         }
 
-        if (!$embedder_model_filepath[$embedding]) {
+        if (!$current_embedder_model_filepath) {
             toast.error('Please select a pretrained model');
             return;
         }
@@ -106,7 +107,7 @@
                 embedding: $embedding,
                 npartitions: $NPARTITIONS,
                 test_smiles: $test_smiles,
-                pretrained_model_location: $embedder_model_filepath[$embedding],
+                pretrained_model_location: $current_embedder_model_filepath,
                 PCA_pipeline_location: null,
                 embedd_savefile: $embedd_savefile,
                 vectors_file: vectors_file,
@@ -167,19 +168,18 @@
     let dataFromPython = {} as Record<Embedding, EmbeddingState>;
 </script>
 
-<h3>Pre-trained model</h3>
-
 <div class="grid justify-items-end">
     <Checkbox label="Test mode" bind:value={test_mode} />
 </div>
 
-<div class="py-2">
+<div class="flex-gap items-end py-2">
     <CustomSelect label="Choose embedder" bind:value={$embedding} items={embeddings} />
+    <Loadingbtn callback={embedd_data} subprocess={!test_mode} on:result={onResult} />
 </div>
 <!-- <Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} /> -->
 
 {#if use_built_in_models}
-    {#await fs.exists($embedder_model_filepath[$embedding]) then file_exists}
+    {#await fs.exists($current_embedder_model_filepath) then file_exists}
         {#if !file_exists}
             {#if $embedding_file_download_url[$embedding]}
                 <DownloadModel />
@@ -200,10 +200,10 @@
 
 {#if test_mode}
     <div class="grid gap-2">
-        <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2">
-            <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
-            <Loadingbtn callback={embedd_data} on:result={onResult} />
-        </div>
+        <!-- <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2"> -->
+        <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
+        <!-- <Loadingbtn callback={embedd_data} on:result={onResult} /> -->
+        <!-- </div> -->
 
         <div class="grid items-center gap-1 overflow-auto">
             <Molecule bind:smiles={$test_smiles} show_controls={true} />
@@ -218,11 +218,11 @@
             </div>
         </div>
     </div>
-{:else}
-    <div class="flex gap-2 items-end">
-        <CustomInput label="Embeddings filename" bind:value={$embedd_savefile} lock={true} />
-        <Loadingbtn callback={embedd_data} subprocess={true} on:result={onResult} />
-    </div>
+    <!-- {:else} -->
+    <!-- <div class="flex gap-2 items-end"> -->
+    <!-- <CustomInput label="Embeddings filename" bind:value={$embedd_savefile} lock={true} /> -->
+    <!-- <Loadingbtn callback={embedd_data} subprocess={true} on:result={onResult} /> -->
+    <!-- </div> -->
 {/if}
 
 {#if !test_mode}

@@ -3,7 +3,19 @@ import { current_training_processed_data_directory } from '$pages/03 - load_file
 export const embeddings_computed = writable(false);
 export const embeddings = ['mol2vec', 'VICGAE'];
 export const embedding = localWritable<Embedding>('embedding', 'mol2vec');
-export const embedd_savefile = writable<string>('');
+export const embedder_model_filepath = writable<Record<Embedding, string>>({
+    mol2vec: '',
+    VICGAE: '',
+});
+export const current_embedder_model_filepath = derived(
+    [embedding, embedder_model_filepath],
+    ([$embedding, $embedder_model_filepath]) => {
+        return $embedder_model_filepath[$embedding];
+    },
+);
+
+// export const embedd_savefile = writable<string>('');
+export const embedd_savefile = derived(embedding, $embedding => `${$embedding}_embeddings`);
 export const embedd_savefile_path = derived(
     [embedd_savefile, current_training_processed_data_directory],
     async ([$embedd_savefile, $current_training_processed_data_directory]) => {
@@ -27,12 +39,6 @@ export const processed_df = derived(
         return final_processed_file;
     },
 );
-
-// export const embedder_model_filepath = localWritable<Record<Embedding, string>>('embedder_model_filepath', {
-export const embedder_model_filepath = writable<Record<Embedding, string>>({
-    mol2vec: '',
-    VICGAE: '',
-});
 
 export const embedding_file_download_url = writable<Record<Embedding, string>>({
     mol2vec: 'https://drive.google.com/uc?export=download&id=1Tx12wmiNdFHKGe3uSJn6IPwCnx18eE6O',
