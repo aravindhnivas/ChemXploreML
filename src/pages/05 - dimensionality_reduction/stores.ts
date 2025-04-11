@@ -25,3 +25,7 @@ export const umap_metrics = [
 ];
 
 export const loaded_files = writable<LoadedInfosFile>({});
+
+export const dr_methods = ['PCA', 'UMAP', 't-SNE'] as const;
+export const active_dr = writable<(typeof dr_methods)[number]>('PCA');
+export const use_dr = writable(false);

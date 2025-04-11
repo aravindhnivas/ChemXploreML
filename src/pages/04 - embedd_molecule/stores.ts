@@ -1,4 +1,5 @@
 import { current_training_processed_data_directory } from '$pages/03 - load_file/plot-analysis/stores';
+import { use_dr, active_dr } from '$pages/05 - dimensionality_reduction/stores';
 
 export const embeddings_computed = writable(false);
 export const embeddings = ['mol2vec', 'VICGAE'];
@@ -15,7 +16,10 @@ export const current_embedder_model_filepath = derived(
 );
 
 // export const embedd_savefile = writable<string>('');
-export const embedd_savefile = derived(embedding, $embedding => `${$embedding}_embeddings`);
+export const embedd_savefile = derived([embedding, use_dr, active_dr], ([$embedding, $use_dr, $active_dr]) => {
+    return `${$embedding}_embeddings` + ($use_dr ? `_${$active_dr}` : '');
+});
+
 export const embedd_savefile_path = derived(
     [embedd_savefile, current_training_processed_data_directory],
     async ([$embedd_savefile, $current_training_processed_data_directory]) => {

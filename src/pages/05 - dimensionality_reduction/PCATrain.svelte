@@ -1,5 +1,9 @@
 <script lang="ts">
-    import { current_embedder_model_filepath, embedd_savefile_path } from '$pages/04 - embedd_molecule/stores';
+    import {
+        current_embedder_model_filepath,
+        embedd_savefile,
+        embedd_savefile_path,
+    } from '$pages/04 - embedd_molecule/stores';
     import BrowseFile from '$lib/components/BrowseFile.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import { embeddings } from '$pages/04 - embedd_molecule/stores';
@@ -7,7 +11,6 @@
     import CustomTabs from '$lib/components/CustomTabs.svelte';
     import { Binary, ChartCandlestick } from 'lucide-svelte/icons';
     import CustomInput from '$lib/components/CustomInput.svelte';
-
     let explained_variance_data: { x: number[]; y: number[] }[] = [];
     let cumulative_variance_data: { x: number[]; y: number[] }[] = [];
 
@@ -44,14 +47,6 @@
 
     // read_file().then(() => console.log('done'));
     const active = localWritable('pca-active-tab', 'Training');
-
-    const pca_model_and_npy_files = localWritable<{
-        [name: string]: {
-            model_file: string;
-            npy_file: string;
-        };
-    }>('pca_model_and_npy_files', {});
-
     const embeddings_save_loc = localWritable('pca_embeddings_save_loc', '');
     // const embedding_pipeline_loc = localWritable('pca_embedding_pipeline_loc', '');
 
