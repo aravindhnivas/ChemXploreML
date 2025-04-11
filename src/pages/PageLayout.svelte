@@ -16,9 +16,9 @@
         <Pane minSize={80}>
             <div class="bg-base-200/15 h-full mx-3 px-5 py-2 rounded-xl">
                 {#if child_components}
-                    {#each page.children as { id, title, description, name } (id + title)}
+                    {#each page.children as { id, title, description } (id + title)}
                         <div {id} style:display={active_children === id ? '' : 'none'} class="flex flex-col h-full">
-                            <div class="grid gap-2 shrink-0">
+                            <div class="grid shrink-0">
                                 <h1>{title}</h1>
                                 <span class="text-md">{description}</span>
                                 <div class="divider"></div>
@@ -29,7 +29,7 @@
                         </div>
                     {/each}
                 {:else if component}
-                    <div class="grid gap-2">
+                    <div class="grid">
                         <div class="flex justify-between">
                             <h1>{page.title}</h1>
                             {#if create_modal}
