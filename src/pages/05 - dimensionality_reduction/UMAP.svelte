@@ -143,8 +143,8 @@
     };
 </script>
 
-<SaveAndLoadState loc={umap_loc} {default_params} bind:params unique_ext={'.umap.json'} />
 <CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
+<SaveAndLoadState loc={umap_loc} {default_params} bind:params unique_ext={'.umap.json'} />
 <div class="divider"></div>
 
 <div class="text-md">Basic UMAP Parameters</div>
