@@ -34,6 +34,7 @@
     "@smui/dialog": "7.0.0",
     "@smui/menu-surface": "^7.0.0",
     "@smui/paper": "^7.0.0",
+    "@smui/radio": "^7.0.0",
     "@sveltejs/svelte-virtual-list": "^3.0.1",
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "@tailwindcss/typography": "^0.5.16",
