@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Download } from 'lucide-svelte/icons';
-    import { embedding, embedding_file_download_url, model_and_pipeline_files } from './stores';
+    import { embedding, embedding_file_download_url, embedder_model_filepath } from './stores';
 
     export let progress: number = 0;
     export let downloading: boolean = false;
@@ -38,7 +38,7 @@
                 progress = parseFloat(_progress[1]);
                 if (progress >= 100) {
                     downloading = false;
-                    $model_and_pipeline_files[$embedding].model_file = model_file;
+                    $embedder_model_filepath[$embedding] = model_file;
                     console.log('Download complete');
                 }
             }

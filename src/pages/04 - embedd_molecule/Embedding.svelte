@@ -22,8 +22,7 @@
         embedding_file_download_url,
         embeddings,
         embeddings_computed,
-        model_and_pipeline_files,
-        use_PCA,
+        embedder_model_filepath,
     } from './stores';
     import LoadedFileInfos from '$lib/meta-componenets/LoadedFileInfos.svelte';
     import { BaseDirectory } from '@tauri-apps/plugin-fs';
@@ -40,26 +39,16 @@
         const model_file = await path.join(embedding_models, `${embedder}.pkl`);
 
         if (await fs.exists(model_file)) {
-            $model_and_pipeline_files[embedder] = {
-                model_file,
-                pipeline_file: '',
-            };
+            $embedder_model_filepath[embedder] = model_file;
         }
     };
 
     $: if (use_built_in_models) refresh_built_in_models($embedding);
 
-    $: if (!use_built_in_models && $embedding && !$model_and_pipeline_files[$embedding]) {
-        $model_and_pipeline_files[$embedding] = {
-            model_file: '',
-            pipeline_file: '',
-        };
-    }
-
-    const set_embedd_savefile = async (embedding_name: string, pca: boolean) => {
-        $embedd_savefile = `${embedding_name}_embeddings${pca ? '_with_PCA' : ''}`;
+    const set_embedd_savefile = async (embedding_name: string) => {
+        $embedd_savefile = `${embedding_name}_embeddings`;
     };
-    $: set_embedd_savefile($embedding, $use_PCA);
+    $: set_embedd_savefile($embedding);
 
     let test_mode = false;
     const test_smiles = localWritable('test_smiles', 'CCO');
@@ -71,13 +60,8 @@
             return;
         }
 
-        if (!$model_and_pipeline_files[$embedding].model_file) {
+        if (!$embedder_model_filepath[$embedding]) {
             toast.error('Please select a pretrained model');
-            return;
-        }
-
-        if ($use_PCA && !$model_and_pipeline_files[$embedding].pipeline_file) {
-            toast.error('Please select a PCA pipeline');
             return;
         }
 
@@ -97,7 +81,6 @@
                 `embedd_savefile ${vectors_file} already exists. Do you want to overwrite it ?`,
                 {
                     title: 'Overwrite ?',
-                    type: 'warning',
                 },
             );
             if (!overwrite) return;
@@ -123,8 +106,8 @@
                 embedding: $embedding,
                 npartitions: $NPARTITIONS,
                 test_smiles: $test_smiles,
-                pretrained_model_location: $model_and_pipeline_files[$embedding].model_file,
-                PCA_pipeline_location: $use_PCA ? $model_and_pipeline_files[$embedding].pipeline_file : null,
+                pretrained_model_location: $embedder_model_filepath[$embedding],
+                PCA_pipeline_location: null,
                 embedd_savefile: $embedd_savefile,
                 vectors_file: vectors_file,
                 use_dask: $use_dask,
@@ -190,15 +173,13 @@
     <Checkbox label="Test mode" bind:value={test_mode} />
 </div>
 
-<div class="flex-gap items-end">
+<div class="py-2">
     <CustomSelect label="Choose embedder" bind:value={$embedding} items={embeddings} />
-    <Checkbox label="PCA" bind:value={$use_PCA} />
 </div>
-
-<Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} />
+<!-- <Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} /> -->
 
 {#if use_built_in_models}
-    {#await fs.exists($model_and_pipeline_files[$embedding]?.model_file) then file_exists}
+    {#await fs.exists($embedder_model_filepath[$embedding]) then file_exists}
         {#if !file_exists}
             {#if $embedding_file_download_url[$embedding]}
                 <DownloadModel />
@@ -214,37 +195,27 @@
 {/if}
 
 {#if !use_built_in_models}
-    <BrowseFile
-        disabled={use_built_in_models}
-        bind:filename={$model_and_pipeline_files[$embedding].model_file}
-        label="Model"
-    />
-    {#if $use_PCA}
-        <BrowseFile
-            disabled={use_built_in_models}
-            bind:filename={$model_and_pipeline_files[$embedding].pipeline_file}
-            label="PCA pipeline"
-            helper="Make sure to give a pipeline without kmeans clustering"
-        />
-    {/if}
+    <BrowseFile disabled={use_built_in_models} bind:filename={$embedder_model_filepath[$embedding]} label="Model" />
 {/if}
 
 {#if test_mode}
-    <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2">
-        <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
-        <Loadingbtn callback={embedd_data} on:result={onResult} />
-    </div>
+    <div class="grid gap-2">
+        <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2">
+            <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
+            <Loadingbtn callback={embedd_data} on:result={onResult} />
+        </div>
 
-    <div class="grid items-center gap-1 overflow-auto">
-        <Molecule bind:smiles={$test_smiles} show_controls={true} />
-        <div>
-            <span class="text-lg pl-1">Embedded vector</span>
-            <textarea
-                class="textarea textarea-bordered h-[300px] w-full select-text"
-                placeholder="Embedded vector will be shown"
-                readonly
-                value={test_result}
-            ></textarea>
+        <div class="grid items-center gap-1 overflow-auto">
+            <Molecule bind:smiles={$test_smiles} show_controls={true} />
+            <div>
+                <span class="text-lg pl-1">Embedded vector</span>
+                <textarea
+                    class="textarea textarea-bordered h-[300px] w-full select-text"
+                    placeholder="Embedded vector will be shown"
+                    readonly
+                    value={test_result}
+                ></textarea>
+            </div>
         </div>
     </div>
 {:else}

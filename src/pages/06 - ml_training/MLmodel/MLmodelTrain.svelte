@@ -3,7 +3,7 @@
     import { NPARTITIONS, use_dask } from '$lib/stores/system';
     import Accordion from '@smui-extra/accordion';
     import { copyText } from 'svelte-copy';
-    import { embedd_savefile_path, embedding, use_PCA } from '$pages/04 - embedd_molecule/stores';
+    import { embedd_savefile_path, embedding } from '$pages/04 - embedd_molecule/stores';
     import { current_training_data_file } from '$pages/03 - load_file/plot-analysis/stores';
     import {
         loaded_df_columns,
@@ -273,7 +273,7 @@
             ytransformation: $y_transform.transformation,
             yscaling: $y_transform.scaling,
             embedding: $embedding,
-            pca: $use_PCA,
+            pca: false,
             save_pretrained_model: $save_pretrained_model,
             parallel_computation: $parallel_computation,
             n_jobs: Number($n_jobs),

@@ -28,24 +28,10 @@ export const processed_df = derived(
     },
 );
 
-export const use_PCA = localWritable('use_PCA', false);
-export const model_and_pipeline_files = localWritable<
-    Record<
-        Embedding,
-        {
-            model_file: string;
-            pipeline_file: string;
-        }
-    >
->('model_and_pipeline_files', {
-    mol2vec: {
-        model_file: '',
-        pipeline_file: '',
-    },
-    VICGAE: {
-        model_file: '',
-        pipeline_file: '',
-    },
+// export const embedder_model_filepath = localWritable<Record<Embedding, string>>('embedder_model_filepath', {
+export const embedder_model_filepath = writable<Record<Embedding, string>>({
+    mol2vec: '',
+    VICGAE: '',
 });
 
 export const embedding_file_download_url = writable<Record<Embedding, string>>({
