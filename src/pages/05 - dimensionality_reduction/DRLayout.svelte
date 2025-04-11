@@ -7,7 +7,6 @@
     export let loc: string;
     export let default_params: Record<string, any>;
     export let params: Record<string, any>;
-    export let unique_ext: string;
     export let name: 'pca' | 'umap' | 't-sne';
 
     const get_umap_loc = async (processed_df_file: string) => {
@@ -21,4 +20,7 @@
 </script>
 
 <CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
-<SaveAndLoadState {loc} {default_params} bind:params {unique_ext} />
+<SaveAndLoadState {loc} {default_params} bind:params unique_ext={`${name}.json`} />
+<div class="divider"></div>
+
+<slot />
