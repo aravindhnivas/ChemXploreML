@@ -14,17 +14,18 @@
 <Page {page_name}>
     <svelte:fragment let:active_children let:page>
         <Pane minSize={80}>
-            <div class="bg-base-200/15 overflow-auto h-full mx-3 px-5 py-2 rounded-xl">
+            <div class="bg-base-200/15 h-full mx-3 px-5 py-2 rounded-xl">
                 {#if child_components}
                     {#each page.children as { id, title, description, name } (id + title)}
-                        <div {id} style:display={active_children === id ? '' : 'none'} class="grid gap-2">
-                            <div class="grid gap-2">
+                        <div {id} style:display={active_children === id ? '' : 'none'} class="flex flex-col h-full">
+                            <div class="grid gap-2 shrink-0">
                                 <h1>{title}</h1>
                                 <span class="text-md">{description}</span>
+                                <div class="divider"></div>
                             </div>
-
-                            <div class="divider"></div>
-                            <svelte:component this={child_components[id]} />
+                            <div class="flex flex-col overflow-auto flex-grow pr-5 gap-2">
+                                <svelte:component this={child_components[id]} />
+                            </div>
                         </div>
                     {/each}
                 {:else if component}
@@ -42,10 +43,11 @@
                             {/if}
                         </div>
                         <span class="text-md">{page.description}</span>
+                        <div class="divider"></div>
                     </div>
-
-                    <div class="divider"></div>
-                    <svelte:component this={component} />
+                    <div class="overflow-auto max-h-[calc(100vh-200px)] pr-5">
+                        <svelte:component this={component} />
+                    </div>
                 {:else}
                     <div class="text-xl">No component to render</div>
                 {/if}
