@@ -1,13 +1,13 @@
 <script lang="ts">
-    import { Download, Save, RotateCcw, RefreshCcw } from 'lucide-svelte/icons';
+    import { Download, Save, RotateCcw, RefreshCcw, ExternalLink } from 'lucide-svelte/icons';
     import CustomSelect from './CustomSelect.svelte';
 
     export let params: Record<string, any>;
     export let default_params: Record<string, any>;
     export let loc: string;
     export let unique_ext: string = '.json';
+    export let filename: string = 'default';
 
-    let filename: string = 'default';
     let items: string[] = [];
 
     const get_all_items_in_loc = async (loc: string, log = true) => {
@@ -77,4 +77,18 @@
         <Save />
         <span>Save</span>
     </button>
+    {#await fs.exists(loc) then loc_exists}
+        {#if loc_exists}
+            <button
+                class="btn btn-sm btn-outline"
+                on:click={async () => {
+                    if (!(await fs.exists(loc))) return toast.error('Invalid location: ' + loc);
+                    await open_filepath(loc);
+                }}
+            >
+                <span>Open location</span>
+                <ExternalLink size="20" />
+            </button>
+        {/if}
+    {/await}
 </div>
