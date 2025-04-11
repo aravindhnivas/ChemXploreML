@@ -334,7 +334,8 @@
 </script>
 
 <Effects />
-<div class="overflow-auto md:max-h-[75vh] sm:max-h-lg p-2">
+<!-- <div class="overflow-auto md:max-h-[75vh] sm:max-h-lg p-2"> -->
+<div>
     <Accordion multiple>
         <TrainingFilePanel />
         <ControlPanel />
