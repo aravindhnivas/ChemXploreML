@@ -5,9 +5,7 @@
     import CustomInput from '$lib/components/CustomInput.svelte';
     import CustomSelect from '$lib/components/CustomSelect.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
-    import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
     import Plot from 'svelte-plotly.js';
-    import { embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
     import DrLayout from './DRLayout.svelte';
 
     const params_description: Record<keyof UMAPParams, string> = {
@@ -152,14 +150,14 @@
             type="number"
             label="n_neighbors"
             hoverHelper={params_description.n_neighbors}
-            helperHighlight="default: 15"
+            helperHighlight="default: {default_params.n_neighbors}"
         />
         <CustomInput
             bind:value={params.min_dist}
             type="number"
             label="min_dist"
             hoverHelper={params_description.min_dist}
-            helperHighlight="default: 0.1"
+            helperHighlight="default: {default_params.min_dist}"
             step="0.1"
             min="0.1"
         />
@@ -168,14 +166,14 @@
             type="number"
             label="n_components"
             hoverHelper={params_description.n_components}
-            helperHighlight="default: 2"
+            helperHighlight="default: {default_params.n_components}"
         />
         <CustomSelect
             bind:value={params.umap_metric}
             label="metric"
             items={umap_metrics}
             hoverHelper={params_description.metric}
-            helperHighlight="default: euclidean"
+            helperHighlight="default: {default_params.umap_metric}"
         />
         <CustomInput bind:value={params.n_jobs} type="number" label="n_jobs" hoverHelper={params_description.n_jobs} />
         <CustomInput
@@ -183,12 +181,12 @@
             type="number"
             label="random_state"
             hoverHelper={params_description.random_state}
-            helperHighlight="default: 42"
+            helperHighlight="default: {default_params.random_state}"
             bind:lock={params.random_state_locked}
         />
     </div>
 
-    <div class="divider"></div>
+    <div class="divider" />
 
     <div class="flex-gap">
         <Checkbox bind:value={params.scale_embedding} label="Scale embedding" />
