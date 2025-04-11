@@ -39,6 +39,7 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={async () => {
+            if (!(await fs.exists(loc))) return toast.error(`"${loc}" location doesn't exists`);
             const file = await path.join(loc, `${filename}${unique_ext}`);
             const contents = await readJSON(file);
             if (!contents) {
@@ -55,6 +56,7 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={async () => {
+            if (!(await fs.exists(loc))) return toast.error(`"${loc}" location doesn't exists`);
             const file = await path.join(loc, `${filename}${unique_ext}`);
             await writeJSON(file, params);
             await get_all_items_in_loc(loc);
