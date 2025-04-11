@@ -1,23 +1,11 @@
 <script lang="ts">
     import { cleanlab } from '$pages/06 - ml_training/MLmodel/stores';
-    import { umap_metrics, loaded_files } from './stores';
+    import { loaded_files } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
-    import CustomSelect from '$lib/components/CustomSelect.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import Plot from 'svelte-plotly.js';
-    import DrLayout from './DRLayout.svelte';
-
-    const params_description: Record<keyof UMAPParams, string> = {
-        n_neighbors:
-            'This parameter controls how UMAP balances local versus global structure in the data. Lower values will force UMAP to concentrate on very local structure (potentially to the detriment of the big picture), while larger values will push UMAP to look at larger neighborhoods of each point when making embeddings.',
-        min_dist:
-            'The effective minimum distance between embedded points. Smaller values will result in a more clustered embedding. Higher values will force the embedded data to be more evenly distributed.',
-        n_components: 'The dimension of the space to embed into.',
-        n_jobs: 'The number of parallel jobs to run for neighbors search. -1 means using all processors.',
-        metric: 'The metric to use when calculating distance between instances in a feature array.',
-        random_state: 'The seed used by the random number generator. If random_state is used, n_jobs will be ignored.',
-    };
+    import DrLayout from './comp/DRLayout.svelte';
 
     async function compute_umap_embedding() {
         console.log('UMAP embedding');
@@ -44,7 +32,7 @@
                 n_neighbors: params.n_neighbors,
                 min_dist: params.min_dist,
                 n_components: params.n_components,
-                umap_metric: params.umap_metric,
+                umap_metric: params.metric,
                 n_jobs: params.n_jobs,
                 scale_embedding: params.scale_embedding,
                 annotate_clusters: params.annotate_clusters,
@@ -94,7 +82,7 @@
         min_dist: 0.1,
         n_components: 2,
         n_jobs: -1,
-        umap_metric: 'euclidean',
+        metric: 'euclidean',
         random_state: 42,
         scale_embedding: true,
         use_cleaned_data: false,
@@ -142,52 +130,7 @@
     };
 </script>
 
-<DrLayout bind:loc={umap_loc} {default_params} bind:params name="umap">
-    <div class="text-md">Basic UMAP Parameters</div>
-    <div class="flex-gap items-start flex-wrap">
-        <CustomInput
-            bind:value={params.n_neighbors}
-            type="number"
-            label="n_neighbors"
-            hoverHelper={params_description.n_neighbors}
-            helperHighlight="default: {default_params.n_neighbors}"
-        />
-        <CustomInput
-            bind:value={params.min_dist}
-            type="number"
-            label="min_dist"
-            hoverHelper={params_description.min_dist}
-            helperHighlight="default: {default_params.min_dist}"
-            step="0.1"
-            min="0.1"
-        />
-        <CustomInput
-            bind:value={params.n_components}
-            type="number"
-            label="n_components"
-            hoverHelper={params_description.n_components}
-            helperHighlight="default: {default_params.n_components}"
-        />
-        <CustomSelect
-            bind:value={params.umap_metric}
-            label="metric"
-            items={umap_metrics}
-            hoverHelper={params_description.metric}
-            helperHighlight="default: {default_params.umap_metric}"
-        />
-        <CustomInput bind:value={params.n_jobs} type="number" label="n_jobs" hoverHelper={params_description.n_jobs} />
-        <CustomInput
-            bind:value={params.random_state}
-            type="number"
-            label="random_state"
-            hoverHelper={params_description.random_state}
-            helperHighlight="default: {default_params.random_state}"
-            bind:lock={params.random_state_locked}
-        />
-    </div>
-
-    <div class="divider" />
-
+<DrLayout bind:loc={umap_loc} bind:params name="UMAP">
     <div class="flex-gap">
         <Checkbox bind:value={params.scale_embedding} label="Scale embedding" />
         <Checkbox bind:value={params.use_cleaned_data} label="Use cleaned data" />

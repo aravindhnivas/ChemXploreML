@@ -14,8 +14,9 @@
         if (!(await fs.exists(loc))) return;
         const files = await fs.readDir(loc);
         items = files.filter(f => f.isFile && f.name.endsWith(unique_ext)).map(f => f.name.replace(unique_ext, ''));
+        console.log({ files, items });
         if (items.length > 0) filename ||= items[0];
-        if (log) toast.success('UMAP loaded');
+        if (log) toast.success(`Parameters loaded`);
     };
 
     $: loc && get_all_items_in_loc(loc, false);
@@ -56,7 +57,11 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={async () => {
-            if (!(await fs.exists(loc))) return toast.error(`"${loc}" location doesn't exists`);
+            if (!(await fs.exists(loc))) {
+                // return toast.error(`"${loc}" location doesn't exists`)
+                // create directory
+                await fs.mkdir(loc);
+            }
             const file = await path.join(loc, `${filename}${unique_ext}`);
             await writeJSON(file, params);
             await get_all_items_in_loc(loc);

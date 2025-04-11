@@ -1,9 +1,5 @@
 <script lang="ts">
-    import {
-        current_embedder_model_filepath,
-        embedd_savefile,
-        embedd_savefile_path,
-    } from '$pages/04 - embedd_molecule/stores';
+    import { current_embedder_model_filepath, embedd_savefile_path } from '$pages/04 - embedd_molecule/stores';
     import BrowseFile from '$lib/components/BrowseFile.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import { embeddings } from '$pages/04 - embedd_molecule/stores';

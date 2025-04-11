@@ -13,7 +13,6 @@
 
 <Checkbox bind:value={$use_dr} label="use DR" />
 
-<!-- {#if $use_dr} -->
 <div class="flex">
     {#each dr_methods as option}
         <div class="flex items-center">
@@ -28,7 +27,6 @@
     _
     <CustomInput value="" />
 </div>
-<!-- {/if} -->
 
 <div class="grid gap-1 w-full grid-cols-4 items-center">
     <div class="divider col-span-4"></div>
