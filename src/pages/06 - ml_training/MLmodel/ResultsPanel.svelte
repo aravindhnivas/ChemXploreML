@@ -544,7 +544,10 @@
                                                     {#if toggle_embedder_plots[category]}
                                                         {#each Object.entries(parents) as [parent, parentData] (parentData.pkl)}
                                                             {@const name = `${embedder}: ${parent}`}
-                                                            <div class="breadcrumbs text-sm">
+                                                            <div
+                                                                class="breadcrumbs text-sm"
+                                                                style="max-width: calc(70vw - 50px);"
+                                                            >
                                                                 <ul class="flex gap-2 flex-wrap">
                                                                     <li>
                                                                         ({$current_model_pkl_files[embedder].filter(f =>
