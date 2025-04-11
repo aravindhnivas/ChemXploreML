@@ -18,7 +18,7 @@
         <div class="alert text-sm p-1">
             <span>Total {data.shape} rows: {data?.nrows.length} rows are displayed below</span>
         </div>
-        <div class="overflow-x-auto" style="height: 500px;">
+        <div style="height: 500px;">
             <table class="table bg-base-100">
                 <thead>
                     <tr>
