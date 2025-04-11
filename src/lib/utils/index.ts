@@ -147,8 +147,12 @@ export const writeJSON = async (file: string, data: any, append: boolean = false
 
     const jsonString = safeJsonStringify(data);
     if (jsonString) {
-        await fs.writeTextFile(file, jsonString);
-        toast.success(`Data saved to ${file}`);
+        try {
+            await fs.writeTextFile(file, jsonString);
+            toast.success(`Data saved to ${file}`);
+        } catch (error) {
+            toast.error(error);
+        }
     }
 };
 
