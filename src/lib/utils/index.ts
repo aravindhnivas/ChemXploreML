@@ -108,7 +108,7 @@ export const readJSON = async <T>(file: string) => {
     return safeJsonParse<T>(contents);
 };
 
-export const writeJSON = async (file: string, data: any, append: boolean = false) => {
+export const writeJSON = async (file: string, data: any, append: boolean = false, overwrite: boolean = false) => {
     if (!file) return;
     if (!data) return;
     if (typeof data === 'function') return;
@@ -148,8 +148,20 @@ export const writeJSON = async (file: string, data: any, append: boolean = false
     const jsonString = safeJsonStringify(data);
     if (jsonString) {
         try {
+            if (!overwrite && (await fs.exists(file))) {
+                const response = await dialog.confirm(`File already exists: ${file}. Do you want to overwrite it ?`, {
+                    title: 'Overwrite ?',
+                    kind: 'warning',
+                });
+
+                if (!response) {
+                    toast.warning('File not overwritten');
+                    return false;
+                }
+            }
             await fs.writeTextFile(file, jsonString);
             toast.success(`Data saved to ${file}`);
+            return true;
         } catch (error) {
             toast.error(error);
         }

@@ -62,7 +62,6 @@
         <div class="flex flex-col gap-1 {className}">
             <div class="flex gap-1 items-center">
                 {#if label}
-                    <!-- <span class="text-xs pl-1 {element_disabled ? 'text-gray-600/75' : ''}">{label}</span> -->
                     <div class="flex-gap {element_disabled ? 'text-gray-600/75' : ''}">
                         <span class="text-xs">{label}</span>
                         {#if hoverHelper}

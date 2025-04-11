@@ -9,6 +9,7 @@
         embeddings,
     } from '$pages/04 - embedd_molecule/stores';
     import { DR_default_params } from '../stores';
+    import { ROOT_DIR } from '$pages/03 - load_file/plot-analysis/stores';
 
     export let loc: string;
     export let name: DRNames;
@@ -62,6 +63,7 @@
 <div class="grid gap-2">
     <CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
     <SaveAndLoadState {loc} {default_params} bind:params unique_ext={`.${name.toLowerCase()}.json`} />
+    <!-- <div class="text-sm break-words">{loc}</div> -->
     <div class="divider"></div>
     <div class="text-md">Basic {name.toUpperCase()} Parameters</div>
 

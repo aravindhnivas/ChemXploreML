@@ -20,10 +20,18 @@
     };
 
     $: loc && get_all_items_in_loc(loc, false);
+    let use_input = false;
 </script>
 
 <div class="flex-gap items-end m-auto border border-solid border-black p-1 rounded">
-    <CustomSelect class="min-w-xl" label="filename" bind:value={filename} {items} enable_use_input>
+    <CustomSelect
+        class="min-w-xl"
+        label={`${filename}${unique_ext}`}
+        bind:value={filename}
+        {items}
+        enable_use_input
+        bind:use_input
+    >
         <svelte:fragment slot="pre-within">
             <button
                 class="btn btn-sm btn-square btn-outline join-item"
@@ -57,14 +65,13 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={async () => {
-            if (!(await fs.exists(loc))) {
-                // return toast.error(`"${loc}" location doesn't exists`)
-                // create directory
-                await fs.mkdir(loc);
-            }
+            if (!(await fs.exists(loc))) await fs.mkdir(loc);
+            filename = filename.replace(unique_ext, '');
             const file = await path.join(loc, `${filename}${unique_ext}`);
-            await writeJSON(file, params);
+            const saved = await writeJSON(file, params);
+            if (!saved) return;
             await get_all_items_in_loc(loc);
+            use_input = false;
         }}
     >
         <Save />
