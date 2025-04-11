@@ -8,6 +8,7 @@
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
     import Plot from 'svelte-plotly.js';
     import { embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
+    import DrLayout from './DRLayout.svelte';
 
     const params_description: Record<keyof UMAPParams, string> = {
         n_neighbors:
@@ -143,116 +144,113 @@
     };
 </script>
 
-<CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
-<SaveAndLoadState loc={umap_loc} {default_params} bind:params unique_ext={'.umap.json'} />
-<div class="divider"></div>
+<DrLayout bind:loc={umap_loc} {default_params} bind:params name="umap">
+    <div class="text-md">Basic UMAP Parameters</div>
+    <div class="flex-gap items-start flex-wrap">
+        <CustomInput
+            bind:value={params.n_neighbors}
+            type="number"
+            label="n_neighbors"
+            hoverHelper={params_description.n_neighbors}
+            helperHighlight="default: 15"
+        />
+        <CustomInput
+            bind:value={params.min_dist}
+            type="number"
+            label="min_dist"
+            hoverHelper={params_description.min_dist}
+            helperHighlight="default: 0.1"
+            step="0.1"
+            min="0.1"
+        />
+        <CustomInput
+            bind:value={params.n_components}
+            type="number"
+            label="n_components"
+            hoverHelper={params_description.n_components}
+            helperHighlight="default: 2"
+        />
+        <CustomSelect
+            bind:value={params.umap_metric}
+            label="metric"
+            items={umap_metrics}
+            hoverHelper={params_description.metric}
+            helperHighlight="default: euclidean"
+        />
+        <CustomInput bind:value={params.n_jobs} type="number" label="n_jobs" hoverHelper={params_description.n_jobs} />
+        <CustomInput
+            bind:value={params.random_state}
+            type="number"
+            label="random_state"
+            hoverHelper={params_description.random_state}
+            helperHighlight="default: 42"
+            bind:lock={params.random_state_locked}
+        />
+    </div>
 
-<div class="text-md">Basic UMAP Parameters</div>
+    <div class="divider"></div>
 
-<div class="flex-gap items-start flex-wrap">
-    <CustomInput
-        bind:value={params.n_neighbors}
-        type="number"
-        label="n_neighbors"
-        hoverHelper={params_description.n_neighbors}
-        helperHighlight="default: 15"
-    />
-    <CustomInput
-        bind:value={params.min_dist}
-        type="number"
-        label="min_dist"
-        hoverHelper={params_description.min_dist}
-        helperHighlight="default: 0.1"
-        step="0.1"
-        min="0.1"
-    />
-    <CustomInput
-        bind:value={params.n_components}
-        type="number"
-        label="n_components"
-        hoverHelper={params_description.n_components}
-        helperHighlight="default: 2"
-    />
-    <CustomSelect
-        bind:value={params.umap_metric}
-        label="metric"
-        items={umap_metrics}
-        hoverHelper={params_description.metric}
-        helperHighlight="default: euclidean"
-    />
-    <CustomInput bind:value={params.n_jobs} type="number" label="n_jobs" hoverHelper={params_description.n_jobs} />
-    <CustomInput
-        bind:value={params.random_state}
-        type="number"
-        label="random_state"
-        hoverHelper={params_description.random_state}
-        helperHighlight="default: 42"
-        bind:lock={params.random_state_locked}
-    />
-</div>
+    <div class="flex-gap">
+        <Checkbox bind:value={params.scale_embedding} label="Scale embedding" />
+        <Checkbox bind:value={params.use_cleaned_data} label="Use cleaned data" />
+    </div>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<div class="flex-gap">
-    <Checkbox bind:value={params.scale_embedding} label="Scale embedding" />
-    <Checkbox bind:value={params.use_cleaned_data} label="Use cleaned data" />
-</div>
+    <div class="text-md">DBSCAN Clustering</div>
+    <div class="flex-gap items-start">
+        <CustomInput
+            bind:value={params.dbscan_eps}
+            type="number"
+            label="eps"
+            helperHighlight="default: 0.5"
+            min="0.1"
+            step="0.1"
+            hoverHelper={'Maximum distance between two points for them to be considered neighbors'}
+        />
+        <CustomInput
+            bind:value={params.dbscan_min_samples}
+            type="number"
+            label="min_samples"
+            helperHighlight="default: 5"
+            hoverHelper={'Minimum number of points required to form a dense region (cluster)'}
+        />
+    </div>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<div class="text-md">DBSCAN Clustering</div>
-<div class="flex-gap items-start">
-    <CustomInput
-        bind:value={params.dbscan_eps}
-        type="number"
-        label="eps"
-        helperHighlight="default: 0.5"
-        min="0.1"
-        step="0.1"
-        hoverHelper={'Maximum distance between two points for them to be considered neighbors'}
-    />
-    <CustomInput
-        bind:value={params.dbscan_min_samples}
-        type="number"
-        label="min_samples"
-        helperHighlight="default: 5"
-        hoverHelper={'Minimum number of points required to form a dense region (cluster)'}
-    />
-</div>
+    <div class="text-md">Plotting</div>
+    <div class="flex-gap">
+        <CustomInput bind:value={params.fig_title} label="title" helper={'Figure title'} />
+        <Checkbox bind:value={params.annotate_clusters} label="Annotate clusters" />
+    </div>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<div class="text-md">Plotting</div>
-<div class="flex-gap">
-    <CustomInput bind:value={params.fig_title} label="title" helper={'Figure title'} />
-    <Checkbox bind:value={params.annotate_clusters} label="Annotate clusters" />
-</div>
+    <div class="flex-gap m-auto">
+        <Loadingbtn callback={compute_umap_embedding} subprocess={true} on:result={onResult} />
+        <button
+            class="btn btn-sm btn-outline"
+            on:click={async () => {
+                const file_exists = await fs.exists(plotly_data_file);
+                if (!file_exists) return toast.error('Plot not available');
+                await plot_from_json(plotly_data_file);
+            }}
+        >
+            {#await fs.exists(plotly_data_file) then value}
+                {#if value}
+                    <span>Show plot</span>
+                {:else}
+                    <span>Plot not available</span>
+                {/if}
+            {/await}
+        </button>
+    </div>
 
-<div class="divider"></div>
-
-<div class="flex-gap m-auto">
-    <Loadingbtn callback={compute_umap_embedding} subprocess={true} on:result={onResult} />
-    <button
-        class="btn btn-sm btn-outline"
-        on:click={async () => {
-            const file_exists = await fs.exists(plotly_data_file);
-            if (!file_exists) return toast.error('Plot not available');
-            await plot_from_json(plotly_data_file);
-        }}
-    >
-        {#await fs.exists(plotly_data_file) then value}
-            {#if value}
-                <span>Show plot</span>
-            {:else}
-                <span>Plot not available</span>
-            {/if}
-        {/await}
-    </button>
-</div>
-
-<div>
-    {#if plotly_data && plotly_layout}
-        <Plot data={plotly_data} layout={plotly_layout} fillParent={true} debounce={250} />
-    {/if}
-</div>
-<div class="divider"></div>
+    <div>
+        {#if plotly_data && plotly_layout}
+            <Plot data={plotly_data} layout={plotly_layout} fillParent={true} debounce={250} />
+        {/if}
+    </div>
+    <div class="divider"></div>
+</DrLayout>
