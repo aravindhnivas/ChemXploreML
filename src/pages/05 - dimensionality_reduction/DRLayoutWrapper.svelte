@@ -165,7 +165,6 @@
                         class:bg-success={file_exists}
                         class:bg-error={!file_exists}
                         class="text-xs p-1 rounded-md break-words whitespace-normal">
-                    <!-- {$dr_vector_file[name]} -->
                     {file_exists ? 'File available' : 'File not available'}
                 </pre>
                     <span aria-label={$dr_vector_file[name]} data-cooltipz-dir="top" data-cooltipz-size="medium">
