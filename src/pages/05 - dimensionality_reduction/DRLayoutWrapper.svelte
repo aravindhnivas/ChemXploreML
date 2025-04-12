@@ -5,6 +5,8 @@
     import { current_embedder_model_filepath, embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
     import { DR_default_params, dr_params_filename, dr_vector_file } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
+    import { exists } from '@tauri-apps/plugin-fs';
+    import Notification from '$lib/components/Notification.svelte';
 
     export let name: DRNames;
 
@@ -77,6 +79,8 @@
     });
 
     let scaling = true;
+    let saved_config_file = '';
+    let refresh_state = false;
 </script>
 
 <div class="grid gap-2">
@@ -84,24 +88,26 @@
     <SaveAndLoadState
         bind:typed_filename={$dr_params_filename[name]}
         bind:params
+        bind:saved_config_file
         {loc}
         {default_params}
         unique_ext={`.${name.toLowerCase()}.json`}
-        on:load={e => {
-            console.log('loaded');
-            console.log(e.detail);
+        on:save={e => {
+            refresh_state = !refresh_state;
         }}
     />
-    <!-- <div class="grid gap-2">
+    <div class="grid gap-2">
         <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">loc</span> - {loc}</pre>
+        <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">saved_config_file</span
+            > - {saved_config_file}</pre>
         <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">vector_file</span
             > - {vector_file}</pre>
         <pre class="text-sm break-all whitespace-normal">
             <span class="badge badge-sm">dr_vector_file</span> - {$dr_vector_file[name]}
         </pre>
-    </div> -->
+    </div>
     <div class="divider"></div>
-    <div class="text-md">Basic {name.toUpperCase()} Parameters</div>
+    <div class="text-md">Basic Parameters</div>
 
     <div class="flex-gap items-start flex-wrap">
         {#each Object.entries(DR_default_params[name]) as [key, obj]}
@@ -131,6 +137,18 @@
     <div class="divider"></div>
     <Checkbox bind:value={scaling} label="scaling" />
     <div class="divider"></div>
-    <Loadingbtn callback={generate_reduced_embeddings} subprocess={true} />
-    <slot />
+    {#key refresh_state}
+        {#await fs.exists(saved_config_file) then file_exists}
+            {#if file_exists}
+                <Loadingbtn callback={generate_reduced_embeddings} subprocess={true} />
+            {:else}
+                <Loadingbtn callback={generate_reduced_embeddings} subprocess={true} disabled />
+                <Notification
+                    message="Please save the config parameter to compute"
+                    type="warning"
+                    dismissable={false}
+                />
+            {/if}
+        {/await}
+    {/key}
 </div>

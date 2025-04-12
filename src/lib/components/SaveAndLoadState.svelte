@@ -8,6 +8,7 @@
     export let unique_ext: string = '.json';
     export let filename: string = 'default';
     export let typed_filename: string = '';
+    export let saved_config_file: string = '';
 
     let items: string[] = [];
 
@@ -24,6 +25,7 @@
     let use_input = false;
     const dispatch = createEventDispatcher();
 
+    $: path.join(loc, `${filename}${unique_ext}`).then(r => (saved_config_file = r));
     onMount(() => {
         typed_filename = filename;
     });
@@ -56,8 +58,7 @@
         class="btn btn-sm btn-outline"
         on:click={async () => {
             if (!(await fs.exists(loc))) return toast.error(`"${loc}" location doesn't exists`);
-            const file = await path.join(loc, `${filename}${unique_ext}`);
-            const contents = await readJSON(file);
+            const contents = await readJSON(saved_config_file);
             if (!contents) {
                 toast.error('No state found');
                 return;
@@ -75,8 +76,7 @@
         on:click={async () => {
             if (!(await fs.exists(loc))) await fs.mkdir(loc);
             filename = filename.replace(unique_ext, '');
-            const file = await path.join(loc, `${filename}${unique_ext}`);
-            const saved = await writeJSON(file, params);
+            const saved = await writeJSON(saved_config_file, params);
             if (!saved) return;
             await get_all_items_in_loc(loc);
             use_input = false;

@@ -17,7 +17,7 @@
     export let subprocess = false;
     export let btn: HTMLButtonElement | undefined = undefined;
     export let id = getID();
-
+    export let disabled = false;
     let klass: string = '';
     export { klass as class };
 
@@ -129,6 +129,7 @@
 <div class="join {klass}">
     <button
         class="btn btn-sm btn-outline join-item"
+        class:btn-disabled={disabled}
         on:click={() => {
             if (loading) return toast.error('Operation in progress');
             subprocess = !subprocess;
@@ -144,7 +145,7 @@
     <button
         {id}
         bind:this={btn}
-        class:btn-disabled={server_loading}
+        class:btn-disabled={disabled || server_loading}
         class="btn btn-sm btn-outline w-max join-item"
         on:click={run_callback}
         on:pyEvent
