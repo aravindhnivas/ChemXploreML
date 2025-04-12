@@ -2,12 +2,7 @@
     import { CustomInput, CustomSelect, Loadingbtn } from '$lib/components';
     import { loaded_files } from '$lib/meta-componenets/stores';
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
-    import {
-        current_embedder_model_filepath,
-        embedd_savefile,
-        embedding,
-        embeddings,
-    } from '$pages/04 - embedd_molecule/stores';
+    import { current_embedder_model_filepath, embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
     import { DR_default_params, dr_params_filename, dr_vector_file } from '../stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
 
@@ -15,21 +10,14 @@
     export let name: DRNames;
     export let params: Record<string, number | string> = {};
 
-    let processed_df_file = '';
-    // let dr_file = '';
     const generate_reduced_embeddings = async () => {
         if (!$current_embedder_model_filepath) {
             toast.error('Please select a model_file');
             return;
         }
 
-        if (!(await fs.exists(processed_df_file))) {
-            toast.error('Invalid processed_df file');
-            return;
-        }
-
         let parameter_file = await path.join(loc, `${$dr_params_filename[name]}.${name.toLowerCase()}.json`);
-        console.log(parameter_file);
+        // console.log(parameter_file);
         let parameter_file_exists = await fs.exists(parameter_file);
         if (!parameter_file_exists) {
             toast.warning('Please save the parameters file first!!');
@@ -37,10 +25,13 @@
         }
 
         if (await fs.exists($dr_vector_file[name])) {
-            const overwrite = await dialog.confirm('File already exisits. Do you want to overwrite ?', {
-                title: 'Overwrite ?',
-                kind: 'warning',
-            });
+            const overwrite = await dialog.confirm(
+                `File already exisits. ${$dr_vector_file[name]}. Do you want to overwrite ?`,
+                {
+                    title: 'Overwrite ?',
+                    kind: 'warning',
+                },
+            );
             if (!overwrite) return;
         }
 
@@ -48,8 +39,8 @@
             pyfile: 'training.generate_reduced_embeddings',
             args: {
                 params,
-                processed_df_file,
-                dr_file: $dr_vector_file[name],
+                vector_file,
+                dr_savefile: $dr_vector_file[name],
                 embedder_loc: $current_embedder_model_filepath,
                 method: name,
                 embedder_name: $embedding,
@@ -58,47 +49,51 @@
         };
     };
 
-    const get_loc = async (file: string) => {
-        if (!(await fs.exists(file))) return;
-        const dir = await path.dirname(file);
-        loc = await path.join(dir, name);
-        $dr_vector_file[name] = await path.join(
-            loc,
-            `${$embedd_savefile}_${name.toLocaleLowerCase()}_${$dr_params_filename[name]}.npy`,
-        );
+    let vector_file = '';
+
+    const parse_loc = async (file_obj: LoadedInfosFile) => {
+        const dir = await path.dirname(file_obj.embedded_file.value);
+        const fname = file_obj.embedded_file.basename.replace('.npy', '');
+        const original_vec_filename = fname.split('_with')[0];
+        const append_name = `with_${name.toLowerCase()}_${$dr_params_filename[name]}`;
+        const dr_vec_fname = `${original_vec_filename}_${append_name}`;
+        loc = await path.join(dir, `${name}_configs`);
+        $dr_vector_file[name] = await path.join(dir, `${dr_vec_fname}.npy`);
+        vector_file = await path.join(dir, `${original_vec_filename}.npy`);
+        console.log({ embedded_file: file_obj.embedded_file, loc, original_vec_filename, append_name, dr_vec_fname });
     };
 
-    $: processed_df_file = $loaded_files?.final_processed_file?.value;
-    $: get_loc(processed_df_file);
-
-    type ParamValue = { value: number | string; description: string };
-
+    $: parse_loc($loaded_files);
     let default_params: Record<string, number | string> = {};
 
-    const entries = DR_default_params[name] as Record<string, ParamValue>;
-
+    const entries = DR_default_params[name];
     Object.entries(entries).forEach(([key, value]) => {
         default_params[key] = value.value;
         params[key] = value.value;
     });
 
-    // let param_filename: string = 'default';
     let scaling = true;
 </script>
 
 <div class="grid gap-2">
     <CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
     <SaveAndLoadState
-        bind:filename={$dr_params_filename[name]}
+        bind:typed_filename={$dr_params_filename[name]}
         bind:params
         {loc}
         {default_params}
         unique_ext={`.${name.toLowerCase()}.json`}
+        on:load={e => {
+            console.log('loaded');
+            console.log(e.detail);
+        }}
     />
     <div class="grid gap-2">
-        <div class="text-sm break-words">loc - {loc}</div>
-        <div class="text-sm break-all">processed_df_file - {processed_df_file}</div>
-        <div class="text-sm break-all">dr_file - {$dr_vector_file[name]}</div>
+        <div class="text-sm break-all"><span class="badge badge-sm">loc</span> - {loc}</div>
+        <div class="text-sm break-all"><span class="badge badge-sm">vector_file</span> - {vector_file}</div>
+        <div class="text-sm break-all">
+            <span class="badge badge-sm">dr_vector_file</span> - {$dr_vector_file[name]}
+        </div>
     </div>
     <div class="divider"></div>
     <div class="text-md">Basic {name.toUpperCase()} Parameters</div>
@@ -121,6 +116,9 @@
                     label={key}
                     hoverHelper={obj.description}
                     helperHighlight="default: {obj.value}"
+                    on:change={() => {
+                        if (obj.type === 'number') params[key] = Number(params[key]);
+                    }}
                 />
             {/if}
         {/each}

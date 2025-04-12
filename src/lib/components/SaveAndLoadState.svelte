@@ -7,6 +7,7 @@
     export let loc: string;
     export let unique_ext: string = '.json';
     export let filename: string = 'default';
+    export let typed_filename: string = '';
 
     let items: string[] = [];
 
@@ -21,6 +22,11 @@
 
     $: loc && get_all_items_in_loc(loc, false);
     let use_input = false;
+    const dispatch = createEventDispatcher();
+
+    onMount(() => {
+        typed_filename = filename;
+    });
 </script>
 
 <div class="flex-gap items-end m-auto border border-solid border-black p-1 rounded">
@@ -31,6 +37,7 @@
         {items}
         enable_use_input
         bind:use_input
+        on:change={() => (typed_filename = filename)}
     >
         <svelte:fragment slot="pre-within">
             <button
@@ -56,6 +63,7 @@
                 return;
             }
             params = contents;
+            dispatch('load', { params });
             toast.success('State loaded');
         }}
     >
@@ -72,6 +80,7 @@
             if (!saved) return;
             await get_all_items_in_loc(loc);
             use_input = false;
+            dispatch('save', { params });
         }}
     >
         <Save />

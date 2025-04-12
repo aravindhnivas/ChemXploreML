@@ -20,7 +20,7 @@ interface TSNEParams {
 }
 
 type DRParamDescription<T> = {
-    [K in keyof T]: { value: T[K]; description: string; options?: T[K][] };
+    [K in keyof T]: { value: T[K]; description: string; type: string; options?: T[K][] };
 };
 
 type DRDefaultParams = {

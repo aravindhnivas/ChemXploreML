@@ -46,6 +46,7 @@
             bind:lock
             {enabled_lock_mode}
             {disabled}
+            on:change
         >
             <svelte:fragment slot="post-input-within">
                 <button
