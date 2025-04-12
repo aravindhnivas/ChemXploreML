@@ -92,14 +92,14 @@
             console.log(e.detail);
         }}
     />
-    <div class="grid gap-2">
+    <!-- <div class="grid gap-2">
         <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">loc</span> - {loc}</pre>
         <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">vector_file</span
             > - {vector_file}</pre>
         <pre class="text-sm break-all whitespace-normal">
             <span class="badge badge-sm">dr_vector_file</span> - {$dr_vector_file[name]}
         </pre>
-    </div>
+    </div> -->
     <div class="divider"></div>
     <div class="text-md">Basic {name.toUpperCase()} Parameters</div>
 
