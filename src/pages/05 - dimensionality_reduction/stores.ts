@@ -107,7 +107,7 @@ export const DR_default_params: DRDefaultParams = {
         },
     },
     PCA: {
-        n_components: { value: 2, type: 'number', description: 'The dimension of the space to embed into.' },
+        n_components: { value: 70, type: 'number', description: 'The dimension of the space to embed into.' },
         random_state: {
             value: 42,
             type: 'number',
