@@ -16,21 +16,81 @@
         </div>
     {/each}
 </div>
-
-<div class="grid gap-1 w-full grid-cols-4 items-center">
-    <div class="divider col-span-4"></div>
-
-    <div class="text-sm">Choosen DR</div>
-    <pre class="text-sm col-span-3">{$active_dr}</pre>
-    <div class="divider col-span-4"></div>
-
-    <div class="text-sm">Molecular Embedder - Modal</div>
-    <pre class="text-sm col-span-3 break-all whitespace-normal">{$current_embedder_model_filepath}</pre>
-    <div class="divider col-span-4"></div>
-
-    <div class="text-sm">Vectorized file</div>
-    {#await $embedd_savefile_path then value}
-        <pre class="text-sm col-span-3 break-all whitespace-normal">{value}</pre>
-    {/await}
-    <div class="divider col-span-4"></div>
+<div class="overflow-x-auto">
+    <table class="table bg-base-200 table-sm text-sm">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+                <th>Local Structure</th>
+                <th>Global Structure</th>
+                <th>Scalability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PCA</td>
+                <td>Linear projection capturing directions of maximum variance.</td>
+                <td>⚠️ Moderate</td>
+                <td>✅ Excellent</td>
+                <td>✅ Fast</td>
+            </tr>
+            <tr>
+                <td>KernelPCA</td>
+                <td>Nonlinear PCA using RBF or polynomial kernels.</td>
+                <td>✅ Good</td>
+                <td>✅ Good</td>
+                <td>⚠️ Slower</td>
+            </tr>
+            <tr>
+                <td>t-SNE</td>
+                <td>Preserves local clusters using stochastic modeling.</td>
+                <td>✅ Excellent</td>
+                <td>❌ Poor</td>
+                <td>❌ Slow</td>
+            </tr>
+            <tr>
+                <td>UMAP</td>
+                <td>Topological embedding preserving local and mid-range patterns.</td>
+                <td>✅ Excellent</td>
+                <td>⚠️ Moderate</td>
+                <td>✅ Fast</td>
+            </tr>
+            <tr>
+                <td>PHATE</td>
+                <td>Diffusion-based method for visualizing progression or trajectories.</td>
+                <td>✅ Good</td>
+                <td>✅ Excellent</td>
+                <td>⚠️ Medium</td>
+            </tr>
+            <tr>
+                <td>ISOMAP</td>
+                <td>Preserves geodesic distances in nonlinear manifolds.</td>
+                <td>✅ Excellent</td>
+                <td>✅ Good</td>
+                <td>⚠️ Medium</td>
+            </tr>
+            <tr>
+                <td>Laplacian Eigenmaps</td>
+                <td>Spectral method preserving local manifold information.</td>
+                <td>✅ Excellent</td>
+                <td>❌ Poor</td>
+                <td>✅ Fast</td>
+            </tr>
+            <tr>
+                <td>TriMap</td>
+                <td>Triplet-based approach focusing on global structure.</td>
+                <td>✅ Excellent</td>
+                <td>✅ Good</td>
+                <td>✅ Fast</td>
+            </tr>
+            <tr>
+                <td>Factor Analysis</td>
+                <td>Statistical method uncovering latent factors.</td>
+                <td>⚠️ Limited</td>
+                <td>✅ Good</td>
+                <td>✅ Fast</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
