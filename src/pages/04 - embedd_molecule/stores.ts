@@ -16,8 +16,8 @@ export const current_embedder_model_filepath = derived(
 );
 
 // export const embedd_savefile = writable<string>('');
-export const embedd_savefile = derived([embedding, use_dr, active_dr], ([$embedding, $use_dr, $active_dr]) => {
-    return `${$embedding}_embeddings` + ($use_dr ? `_${$active_dr}` : '');
+export const embedd_savefile = derived([embedding], ([$embedding]) => {
+    return `${$embedding}_embeddings`;
 });
 
 export const embedd_savefile_path = derived(

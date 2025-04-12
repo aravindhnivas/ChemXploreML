@@ -80,3 +80,15 @@ export const DR_default_params: DRDefaultParams = {
         },
     },
 };
+
+export const dr_params_filename = localWritable<Record<DRNames, string>>('dr_params_filename', {
+    UMAP: 'default',
+    PCA: 'default',
+    't-SNE': 'default',
+});
+
+export const dr_vector_file = localWritable<Record<DRNames, string>>('dr_vector_file', {
+    UMAP: '',
+    PCA: '',
+    't-SNE': '',
+});

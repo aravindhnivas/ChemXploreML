@@ -4,49 +4,72 @@
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
     import {
         current_embedder_model_filepath,
-        embedd_savefile_path,
+        embedd_savefile,
         embedding,
         embeddings,
     } from '$pages/04 - embedd_molecule/stores';
-    import { DR_default_params } from '../stores';
-    import { ROOT_DIR } from '$pages/03 - load_file/plot-analysis/stores';
+    import { DR_default_params, dr_params_filename, dr_vector_file } from '../stores';
+    import Checkbox from '$lib/components/Checkbox.svelte';
 
     export let loc: string;
     export let name: DRNames;
     export let params: Record<string, number | string> = {};
 
+    let processed_df_file = '';
+    // let dr_file = '';
     const generate_reduced_embeddings = async () => {
         if (!$current_embedder_model_filepath) {
             toast.error('Please select a model_file');
             return;
         }
 
-        const npy_file = await $embedd_savefile_path;
-        if (!(await fs.exists(npy_file))) {
-            toast.error('Please select a .npy vectors file');
+        if (!(await fs.exists(processed_df_file))) {
+            toast.error('Invalid processed_df file');
             return;
+        }
+
+        let parameter_file = await path.join(loc, `${$dr_params_filename[name]}.${name.toLowerCase()}.json`);
+        console.log(parameter_file);
+        let parameter_file_exists = await fs.exists(parameter_file);
+        if (!parameter_file_exists) {
+            toast.warning('Please save the parameters file first!!');
+            return;
+        }
+
+        if (await fs.exists($dr_vector_file[name])) {
+            const overwrite = await dialog.confirm('File already exisits. Do you want to overwrite ?', {
+                title: 'Overwrite ?',
+                kind: 'warning',
+            });
+            if (!overwrite) return;
         }
 
         return {
             pyfile: 'training.generate_reduced_embeddings',
             args: {
-                ...params,
-                npy_file,
+                params,
+                processed_df_file,
+                dr_file: $dr_vector_file[name],
+                embedder_loc: $current_embedder_model_filepath,
                 method: name,
-                save_loc: loc,
-                model_loc: $current_embedder_model_filepath,
+                embedder_name: $embedding,
+                scaling,
             },
         };
     };
 
-    const get_loc = async (processed_df_file: string) => {
-        if (!processed_df_file) return;
-        const dir = await path.dirname(processed_df_file);
+    const get_loc = async (file: string) => {
+        if (!(await fs.exists(file))) return;
+        const dir = await path.dirname(file);
         loc = await path.join(dir, name);
-        if (!(await fs.exists(loc))) return;
+        $dr_vector_file[name] = await path.join(
+            loc,
+            `${$embedd_savefile}_${name.toLocaleLowerCase()}_${$dr_params_filename[name]}.npy`,
+        );
     };
 
-    $: get_loc($loaded_files?.final_processed_file?.value);
+    $: processed_df_file = $loaded_files?.final_processed_file?.value;
+    $: get_loc(processed_df_file);
 
     type ParamValue = { value: number | string; description: string };
 
@@ -58,12 +81,25 @@
         default_params[key] = value.value;
         params[key] = value.value;
     });
+
+    // let param_filename: string = 'default';
+    let scaling = true;
 </script>
 
 <div class="grid gap-2">
     <CustomSelect bind:value={$embedding} items={embeddings} label="Embedder" />
-    <SaveAndLoadState {loc} {default_params} bind:params unique_ext={`.${name.toLowerCase()}.json`} />
-    <!-- <div class="text-sm break-words">{loc}</div> -->
+    <SaveAndLoadState
+        bind:filename={$dr_params_filename[name]}
+        bind:params
+        {loc}
+        {default_params}
+        unique_ext={`.${name.toLowerCase()}.json`}
+    />
+    <div class="grid gap-2">
+        <div class="text-sm break-words">loc - {loc}</div>
+        <div class="text-sm break-all">processed_df_file - {processed_df_file}</div>
+        <div class="text-sm break-all">dr_file - {$dr_vector_file[name]}</div>
+    </div>
     <div class="divider"></div>
     <div class="text-md">Basic {name.toUpperCase()} Parameters</div>
 
@@ -89,6 +125,8 @@
             {/if}
         {/each}
     </div>
+    <div class="divider"></div>
+    <Checkbox bind:value={scaling} label="scaling" />
     <div class="divider"></div>
     <Loadingbtn callback={generate_reduced_embeddings} subprocess={true} />
     <slot />

@@ -22,12 +22,6 @@
     {/each}
 </div>
 
-<div class="flex-gap">
-    <CustomInput value={$embedd_savefile} disabled />
-    _
-    <CustomInput value="" />
-</div>
-
 <div class="grid gap-1 w-full grid-cols-4 items-center">
     <div class="divider col-span-4"></div>
 
