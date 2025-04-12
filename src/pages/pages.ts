@@ -73,10 +73,10 @@ export const navigationConfig = writable<NavigationConfig>({
         description: 'Visualize and explore molecular embeddings in reduced dimensions.',
         children: [
             {
-                name: 'Dim. Reduction',
+                name: 'Information',
                 id: 'metadata_info',
                 title: 'Dimensionality Reduction',
-                description: '',
+                description: 'Choose a method.',
             },
             {
                 name: 'PCA',
