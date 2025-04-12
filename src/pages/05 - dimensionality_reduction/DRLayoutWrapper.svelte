@@ -1,12 +1,12 @@
 <script lang="ts">
     import { CustomInput, CustomSelect, Loadingbtn } from '$lib/components';
-    import { all_files_loaded, loaded_files } from '$lib/meta-componenets/stores';
+    import { loaded_files } from '$lib/meta-componenets/stores';
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
     import { current_embedder_model_filepath, embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
     import { DR_default_params, dr_params_filename, dr_vector_file } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
-    import { exists } from '@tauri-apps/plugin-fs';
     import Notification from '$lib/components/Notification.svelte';
+    import { HelpCircle } from 'lucide-svelte/icons';
 
     export let name: DRNames;
 
@@ -95,18 +95,27 @@
         on:save={e => {
             refresh_state = !refresh_state;
         }}
+        on:load={e => {
+            refresh_state = !refresh_state;
+        }}
     />
-    <div class="grid gap-2">
-        <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">loc</span> - {loc}</pre>
-        <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">saved_config_file</span
-            > - {saved_config_file}</pre>
-        <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">vector_file</span
-            > - {vector_file}</pre>
-        <pre class="text-sm break-all whitespace-normal">
+
+    <div class="divider"></div>
+
+    {#if import.meta.env.DEV}
+        <div class="grid gap-2">
+            <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">loc</span> - {loc}</pre>
+            <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">saved_config_file</span
+                > - {saved_config_file}</pre>
+            <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">vector_file</span
+                > - {vector_file}</pre>
+            <pre class="text-sm break-all whitespace-normal">
             <span class="badge badge-sm">dr_vector_file</span> - {$dr_vector_file[name]}
         </pre>
-    </div>
-    <div class="divider"></div>
+        </div>
+        <div class="divider"></div>
+    {/if}
+
     <div class="text-md">Basic Parameters</div>
 
     <div class="flex-gap items-start flex-wrap">
@@ -149,6 +158,21 @@
                     dismissable={false}
                 />
             {/if}
+
+            {#await fs.exists($dr_vector_file[name]) then file_exists}
+                <div class="flex-gap">
+                    <pre
+                        class:bg-success={file_exists}
+                        class:bg-error={!file_exists}
+                        class="text-xs p-1 rounded-md break-words whitespace-normal">
+                    <!-- {$dr_vector_file[name]} -->
+                    {file_exists ? 'File available' : 'File not available'}
+                </pre>
+                    <span aria-label={$dr_vector_file[name]} data-cooltipz-dir="top" data-cooltipz-size="medium">
+                        <HelpCircle size="20" />
+                    </span>
+                </div>
+            {/await}
         {/await}
     {/key}
 </div>
