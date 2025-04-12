@@ -26,7 +26,17 @@ export const umap_metrics = [
 
 export type UMAPMetric = (typeof umap_metrics)[number];
 
-export const dr_methods = ['PCA', 'UMAP', 't-SNE'] as const;
+export const dr_methods = [
+    'PCA',
+    'UMAP',
+    't-SNE',
+    'KernelPCA',
+    'PHATE',
+    'ISOMAP',
+    'LaplacianEigenmaps',
+    'TriMap',
+    'FactorAnalysis',
+] as const;
 export const active_dr = writable<(typeof dr_methods)[number]>('PCA');
 export const use_dr = writable(false);
 
@@ -34,6 +44,12 @@ export const dr_params_filename = localWritable<Record<DRNames, string>>('dr_par
     UMAP: 'default',
     PCA: 'default',
     't-SNE': 'default',
+    KernelPCA: 'default',
+    PHATE: 'default',
+    ISOMAP: 'default',
+    LaplacianEigenmaps: 'default',
+    TriMap: 'default',
+    FactorAnalysis: 'default',
 });
 
 export const append_dr_name = derived(
@@ -49,6 +65,12 @@ export const dr_vector_file = writable<Record<DRNames, string>>({
     UMAP: '',
     PCA: '',
     't-SNE': '',
+    KernelPCA: '',
+    PHATE: '',
+    ISOMAP: '',
+    LaplacianEigenmaps: '',
+    TriMap: '',
+    FactorAnalysis: '',
 });
 
 export const DR_default_params: DRDefaultParams = {
@@ -106,6 +128,116 @@ export const DR_default_params: DRDefaultParams = {
             type: 'number',
             description:
                 'The seed used by the random number generator. If random_state is used, n_jobs will be ignored.',
+        },
+    },
+
+    KernelPCA: {
+        n_components: {
+            value: 2,
+            type: 'number',
+            description: 'Number of components to keep.',
+        },
+        kernel: {
+            value: 'rbf',
+            type: 'string',
+            description: 'Kernel to use in the algorithm.',
+            options: ['linear', 'poly', 'rbf', 'sigmoid', 'cosine'],
+        },
+        gamma: {
+            value: null,
+            type: 'number',
+            description: 'Kernel coefficient for rbf, poly and sigmoid.',
+        },
+    },
+
+    PHATE: {
+        n_components: {
+            value: 2,
+            type: 'number',
+            description: 'Number of dimensions to reduce to.',
+        },
+        knn: {
+            value: 5,
+            type: 'number',
+            description: 'Number of nearest neighbors to consider for PHATE graph construction.',
+        },
+        decay: {
+            value: 40,
+            type: 'number',
+            description: 'Controls the exponential kernel decay; higher means broader influence.',
+        },
+        t: {
+            value: 'auto',
+            type: 'string',
+            description: 'Diffusion time scale. "auto" selects optimal based on data entropy.',
+        },
+        random_state: {
+            value: 42,
+            type: 'number',
+            description: 'Seed for reproducibility.',
+        },
+    },
+
+    ISOMAP: {
+        n_components: {
+            value: 2,
+            type: 'number',
+            description: 'Number of coordinates for the manifold.',
+        },
+        n_neighbors: {
+            value: 5,
+            type: 'number',
+            description: 'Number of neighbors considered for each point.',
+        },
+    },
+
+    LaplacianEigenmaps: {
+        n_components: {
+            value: 2,
+            type: 'number',
+            description: 'Dimension of the embedding space.',
+        },
+        n_neighbors: {
+            value: 10,
+            type: 'number',
+            description: 'Size of neighborhood graph for constructing the Laplacian.',
+        },
+    },
+
+    TriMap: {
+        n_dims: {
+            value: 2,
+            type: 'number',
+            description: 'Output dimensionality.',
+        },
+        n_inliers: {
+            value: 10,
+            type: 'number',
+            description: 'Number of inlier points used per triplet.',
+        },
+        n_outliers: {
+            value: 5,
+            type: 'number',
+            description: 'Number of outlier points used per triplet.',
+        },
+        n_random: {
+            value: 5,
+            type: 'number',
+            description: 'Number of random triplets per point.',
+        },
+        distance: {
+            value: 'euclidean',
+            type: 'string',
+            description: 'Distance metric to use.',
+            options: ['euclidean', 'manhattan', 'cosine'],
+        },
+    },
+
+    FactorAnalysis: {
+        n_components: {
+            value: 2,
+            type: 'number',
+            description: 'Number of latent factors to extract.',
         },
     },
 };

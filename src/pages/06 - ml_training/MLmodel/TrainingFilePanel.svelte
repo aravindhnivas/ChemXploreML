@@ -3,7 +3,6 @@
     import CustomPanel from '$lib/components/CustomPanel.svelte';
     import { isObject, isEmpty } from 'lodash-es';
     import LoadedFileInfos from '$lib/meta-componenets/LoadedFileInfos.svelte';
-    // import { typeSafeObjectKeys } from '$lib/utils';
 
     let loaded_files = {} as LoadedInfosFile;
     const get_loaded_files = async (e: CustomEvent) => {

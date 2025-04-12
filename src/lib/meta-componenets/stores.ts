@@ -5,3 +5,5 @@ export const loaded_files = writable<LoadedInfosFile>({
     columnY: { value: '', valid: false, basename: '' },
     final_processed_file: { value: '', valid: false, basename: '' },
 });
+
+export const all_files_loaded = writable(false);

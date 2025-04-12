@@ -73,9 +73,9 @@ export const navigationConfig = writable<NavigationConfig>({
         description: 'Visualize and explore molecular embeddings in reduced dimensions.',
         children: [
             {
-                name: 'Metadata',
+                name: 'Dim. Reduction',
                 id: 'metadata_info',
-                title: 'Metadata Informations',
+                title: 'Dimensionality Reduction',
                 description: '',
             },
             {
@@ -92,9 +92,46 @@ export const navigationConfig = writable<NavigationConfig>({
             },
             {
                 name: 't-SNE',
-                id: 'tsne_embedder',
+                id: 't_sne_embedder',
                 title: 't-SNE',
                 description: 't-distributed Stochastic Neighbor Embedding for clustering and exploration.',
+            },
+            {
+                name: 'KernelPCA',
+                id: 'kernelpca_embedder',
+                title: 'KernelPCA',
+                description: 'Kernel Principal Component Analysis for nonlinear dimensionality reduction.',
+            },
+            {
+                name: 'PHATE',
+                id: 'phate_embedder',
+                title: 'PHATE',
+                description:
+                    'Potential of Heat-diffusion for Affinity-based Transition Embedding, useful for visualizing trajectories.',
+            },
+            {
+                name: 'ISOMAP',
+                id: 'isomap_embedder',
+                title: 'ISOMAP',
+                description: 'Isometric Mapping for capturing global geometric structure in manifolds.',
+            },
+            {
+                name: 'LaplacianEigenmaps',
+                id: 'laplacianeigenmaps_embedder',
+                title: 'Laplacian Eigenmaps',
+                description: 'Spectral embedding method preserving local neighborhood information.',
+            },
+            {
+                name: 'TriMap',
+                id: 'trimap_embedder',
+                title: 'TriMap',
+                description: 'Triplet-based dimensionality reduction method preserving global structure.',
+            },
+            {
+                name: 'FactorAnalysis',
+                id: 'factoranalysis_embedder',
+                title: 'Factor Analysis',
+                description: 'Latent factor model used for uncovering unobserved variables from high-dimensional data.',
             },
         ],
     },

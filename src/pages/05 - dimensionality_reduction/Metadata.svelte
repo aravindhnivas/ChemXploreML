@@ -2,20 +2,15 @@
     import { dr_methods, active_dr, use_dr } from './stores';
     import Radio from '@smui/radio';
 
-    import {
-        current_embedder_model_filepath,
-        embedd_savefile,
-        embedd_savefile_path,
-    } from '$pages/04 - embedd_molecule/stores';
+    import { current_embedder_model_filepath, embedd_savefile_path } from '$pages/04 - embedd_molecule/stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
-    import CustomInput from '$lib/components/CustomInput.svelte';
 </script>
 
 <Checkbox bind:value={$use_dr} label="use DR" />
 
-<div class="flex">
+<div class="flex flex-wrap">
     {#each dr_methods as option}
-        <div class="flex items-center">
+        <div class="flex items-center flex-wrap">
             <Radio bind:group={$active_dr} value={option} touch />
             <pre>{option}</pre>
         </div>
@@ -30,7 +25,7 @@
     <div class="divider col-span-4"></div>
 
     <div class="text-sm">Molecular Embedder - Modal</div>
-    <pre class="text-sm col-span-3">{$current_embedder_model_filepath}</pre>
+    <pre class="text-sm col-span-3 break-all whitespace-normal">{$current_embedder_model_filepath}</pre>
     <div class="divider col-span-4"></div>
 
     <div class="text-sm">Vectorized file</div>
