@@ -2,7 +2,12 @@
     import { CustomInput, CustomSelect, Loadingbtn } from '$lib/components';
     import { loaded_files } from '$lib/meta-componenets/stores';
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
-    import { current_embedder_model_filepath, embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
+    import {
+        current_embedder_model_filepath,
+        embedd_savefile,
+        embedding,
+        embeddings,
+    } from '$pages/04 - embedd_molecule/stores';
     import { DR_default_params, dr_params_filename, dr_vector_file } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import Notification from '$lib/components/Notification.svelte';
@@ -20,10 +25,8 @@
             return;
         }
 
-        let parameter_file = await path.join(loc, `${$dr_params_filename[name]}.${name.toLowerCase()}.json`);
-        // console.log(parameter_file);
-        let parameter_file_exists = await fs.exists(parameter_file);
-        if (!parameter_file_exists) {
+        let saved_config_file_exists = await fs.exists(saved_config_file);
+        if (!saved_config_file_exists) {
             toast.warning('Please save the parameters file first!!');
             return;
         }
@@ -53,6 +56,7 @@
         };
     };
 
+    let dr_vec_fname: string = '';
     const parse_loc = async (
         embedded_file: { value: string; valid: boolean; basename: string },
         config_name: string,
@@ -63,9 +67,9 @@
         const fname = embedded_file.basename.replace('.npy', '');
         const original_vec_filename = fname.split('_with')[0];
         const append_name = `with_${name.toLowerCase()}_${config_name}`;
-        const dr_vec_fname = `${original_vec_filename}_${append_name}`;
+        dr_vec_fname = `${original_vec_filename}_${append_name}`;
 
-        loc = await path.join(dir, `${name}_configs`);
+        loc = await path.join(dir, 'configs');
         $dr_vector_file[name] = await path.join(dir, `${dr_vec_fname}.npy`);
         vector_file = await path.join(dir, `${original_vec_filename}.npy`);
     };
@@ -91,14 +95,13 @@
         bind:saved_config_file
         {loc}
         {default_params}
-        unique_ext={`.${name.toLowerCase()}.json`}
+        unique_ext={`.${$embedding}.${name.toLowerCase()}.json`}
         on:save={() => (refresh_state = !refresh_state)}
         on:load={() => (refresh_state = !refresh_state)}
         on:refresh={() => (refresh_state = !refresh_state)}
     />
 
     <div class="divider"></div>
-
     {#if import.meta.env.DEV}
         <div class="grid gap-2">
             <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">loc</span> - {loc}</pre>
