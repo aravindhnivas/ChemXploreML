@@ -29,6 +29,18 @@
     onMount(() => {
         typed_filename = filename;
     });
+
+    const load_config = async () => {
+        if (!(await fs.exists(loc))) return toast.error(`"${loc}" location doesn't exists`);
+        const contents = await readJSON(saved_config_file);
+        if (!contents) {
+            toast.error('No state found');
+            return;
+        }
+        params = contents;
+        dispatch('load', { params });
+        toast.success('State loaded');
+    };
 </script>
 
 <div class="flex-gap items-end m-auto border border-solid border-black p-1 rounded">
@@ -39,12 +51,18 @@
         {items}
         enable_use_input
         bind:use_input
-        on:change={() => (typed_filename = filename)}
+        on:change={async () => {
+            typed_filename = filename;
+            await load_config();
+        }}
     >
         <svelte:fragment slot="pre-within">
             <button
                 class="btn btn-sm btn-square btn-outline join-item"
-                on:click={async () => await get_all_items_in_loc(loc)}
+                on:click={async () => {
+                    await get_all_items_in_loc(loc);
+                    dispatch('refresh');
+                }}
             >
                 <RefreshCcw size="20" />
             </button>
@@ -54,20 +72,7 @@
         <RotateCcw />
         <span>Reset</span>
     </button>
-    <button
-        class="btn btn-sm btn-outline"
-        on:click={async () => {
-            if (!(await fs.exists(loc))) return toast.error(`"${loc}" location doesn't exists`);
-            const contents = await readJSON(saved_config_file);
-            if (!contents) {
-                toast.error('No state found');
-                return;
-            }
-            params = contents;
-            dispatch('load', { params });
-            toast.success('State loaded');
-        }}
-    >
+    <button class="btn btn-sm btn-outline" on:click={load_config}>
         <Download />
         <span>Load</span>
     </button>

@@ -92,12 +92,9 @@
         {loc}
         {default_params}
         unique_ext={`.${name.toLowerCase()}.json`}
-        on:save={e => {
-            refresh_state = !refresh_state;
-        }}
-        on:load={e => {
-            refresh_state = !refresh_state;
-        }}
+        on:save={() => (refresh_state = !refresh_state)}
+        on:load={() => (refresh_state = !refresh_state)}
+        on:refresh={() => (refresh_state = !refresh_state)}
     />
 
     <div class="divider"></div>
@@ -159,13 +156,13 @@
                 />
             {/if}
 
-            {#await fs.exists($dr_vector_file[name]) then file_exists}
+            {#await fs.exists($dr_vector_file[name]) then vec_file_exists}
                 <div class="flex-gap">
                     <pre
-                        class:bg-success={file_exists}
-                        class:bg-error={!file_exists}
+                        class:bg-success={vec_file_exists}
+                        class:bg-error={!vec_file_exists}
                         class="text-xs p-1 rounded-md break-words whitespace-normal">
-                    {file_exists ? 'File available' : 'File not available'}
+                    {vec_file_exists ? 'File available' : 'File not available'}
                 </pre>
                     <span aria-label={$dr_vector_file[name]} data-cooltipz-dir="top" data-cooltipz-size="medium">
                         <HelpCircle size="20" />
