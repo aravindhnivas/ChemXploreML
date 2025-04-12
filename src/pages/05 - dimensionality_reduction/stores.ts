@@ -241,3 +241,75 @@ export const DR_default_params: DRDefaultParams = {
         },
     },
 };
+
+export const dr_methods_details: {
+    method: DRNames;
+    description: string;
+    local: string;
+    global: string;
+    scalability: string;
+}[] = [
+    {
+        method: 'PCA',
+        description: 'Linear projection capturing directions of maximum variance.',
+        local: '⚠️ Moderate',
+        global: '✅ Excellent',
+        scalability: '✅ Fast',
+    },
+    {
+        method: 'KernelPCA',
+        description: 'Nonlinear PCA using RBF or polynomial kernels.',
+        local: '✅ Good',
+        global: '✅ Good',
+        scalability: '⚠️ Slower',
+    },
+    {
+        method: 't-SNE',
+        description: 'Preserves local clusters using stochastic modeling.',
+        local: '✅ Excellent',
+        global: '❌ Poor',
+        scalability: '❌ Slow',
+    },
+    {
+        method: 'UMAP',
+        description: 'Topological embedding preserving local and mid-range patterns.',
+        local: '✅ Excellent',
+        global: '⚠️ Moderate',
+        scalability: '✅ Fast',
+    },
+    {
+        method: 'PHATE',
+        description: 'Diffusion-based method for visualizing progression or trajectories.',
+        local: '✅ Good',
+        global: '✅ Excellent',
+        scalability: '⚠️ Medium',
+    },
+    {
+        method: 'ISOMAP',
+        description: 'Preserves geodesic distances in nonlinear manifolds.',
+        local: '✅ Excellent',
+        global: '✅ Good',
+        scalability: '⚠️ Medium',
+    },
+    {
+        method: 'LaplacianEigenmaps',
+        description: 'Spectral method preserving local manifold information.',
+        local: '✅ Excellent',
+        global: '❌ Poor',
+        scalability: '✅ Fast',
+    },
+    {
+        method: 'TriMap',
+        description: 'Triplet-based approach focusing on global structure.',
+        local: '✅ Excellent',
+        global: '✅ Good',
+        scalability: '✅ Fast',
+    },
+    {
+        method: 'FactorAnalysis',
+        description: 'Statistical method uncovering latent factors.',
+        local: '⚠️ Limited',
+        global: '✅ Good',
+        scalability: '✅ Fast',
+    },
+];
