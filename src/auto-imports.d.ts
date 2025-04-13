@@ -31,6 +31,8 @@ declare global {
   const getID: typeof import('$lib/utils/initialise')['getID']
   const getTauriVersion: typeof import('$lib/utils/index')['getTauriVersion']
   const getVersion: typeof import('$lib/utils/index')['getVersion']
+  const get_file_metadata: typeof import('$lib/utils/index')['get_file_metadata']
+  const get_metadata: typeof import('$lib/utils/index')['get_metadata']
   const hasContext: typeof import('svelte')['hasContext']
   const installUpdate: typeof import('$lib/utils/index')['installUpdate']
   const invoke: typeof import('$lib/utils/index')['invoke']

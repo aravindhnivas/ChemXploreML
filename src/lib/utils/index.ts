@@ -208,3 +208,19 @@ export const btn_dispatch_event = (target: HTMLButtonElement, detail: Object, ev
     const event = new CustomEvent(eventName, { bubbles: false, detail });
     target.dispatchEvent(event);
 };
+
+export const get_file_metadata = async (filename: string | Promise<string>) => {
+    if (typeof filename === 'object' && filename instanceof Promise) {
+        filename = await filename;
+    }
+    if (!filename || filename?.trim() === '') {
+        toast.error('File path is empty');
+        return;
+    }
+    const dirname = await path.dirname(filename);
+    const basename = await path.basename(filename);
+    const extname = await path.extname(filename);
+    const file_exists = await fs.exists(filename);
+    const dir_exists = await fs.exists(dirname);
+    return { dirname, basename, extname, file_exists, dir_exists, filename };
+};

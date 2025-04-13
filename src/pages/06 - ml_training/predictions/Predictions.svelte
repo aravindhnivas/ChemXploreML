@@ -8,6 +8,7 @@
     import CustomSelect from '$lib/components/CustomSelect.svelte';
     import { find } from 'lodash-es';
     import { embedder_model_filepath } from '$pages/04 - embedd_molecule/stores';
+    import { ExternalLink, HelpCircle } from 'lucide-svelte/icons';
 
     const predict = async () => {
         if (!(await fs.exists($pretrained_model_file))) {
@@ -26,10 +27,10 @@
         }
 
         let embedder_loc: string = '';
-        const embedder = choosen_embedder.split('_with')[0];
+        const embedder = $choosen_embedder.split('_with')[0];
         embedder_loc = $embedder_model_filepath[embedder];
         if (!embedder_loc) {
-            console.log({ $embedder_model_filepath, choosen_embedder, embedder, embedder_loc });
+            console.log({ $embedder_model_filepath, $choosen_embedder, embedder, embedder_loc });
             return toast.error('Invalid embedder location');
         }
 
@@ -202,8 +203,8 @@
         if (!model) return {};
         console.log(`Fetching all pkl files from ${model}`);
         const all_pkl_files = {} as Record<string, { name: string; pkl_file: string }[]>;
-        choosen_embedder = '';
-        choosen_pkl_key = '';
+        $choosen_embedder = '';
+        $choosen_pkl_key = '';
         $pretrained_model_file = '';
         const root_dir = await name;
         const model_dir = await path.join(root_dir, 'pretrained_models', model);
@@ -214,7 +215,7 @@
             const pkl_files = await fetch_all_pkl_files(embeddings_dir);
             all_pkl_files[child.name.replace('_embeddings', '')] = pkl_files;
         }
-        console.log({ model_dir, all_pkl_files });
+        // console.log({ model_dir, all_pkl_files });
         // return result_names;
         fetched_pkl_files = structuredClone(all_pkl_files);
         return all_pkl_files;
@@ -227,41 +228,61 @@
         return all_dirs;
     };
 
-    let choosen_model = 'lgbm';
-    let choosen_embedder = 'mol2vec';
-    let choosen_pkl_key = '';
+    const choosen_model = localWritable('choosen_model', 'lgbm');
+    const choosen_embedder = localWritable('choosen_embedder', 'mol2vec');
+    const choosen_pkl_key = localWritable('choosen_pkl_key', '');
 
-    $: if (!isEmpty(fetched_pkl_files) && choosen_model && choosen_embedder && choosen_pkl_key) {
+    $: if (!isEmpty(fetched_pkl_files) && $choosen_model && $choosen_embedder && $choosen_pkl_key) {
         $pretrained_model_file =
-            find(fetched_pkl_files[choosen_embedder], o => o.name === choosen_pkl_key)?.pkl_file ?? '';
+            find(fetched_pkl_files[$choosen_embedder], o => o.name === $choosen_pkl_key)?.pkl_file ?? '';
     }
 </script>
 
 <Checkbox class="ml-auto" label="Test mode" bind:value={test_mode} />
+<div class="divider"></div>
 
 <div class="flex-gap">
     {#await get_all_available_models($current_training_processed_data_directory) then items}
-        <CustomSelect bind:value={choosen_model} {items} label="model" />
+        <CustomSelect bind:value={$choosen_model} {items} label="model" />
     {/await}
 
-    {#await get_valid_dirs($current_training_processed_data_directory, choosen_model) then all_pkl_files}
-        <CustomSelect bind:value={choosen_embedder} items={Object.keys(all_pkl_files)} label="embedder" />
-        {#if choosen_embedder}
+    {#await get_valid_dirs($current_training_processed_data_directory, $choosen_model) then all_pkl_files}
+        <CustomSelect bind:value={$choosen_embedder} items={Object.keys(all_pkl_files)} label="embedder" />
+        {#if $choosen_embedder}
             <CustomSelect
-                bind:value={choosen_pkl_key}
-                items={all_pkl_files[choosen_embedder].map(f => f.name)}
+                bind:value={$choosen_pkl_key}
+                items={all_pkl_files[$choosen_embedder].map(f => f.name)}
                 label="pre-trained model"
             />
         {/if}
     {/await}
 </div>
 
-<BrowseFile
+{#await get_file_metadata($pretrained_model_file) then res}
+    {#if res}
+        <div class="flex-gap">
+            <div class="text-md bg-info p-1 rounded-lg break-all">{res.basename}</div>
+            <span aria-label={res.filename} data-cooltipz-dir="right" data-cooltipz-size="medium">
+                <HelpCircle size="20" />
+            </span>
+            <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath(res.dirname)}>
+                <span>Open folder</span>
+                <ExternalLink />
+            </button>
+        </div>
+    {:else}
+        <div class="text-sm bg-warning p-1 rounded-lg break-all">Pre-trained model not loaded. Choose from above.</div>
+    {/if}
+{/await}
+
+<div class="divider"></div>
+
+<!-- <BrowseFile
     bind:filename={$pretrained_model_file}
     disabled
     label="Pre-trained model"
     filters={[{ name: 'Model files', extensions: ['pkl'] }]}
-/>
+/> -->
 {#if !test_mode}
     <BrowseFile
         bind:filename={$prediction_file}

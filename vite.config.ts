@@ -58,6 +58,7 @@ export default defineConfig(async () => ({
                         'listen',
                         'open_filepath',
                         'btn_dispatch_event',
+                        'get_file_metadata',
                     ],
                 },
             ],
