@@ -4,6 +4,10 @@
     import Molecule from '$lib/components/Molecule.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import { Checkbox } from '$lib/components';
+    import { current_training_processed_data_directory } from '$pages/03 - load_file/plot-analysis/stores';
+    import CustomSelect from '$lib/components/CustomSelect.svelte';
+    import { find } from 'lodash-es';
+    import { embedder_model_filepath, embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
 
     const predict = async () => {
         const basename = await path.basename($pretrained_model_file);
@@ -27,11 +31,21 @@
             return;
         }
 
+        let embedder_loc: string = '';
+        const embedder = choosen_embedder.split('_with')[0];
+        embedder_loc = $embedder_model_filepath[embedder];
+        if (!embedder_loc) {
+            console.log({ $embedder_model_filepath, choosen_embedder, embedder, embedder_loc });
+            return toast.error('Invalid embedder location');
+        }
+
         if (test_mode) predicted_value = 'Computing...';
         const args = {
             smiles: $smiles,
             pretrained_model_file: $pretrained_model_file,
             prediction_file: test_mode ? null : $prediction_file,
+            embedder_name: embedder,
+            embedder_loc,
         };
         const pyfile = 'training.ml_prediction';
         return { pyfile, args };
@@ -67,17 +81,186 @@
 
     let predicted_value: number | string = '';
     let predicted_value_significance = 2;
-    // $: console.log({ predicted_value_significance });
+
     $: if (predicted_value_significance < 0) predicted_value_significance = 0;
     $: if (predicted_value_significance > 10) predicted_value_significance = 10;
 
     const width = localWritable('ml_prediction_molecular_svg_width', 500);
     const height = localWritable('ml_prediction_molecular_svg_height', 400);
+
+    // let result_names = {} as Record<string, Record<string, { pkl: string; childrens: Record<string, any> }>>;
+
+    const fetch_all_pkl_files = async (dir: string) => {
+        if (!(await fs.exists(dir))) return [];
+        const result_names = {} as Record<string, Record<string, { pkl: string; childrens: Record<string, any> }>>;
+        const fname = await path.basename(dir);
+        result_names[fname] = {};
+
+        const getAllPklFiles = async (
+            directory: string,
+            parentName = '',
+        ): Promise<Array<{ name: string; pkl_file: string }>> => {
+            console.log('Fetching all pkl files from directory');
+            console.log(directory);
+            const files = await fs.readDir(directory);
+            const results: Array<{ name: string; pkl_file: string }> = [];
+
+            // Helper function to process a directory and find pkl files
+            const processDirForPkl = async (dirPath: string, dirName: string) => {
+                const contents = await fs.readDir(dirPath);
+
+                if (!contents.some(f => f.name.endsWith('.results.json'))) return null;
+
+                const datFile = contents.find(f => f.name.endsWith('.dat.json'))?.name;
+                if (!datFile) return null;
+
+                const pklFile = datFile.replace('.dat.json', '.pkl');
+                return {
+                    name: parentName ? `${parentName}: ${dirName}` : dirName,
+                    pkl_file: await path.join(dirPath, pklFile),
+                };
+            };
+
+            const searchSubdir = async (dirPath: string, name: string) => {
+                let results = [] as Array<{ name: string; pkl_file: string }>;
+                if (!(await fs.exists(dirPath))) return results;
+                const subdirs = (await fs.readDir(dirPath)).filter(f => f.isDirectory);
+
+                // Initialize the parent structure if it doesn't exist
+                if (!result_names[fname][name]) {
+                    result_names[fname][name] = { pkl: '', childrens: {} };
+                }
+
+                for (const subdir of subdirs) {
+                    const subdirPath = await path.join(dirPath, subdir.name);
+                    const subdirResult = await processDirForPkl(subdirPath, subdir.name);
+                    if (subdirResult) {
+                        results.push({
+                            ...subdirResult,
+                            name: `${name}: ${subdir.name}`,
+                        });
+
+                        // Initialize subdir structure
+                        result_names[fname][name].childrens[subdir.name] = {
+                            pkl: subdirResult.pkl_file,
+                            childrens: {},
+                        };
+                    }
+                    const subsubdirs = (await fs.readDir(subdirPath)).filter(f => f.isDirectory);
+                    for (const subsubdir of subsubdirs) {
+                        const subsubdirPath = await path.join(subdirPath, subsubdir.name);
+                        const subsubdirResult = await processDirForPkl(subsubdirPath, subsubdir.name);
+                        if (subsubdirResult) {
+                            results.push({
+                                ...subsubdirResult,
+                                name: `${name}: ${subdir.name}: ${subsubdir.name}`,
+                            });
+
+                            // Safely access and update nested structure
+                            const parentChild = result_names[fname][name].childrens[subdir.name];
+                            if (parentChild) {
+                                parentChild.childrens[subsubdir.name] = {
+                                    pkl: subsubdirResult.pkl_file,
+                                    childrens: {},
+                                };
+                            }
+                        }
+                    }
+                }
+                return results;
+            };
+
+            // Process each directory
+            for (const entry of files.filter(f => f.isDirectory)) {
+                const currentPath = await path.join(directory, entry.name);
+
+                // Check main directory
+                const mainDirResult = await processDirForPkl(currentPath, entry.name);
+                if (mainDirResult) {
+                    results.push(mainDirResult);
+
+                    result_names[fname][entry.name] = {
+                        ...result_names[fname][entry.name],
+                        pkl: mainDirResult.pkl_file,
+                        childrens: {},
+                    };
+                }
+
+                // Check processed_subdirs if they exist
+                const processedSubdirsPath = await path.join(currentPath, 'processed_subdirs');
+                const subdir_results = await searchSubdir(processedSubdirsPath, entry.name);
+                results.push(...subdir_results);
+            }
+            return results;
+        };
+        try {
+            const pkl_files = await getAllPklFiles(dir);
+            return pkl_files;
+        } catch (error) {
+            toast.error('Error fetching pkl files: ' + error);
+            return [];
+        }
+    };
+
+    let all_pkl_files = {} as Record<string, { name: string; pkl_file: string }[]>;
+
+    const get_valid_dirs = async (name: Promise<string>, model: string) => {
+        if (!model) return {};
+        choosen_embedder = '';
+        choosen_pkl_key = '';
+        $pretrained_model_file = '';
+        const root_dir = await name;
+        const model_dir = await path.join(root_dir, 'pretrained_models', model);
+        if (!(await fs.exists(model_dir))) return {};
+
+        for (const child of (await fs.readDir(model_dir)).filter(f => f.isDirectory)) {
+            const embeddings_dir = await path.join(model_dir, child.name);
+            const pkl_files = await fetch_all_pkl_files(embeddings_dir);
+            all_pkl_files[child.name.replace('_embeddings', '')] = pkl_files;
+        }
+        // return result_names;
+        return all_pkl_files;
+    };
+
+    const get_all_available_models = async (name: Promise<string>) => {
+        const root_dir = await name;
+        const model_dir = await path.join(root_dir, 'pretrained_models');
+        const all_dirs = (await fs.readDir(model_dir)).filter(f => f.isDirectory).map(f => f.name);
+        return all_dirs;
+    };
+
+    let choosen_model = 'lgbm';
+    let choosen_embedder = 'mol2vec';
+    let choosen_pkl_key = '';
+    // let choosen_pkl_file = '';
+
+    $: if (!isEmpty(all_pkl_files) && choosen_model && choosen_embedder && choosen_pkl_key) {
+        $pretrained_model_file = find(all_pkl_files[choosen_embedder], o => o.name === choosen_pkl_key)?.pkl_file ?? '';
+    }
 </script>
 
 <Checkbox class="ml-auto" label="Test mode" bind:value={test_mode} />
+
+<div class="flex-gap">
+    {#await get_all_available_models($current_training_processed_data_directory) then items}
+        <CustomSelect bind:value={choosen_model} {items} label="model" />
+    {/await}
+
+    {#await get_valid_dirs($current_training_processed_data_directory, choosen_model) then all_pkl_files}
+        <CustomSelect bind:value={choosen_embedder} items={Object.keys(all_pkl_files)} label="embedder" />
+        {#if choosen_embedder}
+            <CustomSelect
+                bind:value={choosen_pkl_key}
+                items={all_pkl_files[choosen_embedder].map(f => f.name)}
+                label="pre-trained model"
+            />
+        {/if}
+    {/await}
+</div>
+
 <BrowseFile
     bind:filename={$pretrained_model_file}
+    disabled
     label="Pre-trained model"
     filters={[{ name: 'Model files', extensions: ['pkl'] }]}
 />
