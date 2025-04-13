@@ -7,15 +7,9 @@
     import { current_training_processed_data_directory } from '$pages/03 - load_file/plot-analysis/stores';
     import CustomSelect from '$lib/components/CustomSelect.svelte';
     import { find } from 'lodash-es';
-    import { embedder_model_filepath, embedding, embeddings } from '$pages/04 - embedd_molecule/stores';
+    import { embedder_model_filepath } from '$pages/04 - embedd_molecule/stores';
 
     const predict = async () => {
-        const basename = await path.basename($pretrained_model_file);
-        if (!basename.split('.')[0]) {
-            toast.error('Invalid pretrained_model filename');
-            return;
-        }
-
         if (!(await fs.exists($pretrained_model_file))) {
             toast.error('pretrained_model file not found');
             return;
@@ -276,7 +270,16 @@
     {#if test_mode}
         <CustomInput class="col-span-3" bind:value={$smiles} label="Enter molecular SMILES" />
     {/if}
-    <Loadingbtn callback={predict} on:result={onResult} subprocess={!test_mode} />
+    <Loadingbtn
+        callback={predict}
+        on:result={onResult}
+        on:close={() => {
+            if (predicted_value === 'Computing...') {
+                predicted_value = '';
+            }
+        }}
+        subprocess={!test_mode}
+    />
 </div>
 
 {#if test_mode}
