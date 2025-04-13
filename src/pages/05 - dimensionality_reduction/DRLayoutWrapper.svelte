@@ -69,7 +69,8 @@
         const append_name = `with_${name.toLowerCase()}_${config_name}`;
         dr_vec_fname = `${original_vec_filename}_${append_name}`;
 
-        loc = await path.join(dir, 'configs');
+        // loc = await path.join(dir, name.toLocaleLowerCase(), 'configs');
+        loc = await path.join(dir, 'dr_param_configs');
         $dr_vector_file[name] = await path.join(dir, `${dr_vec_fname}.npy`);
         vector_file = await path.join(dir, `${original_vec_filename}.npy`);
     };
