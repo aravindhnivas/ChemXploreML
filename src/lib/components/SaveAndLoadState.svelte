@@ -41,6 +41,16 @@
         dispatch('load', { params });
         toast.success('State loaded');
     };
+
+    const save_config = async () => {
+        if (!(await fs.exists(loc))) await fs.mkdir(loc, { recursive: true });
+        filename = filename.replace(unique_ext, '');
+        const saved = await writeJSON(saved_config_file, params);
+        if (!saved) return;
+        await get_all_items_in_loc(loc);
+        use_input = false;
+        dispatch('save', { params });
+    };
 </script>
 
 <div class="flex-gap items-end m-auto border border-solid border-black p-1 rounded">
@@ -76,18 +86,7 @@
         <Download />
         <span>Load</span>
     </button>
-    <button
-        class="btn btn-sm btn-outline"
-        on:click={async () => {
-            if (!(await fs.exists(loc))) await fs.mkdir(loc);
-            filename = filename.replace(unique_ext, '');
-            const saved = await writeJSON(saved_config_file, params);
-            if (!saved) return;
-            await get_all_items_in_loc(loc);
-            use_input = false;
-            dispatch('save', { params });
-        }}
-    >
+    <button class="btn btn-sm btn-outline" on:click={save_config}>
         <Save />
         <span>Save</span>
     </button>
