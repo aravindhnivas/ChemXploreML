@@ -196,10 +196,12 @@
         }
     };
 
-    let all_pkl_files = {} as Record<string, { name: string; pkl_file: string }[]>;
+    let fetched_pkl_files = {} as Record<string, { name: string; pkl_file: string }[]>;
 
     const get_valid_dirs = async (name: Promise<string>, model: string) => {
         if (!model) return {};
+        console.log(`Fetching all pkl files from ${model}`);
+        const all_pkl_files = {} as Record<string, { name: string; pkl_file: string }[]>;
         choosen_embedder = '';
         choosen_pkl_key = '';
         $pretrained_model_file = '';
@@ -212,7 +214,9 @@
             const pkl_files = await fetch_all_pkl_files(embeddings_dir);
             all_pkl_files[child.name.replace('_embeddings', '')] = pkl_files;
         }
+        console.log({ model_dir, all_pkl_files });
         // return result_names;
+        fetched_pkl_files = structuredClone(all_pkl_files);
         return all_pkl_files;
     };
 
@@ -226,10 +230,10 @@
     let choosen_model = 'lgbm';
     let choosen_embedder = 'mol2vec';
     let choosen_pkl_key = '';
-    // let choosen_pkl_file = '';
 
-    $: if (!isEmpty(all_pkl_files) && choosen_model && choosen_embedder && choosen_pkl_key) {
-        $pretrained_model_file = find(all_pkl_files[choosen_embedder], o => o.name === choosen_pkl_key)?.pkl_file ?? '';
+    $: if (!isEmpty(fetched_pkl_files) && choosen_model && choosen_embedder && choosen_pkl_key) {
+        $pretrained_model_file =
+            find(fetched_pkl_files[choosen_embedder], o => o.name === choosen_pkl_key)?.pkl_file ?? '';
     }
 </script>
 
