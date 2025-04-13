@@ -2,7 +2,7 @@ import { current_training_processed_data_directory } from '$pages/03 - load_file
 import { use_dr, active_dr, dr_params_filename } from '$pages/05 - dimensionality_reduction/stores';
 
 export const embeddings_computed = writable(false);
-export const embeddings = ['mol2vec', 'VICGAE'];
+export const embeddings = ['mol2vec', 'VICGAE'] as const;
 export const embedding = localWritable<Embedding>('embedding', 'mol2vec');
 export const embedder_model_filepath = writable<Record<Embedding, string>>({
     mol2vec: '',
