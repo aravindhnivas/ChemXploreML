@@ -44,12 +44,14 @@
         }
     };
 
-    $: if (use_built_in_models) refresh_built_in_models($embedding);
+    onMount(() => {
+        embeddings.forEach(embedding => {
+            $embedder_model_filepath[embedding] = '';
+            refresh_built_in_models(embedding);
+        });
+    });
 
-    // const set_embedd_savefile = async (embedding_name: string) => {
-    //     $embedd_savefile = `${embedding_name}_embeddings`;
-    // };
-    // $: set_embedd_savefile($embedding);
+    $: if (use_built_in_models) refresh_built_in_models($embedding);
 
     let test_mode = false;
     const test_smiles = localWritable('test_smiles', 'CCO');
