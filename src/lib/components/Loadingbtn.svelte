@@ -120,6 +120,7 @@
         } finally {
             if (!subprocess) server_loading = false;
             if (process_count > 0) process_count -= 1;
+            dispatch('close', { pyfile, args });
         }
     };
 
