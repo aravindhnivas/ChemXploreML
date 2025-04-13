@@ -458,7 +458,7 @@
         if (!(await fs.exists(model_dir))) return {};
         let all_pkl_files = {} as Record<string, { name: string; pkl_file: string }[]>;
         for (const child of (await fs.readDir(model_dir)).filter(f => f.isDirectory)) {
-            if (!child.name.endsWith('_embeddings')) continue;
+            // if (!child.name.endsWith('_embeddings')) continue;
             const embeddings_dir = await path.join(model_dir, child.name);
             const pkl_files = await fetch_all_pkl_files(embeddings_dir);
             all_pkl_files[child.name.replace('_embeddings', '')] = pkl_files;
@@ -468,6 +468,7 @@
         Object.keys(result_names).forEach(key => {
             toggle_embedder_plots[key] = false;
         });
+        console.log(result_names);
         return result_names;
     };
 
