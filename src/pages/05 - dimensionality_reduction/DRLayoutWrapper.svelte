@@ -11,7 +11,7 @@
     import { DR_default_params, dr_params_filename, dr_vector_file } from './stores';
     import Checkbox from '$lib/components/Checkbox.svelte';
     import Notification from '$lib/components/Notification.svelte';
-    import { HelpCircle } from 'lucide-svelte/icons';
+    import { HelpCircle, RefreshCcw } from 'lucide-svelte/icons';
 
     export let name: DRNames;
 
@@ -86,6 +86,7 @@
     let scaling = true;
     let saved_config_file = '';
     let refresh_state = false;
+    let refresh_state_inner_file = false;
 </script>
 
 <div class="grid gap-2">
@@ -149,30 +150,49 @@
     <div class="divider"></div>
     {#key refresh_state}
         {#await fs.exists(saved_config_file) then file_exists}
-            {#if file_exists}
-                <Loadingbtn callback={generate_reduced_embeddings} subprocess={true} />
-            {:else}
-                <Loadingbtn callback={generate_reduced_embeddings} subprocess={true} disabled />
+            <Loadingbtn
+                callback={generate_reduced_embeddings}
+                subprocess={true}
+                disabled={!file_exists}
+                on:close={() => {
+                    console.log('close');
+                    refresh_state_inner_file = !refresh_state_inner_file;
+                }}
+            />
+            {#if !file_exists}
                 <Notification
                     message="Please save the config parameter to compute"
                     type="warning"
                     dismissable={false}
                 />
             {/if}
-
-            {#await fs.exists($dr_vector_file[name]) then vec_file_exists}
-                <div class="flex-gap">
-                    <pre
-                        class:bg-success={vec_file_exists}
-                        class:bg-error={!vec_file_exists}
-                        class="text-xs p-1 rounded-md break-words whitespace-normal">
-                    {vec_file_exists ? 'File available' : 'File not available'}
-                </pre>
-                    <span aria-label={$dr_vector_file[name]} data-cooltipz-dir="top" data-cooltipz-size="medium">
-                        <HelpCircle size="20" />
-                    </span>
-                </div>
-            {/await}
+            <div class="flex-gap">
+                <button
+                    class="btn btn-xs btn-square btn-outline join-item"
+                    on:click={async () => (refresh_state_inner_file = !refresh_state_inner_file)}
+                >
+                    <RefreshCcw size="16" />
+                </button>
+                {#key refresh_state_inner_file}
+                    {#await fs.exists($dr_vector_file[name]) then vec_file_exists}
+                        <div class="flex-gap">
+                            <pre
+                                class:bg-success={vec_file_exists}
+                                class:bg-error={!vec_file_exists}
+                                class="text-xs p-1 rounded-md break-words whitespace-normal">
+                                {vec_file_exists ? 'File available' : 'File not available'}
+                            </pre>
+                            <span
+                                aria-label={$dr_vector_file[name]}
+                                data-cooltipz-dir="top"
+                                data-cooltipz-size="medium"
+                            >
+                                <HelpCircle size="20" />
+                            </span>
+                        </div>
+                    {/await}
+                {/key}
+            </div>
         {/await}
     {/key}
 </div>
