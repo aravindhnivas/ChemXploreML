@@ -270,7 +270,7 @@
         {/if}
     {/await}
 </div>
-
+<!-- 
 {#await get_file_metadata($pretrained_model_file) then res}
     {#if res}
         <div class="flex-gap">
@@ -286,7 +286,7 @@
     {:else}
         <div class="text-sm bg-warning p-1 rounded-lg break-all">Pre-trained model not loaded. Choose from above.</div>
     {/if}
-{/await}
+{/await} -->
 
 <div class="divider"></div>
 
