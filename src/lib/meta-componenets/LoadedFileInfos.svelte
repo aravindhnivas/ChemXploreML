@@ -69,12 +69,11 @@
             if (_metadata) metadata = _metadata;
 
             dispatch('refresh', $loaded_files);
-            // return $loaded_files;
         } catch (error) {
-            toast.error(`Error while loading file infos: ${error}`);
             return Promise.reject(error);
         }
     };
+
     $: refresh_data(
         $current_training_data_file,
         $embedd_savefile_path,

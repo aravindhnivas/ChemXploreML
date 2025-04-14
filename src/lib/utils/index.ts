@@ -214,7 +214,6 @@ export const get_file_metadata = async (filename: string | Promise<string>) => {
         filename = await filename;
     }
     if (!filename || filename?.trim() === '') {
-        toast.error('File path is empty');
         return;
     }
     const dirname = await path.dirname(filename);
