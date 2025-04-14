@@ -9,7 +9,7 @@
         current_training_processed_data_directory,
     } from '$pages/03 - load_file/plot-analysis/stores';
     import { embedder_model_filepath } from '$pages/04 - embedd_molecule/stores';
-    import { ExternalLink, HelpCircle } from 'lucide-svelte/icons';
+    import { ExternalLink, HelpCircle, RefreshCcw } from 'lucide-svelte/icons';
     import { find } from 'lodash-es';
     import { training_file } from '$pages/03 - load_file/stores';
 
@@ -239,6 +239,8 @@
         $pretrained_model_file =
             find(fetched_pkl_files[$choosen_embedder], o => o.name === $choosen_pkl_key)?.pkl_file ?? '';
     }
+
+    let refresh_state = false;
 </script>
 
 <div class="flex items-center gap-2 justify-between">
@@ -254,21 +256,26 @@
 </div>
 <div class="divider"></div>
 
-<div class="flex-gap">
-    {#await get_all_available_models($current_training_processed_data_directory) then items}
-        <CustomSelect bind:value={$choosen_model} {items} label="model" />
-    {/await}
+<div class="flex-gap items-end">
+    <button class="btn btn-sm btn-outline" on:click={() => (refresh_state = !refresh_state)}>
+        <RefreshCcw size="20" />
+    </button>
+    {#key refresh_state}
+        {#await get_all_available_models($current_training_processed_data_directory) then items}
+            <CustomSelect bind:value={$choosen_model} {items} label="model" />
+        {/await}
 
-    {#await get_valid_dirs($current_training_processed_data_directory, $choosen_model) then all_pkl_files}
-        <CustomSelect bind:value={$choosen_embedder} items={Object.keys(all_pkl_files)} label="embedder" />
-        {#if $choosen_embedder}
-            <CustomSelect
-                bind:value={$choosen_pkl_key}
-                items={all_pkl_files[$choosen_embedder].map(f => f.name)}
-                label="pre-trained model"
-            />
-        {/if}
-    {/await}
+        {#await get_valid_dirs($current_training_processed_data_directory, $choosen_model) then all_pkl_files}
+            <CustomSelect bind:value={$choosen_embedder} items={Object.keys(all_pkl_files)} label="embedder" />
+            {#if $choosen_embedder}
+                <CustomSelect
+                    bind:value={$choosen_pkl_key}
+                    items={all_pkl_files[$choosen_embedder].map(f => f.name)}
+                    label="pre-trained model"
+                />
+            {/if}
+        {/await}
+    {/key}
 </div>
 <!-- 
 {#await get_file_metadata($pretrained_model_file) then res}
