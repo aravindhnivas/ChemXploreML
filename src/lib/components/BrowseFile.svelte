@@ -1,6 +1,6 @@
 <script lang="ts">
     import { isError } from 'ts-try';
-    import { HelpCircle, ExternalLink } from 'lucide-svelte/icons';
+    import { HelpCircle, ExternalLink, LockKeyhole, UnlockKeyhole } from 'lucide-svelte/icons';
     import type { DialogFilter } from '$lib/utils';
 
     export let disabled = false;
@@ -12,6 +12,7 @@
     export let btn_name = `Browse ${directory ? 'directory' : 'file'}`;
     export let callback: null | ((filename: string) => Promise<void>) = null;
     export let lock: boolean = false;
+    export let enable_lock: boolean = false;
 
     let className = '';
     export { className as class };
@@ -72,6 +73,20 @@
         {/if}
     </div>
     <div class="join">
+        {#if enable_lock}
+            <button
+                class="btn btn-sm btn-outline join-item"
+                on:click={() => {
+                    lock = !lock;
+                }}
+            >
+                {#if lock}
+                    <LockKeyhole size="16" />
+                {:else}
+                    <UnlockKeyhole size="16" />
+                {/if}
+            </button>
+        {/if}
         <button class="btn btn-sm btn-outline join-item" on:click={browse_file} disabled={disabled || lock}>
             {btn_name}
         </button>
