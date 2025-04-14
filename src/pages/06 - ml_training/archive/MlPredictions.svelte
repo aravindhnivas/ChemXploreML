@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Predictions from './Predictions.svelte';
+    import Predictions from '../Predictions.svelte';
     import Analysis from './Analysis.svelte';
     import CustomTabs from '$lib/components/CustomTabs.svelte';
     import { Binary, ChartCandlestick } from 'lucide-svelte/icons';
