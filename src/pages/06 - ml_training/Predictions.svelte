@@ -3,12 +3,11 @@
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import Molecule from '$lib/components/Molecule.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
-    import { Checkbox } from '$lib/components';
+    import { Checkbox, CustomSelect } from '$lib/components';
     import { current_training_processed_data_directory } from '$pages/03 - load_file/plot-analysis/stores';
-    import CustomSelect from '$lib/components/CustomSelect.svelte';
-    import { find } from 'lodash-es';
     import { embedder_model_filepath } from '$pages/04 - embedd_molecule/stores';
     import { ExternalLink, HelpCircle } from 'lucide-svelte/icons';
+    import { find } from 'lodash-es';
 
     const predict = async () => {
         if (!(await fs.exists($pretrained_model_file))) {
