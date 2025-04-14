@@ -20,15 +20,10 @@
         mode: 'all' | 'size_distribution' | 'structural_distribution' | 'elemental_distribution' = 'all',
         force: boolean = false,
     ) => {
-        console.log('MolecularAnalysis', { $filtered_dir });
         const analysis_file = await $current_analysis_file;
-        console.log('Analysis file');
-        console.warn(analysis_file);
-
         return {
             pyfile: 'training.molecular_analysis',
             args: {
-                // filename: $training_file.filename,
                 filename: await $current_training_data_file,
                 filetype: $training_file.filetype,
                 key: $training_file.key,
@@ -45,8 +40,8 @@
 
     let duplicates: number = 0;
     let deduplicated_filename = '';
+
     const onRemoveDuplicatesOnXColumn = (e: CustomEvent) => {
-        // console.log(e.detail);
         const { dataFromPython } = e.detail as {
             dataFromPython: {
                 deduplicated_filename: string;
@@ -68,8 +63,6 @@
     };
 
     const ApplyFilterForMolecularAnalysis = async (filtered_filename: string) => {
-        console.log('ApplyFilterForMolecularAnalysis');
-
         if ($filtered_dir !== 'default') {
             toast.error('Filters can only be applied to the default directory');
             return;
@@ -140,19 +133,22 @@
         const pyfile = 'training.check_duplicates_on_x_column';
         return { pyfile, args };
     };
+
     setContext('MolecularAnalysis', MolecularAnalysis);
     setContext('ApplyFilterForMolecularAnalysis', ApplyFilterForMolecularAnalysis);
 </script>
 
 {#if $index_column_valid}
-    <FetchAnalysisDir />
-    <div class="flex gap-2 m-auto items-end">
-        <Loadingbtn
-            name="Remove duplicates on X column"
-            subprocess={true}
-            callback={() => CheckDuplicatesOnXColumn()}
-            on:result={onRemoveDuplicatesOnXColumn}
-        />
+    <div class="grid gap-2">
+        <FetchAnalysisDir />
+        <div class="flex gap-2 m-auto items-end">
+            <Loadingbtn
+                name="Remove duplicates on X column"
+                subprocess={true}
+                callback={() => CheckDuplicatesOnXColumn()}
+                on:result={onRemoveDuplicatesOnXColumn}
+            />
+        </div>
     </div>
 
     {#if duplicates > 0}
