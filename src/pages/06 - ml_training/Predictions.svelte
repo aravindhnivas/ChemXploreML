@@ -4,10 +4,14 @@
     import Molecule from '$lib/components/Molecule.svelte';
     import CustomInput from '$lib/components/CustomInput.svelte';
     import { Checkbox, CustomSelect } from '$lib/components';
-    import { current_training_processed_data_directory } from '$pages/03 - load_file/plot-analysis/stores';
+    import {
+        current_training_data_file,
+        current_training_processed_data_directory,
+    } from '$pages/03 - load_file/plot-analysis/stores';
     import { embedder_model_filepath } from '$pages/04 - embedd_molecule/stores';
     import { ExternalLink, HelpCircle } from 'lucide-svelte/icons';
     import { find } from 'lodash-es';
+    import { training_file } from '$pages/03 - load_file/stores';
 
     const predict = async () => {
         if (!(await fs.exists($pretrained_model_file))) {
@@ -237,7 +241,17 @@
     }
 </script>
 
-<Checkbox class="ml-auto" label="Test mode" bind:value={test_mode} />
+<div class="flex items-center gap-2 justify-between">
+    <div class="flex-gap">
+        {#await get_file_metadata($current_training_data_file) then value}
+            <pre class="text-sm p-1 rounded-lg bg-base-100">{value?.basename}</pre>
+            <span aria-label={value?.filename} data-cooltipz-dir="bottom" data-cooltipz-size="medium">
+                <HelpCircle size="20" />
+            </span>
+        {/await}
+    </div>
+    <Checkbox class="ml-auto" label="Test mode" bind:value={test_mode} />
+</div>
 <div class="divider"></div>
 
 <div class="flex-gap">
@@ -275,6 +289,8 @@
 {/await}
 
 <div class="divider"></div>
+
+<BrowseFile enable_lock lock bind:filename={$pretrained_model_file} label="pretrained_model_file" />
 
 {#if !test_mode}
     <BrowseFile
