@@ -277,23 +277,6 @@
         {/await}
     {/key}
 </div>
-<!-- 
-{#await get_file_metadata($pretrained_model_file) then res}
-    {#if res}
-        <div class="flex-gap">
-            <div class="text-md bg-info p-1 rounded-lg break-all">{res.basename}</div>
-            <span aria-label={res.filename} data-cooltipz-dir="right" data-cooltipz-size="medium">
-                <HelpCircle size="20" />
-            </span>
-            <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath(res.dirname)}>
-                <span>Open folder</span>
-                <ExternalLink />
-            </button>
-        </div>
-    {:else}
-        <div class="text-sm bg-warning p-1 rounded-lg break-all">Pre-trained model not loaded. Choose from above.</div>
-    {/if}
-{/await} -->
 
 <div class="divider"></div>
 
@@ -307,7 +290,7 @@
     />
 {/if}
 
-<div class="grid grid-cols-5 items-end gap-2">
+<div class="grid grid-cols-5 items-end gap-2" transition:fade>
     {#if test_mode}
         <CustomInput class="col-span-3" bind:value={$smiles} label="Enter molecular SMILES" />
     {/if}

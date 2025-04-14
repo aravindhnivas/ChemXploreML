@@ -127,7 +127,7 @@
     $: loading = server_loading || subprocess_loading || redis_loading;
 </script>
 
-<div class="join {klass}">
+<div class="join {klass}" transition:fade>
     <button
         class="btn btn-sm btn-outline join-item"
         class:btn-disabled={disabled}

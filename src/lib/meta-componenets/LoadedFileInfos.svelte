@@ -111,7 +111,7 @@
 </div>
 
 {#if $all_files_loaded}
-    <div class="grid gap-2 grid-cols-4 items-center">
+    <div class="grid gap-2 grid-cols-4 items-center" transition:fade>
         {#each items as { name, key }}
             {@const { value, valid } = $loaded_files[key]}
             <div>{name}:</div>
