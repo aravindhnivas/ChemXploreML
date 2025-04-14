@@ -1,13 +1,13 @@
 <script lang="ts">
     import PageLayout from '$pages/PageLayout.svelte';
     import MLmodelTrain from './MLmodel/MLmodelTrain.svelte';
-    import MlPredictions from './predictions/MlPredictions.svelte';
+    import Predictions from './Predictions.svelte';
     import type { SvelteComponent } from 'svelte';
 
     const page_name: PAGES = 'MLTraining';
     const child_components: Record<string, typeof SvelteComponent<any>> = {
         ml_model: MLmodelTrain,
-        ml_prediction: MlPredictions,
+        ml_prediction: Predictions,
     };
 </script>
 

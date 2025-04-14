@@ -44,19 +44,19 @@
         await fetch_analysis_dir({ warn: false });
     });
 
-    const get_essential_files = async (name: Promise<string>, tfile: Promise<string>) => {
-        const training_file = await tfile;
-        const analysis_dir = await name;
-        return {
-            analysis_dir,
-            training_file,
-        };
-    };
+    // const get_essential_files = async (name: Promise<string>, tfile: Promise<string>) => {
+    //     const training_file = await tfile;
+    //     const analysis_dir = await name;
+    //     return {
+    //         analysis_dir,
+    //         training_file,
+    //     };
+    // };
 </script>
 
 <!-- <div class="divider"></div> -->
 
-{#await get_essential_files($current_post_analysis_files_directory, $current_training_data_file) then { analysis_dir, training_file }}
+<!-- {#await get_essential_files($current_post_analysis_files_directory, $current_training_data_file) then { analysis_dir, training_file }}
     <div class="grid gap-2">
         <div class="flex-gap">
             <div class="text-sm">Analysis dir:</div>
@@ -70,7 +70,7 @@
             <div class="text-sm">{training_file}</div>
         </div>
     </div>
-{/await}
+{/await} -->
 
 <div class="flex items-end gap-2">
     <div class="flex gap-2 items-end">

@@ -277,12 +277,6 @@
 
 <div class="divider"></div>
 
-<!-- <BrowseFile
-    bind:filename={$pretrained_model_file}
-    disabled
-    label="Pre-trained model"
-    filters={[{ name: 'Model files', extensions: ['pkl'] }]}
-/> -->
 {#if !test_mode}
     <BrowseFile
         bind:filename={$prediction_file}
