@@ -2,7 +2,7 @@
     import { optuna_storage_file } from './stores';
     import CustomPanel from '$lib/components/CustomPanel.svelte';
     import { isObject, isEmpty } from 'lodash-es';
-    import LoadedFileInfos from '$lib/meta-componenets/LoadedFileInfos.svelte';
+    import LoadedFileInfos from '$lib/meta-components/LoadedFileInfos.svelte';
 
     let loaded_files = {} as LoadedInfosFile;
     const get_loaded_files = async (e: CustomEvent) => {

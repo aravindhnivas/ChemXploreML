@@ -25,7 +25,7 @@
         embedder_model_filepath,
         current_embedder_model_filepath,
     } from './stores';
-    import LoadedFileInfos from '$lib/meta-componenets/LoadedFileInfos.svelte';
+    import LoadedFileInfos from '$lib/meta-components/LoadedFileInfos.svelte';
     import { BaseDirectory } from '@tauri-apps/plugin-fs';
     import DownloadModel from './DownloadModel.svelte';
 

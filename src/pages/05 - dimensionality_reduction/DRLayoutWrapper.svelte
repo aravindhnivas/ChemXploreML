@@ -1,6 +1,6 @@
 <script lang="ts">
     import { CustomInput, CustomSelect, Loadingbtn } from '$lib/components';
-    import { loaded_files } from '$lib/meta-componenets/stores';
+    import { loaded_files } from '$lib/meta-components/stores';
     import SaveAndLoadState from '$lib/components/SaveAndLoadState.svelte';
     import {
         current_embedder_model_filepath,

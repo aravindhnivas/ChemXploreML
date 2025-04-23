@@ -16,7 +16,7 @@
     import CustomSelect from '$lib/components/CustomSelect.svelte';
     import { CustomInput, Loadingbtn } from '$lib/components';
     import FetchAnalysisDir from './FetchAnalysisDir.svelte';
-    import LoadedFileInfos from '$lib/meta-componenets/LoadedFileInfos.svelte';
+    import LoadedFileInfos from '$lib/meta-components/LoadedFileInfos.svelte';
     import { Download, Save } from 'lucide-svelte/icons';
     import Checkbox from '$lib/components/Checkbox.svelte';
 
