@@ -40,7 +40,11 @@ pub fn run() {
         //     .max_file_size(50_000 /* bytes */)
         //     .build()
         // )
-        .plugin(tauri_plugin_log::Builder::new().build())
+        .plugin(
+            tauri_plugin_log::Builder::new()
+            .level(log::LevelFilter::Info)
+            .build()
+        )
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_os::init())
