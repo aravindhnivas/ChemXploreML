@@ -8,5 +8,6 @@
   },
   "search.exclude": {
     "**/node_modules": true
-  }
+  },
+  "postman.settings.dotenv-detection-notification-visibility": false
 }
