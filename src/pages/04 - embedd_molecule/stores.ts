@@ -2,12 +2,23 @@ import { current_training_processed_data_directory } from '$pages/03 - load_file
 import { use_dr, active_dr, dr_params_filename } from '$pages/05 - dimensionality_reduction/stores';
 
 export const embeddings_computed = writable(false);
-export const embeddings = ['mol2vec', 'VICGAE'] as const;
+export const embeddings = ['mol2vec', 'VICGAE', 'MoLFormer-XL-both-10pct', 'ChemBERTa-zinc-base-v1'] as const;
 export const embedding = localWritable<Embedding>('embedding', 'mol2vec');
 export const embedder_model_filepath = writable<Record<Embedding, string>>({
     mol2vec: '',
     VICGAE: '',
+    'MoLFormer-XL-both-10pct': '',
+    'ChemBERTa-zinc-base-v1': '',
 });
+
+// some embedder models are pkl but but some are hugginface models so create a file path for each embedder
+export const embedder_model_filepath_type = writable<Record<Embedding, 'pkl' | 'huggingface'>>({
+    mol2vec: 'pkl',
+    VICGAE: 'pkl',
+    'MoLFormer-XL-both-10pct': 'huggingface',
+    'ChemBERTa-zinc-base-v1': 'huggingface',
+});
+
 export const current_embedder_model_filepath = derived(
     [embedding, embedder_model_filepath],
     ([$embedding, $embedder_model_filepath]) => {
@@ -53,4 +64,6 @@ export const processed_df = derived(
 export const embedding_file_download_url = writable<Record<Embedding, string>>({
     mol2vec: 'https://drive.google.com/uc?export=download&id=1Tx12wmiNdFHKGe3uSJn6IPwCnx18eE6O',
     VICGAE: 'https://drive.google.com/uc?export=download&id=17peb0K6tGP0HbLG83I41ZJ1-wYVjEvmm',
+    'MoLFormer-XL-both-10pct': '',
+    'ChemBERTa-zinc-base-v1': '',
 });

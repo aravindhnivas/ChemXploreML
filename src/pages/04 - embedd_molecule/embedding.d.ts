@@ -15,13 +15,7 @@ interface EmbeddingResult {
     computed_time: string;
 }
 
-type Embedding = 'mol2vec' | 'VICGAE';
-// training_file: { value: '', valid: false, basename: '' },
-//                 embedded_file: { value: '', valid: false, basename: '' },
-//                 columnX: { value: '', valid: false, basename: '' },
-//                 columnY: { value: '', valid: false, basename: '' },
-//                 final_processed_file: { value: '', valid: false, basename: '' },
-
+type Embedding = 'mol2vec' | 'VICGAE' | 'MoLFormer-XL-both-10pct' | 'ChemBERTa-zinc-base-v1';
 type LoadedFileNames = 'training_file' | 'embedded_file' | 'columnX' | 'columnY' | 'final_processed_file';
 type LoadedInfosFile = Record<LoadedFileNames, { value: string; valid: boolean; basename: string }>;
 

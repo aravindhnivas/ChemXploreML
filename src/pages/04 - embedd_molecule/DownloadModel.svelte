@@ -1,17 +1,28 @@
 <script lang="ts">
     import { Download } from 'lucide-svelte/icons';
-    import { embedding, embedding_file_download_url, embedder_model_filepath } from './stores';
+    import {
+        embedding,
+        embedding_file_download_url,
+        // embedder_model_filepath,
+        current_embedder_model_filepath,
+        embedder_model_filepath_type,
+    } from './stores';
 
     export let progress: number = 0;
     export let downloading: boolean = false;
 
     async function startDownload() {
         if (downloading) return;
+        if (!$embedding_file_download_url[$embedding]) return;
+
         downloading = true;
         progress = 0;
 
-        const embedding_models_dir = await path.join(await path.appLocalDataDir(), 'embedding_models');
-        const model_file = await path.join(embedding_models_dir, $embedding + '.pkl');
+        let model_file = $current_embedder_model_filepath;
+        if ($embedder_model_filepath_type[$embedding] === 'huggingface') {
+            model_file += '.zip';
+        }
+
         const cmd = shell.Command.create('curl', [
             '-L',
             $embedding_file_download_url[$embedding],
@@ -38,7 +49,7 @@
                 progress = parseFloat(_progress[1]);
                 if (progress >= 100) {
                     downloading = false;
-                    $embedder_model_filepath[$embedding] = model_file;
+                    // $embedder_model_filepath[$embedding] = model_file;
                     console.log('Download complete');
                 }
             }

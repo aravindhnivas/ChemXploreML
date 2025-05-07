@@ -24,6 +24,7 @@
         embeddings_computed,
         embedder_model_filepath,
         current_embedder_model_filepath,
+        embedder_model_filepath_type,
     } from './stores';
     import LoadedFileInfos from '$lib/meta-components/LoadedFileInfos.svelte';
     import { BaseDirectory } from '@tauri-apps/plugin-fs';
@@ -36,12 +37,11 @@
         if (!(await fs.exists(embedding_models))) {
             await fs.mkdir('embedding_models', { baseDir: BaseDirectory.AppLocalData, recursive: true });
         }
-
-        const model_file = await path.join(embedding_models, `${embedder}.pkl`);
-
-        if (await fs.exists(model_file)) {
-            $embedder_model_filepath[embedder] = model_file;
+        let model_file = await path.join(embedding_models, `${embedder}`);
+        if ($embedder_model_filepath_type[embedder] === 'pkl') {
+            model_file += '.pkl';
         }
+        $embedder_model_filepath[embedder] = model_file;
     };
 
     onMount(() => {
@@ -93,7 +93,8 @@
         dataFromPython[$embedding] = null;
 
         $embeddings_computed = false;
-        const pyfile = 'training.embedd_data';
+        // const pyfile = 'training.embedd_data';
+        const pyfile = 'embedder.vectorize_molecules';
         const final_training_file = await $current_training_data_file;
         return {
             pyfile,
@@ -178,7 +179,6 @@
     <CustomSelect label="Choose embedder" bind:value={$embedding} items={embeddings} />
     <Loadingbtn callback={embedd_data} subprocess={!test_mode} on:result={onResult} />
 </div>
-<!-- <Checkbox check="checkbox" label="use_built_in_models" bind:value={use_built_in_models} /> -->
 
 {#if use_built_in_models}
     {#await fs.exists($current_embedder_model_filepath) then file_exists}
@@ -202,11 +202,7 @@
 
 {#if test_mode}
     <div class="grid gap-2">
-        <!-- <div class="grid grid-cols-[auto_auto_1fr_auto] items-end gap-2"> -->
         <CustomInput label="Enter SMILES" bind:value={$test_smiles} placeholder="Enter SMILES" />
-        <!-- <Loadingbtn callback={embedd_data} on:result={onResult} /> -->
-        <!-- </div> -->
-
         <div class="grid items-center gap-1 overflow-auto">
             <Molecule bind:smiles={$test_smiles} show_controls={true} />
             <div>
@@ -220,11 +216,6 @@
             </div>
         </div>
     </div>
-    <!-- {:else} -->
-    <!-- <div class="flex gap-2 items-end"> -->
-    <!-- <CustomInput label="Embeddings filename" bind:value={$embedd_savefile} lock={true} /> -->
-    <!-- <Loadingbtn callback={embedd_data} subprocess={true} on:result={onResult} /> -->
-    <!-- </div> -->
 {/if}
 
 {#if !test_mode}
