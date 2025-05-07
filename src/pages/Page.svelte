@@ -75,7 +75,7 @@
                                 {#if show_sidebar}
                                     {name}
                                 {:else if !icon}
-                                    {name.slice(0, 2)}
+                                    {name.slice(0, 5)}{name.length > 5 ? '...' : ''}
                                 {/if}
                             </span>
                         </li>
