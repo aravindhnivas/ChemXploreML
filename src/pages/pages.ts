@@ -13,8 +13,8 @@ import {
     WalletCards,
     Info,
     Scale,
-    FileText,
-    ChartBar,
+    Library,
+    ChartScatter,
 } from 'lucide-svelte/icons';
 
 export const navigationConfig = writable<NavigationConfig>({
@@ -44,14 +44,14 @@ export const navigationConfig = writable<NavigationConfig>({
             {
                 name: 'Load',
                 id: 'load_data',
-                icon: FileText,
+                icon: MonitorDown,
                 title: 'Load file',
                 description: 'Upload and parse molecule datasets (in smiles) for processing.',
             },
             {
                 name: 'Analyse',
                 id: 'analyse_data',
-                icon: ChartBar,
+                icon: ChartScatter,
                 title: 'Analyse loaded file',
                 description: 'View summary statistics and initial insights from your dataset.',
             },
@@ -77,6 +77,7 @@ export const navigationConfig = writable<NavigationConfig>({
                 id: 'metadata_info',
                 title: 'Dimensionality Reduction',
                 description: 'Choose a method.',
+                icon: Library,
             },
             {
                 name: 'PCA',
