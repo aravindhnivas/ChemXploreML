@@ -10,15 +10,16 @@
 {#if data}
     {@const { invalid_smiles, saved_file } = data}
 
-    <button class="btn btn-sm btn-error w-max ml-auto" on:click={() => (data = undefined)}>X</button>
     <div class=" flex flex-col gap-1">
-        {#if saved_file}
-            <div role="alert" class="alert alert-info p-2">
-                <CheckCheck />
-                <span class="text-sm">(Computed in {computed_time}) File saved to: {saved_file}</span>
-            </div>
-        {/if}
-
+        <div class="flex-gap">
+            {#if saved_file}
+                <div role="alert" class="alert alert-info p-2">
+                    <CheckCheck />
+                    <span class="text-sm">(Computed in {computed_time}) File saved to: {saved_file}</span>
+                </div>
+            {/if}
+            <button class="btn btn-sm btn-error w-max ml-auto" on:click={() => (data = undefined)}>X</button>
+        </div>
         {#if invalid_smiles.length > 0}
             {@const invalid_smiles_indexed = invalid_smiles.map((smiles, ind) => ({ smiles, ind }))}
 
