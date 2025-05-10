@@ -91,7 +91,7 @@
         },
         {
           "args": true,
-          "cmd": "/Users/aravindhnivas/Documents/GitHub/umdapy/scripts/dist/umdapy/umdapy",
+          "cmd": "/Volumes/DataDock2TB/Documents/GitHub/umdapy/scripts/dist/umdapy/umdapy",
           "name": "umdapy-dev",
           "sidecar": false
         },
