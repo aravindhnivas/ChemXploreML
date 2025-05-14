@@ -7,8 +7,12 @@
     import PreModal from '$utils/PreModal.svelte';
     import { typeSafeObjectKeys } from '$lib/utils';
     import { active_page_id, navigationConfig } from '$pages/pages';
+    import type { Icon } from 'lucide-svelte';
 
-    let nav_tabs: { tab: string; component: any; id: string }[] = [];
+    // let nav_tabs: { tab: string; component: any; id: string }[] = [];
+    // component is lucide-svelte icon
+
+    let nav_tabs: { tab: string; component: typeof Icon; id: string }[] = [];
 
     Object.values($navigationConfig).forEach(value => {
         const { name, icon, id } = value;

@@ -136,6 +136,9 @@
             placeholder="Browse Directory"
             bind:value={filelocation}
             on:change={async () => {
+                if (!(await fs.exists(filelocation))) {
+                    fname = '';
+                }
                 filename = await path.join(filelocation, fname);
             }}
             autocomplete="off"
@@ -163,22 +166,32 @@
 </div>
 
 <div class="flex gap-1 items-end">
-    <CustomSelect label="where" bind:value={rows.where} items={['head', 'tail']} />
-    <CustomInput bind:value={rows.value} label="# Rows" type="number" max={rows.max} on:change={() => load_data()} />
-    <Checkbox bind:value={use_dask} label="Use dask" check="checkbox" />
-    <Loadingbtn
-        bind:btn={load_btn}
-        bind:loading
-        name="load file"
-        callback={load_data}
-        on:result={e => {
-            console.log(e.detail);
-            const { dataFromPython } = e.detail;
-            data = dataFromPython;
-            dispatch('load', data);
-            toast.success(`${filename} loaded successfully`);
-        }}
-    />
+    {#await fs.exists(filename) then file_exists}
+        {#if file_exists}
+            <CustomSelect label="where" bind:value={rows.where} items={['head', 'tail']} />
+            <CustomInput
+                bind:value={rows.value}
+                label="# Rows"
+                type="number"
+                max={rows.max}
+                on:change={() => load_data()}
+            />
+            <Checkbox bind:value={use_dask} label="Use dask" check="checkbox" />
+            <Loadingbtn
+                bind:btn={load_btn}
+                bind:loading
+                name="load file"
+                callback={load_data}
+                on:result={e => {
+                    console.log(e.detail);
+                    const { dataFromPython } = e.detail;
+                    data = dataFromPython;
+                    dispatch('load', data);
+                    toast.success(`${filename} loaded successfully`);
+                }}
+            />
+        {/if}
+    {/await}
     <slot name="btn-row"></slot>
 </div>
 
