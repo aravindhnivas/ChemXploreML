@@ -4,7 +4,8 @@
     import { ChevronRight, ChevronLeft } from 'lucide-svelte/icons';
 
     export let page_name: PAGES = 'Home';
-    export let pane_size = 20;
+    const default_pane_size = 15;
+    export let pane_size = default_pane_size;
     export let pane_min_size = 5;
     export let pane_max_size = 20;
 
@@ -25,7 +26,7 @@
 
     let show_sidebar = false;
     const toggle_sidebar = () => {
-        pane_size = show_sidebar ? pane_min_size : 20;
+        pane_size = show_sidebar ? pane_min_size : default_pane_size;
     };
     onMount(() => {
         pane_size = pane_min_size;
