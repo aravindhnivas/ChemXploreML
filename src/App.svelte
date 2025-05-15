@@ -92,7 +92,6 @@
             {#if name in pages}
                 <svelte:component this={pages[name]} />
             {/if}
-            <!-- {name} - -->
         {/each}
     </main>
     <footer class="border-t border-t-black"><Footer /></footer>
