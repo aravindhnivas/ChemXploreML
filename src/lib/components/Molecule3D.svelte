@@ -124,7 +124,6 @@
 
     let optimized_pdb = '';
     let optimize_btn: HTMLButtonElement | undefined = undefined;
-    let optimized = false;
 
     const optimize_3d_structure = async () => {
         if (!smiles) return toast.error('Please provide a SMILES string');
@@ -138,7 +137,6 @@
         if (!e.detail) return;
         const { dataFromPython } = e.detail;
         optimized_pdb = dataFromPython.optimized_pdb;
-        optimized = true;
     };
 </script>
 
@@ -146,8 +144,8 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={() => {
+            if (!optimized_pdb) optimize_btn?.click();
             reset_structure = !reset_structure;
-            // optimized_pdb = '';
         }}
     >
         <span>Structure</span>
