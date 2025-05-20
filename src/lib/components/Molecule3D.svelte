@@ -147,7 +147,7 @@
         class="btn btn-sm btn-outline"
         on:click={() => {
             reset_structure = !reset_structure;
-            optimized_pdb = '';
+            // optimized_pdb = '';
         }}
     >
         <span>Structure</span>
