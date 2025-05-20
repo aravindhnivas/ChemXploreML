@@ -1,11 +1,11 @@
 <script lang="ts">
     import { RotateCcw } from 'lucide-svelte/icons';
     import { Stage } from 'ngl';
+    import Loadingbtn from './Loadingbtn.svelte';
 
     export let smiles = '';
     export let width = 700;
     export let height = 400;
-    export let optimized_pdb = '';
 
     let stage: Stage | null = null;
     const init_ngl = (node: HTMLDivElement) => {
@@ -121,6 +121,25 @@
     }
 
     let reset_structure = false;
+
+    let optimized_pdb = '';
+    let optimize_btn: HTMLButtonElement | undefined = undefined;
+    let optimized = false;
+
+    const optimize_3d_structure = async () => {
+        if (!smiles) return toast.error('Please provide a SMILES string');
+        return {
+            pyfile: 'molecule_analysis.optimize_3d_structure',
+            args: { smiles },
+        };
+    };
+
+    const on_optimize_result = (e: CustomEvent) => {
+        if (!e.detail) return;
+        const { dataFromPython } = e.detail;
+        optimized_pdb = dataFromPython.optimized_pdb;
+        optimized = true;
+    };
 </script>
 
 <div class="flex">
@@ -140,8 +159,16 @@
     <div use:init_ngl></div>
 {/key}
 
-{#if optimized_pdb}
-    <span class="badge badge-sm badge-success">Optimized Structure</span>
-{:else}
-    <span class="badge badge-sm badge-error">Not Optimized</span>
-{/if}
+<div class="flex-gap m-auto">
+    <Loadingbtn
+        bind:btn={optimize_btn}
+        name="Optimize-3D"
+        callback={optimize_3d_structure}
+        on:result={on_optimize_result}
+    />
+    {#if optimized_pdb}
+        <span class="badge badge-sm badge-success">Optimized</span>
+    {:else}
+        <span class="badge badge-sm badge-error">Not Optimized</span>
+    {/if}
+</div>
