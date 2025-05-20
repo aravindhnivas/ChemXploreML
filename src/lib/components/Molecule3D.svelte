@@ -5,6 +5,7 @@
     export let smiles = '';
     export let width = 700;
     export let height = 400;
+    export let optimized_pdb = '';
 
     let stage: Stage | null = null;
     const init_ngl = (node: HTMLDivElement) => {
@@ -17,27 +18,38 @@
             backgroundColor: 'white',
             tooltip: false,
         });
-
-        load_3d_structure(smiles);
+        // load_3d_structure(smiles);
     };
 
-    const load_3d_structure = async (smiles: string) => {
+    const load_3d_structure = async (smiles: string, optimized_pdb: string = '') => {
         if (!window.RDKit) return toast.error('RDKit not loaded.');
         if (!stage) {
             toast.error('NGL Stage not initialized.');
             return;
         }
-
         if (!smiles) return;
-
+        // console.warn('Loading structure...');
         const mol = window.RDKit.get_mol(smiles);
         if (!mol) return;
 
+        // mol.add_hs();
         stage.removeAllComponents();
 
         try {
-            const mol_block = mol.get_v3Kmolblock();
-            const component = await stage.loadFile(new Blob([mol_block], { type: 'chemical/x-mol' }), { ext: 'mol' });
+            let component;
+            if (optimized_pdb) {
+                console.warn('Loading optimized PDB...');
+                console.log({ optimized_pdb });
+                component = await stage.loadFile(new Blob([optimized_pdb], { type: 'chemical/x-pdb' }), { ext: 'pdb' });
+            } else {
+                console.warn('Loading original MOL...', { optimized_pdb });
+                const mol_block = mol.get_v3Kmolblock();
+                component = await stage.loadFile(new Blob([mol_block], { type: 'chemical/x-mol' }), { ext: 'mol' });
+            }
+
+            // const mol_block = mol.get_v3Kmolblock();
+            // const component = await stage.loadFile(new Blob([mol_block], { type: 'chemical/x-mol' }), { ext: 'mol' });
+
             if (!component) {
                 toast.error('Failed to load component.');
                 return;
@@ -59,7 +71,7 @@
 
             console.log(`Successfully loaded and centered structure for ${smiles}.`);
         } catch (error) {
-            toast.error('Failed to load structure.');
+            toast.error('Failed to load structure. ' + error);
             stage.removeAllComponents();
         }
     };
@@ -92,7 +104,6 @@
 
     onMount(async () => {
         window.addEventListener('resize', handleResize);
-        if (window.RDKit) load_3d_structure(smiles);
     });
 
     onDestroy(() => {
@@ -105,7 +116,7 @@
     });
 
     $: if (stage) {
-        load_3d_structure(smiles);
+        load_3d_structure(smiles, optimized_pdb);
         stage.setSize(`${width}px`, `${height}px`);
     }
 
@@ -113,7 +124,13 @@
 </script>
 
 <div class="flex">
-    <button class="btn btn-sm btn-outline" on:click={() => (reset_structure = !reset_structure)}>
+    <button
+        class="btn btn-sm btn-outline"
+        on:click={() => {
+            reset_structure = !reset_structure;
+            optimized_pdb = '';
+        }}
+    >
         <span>Structure</span>
         <RotateCcw size="20" />
     </button>

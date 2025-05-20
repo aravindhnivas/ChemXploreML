@@ -7,8 +7,9 @@
     export let smiles = '';
     export let width = 700;
     export let height = 400;
-    export let show_controls = true;
+    export let show_controls = false;
     export let show_3d = true;
+    export let optimized_pdb = '';
 
     $: drawer = new SmilesDrawer.SvgDrawer({ width, height });
     let svgElement: SVGElement;
@@ -66,7 +67,7 @@
         </div>
     {/if}
     {#if show_3d}
-        <Molecule3D bind:smiles bind:width bind:height />
+        <Molecule3D bind:smiles bind:width bind:height {optimized_pdb} />
     {:else}
         <div class="flex-center rounded-1">
             <svg

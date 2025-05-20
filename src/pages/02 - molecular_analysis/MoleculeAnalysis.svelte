@@ -5,7 +5,7 @@
     import Chip, { Set, Text } from '@smui/chips';
     import PropertiesBox from './PropertiesBox.svelte';
 
-    let smiles = 'CCO';
+    let smiles = 'C1=CC2C3C1C23';
 
     const all_properties = [
         'basic_properties',
@@ -24,7 +24,7 @@
         if (!smiles) return toast.error('Please provide a SMILES string');
         // console.log('Analyse', smiles);
         return {
-            pyfile: 'training.molecular_analysis_single_mode',
+            pyfile: 'molecule_analysis.generate_analysis',
             args: {
                 smiles,
             },
@@ -37,6 +37,25 @@
         full_analysis = dataFromPython.full_analysis;
     };
 
+    let optimized_pdb = '';
+    let optimize_btn: HTMLButtonElement | undefined = undefined;
+    let optimized = false;
+
+    const optimize_3d_structure = async () => {
+        if (!smiles) return toast.error('Please provide a SMILES string');
+        return {
+            pyfile: 'molecule_analysis.optimize_3d_structure',
+            args: { smiles },
+        };
+    };
+
+    const on_optimize_result = (e: CustomEvent) => {
+        if (!e.detail) return;
+        const { dataFromPython } = e.detail;
+        optimized_pdb = dataFromPython.optimized_pdb;
+        optimized = true;
+    };
+
     let compute_btn: HTMLButtonElement | undefined = undefined;
 </script>
 
@@ -46,16 +65,23 @@
         bind:value={smiles}
         on:change={() => {
             if (!smiles) return;
+            optimized = false;
             compute_btn?.click();
+            optimize_btn?.click();
         }}
     />
-
-    <Molecule bind:smiles show_controls={false} show_3d={true} />
+    <Molecule bind:smiles {optimized_pdb} />
 </div>
 
 <div class="divider"></div>
 <div class="m-auto">
     <Loadingbtn bind:btn={compute_btn} name="Analyse" callback={compute_molecular_analysis} on:result={onResult} />
+    <Loadingbtn
+        bind:btn={optimize_btn}
+        name="Optimize"
+        callback={optimize_3d_structure}
+        on:result={on_optimize_result}
+    />
 </div>
 <div class="divider"></div>
 
