@@ -135,6 +135,13 @@
         <RotateCcw size="20" />
     </button>
 </div>
+
 {#key reset_structure}
     <div use:init_ngl></div>
 {/key}
+
+{#if optimized_pdb}
+    <span class="badge badge-sm badge-success">Optimized Structure</span>
+{:else}
+    <span class="badge badge-sm badge-error">Not Optimized</span>
+{/if}
