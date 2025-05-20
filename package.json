@@ -50,6 +50,7 @@
     "hover.css": "^2.3.2",
     "ldbutton": "^2.0.5",
     "lodash-es": "^4.17.21",
+    "ngl": "^2.4.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-svelte": "^3.4.0",

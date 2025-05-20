@@ -2,9 +2,22 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+        <link rel="icon" type="image/png" href="/icons/icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ChemXploreML</title>
+        <script src="/lib/rdkit/RDKit_minimal.js"></script>
+        <script>
+            window
+                .initRDKitModule()
+                .then(function (RDKit) {
+                    console.log('RDKit version: ' + RDKit.version());
+                    window.RDKit = RDKit;
+                    console.warn('RDKit loaded');
+                })
+                .catch(e => {
+                    console.error('Error loading RDKit:', e);
+                });
+        </script>
     </head>
 
     <body>

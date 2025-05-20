@@ -50,7 +50,7 @@
         }}
     />
 
-    <Molecule bind:smiles show_controls={false} />
+    <Molecule bind:smiles show_controls={false} show_3d={true} />
 </div>
 
 <div class="divider"></div>

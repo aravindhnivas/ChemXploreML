@@ -1,5 +1,6 @@
-onlyBuiltDependencies:
-  - esbuild
-  - svelte-preprocess
 packages:
   - .
+onlyBuiltDependencies:
+  - '@scarf/scarf'
+  - esbuild
+  - svelte-preprocess

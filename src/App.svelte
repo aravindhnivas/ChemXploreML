@@ -9,12 +9,9 @@
     import { active_page_id, navigationConfig } from '$pages/pages';
     import type { Icon } from 'lucide-svelte';
 
-    // let nav_tabs: { tab: string; component: any; id: string }[] = [];
-    // component is lucide-svelte icon
-
     let nav_tabs: { tab: string; component: typeof Icon; id: string }[] = [];
 
-    Object.values($navigationConfig).forEach(value => {
+    Object.values($navigationConfig as Record<string, NavigationPage>).forEach(value => {
         const { name, icon, id } = value;
         nav_tabs.push({ tab: name, component: icon, id });
     });
@@ -65,6 +62,7 @@
 
 <Toaster position="bottom-left" richColors />
 <PreModal />
+
 <div class="parent w-full h-full">
     <header class="">
         <div role="tablist" class="tabs tabs-sm tabs-boxed w-full rounded-none gap-2">
