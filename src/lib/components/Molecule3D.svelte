@@ -27,11 +27,9 @@
             return;
         }
         if (!smiles) return;
-        // console.warn('Loading structure...');
         const mol = window.RDKit.get_mol(smiles);
         if (!mol) return;
 
-        // mol.add_hs();
         stage.removeAllComponents();
 
         try {
@@ -52,12 +50,7 @@
             }
 
             console.log('Structure loaded. Applying representation and centering...');
-            component.addRepresentation('ball+stick', {
-                // Optional: Customize representation settings here
-                // color: 'element',
-                // radiusScale: 1.5
-            });
-            // component.removeAllRepresentations();
+            component.addRepresentation('ball+stick', {});
 
             stage.handleResize();
 
