@@ -2,12 +2,15 @@
     import { RotateCcw } from 'lucide-svelte/icons';
     import { Stage } from 'ngl';
     import Loadingbtn from './Loadingbtn.svelte';
+    import type { Component } from 'ngl';
 
     export let smiles = '';
     export let width = 700;
     export let height = 400;
 
     let stage: Stage | null = null;
+    let component: Component | void;
+
     const init_ngl = (node: HTMLDivElement) => {
         console.log('Initializing NGL Stage...');
         if (stage) {
@@ -31,9 +34,9 @@
         if (!mol) return toast.error('Failed to get molecule.');
 
         stage.removeAllComponents();
+        component?.removeAllRepresentations();
 
         try {
-            let component;
             if (optimized_pdb) {
                 console.warn('Loading optimized PDB...');
                 console.log({ optimized_pdb });
@@ -51,7 +54,6 @@
 
             console.log('Structure loaded. Applying representation and centering...');
             component.addRepresentation('ball+stick', {});
-
             stage.handleResize();
 
             component.autoView();
@@ -103,8 +105,8 @@
 
     $: stage && load_3d_structure(smiles, optimized_pdb);
     $: stage?.setSize(`${width}px`, `${height}px`);
+    $: smiles && optimize_btn?.click();
 
-    let reset_structure = false;
     let optimized_pdb = '';
     let optimize_btn: HTMLButtonElement | undefined = undefined;
 
@@ -127,8 +129,8 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={() => {
-            if (!optimized_pdb) optimize_btn?.click();
-            reset_structure = !reset_structure;
+            optimized_pdb = '';
+            optimize_btn?.click();
         }}
     >
         <span>Structure</span>
@@ -136,9 +138,7 @@
     </button>
 </div>
 
-{#key reset_structure}
-    <div style="cursor: pointer;" use:init_ngl></div>
-{/key}
+<div style="cursor: pointer;" use:init_ngl></div>
 
 <div class="flex-gap">
     {#if optimized_pdb}
