@@ -26,9 +26,9 @@
             toast.error('NGL Stage not initialized.');
             return;
         }
-        if (!smiles) return;
+        if (!smiles) return toast.error('No SMILES provided.');
         const mol = window.RDKit.get_mol(smiles);
-        if (!mol) return;
+        if (!mol) return toast.error('Failed to get molecule.');
 
         stage.removeAllComponents();
 
@@ -101,13 +101,10 @@
         window.removeEventListener('resize', handleResize);
     });
 
-    $: if (stage) {
-        load_3d_structure(smiles, optimized_pdb);
-        stage.setSize(`${width}px`, `${height}px`);
-    }
+    $: stage && load_3d_structure(smiles, optimized_pdb);
+    $: stage?.setSize(`${width}px`, `${height}px`);
 
     let reset_structure = false;
-
     let optimized_pdb = '';
     let optimize_btn: HTMLButtonElement | undefined = undefined;
 
