@@ -5,7 +5,7 @@
     import Chip, { Set, Text } from '@smui/chips';
     import PropertiesBox from './PropertiesBox.svelte';
 
-    let smiles = 'C1=CC2C3C1C23';
+    let smiles = 'CCO';
 
     const all_properties = [
         'basic_properties',

@@ -157,16 +157,17 @@
     <div use:init_ngl></div>
 {/key}
 
-<div class="flex-gap m-auto">
+<div class="flex-gap">
+    {#if optimized_pdb}
+        <span class="badge badge-sm badge-success">Optimized</span>
+    {:else}
+        <span class="badge badge-sm badge-error">Not Optimized</span>
+    {/if}
+
     <Loadingbtn
         bind:btn={optimize_btn}
         name="Optimize-3D"
         callback={optimize_3d_structure}
         on:result={on_optimize_result}
     />
-    {#if optimized_pdb}
-        <span class="badge badge-sm badge-success">Optimized</span>
-    {:else}
-        <span class="badge badge-sm badge-error">Not Optimized</span>
-    {/if}
 </div>
