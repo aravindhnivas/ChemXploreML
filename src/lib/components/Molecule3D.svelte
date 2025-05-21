@@ -18,7 +18,6 @@
             backgroundColor: 'white',
             tooltip: false,
         });
-        // load_3d_structure(smiles);
     };
 
     const load_3d_structure = async (smiles: string, optimized_pdb: string = '') => {
@@ -47,9 +46,6 @@
                 component = await stage.loadFile(new Blob([mol_block], { type: 'chemical/x-mol' }), { ext: 'mol' });
             }
 
-            // const mol_block = mol.get_v3Kmolblock();
-            // const component = await stage.loadFile(new Blob([mol_block], { type: 'chemical/x-mol' }), { ext: 'mol' });
-
             if (!component) {
                 toast.error('Failed to load component.');
                 return;
@@ -76,7 +72,6 @@
         }
     };
 
-    // Debounce function to limit resize calls
     function debounce(func: Function, wait: number) {
         let timeout: number | undefined;
         return function executedFunction(...args: any[]) {
@@ -89,12 +84,10 @@
         };
     }
 
-    // Handle viewport resize
     const handleResize = debounce(() => {
         if (stage) {
             console.log('Handling resize...');
             stage.handleResize();
-            // Optional: Recenter the first component if it exists
             const comp = stage.compList[0];
             if (comp) {
                 comp.autoView(100); // Re-center smoothly
@@ -154,7 +147,7 @@
 </div>
 
 {#key reset_structure}
-    <div use:init_ngl></div>
+    <div style="cursor: pointer;" use:init_ngl></div>
 {/key}
 
 <div class="flex-gap">
