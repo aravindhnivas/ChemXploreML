@@ -45,7 +45,7 @@
             embedder_name: embedder,
             embedder_loc,
         };
-        const pyfile = 'training.ml_prediction';
+        const pyfile = 'ml_training.ml_prediction';
         return { pyfile, args };
     };
 

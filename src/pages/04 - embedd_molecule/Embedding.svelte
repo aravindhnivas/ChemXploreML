@@ -93,8 +93,7 @@
         dataFromPython[$embedding] = null;
 
         $embeddings_computed = false;
-        // const pyfile = 'training.embedd_data';
-        const pyfile = 'embedder.vectorize_molecules';
+        const pyfile = 'vectorize_molecules.embedder';
         const final_training_file = await $current_training_data_file;
         return {
             pyfile,

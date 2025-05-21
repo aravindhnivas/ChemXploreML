@@ -31,7 +31,7 @@
             use_dask: $use_dask,
             index_column_name: $training_column_name_index,
         };
-        const pyfile = 'training.make_index_and_save_file';
+        const pyfile = 'load_file.make_index_and_save_file';
         return { pyfile, args };
     }
 

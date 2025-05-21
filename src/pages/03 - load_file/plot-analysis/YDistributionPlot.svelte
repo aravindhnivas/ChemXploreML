@@ -66,7 +66,7 @@
         }
 
         return {
-            pyfile: 'training.y_data_distribution',
+            pyfile: 'load_file.y_data_distribution',
             args: {
                 filename: await $current_training_data_file,
                 filetype: $training_file.filetype,

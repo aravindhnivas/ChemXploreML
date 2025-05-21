@@ -10,7 +10,7 @@
 
     const generate_vec = async () => {
         toast.error('Under construction');
-        return { pyfile: 'training.vicgae', args: {} };
+        return { pyfile: 'ml_training.vicgae', args: {} };
 
         if (!$filename) {
             toast.error('Please select a file');
@@ -18,7 +18,7 @@
         }
 
         return {
-            pyfile: 'training.vicgae',
+            pyfile: 'ml_training.vicgae',
             args: {
                 smi_file: $filename,
                 vector_size,

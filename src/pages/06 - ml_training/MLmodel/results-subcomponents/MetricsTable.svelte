@@ -182,7 +182,7 @@
             }
 
             return {
-                pyfile: 'training.export_all_metrics',
+                pyfile: 'ml_training.export_all_metrics',
                 args: { metrics_loc },
             };
         }}

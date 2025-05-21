@@ -22,7 +22,7 @@
     ) => {
         const analysis_file = await $current_analysis_file;
         return {
-            pyfile: 'training.molecular_analysis',
+            pyfile: 'load_file.molecular_analysis',
             args: {
                 filename: await $current_training_data_file,
                 filetype: $training_file.filetype,
@@ -115,7 +115,7 @@
             filtered_filename,
             index_column_name: $training_column_name_index,
         };
-        const pyfile = 'training.apply_filter_for_molecular_analysis';
+        const pyfile = 'load_file.apply_filter_for_molecular_analysis';
         return { pyfile, args };
     };
 
@@ -130,7 +130,7 @@
             smiles_column_name: $training_column_name_X,
             index_column_name: $training_column_name_index,
         };
-        const pyfile = 'training.check_duplicates_on_x_column';
+        const pyfile = 'load_file.check_duplicates_on_x_column';
         return { pyfile, args };
     };
 

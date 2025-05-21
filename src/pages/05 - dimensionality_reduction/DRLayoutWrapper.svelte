@@ -43,7 +43,7 @@
         }
 
         return {
-            pyfile: 'training.generate_reduced_embeddings',
+            pyfile: 'dimensionality_reduction.generate_reduced_embeddings',
             args: {
                 params,
                 vector_file,

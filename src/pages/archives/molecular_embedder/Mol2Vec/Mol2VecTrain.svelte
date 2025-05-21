@@ -30,7 +30,7 @@
             return;
         }
         return {
-            pyfile: 'training.mol2vec',
+            pyfile: 'ml_training.mol2vec',
             args: {
                 smi_file: $filename,
                 sentence_type,

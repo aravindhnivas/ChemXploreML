@@ -50,7 +50,7 @@
             max_yvalue: maxy,
             property_column: $training_column_name_y,
         };
-        const pyfile = 'training.apply_filter_for_ydata';
+        const pyfile = 'load_file.apply_filter_for_ydata';
         return { pyfile, args };
     };
 

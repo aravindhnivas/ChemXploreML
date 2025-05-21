@@ -24,7 +24,7 @@
         }
 
         return {
-            pyfile: 'training.ml_prediction_analysis',
+            pyfile: 'ml_training.ml_prediction_analysis',
             args: {
                 analysis_file: $analysis_test_file_for_prediction,
                 columnX,

@@ -45,7 +45,7 @@
             return;
         }
         return {
-            pyfile: 'training.read_data',
+            pyfile: 'load_file.read_data',
             args: {
                 filename,
                 filetype,

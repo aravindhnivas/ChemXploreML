@@ -296,7 +296,7 @@
 
         delete $results[$model];
         $results = $results; // force - make it reactive
-        return { pyfile: 'training.ml_model', args };
+        return { pyfile: 'ml_training.ml_model', args };
     };
 
     let plot_data_ready = false;
