@@ -30,7 +30,8 @@
         }
 
         let embedder_loc: string = '';
-        const embedder = $choosen_embedder.split('_with')[0];
+        const embedder = $choosen_embedder.split('_with')[0] as Embedding;
+        console.log({ embedder });
         embedder_loc = $embedder_model_filepath[embedder];
         if (!embedder_loc) {
             console.log({ $embedder_model_filepath, $choosen_embedder, embedder, embedder_loc });
