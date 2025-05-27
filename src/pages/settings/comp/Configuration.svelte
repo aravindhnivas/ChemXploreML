@@ -71,11 +71,19 @@
         {/if}
         <div class="badge badge-{$serverCurrentStatus.type}">{$serverCurrentStatus.value}</div>
     </div>
-    <div class="flex gap-2">
-        <Checkbox bind:value={$redis_server_mode} label="Redis-server" />
-        <Checkbox bind:value={$developerMode} label="Developer mode" />
-    </div>
+    {#await platform() then os}
+        {#if os === 'linux' || os === 'macos'}
+            <div class="flex gap-2">
+                <Checkbox bind:value={$redis_server_mode} label="Redis-server" />
+                <Checkbox bind:value={$developerMode} label="Developer mode" />
+            </div>
+        {/if}
+    {/await}
 </div>
+
+{#if $redis_server_mode}
+    <div class="badge badge-warning">Make sure you start redis-server on operating system to schedule jobs</div>
+{/if}
 
 <div class="flex items-end gap-1">
     <CustomInput bind:value={$umdapy} label="Python program" lock />
