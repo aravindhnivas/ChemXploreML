@@ -2,7 +2,7 @@
     import { suppress_py_warnings } from '$pages/settings/stores';
     import { pyServerURL } from '$lib/pyserver/stores';
     import { pyServerReady, pyServerPORT, pyServerFailed, serverDebug } from '$lib/pyserver/stores';
-    import { start_and_check_umdapy_with_toast, stopServer, currentPortPID } from '$lib/pyserver/umdapyServer';
+    import { start_and_check_pypackage_with_toast, stopServer, currentPortPID } from '$lib/pyserver';
     import ServerControl from './ServerControl.svelte';
     import { Panel, Header, Content } from '@smui-extra/accordion';
     import { ChevronDown, ChevronUp } from 'lucide-svelte/icons';
@@ -30,7 +30,7 @@
                 bind:serverReady={$pyServerReady}
                 bind:pids={$currentPortPID}
                 bind:serverFailed={$pyServerFailed}
-                startServer={start_and_check_umdapy_with_toast}
+                startServer={start_and_check_pypackage_with_toast}
                 {stopServer}
                 bind:suppress_warnings={$suppress_py_warnings}
                 bind:debug={$serverDebug}

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { fetchServerROOT, updateServerInfo } from '$lib/pyserver/umdapyServer';
+    import { fetchServerROOT, updateServerInfo } from '$lib/pyserver';
     import { checkNetstat, killPID } from '../utils/network';
     import { serverInfo } from '../utils/stores';
     import { AxiosError } from 'axios';
@@ -36,6 +36,14 @@
             return;
         }
         return toast.error('Failed to fetch port');
+    };
+
+    const connect_websocket = async () => {
+        // const [err] = await oO(fetchServerROOT());
+        // if (err instanceof AxiosError) {
+        //     console.log(err);
+        //     serverInfo.error(err.code || 'unknown network error');
+        // }
     };
 </script>
 

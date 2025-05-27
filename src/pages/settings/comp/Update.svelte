@@ -1,7 +1,7 @@
 <script lang="ts">
     import { python_asset_ready_to_install, install_update_without_promt } from '$pages/settings/utils/stores';
     import { updateError } from '$utils/stores';
-    import { stopServer } from '$lib/pyserver/umdapyServer';
+    import { stopServer } from '$lib/pyserver';
     import { outputbox } from '$settings/utils/stores';
     import { footerMsg } from '$lib/utils/initialise';
     import {
@@ -15,10 +15,10 @@
     import TerminalBox from '$lib/components/TerminalBox.svelte';
     import { toggle_loading } from '$utils/index';
     import CustomInput from '$lib/components/CustomInput.svelte';
-    import { umdapyVersion } from '$lib/pyserver/stores';
+    import { pyPackageVersion } from '$lib/pyserver/stores';
     import { WifiOff, X } from 'lucide-svelte/icons';
     import { killPID } from '$settings/utils/network';
-    import { download_url, assets_download_progress, assets_download_pid } from '$lib/utils/download';
+    import { assets_download_progress, assets_download_pid } from '$lib/utils/download';
 
     let install_dialog_active = false;
 
@@ -152,13 +152,13 @@
 
     let currentVersion = '';
 
-    const get_umdapy_version = async (umdapy_folder: string) => {
-        if (!(await fs.exists(umdapy_folder))) return;
-        const umdapy_version_file = await path.join(umdapy_folder, '_internal', 'umdalib', '__version__.dat');
-        if (!(await fs.exists(umdapy_version_file))) return;
-        const umdapy_version_file_content = await fs.readTextFile(umdapy_version_file);
-        if (!umdapy_version_file_content) return;
-        $umdapyVersion = umdapy_version_file_content;
+    const get_pypackage_version = async (pypackage_folder: string) => {
+        if (!(await fs.exists(pypackage_folder))) return;
+        const pypackage_version_file = await path.join(pypackage_folder, '_internal', 'umdalib', '__version__.dat');
+        if (!(await fs.exists(pypackage_version_file))) return;
+        const pypackage_version_file_content = await fs.readTextFile(pypackage_version_file);
+        if (!pypackage_version_file_content) return;
+        $pyPackageVersion = pypackage_version_file_content;
     };
 
     let unlisten_check_for_update: ReturnType<typeof setInterval>;
@@ -178,14 +178,14 @@
         console.log('Update page mounted');
 
         currentVersion = await getVersion();
-        const umdapy_folder = await path.join(await path.appLocalDataDir(), asset_name_prefix);
+        const pypackage_folder = await path.join(await path.appLocalDataDir(), asset_name_prefix);
         const download_assets_btn = document.getElementById('btn-download-asset');
 
-        if (!(await fs.exists(umdapy_folder))) {
+        if (!(await fs.exists(pypackage_folder))) {
             download_assets_btn?.click();
         } else {
             console.warn(`${asset_name_prefix} folder exists`);
-            await get_umdapy_version(umdapy_folder);
+            await get_pypackage_version(pypackage_folder);
         }
 
         if (import.meta.env.PROD) {

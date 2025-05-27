@@ -7,16 +7,16 @@
         pythonscript,
         pyServerReady,
         pyVersion,
-        umdapyVersion,
+        pyPackageVersion,
         redis_server_mode,
         server_timeout_in_minutes,
-        umdapy,
+        pyPackage,
     } from '$lib/pyserver/stores';
     import { fontSize, defaultFontSize } from '$lib/stores/system';
     import { Checkbox } from '$components/index';
-    import { fetchServerROOT, start_and_check_umdapy_with_toast } from '$lib/pyserver/umdapyServer';
-    import { install_umdapy_from_zipfile } from '$settings/utils/download-assets';
-    import { check_umdapy_assets_status } from '$settings/utils/assets-status';
+    import { fetchServerROOT, start_and_check_pypackage_with_toast } from '$lib/pyserver';
+    import { install_pypackage_from_zipfile } from '$settings/utils/download-assets';
+    import { check_pypackage_assets_status } from '$settings/utils/assets-status';
     import PyServerControl from '$settings/config/PyServerControl.svelte';
     import Accordion from '@smui-extra/accordion';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
@@ -31,8 +31,8 @@
         console.log('Mounting Configuration');
 
         if (import.meta.env.DEV) {
-            if (!$umdapy.includes('dev')) {
-                $umdapy += '-dev';
+            if (!$pyPackage.includes('dev')) {
+                $pyPackage += '-dev';
             }
             if (!$pyServerReady) {
                 await oO(fetchServerROOT());
@@ -40,8 +40,8 @@
         }
 
         if (import.meta.env.PROD) {
-            $umdapy = import.meta.env.VITE_pypackage;
-            if (!$pyServerReady) await start_and_check_umdapy_with_toast();
+            $pyPackage = import.meta.env.VITE_pypackage;
+            if (!$pyServerReady) await start_and_check_pypackage_with_toast();
         }
     });
 </script>
@@ -65,12 +65,15 @@
 <div class="flex-center justify-between">
     <div class="">
         {#if $pyServerReady && $pyVersion}
-            <div class="badge badge-success">Python: {$pyVersion} (umdapy: {$umdapyVersion})</div>
+            <div class="badge badge-success">
+                Python: {$pyVersion} ({import.meta.env.VITE_pypackage}: {$pyPackageVersion})
+            </div>
         {:else}
             <div class="badge badge-error">Invalid python</div>
         {/if}
         <div class="badge badge-{$serverCurrentStatus.type}">{$serverCurrentStatus.value}</div>
     </div>
+
     {#await platform() then os}
         {#if os === 'linux' || os === 'macos'}
             <div class="flex gap-2">
@@ -86,12 +89,12 @@
 {/if}
 
 <div class="flex items-end gap-1">
-    <CustomInput bind:value={$umdapy} label="Python program" lock />
+    <CustomInput bind:value={$pyPackage} label="Python program" lock />
     <Loadingbtn
         name="get PyVersion"
         callback={() => {
             if (!$pyServerReady) {
-                toast.error('start umdapy server first!');
+                toast.error('start python server first!');
                 return;
             }
             return { pyfile: 'getVersion', args: [''] };
@@ -104,8 +107,8 @@
 
             console.log('Received data from python');
             $pyVersion = dataFromPython.python;
-            $umdapyVersion = dataFromPython.umdapy;
-            if ($umdapyVersion < import.meta.env.VITE_PY_MIN_VERSION) {
+            $pyPackageVersion = dataFromPython.pyPackageVersion;
+            if ($pyPackageVersion < import.meta.env.VITE_PY_MIN_VERSION) {
                 $asset_download_required = true;
             }
         }}
@@ -121,8 +124,8 @@
     <button
         class="btn btn-sm btn-outline"
         on:click={async () => {
-            await check_umdapy_assets_status({ installation_request: true });
-        }}>check-umdapy-assets</button
+            await check_pypackage_assets_status({ installation_request: true });
+        }}>check-{import.meta.env.VITE_pypackage}-assets</button
     >
 
     <button class="btn btn-sm btn-outline" on:click={async () => await open_filepath(await path.appLocalDataDir())}>
@@ -139,7 +142,7 @@
     <button
         class="btn btn-sm btn-outline ml-auto"
         on:click={async () => {
-            await oO(install_umdapy_from_zipfile());
+            await oO(install_pypackage_from_zipfile());
         }}>Install from ZIPfile <Download /></button
     >
 </div>

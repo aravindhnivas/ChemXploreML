@@ -1,16 +1,14 @@
-import { pyVersion, pyServerReady, umdapyVersion } from '$lib/pyserver/stores';
+import { pyVersion, pyServerReady, pyPackageVersion } from '$lib/pyserver/stores';
 import computefromServer from '$lib/pyserver/computefromServer';
 import { asset_download_required } from './stores';
 
 export async function getPyVersion(e?: MouseEvent) {
     if (!get(pyServerReady)) {
-        toast.error('start umdapy server first!');
-        return Promise.reject('start umdapy server first!');
+        toast.error('start python server first!');
+        return Promise.reject('start python server first!');
     }
 
-    const dataFromPython = await computefromServer<{ python: string; umdapy: string }>({
-        // e,
-        // target: e?.currentTarget as HTMLButtonElement,
+    const dataFromPython = await computefromServer<{ python: string; pyPackageVersion: string }>({
         pyfile: 'getVersion',
         args: [''],
         scheduler: false,
@@ -22,9 +20,9 @@ export async function getPyVersion(e?: MouseEvent) {
     }
     console.log(dataFromPython);
     pyVersion.set(dataFromPython.python);
-    umdapyVersion.set(dataFromPython.umdapy);
+    pyPackageVersion.set(dataFromPython.pyPackageVersion);
 
-    if (get(umdapyVersion) < import.meta.env.VITE_PY_MIN_VERSION) {
+    if (get(pyPackageVersion) < import.meta.env.VITE_PY_MIN_VERSION) {
         asset_download_required.set(true);
     }
 

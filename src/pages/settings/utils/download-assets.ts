@@ -1,4 +1,4 @@
-import { umdapyVersion, pyServerReady } from '$lib/pyserver/stores';
+import { pyPackageVersion, pyServerReady } from '$lib/pyserver/stores';
 import {
     outputbox,
     python_asset_ready,
@@ -11,7 +11,7 @@ import {
     serverInfo,
 } from './stores';
 import { isEmpty } from 'lodash-es';
-import { start_and_check_umdapy_with_toast, stopServer } from '$lib/pyserver/umdapyServer';
+import { start_and_check_pypackage_with_toast, stopServer } from '$lib/pyserver';
 import { footerMsg } from '$lib/utils/initialise';
 import { auto_download_and_install_assets } from './assets-status';
 import { sleep } from '$lib/utils/initialise';
@@ -22,7 +22,7 @@ import { download_url } from '$lib/utils/download';
 let assets_downloading = false;
 let assets_installing = false;
 
-export const asset_name_prefix = 'umdapy';
+export const asset_name_prefix = import.meta.env.VITE_pypackage;
 
 export const remove_asset_folder = async () => {
     try {
@@ -34,7 +34,7 @@ export const remove_asset_folder = async () => {
         return Promise.resolve(asset_folder + ' folder deleted');
     } catch (error) {
         if (error instanceof Error) Alert.error(error);
-        return Promise.reject(`Could not delete the existing umdapy folder\n ${JSON.stringify(error)}`);
+        return Promise.reject(`Could not delete the existing ${asset_name_prefix} folder\n ${JSON.stringify(error)}`);
     }
 };
 
@@ -150,7 +150,7 @@ export function unZIP(installation_request = true) {
             outputbox.warn('UNZIP process closed');
             python_asset_ready_to_install.set(false);
             await sleep(1000);
-            await start_and_check_umdapy_with_toast();
+            await start_and_check_pypackage_with_toast();
             setTimeout(() => footerMsg.set({ msg: '', status: 'idle' }), 1 * 60 * 1000);
         });
 
@@ -210,18 +210,18 @@ export const check_assets_update = async ({ installation_request = true, downloa
 
     outputbox.info(`Python assets available version: ${get(assets_version_available)}`);
 
-    if (!get(umdapyVersion)) {
+    if (!get(pyPackageVersion)) {
         outputbox.error('Python assets current version not determined yet.');
         return;
     }
-    outputbox.info(`Python assets current version: v${get(umdapyVersion)}`);
+    outputbox.info(`Python assets current version: v${get(pyPackageVersion)}`);
 
-    if (`v${get(umdapyVersion)}` < get(assets_version_available)) {
+    if (`v${get(pyPackageVersion)}` < get(assets_version_available)) {
         await fn_asset_download_required({ installation_request, download_request });
         return;
     }
 
-    if (get(umdapyVersion) < import.meta.env.VITE_PY_MIN_VERSION) {
+    if (get(pyPackageVersion) < import.meta.env.VITE_PY_MIN_VERSION) {
         await fn_asset_download_required({ installation_request, download_request });
         return;
     }
@@ -249,7 +249,7 @@ export const download_assets = async () => {
     await downloadZIP();
 };
 
-export const install_umdapy_from_zipfile = async () => {
+export const install_pypackage_from_zipfile = async () => {
     try {
         const result = (await dialog.open({
             directory: false,

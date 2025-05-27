@@ -17,7 +17,7 @@ import { checkNetstat, checkNetstat_execution, killPID } from '$settings/utils/n
 import { getPyVersion } from '$settings/utils/checkPython';
 import { sleep } from '$lib/utils/initialise';
 import { Alert } from '$utils/stores';
-import { check_umdapy_assets_status } from '$pages/settings/utils/assets-status';
+import { check_pypackage_assets_status } from '$pages/settings/utils/assets-status';
 
 import type { Child } from '$lib/utils';
 
@@ -31,7 +31,7 @@ export async function startServer() {
     if (!get(developerMode) && !get(python_asset_ready)) return serverInfo.error('python asset not ready');
     if (get(pyServerReady)) return toast.warning('server already running');
 
-    serverInfo.warn('starting umdapy server at port: ' + get(pyServerPORT));
+    serverInfo.warn('starting python server at port: ' + get(pyServerPORT));
     if (get(currentPortPID).length > 0) {
         const killedports = await killPID(get(currentPortPID));
         if (typeof killedports === 'object') currentPortPID.set(killedports);
@@ -150,7 +150,7 @@ export async function stopServer({ update_info = true } = {}) {
 
 export async function checkServerProblem() {
     if (!get(pyServerReady)) {
-        return await start_and_check_umdapy_with_toast();
+        return await start_and_check_pypackage_with_toast();
     }
 
     const [err, rootpage] = await oO(axios.get<string>(`${get(pyServerURL)}/${import.meta.env.VITE_pypackage}`));
@@ -220,14 +220,15 @@ export const updateServerInfo = async (delay = 0) => {
     await fetchServerROOT(delay);
 };
 
-export const start_and_check_umdapy = () => {
+export const start_and_check_pypackage = () => {
     return new Promise(async (resolve, reject) => {
         try {
+            const pypackage = import.meta.env.VITE_pypackage;
             if (!get(developerMode) && !get(python_asset_ready)) {
-                await check_umdapy_assets_status();
+                await check_pypackage_assets_status();
                 if (!get(python_asset_ready)) {
-                    serverInfo.error('umdapy is not installed. Maybe check-umdapy-assets?');
-                    return reject('umdapy is not installed. Maybe check-umdapy-assets?');
+                    serverInfo.error(`${pypackage} is not installed. Maybe check-${pypackage}-assets?`);
+                    return reject(`${pypackage} is not installed. Maybe check-${pypackage}-assets?`);
                 }
             }
 
@@ -236,16 +237,16 @@ export const start_and_check_umdapy = () => {
         } catch (error) {
             if (error instanceof Error) {
                 reject(error);
-                serverInfo.error(error?.message ?? 'failed to start umdapy server');
+                serverInfo.error(error?.message ?? 'failed to start python server');
             }
         }
     });
 };
 
-export const start_and_check_umdapy_with_toast = () => {
+export const start_and_check_pypackage_with_toast = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            const result = await start_and_check_umdapy();
+            const result = await start_and_check_pypackage();
             resolve(result);
         } catch (error) {
             reject(error);

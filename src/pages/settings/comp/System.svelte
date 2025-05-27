@@ -1,6 +1,6 @@
 <script lang="ts">
     import { RAM_SIZE, CPU_COUNT } from '$lib/stores/system';
-    import { pyVersion, umdapyVersion } from '$lib/pyserver/stores';
+    import { pyVersion, pyPackageVersion } from '$lib/pyserver/stores';
 
     onMount(async () => {
         logger.info('About page mounted');
@@ -40,8 +40,10 @@
     <div class="col-span-3">Python</div>
     <span class="col-span-2 badge badge-dark" class:badge-error={!$pyVersion}>{$pyVersion || 'unknown'}</span>
 
-    <div class="col-span-3">umdapy</div>
-    <span class="col-span-2 badge badge-dark" class:badge-error={!$umdapyVersion}>v{$umdapyVersion || 'unknown'}</span>
+    <div class="col-span-3">{import.meta.env.VITE_pypackage}</div>
+    <span class="col-span-2 badge badge-dark" class:badge-error={!$pyPackageVersion}
+        >v{$pyPackageVersion || 'unknown'}</span
+    >
 </div>
 
 <img src="/icons/icon.png" alt="ChemXploreML Logo" class="w-32 h-32 m-auto" />

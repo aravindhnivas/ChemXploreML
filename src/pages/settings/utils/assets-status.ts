@@ -1,25 +1,25 @@
 import { python_asset_ready, outputbox, python_asset_ready_to_install, serverInfo } from './stores';
 import { asset_name_prefix, download_assets } from './download-assets';
 
-export const check_umdapy_assets_status = async ({ installation_request = false } = {}) => {
+export const check_pypackage_assets_status = async ({ installation_request = false } = {}) => {
     try {
         python_asset_ready.set(false);
 
         if (await fs.exists(asset_name_prefix, { baseDir: fs.BaseDirectory.AppLocalData })) {
             python_asset_ready.set(true);
             python_asset_ready_to_install.set(false);
-            serverInfo.warn('umdapy is installed');
-
-            // if (get(pyServerReady)) await check_assets_update()
+            serverInfo.warn(import.meta.env.VITE_pypackage + ' is installed');
             return;
         }
 
         // if (!(await dialog.confirm('Python assets are missing. Press OK to download.'))) return
-        const req = await dialog.confirm('umdapy is missing. Press OK to download and install python assets.');
+        const req = await dialog.confirm(
+            import.meta.env.VITE_pypackage + ' is missing. Press OK to download and install python assets.',
+        );
         if (!req) return;
         await auto_download_and_install_assets({ installation_request });
         return;
-        // await install_umdapy_from_zipfile();
+        // await install_pypackage_from_zipfile();
     } catch (error) {
         if (error instanceof Error) {
             outputbox.error(error.message);

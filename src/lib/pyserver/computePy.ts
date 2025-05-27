@@ -1,7 +1,7 @@
 import { suppress_py_warnings } from '$pages/settings/stores';
 import computefromServer from './computefromServer';
 import computefromSubprocess from './computefromSubprocess';
-import { fetchServerROOT, start_and_check_umdapy_with_toast } from './umdapyServer';
+import { fetchServerROOT, start_and_check_pypackage_with_toast } from '$lib/pyserver';
 import { pyServerReady, get, developerMode, pyProgram, suppressed_warnings } from './stores';
 import { Alert } from '$utils/stores';
 
@@ -39,12 +39,12 @@ export default async function <T extends Record<string, any>>({
         if (!get(pyServerReady)) {
             await fetchServerROOT();
             const result = await dialog.ask('Start the server ?', {
-                type: 'error',
-                title: 'umdapy server not running',
+                kind: 'warning',
+                title: import.meta.env.VITE_pypackage + 'server not running',
             });
             console.log(result);
             if (!result) return Promise.reject('Server not started');
-            await start_and_check_umdapy_with_toast();
+            await start_and_check_pypackage_with_toast();
         }
         const response = await computefromServer<T>({
             pyfile,

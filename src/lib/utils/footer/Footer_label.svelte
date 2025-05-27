@@ -5,8 +5,8 @@
         installing_python_assets,
         python_asset_ready_to_install,
     } from '$settings/utils/stores';
-    import { start_and_check_umdapy_with_toast } from '$lib/pyserver/umdapyServer';
-    import { check_umdapy_assets_status } from '$settings/utils/assets-status';
+    import { start_and_check_pypackage_with_toast } from '$lib/pyserver';
+    import { check_pypackage_assets_status } from '$settings/utils/assets-status';
     import { ServerOff, AlertTriangle, Download } from 'lucide-svelte/icons';
 </script>
 
@@ -15,7 +15,7 @@
         {#if !$pyServerReady}
             <button
                 on:click={async () => {
-                    await start_and_check_umdapy_with_toast();
+                    await start_and_check_pypackage_with_toast();
                 }}
             >
                 <ServerOff size="20" />
@@ -27,7 +27,7 @@
         <div aria-label="click to check python assets" data-cooltipz-dir="left">
             <button
                 on:click={async () => {
-                    await check_umdapy_assets_status();
+                    await check_pypackage_assets_status();
                 }}
             >
                 <AlertTriangle size="20" />
@@ -45,7 +45,7 @@
                 if (installBtn) installBtn.click();
             }}
         >
-            <span style="color: black;">umdapy assets ready to install</span>
+            <span style="color: black;">{import.meta.env.VITE_pypackage} assets ready to install</span>
             <Download />
         </button>
     {/if}
