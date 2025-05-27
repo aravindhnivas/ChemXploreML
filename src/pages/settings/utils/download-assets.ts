@@ -62,8 +62,13 @@ export async function downloadZIP() {
             return;
         }
 
-        const { assets } = current_release_data as { assets: [{ name: string; browser_download_url: string }] };
+        const { assets } = current_release_data;
         const asset_ind = assets.findIndex(e => e.name === asset_name);
+
+        if (asset_ind === -1) {
+            outputbox.error('Could not find the assets in the release data');
+            return;
+        }
 
         browser_download_url = assets[asset_ind].browser_download_url;
 
@@ -171,7 +176,7 @@ export function unZIP(installation_request = true) {
     });
 }
 
-let current_release_data = {};
+let current_release_data: GithubRelease = {} as GithubRelease;
 
 const get_assets_url = async () => {
     const response = await axios<GithubRelease>(git_url.py.latest());
@@ -207,7 +212,7 @@ export const check_assets_update = async ({ installation_request = true, downloa
     }
 
     if (!(await get_assets_url())) return;
-
+    outputbox.info(JSON.stringify(current_release_data, null, 2));
     outputbox.info(`Python assets available version: ${get(assets_version_available)}`);
 
     if (!get(pyPackageVersion)) {
