@@ -85,14 +85,14 @@
         },
         {
           "args": true,
-          "cmd": "$APPLOCALDATA/umdapy/umdapy",
-          "name": "umdapy",
+          "cmd": "$APPLOCALDATA/cxml_py/cxml_py",
+          "name": "cxml_py",
           "sidecar": false
         },
         {
           "args": true,
-          "cmd": "/Volumes/DataDock2TB/Documents/GitHub/umdapy/scripts/dist/umdapy/umdapy",
-          "name": "umdapy-dev",
+          "cmd": "/Users/aravindhnivas/Documents/GitHub/cxml_py/scripts/dist/cxml_py/cxml_py",
+          "name": "cxml_py-dev",
           "sidecar": false
         },
         {
