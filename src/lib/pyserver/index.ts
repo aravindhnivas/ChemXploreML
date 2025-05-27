@@ -28,7 +28,9 @@ const server_stopped_keyword = 'Server stopped';
 export const currentPortPID = localWritable<string[]>('pyserver-pid', []);
 
 export async function startServer() {
-    if (!get(developerMode) && !get(python_asset_ready)) return serverInfo.error('python asset not ready');
+    if (!get(developerMode) && !get(python_asset_ready) && !get(pyProgram).endsWith('-dev')) {
+        return serverInfo.error('python asset not ready');
+    }
     if (get(pyServerReady)) return toast.warning('server already running');
 
     serverInfo.warn('starting python server at port: ' + get(pyServerPORT));
@@ -224,7 +226,8 @@ export const start_and_check_pypackage = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const pypackage = import.meta.env.VITE_pypackage;
-            if (!get(developerMode) && !get(python_asset_ready)) {
+            console.log('start_and_check_pypackage', get(pyProgram));
+            if (!get(developerMode) && !get(python_asset_ready) && !get(pyProgram).endsWith('-dev')) {
                 await check_pypackage_assets_status();
                 if (!get(python_asset_ready)) {
                     serverInfo.error(`${pypackage} is not installed. Maybe check-${pypackage}-assets?`);
