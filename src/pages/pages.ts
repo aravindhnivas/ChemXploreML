@@ -193,7 +193,7 @@ export const navigationConfig = writable<NavigationConfig>({
                 icon: MonitorCheck,
                 title: 'Process Monitor',
                 description:
-                    'Monitor background tasks and running jobs (redis-server should be turned on macOS/linux only).',
+                    'Monitor background tasks and running jobs (redis-server only supported on macOS/linux OS).',
             },
             {
                 name: 'System',
