@@ -54,9 +54,6 @@ importers:
       '@modyfi/vite-plugin-yaml':
         specifier: ^1.1.1
         version: 1.1.1(rollup@4.40.2)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))
-      '@rdkit/rdkit':
-        specifier: 2025.3.2-1.0.0
-        version: 2025.3.2-1.0.0
       '@smui-extra/accordion':
         specifier: ^7.0.0
         version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
@@ -604,9 +601,6 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
-
-  '@rdkit/rdkit@2025.3.2-1.0.0':
-    resolution: {integrity: sha512-ISD4gRwJQ7A+XPPcy3nEpZoaq1xEth4VmstpAdBOVFPudriBNAVEifkC4zWbMP8Bc+h5204KCUrFxowkFXQ+GA==}
 
   '@rollup/pluginutils@5.1.0':
     resolution: {integrity: sha512-XTIWOPPcpvyKI6L1NHo0lFlCyznUEyPmPY1mc3KpPVDYulHSTvyeLNVW00QTLIAFNhR3kYnJTQHeGqU4M3n09g==}
@@ -3741,8 +3735,6 @@ snapshots:
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
-
-  '@rdkit/rdkit@2025.3.2-1.0.0': {}
 
   '@rollup/pluginutils@5.1.0(rollup@4.40.2)':
     dependencies:
