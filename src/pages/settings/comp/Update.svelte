@@ -34,7 +34,7 @@
             return outputbox.warn('waiting for assets to complete downloading');
         }
 
-        const response = await axios(git_url.gui.latest());
+        const response = await axios<GithubRelease>(git_url.gui.latest());
         const latest_version = response.data.tag_name;
         outputbox.warn(`latest_version: ${latest_version}`);
         outputbox.warn(`current_version: v${currentVersion}`);

@@ -174,7 +174,7 @@ export function unZIP(installation_request = true) {
 let current_release_data = {};
 
 const get_assets_url = async () => {
-    const response = await axios<{ tag_name: string }>(git_url.py.latest());
+    const response = await axios<GithubRelease>(git_url.py.latest());
     if (!response) return;
 
     if (response.status !== 200) return outputbox.error('Could not download the assets');
