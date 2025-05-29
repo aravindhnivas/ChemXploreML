@@ -4,6 +4,8 @@
     import Molecule from '$lib/components/Molecule.svelte';
     import Chip, { Set, Text } from '@smui/chips';
     import PropertiesBox from './PropertiesBox.svelte';
+    import Accordion from '@smui-extra/accordion';
+    import CustomPanel from '$lib/components/CustomPanel.svelte';
 
     let smiles = 'CCO';
 
@@ -40,33 +42,46 @@
     let compute_btn: HTMLButtonElement | undefined = undefined;
 </script>
 
-<div class="grid gap-2">
-    <CustomInput
-        label="SMILES"
-        bind:value={smiles}
-        on:change={() => {
-            if (!smiles) return;
-            compute_btn?.click();
-        }}
-    />
-    <Molecule bind:smiles />
-</div>
+<Accordion>
+    <div class="grid gap-2 mb-2">
+        <CustomInput
+            label="SMILES"
+            bind:value={smiles}
+            on:change={() => {
+                if (!smiles) return;
+                compute_btn?.click();
+            }}
+        />
+    </div>
+    <CustomPanel title="Molecular structure" open={true}>
+        <Molecule bind:smiles />
+    </CustomPanel>
+    <!-- <div class="divider"></div> -->
+    <!-- <div class="m-auto">
+        <Loadingbtn bind:btn={compute_btn} name="Analyse" callback={compute_molecular_analysis} on:result={onResult} />
+    </div> -->
+    <!-- <div class="divider"></div> -->
+    <CustomPanel title="Basic properties">
+        <div class="m-auto">
+            <Loadingbtn
+                bind:btn={compute_btn}
+                name="Analyse"
+                callback={compute_molecular_analysis}
+                on:result={onResult}
+            />
+        </div>
 
-<div class="divider"></div>
-<div class="m-auto">
-    <Loadingbtn bind:btn={compute_btn} name="Analyse" callback={compute_molecular_analysis} on:result={onResult} />
-</div>
-<div class="divider"></div>
+        <Set chips={all_properties} let:chip filter bind:selected={selected_properties}>
+            <Chip {chip} touch>
+                <Text>{chip}</Text>
+            </Chip>
+        </Set>
 
-<Set chips={all_properties} let:chip filter bind:selected={selected_properties}>
-    <Chip {chip} touch>
-        <Text>{chip}</Text>
-    </Chip>
-</Set>
-
-<div class="divider"></div>
-{#if !isEmpty(full_analysis)}
-    <PropertiesBox {selected_properties} {full_analysis} {all_properties} />
-{:else}
-    <div class="text-center">No data to display</div>
-{/if}
+        <div class="divider"></div>
+        {#if !isEmpty(full_analysis)}
+            <PropertiesBox {selected_properties} {full_analysis} {all_properties} />
+        {:else}
+            <div class="text-center">No data to display</div>
+        {/if}
+    </CustomPanel>
+</Accordion>
