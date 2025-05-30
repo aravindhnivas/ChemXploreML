@@ -104,7 +104,7 @@
     />
 
     <div class="divider"></div>
-    {#if import.meta.env.DEV}
+    <!-- {#if import.meta.env.DEV}
         <div class="grid gap-2">
             <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">loc</span> - {loc}</pre>
             <pre class="text-sm break-all whitespace-normal"><span class="badge badge-sm">saved_config_file</span
@@ -116,7 +116,7 @@
         </pre>
         </div>
         <div class="divider"></div>
-    {/if}
+    {/if} -->
 
     <div class="text-md">Basic Parameters</div>
 
