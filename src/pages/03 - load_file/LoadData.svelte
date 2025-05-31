@@ -19,6 +19,8 @@
     import LoadedFileInfos from '$lib/meta-components/LoadedFileInfos.svelte';
     import { Download, Save } from 'lucide-svelte/icons';
     import Checkbox from '$lib/components/Checkbox.svelte';
+    import Accordion from '@smui-extra/accordion';
+    import CustomPanel from '$lib/components/CustomPanel.svelte';
 
     let auto_fetch_columns = false;
     let data: DataType | null = null;
@@ -153,62 +155,66 @@
     <svelte:fragment let:load_btn>
         {#await fs.exists($training_file.filename) then file_exists}
             {#if file_exists}
-                <div class="flex flex-col gap-1">
-                    <Checkbox bind:value={auto_fetch_columns} label="Auto-fetch column name" />
-                    {#if auto_fetch_columns && !$loaded_df_columns.length}
-                        <span class="text-sm">Load file first!</span>
-                    {/if}
-                </div>
+                <Accordion>
+                    <CustomPanel title="Configure">
+                        <div class="grid gap-2">
+                            <div class="flex flex-col gap-1">
+                                <Checkbox bind:value={auto_fetch_columns} label="Auto-fetch column name" />
+                                {#if auto_fetch_columns && !$loaded_df_columns.length}
+                                    <span class="text-sm">Load file first!</span>
+                                {/if}
+                            </div>
 
-                <div class="flex items-end gap-1">
-                    <CustomSelect
-                        enable_use_input
-                        use_input={!auto_fetch_columns}
-                        label="column X"
-                        bind:value={$training_column_name_X}
-                        items={$loaded_df_columns}
-                    />
-                    <CustomSelect
-                        enable_use_input
-                        use_input={!auto_fetch_columns}
-                        label="column Y"
-                        bind:value={$training_column_name_y}
-                        items={$loaded_df_columns}
-                    />
-                    <CustomInput
-                        label="npartitions disk"
-                        bind:value={$NPARTITIONS}
-                        type="number"
-                        placeholder="Enter dask npartitions"
-                    />
-                </div>
+                            <div class="flex items-end gap-1">
+                                <CustomSelect
+                                    enable_use_input
+                                    use_input={!auto_fetch_columns}
+                                    label="column X"
+                                    bind:value={$training_column_name_X}
+                                    items={$loaded_df_columns}
+                                />
+                                <CustomSelect
+                                    enable_use_input
+                                    use_input={!auto_fetch_columns}
+                                    label="column Y"
+                                    bind:value={$training_column_name_y}
+                                    items={$loaded_df_columns}
+                                />
+                                <CustomInput
+                                    label="npartitions disk"
+                                    bind:value={$NPARTITIONS}
+                                    type="number"
+                                    placeholder="Enter dask npartitions"
+                                />
+                            </div>
 
-                <div class="flex items-end gap-1">
-                    <CustomInput label="Enter INDEX column name" bind:value={$training_column_name_index} />
-                    <Loadingbtn
-                        name="Make INDEX and save file"
-                        callback={MakeIndexAndSaveFile}
-                        on:result={e => {
-                            console.log(e.detail);
-                            load_btn?.click();
-                        }}
-                    />
-                    <span class="text-sm my-2">OR</span>
-                    <CustomSelect
-                        label="Choose INDEX column"
-                        bind:value={$training_column_name_index}
-                        items={$loaded_df_columns || []}
-                    />
-                    <span class="badge badge-info ml-auto" class:badge-error={!$index_column_valid}>
-                        {$index_column_valid ? 'Index available' : 'Index not available'}
-                    </span>
-                </div>
-
-                <FetchAnalysisDir />
-                <div class="divider"></div>
-                <h3>Loaded training file</h3>
-                <LoadedFileInfos />
-                <div class="divider"></div>
+                            <div class="flex items-end gap-1">
+                                <CustomInput label="Enter INDEX column name" bind:value={$training_column_name_index} />
+                                <Loadingbtn
+                                    name="Make INDEX and save file"
+                                    callback={MakeIndexAndSaveFile}
+                                    on:result={e => {
+                                        console.log(e.detail);
+                                        load_btn?.click();
+                                    }}
+                                />
+                                <span class="text-sm my-2">OR</span>
+                                <CustomSelect
+                                    label="Choose INDEX column"
+                                    bind:value={$training_column_name_index}
+                                    items={$loaded_df_columns || []}
+                                />
+                                <span class="badge badge-info ml-auto" class:badge-error={!$index_column_valid}>
+                                    {$index_column_valid ? 'Index available' : 'Index not available'}
+                                </span>
+                            </div>
+                            <FetchAnalysisDir />
+                        </div>
+                    </CustomPanel>
+                    <CustomPanel title="Loaded fileinfos">
+                        <LoadedFileInfos />
+                    </CustomPanel>
+                </Accordion>
             {/if}
         {/await}
     </svelte:fragment>
