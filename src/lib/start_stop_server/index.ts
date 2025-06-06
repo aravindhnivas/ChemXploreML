@@ -20,7 +20,7 @@ export const genericStartServer = async (btn: HTMLButtonElement, pyfile: string,
     } catch (error) {
         console.error(error);
         Alert.error(error);
-        return Promise.reject;
+        return Promise.reject(error);
     }
 
     const [err, pyChild] = await oO<Child, string>(py.spawn());
