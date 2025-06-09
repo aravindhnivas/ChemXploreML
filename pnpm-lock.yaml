@@ -15,8 +15,8 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
       '@tauri-apps/plugin-dialog':
-        specifier: ~2.2.1
-        version: 2.2.1
+        specifier: ~2.2.2
+        version: 2.2.2
       '@tauri-apps/plugin-fs':
         specifier: ~2.2.1
         version: 2.2.1
@@ -40,7 +40,7 @@ importers:
         version: 2.3.0
       lucide-svelte:
         specifier: 0.485.0
-        version: 0.485.0(svelte@4.2.19)
+        version: 0.485.0(svelte@4.2.20)
       plotly.js-dist-min:
         specifier: 3.0.1
         version: 3.0.1
@@ -53,31 +53,31 @@ importers:
         version: 3.2.1
       '@modyfi/vite-plugin-yaml':
         specifier: ^1.1.1
-        version: 1.1.1(rollup@4.40.2)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))
+        version: 1.1.1(rollup@4.40.2)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))
       '@smui-extra/accordion':
         specifier: ^7.0.0
-        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+        version: 7.0.0(svelte@4.2.20)(typescript@5.8.3)
       '@smui/chips':
         specifier: ^7.0.0
-        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+        version: 7.0.0(svelte@4.2.20)(typescript@5.8.3)
       '@smui/dialog':
         specifier: 7.0.0
-        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+        version: 7.0.0(svelte@4.2.20)(typescript@5.8.3)
       '@smui/menu-surface':
         specifier: ^7.0.0
-        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+        version: 7.0.0(svelte@4.2.20)(typescript@5.8.3)
       '@smui/paper':
         specifier: ^7.0.0
-        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+        version: 7.0.0(svelte@4.2.20)(typescript@5.8.3)
       '@smui/radio':
         specifier: ^7.0.0
-        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+        version: 7.0.0(svelte@4.2.20)(typescript@5.8.3)
       '@sveltejs/svelte-virtual-list':
         specifier: ^3.0.1
         version: 3.0.1
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.1.2
-        version: 3.1.2(svelte@4.2.19)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))
+        version: 3.1.2(svelte@4.2.20)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
@@ -98,16 +98,16 @@ importers:
         version: 4.1.1
       autoprefixer:
         specifier: ^10.4.21
-        version: 10.4.21(postcss@8.5.3)
+        version: 10.4.21(postcss@8.5.4)
       axios:
         specifier: ^1.9.0
         version: 1.9.0
       cooltipz-css:
         specifier: ^2.3.1
-        version: 2.3.1(sass@1.88.0)
+        version: 2.3.1(sass@1.89.1)
       daisyui:
         specifier: 4.12.10
-        version: 4.12.10(postcss@8.5.3)
+        version: 4.12.10(postcss@8.5.4)
       hover.css:
         specifier: ^2.3.2
         version: 2.3.2
@@ -121,47 +121,47 @@ importers:
         specifier: ^2.4.0
         version: 2.4.0(@types/react@19.1.4)(fp-ts@2.16.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       postcss:
-        specifier: ^8.5.3
-        version: 8.5.3
+        specifier: ^8.5.4
+        version: 8.5.4
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
       prettier-plugin-svelte:
         specifier: ^3.4.0
-        version: 3.4.0(prettier@3.5.3)(svelte@4.2.19)
+        version: 3.4.0(prettier@3.5.3)(svelte@4.2.20)
       sass:
-        specifier: ^1.88.0
-        version: 1.88.0
+        specifier: ^1.89.1
+        version: 1.89.1
       socket.io-client:
         specifier: ^4.8.1
         version: 4.8.1
       svelte:
-        specifier: ^4.2.19
-        version: 4.2.19
+        specifier: ^4.2.20
+        version: 4.2.20
       svelte-check:
         specifier: ^3.8.6
-        version: 3.8.6(postcss-load-config@4.0.2(postcss@8.5.3))(postcss@8.5.3)(sass@1.88.0)(svelte@4.2.19)
+        version: 3.8.6(postcss-load-config@4.0.2(postcss@8.5.4))(postcss@8.5.4)(sass@1.89.1)(svelte@4.2.20)
       svelte-copy:
         specifier: ^1.4.2
-        version: 1.4.2(svelte@4.2.19)
+        version: 1.4.2(svelte@4.2.20)
       svelte-flatlist:
         specifier: ^0.2.6
         version: 0.2.6
       svelte-material-ui:
         specifier: ^7.0.0
-        version: 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+        version: 7.0.0(svelte@4.2.20)(typescript@5.8.3)
       svelte-persisted-store:
         specifier: ^0.12.0
-        version: 0.12.0(svelte@4.2.19)
+        version: 0.12.0(svelte@4.2.20)
       svelte-plotly.js:
         specifier: 1.0.0
-        version: 1.0.0(plotly.js-dist@2.35.2)(svelte@4.2.19)
+        version: 1.0.0(plotly.js-dist@2.35.2)(svelte@4.2.20)
       svelte-sonner:
         specifier: ^0.3.28
-        version: 0.3.28(svelte@4.2.19)
+        version: 0.3.28(svelte@4.2.20)
       svelte-splitpanes:
         specifier: ^8.0.9
-        version: 8.0.9(svelte@4.2.19)
+        version: 8.0.9(svelte@4.2.20)
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -175,11 +175,11 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
       unplugin-auto-import:
-        specifier: ^19.2.0
-        version: 19.2.0
+        specifier: ^19.3.0
+        version: 19.3.0
       vite:
         specifier: ^5.4.19
-        version: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)
+        version: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)
 
 packages:
 
@@ -940,8 +940,8 @@ packages:
     engines: {node: '>= 10'}
     hasBin: true
 
-  '@tauri-apps/plugin-dialog@2.2.1':
-    resolution: {integrity: sha512-wZmCouo4PgTosh/UoejPw9DPs6RllS5Pp3fuOV2JobCu36mR5AXU2MzU9NZiVaFi/5Zfc8RN0IhcZHnksJ1o8A==}
+  '@tauri-apps/plugin-dialog@2.2.2':
+    resolution: {integrity: sha512-Pm9qnXQq8ZVhAMFSEPwxvh+nWb2mk7LASVlNEHYaksHvcz8P6+ElR5U5dNL9Ofrm+uwhh1/gYKWswK8JJJAh6A==}
 
   '@tauri-apps/plugin-fs@2.2.1':
     resolution: {integrity: sha512-KdGzvvA4Eg0Dhw55MwczFbjxLxsTx0FvwwC/0StXlr6IxwPUxh5ziZQoaugkBFs8t+wfebdQrjBEzd8NmmDXNw==}
@@ -987,9 +987,6 @@ packages:
 
   '@types/estree-jsx@1.0.5':
     resolution: {integrity: sha512-52CcUVNFyfb1A2ALocQw/Dd1BQFNmSdkuC3BkZ6iqhdMfQz7JWOFRuJFloOzjk+6WijU56m9oKXFAXc7o3Towg==}
-
-  '@types/estree@1.0.5':
-    resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -1072,11 +1069,6 @@ packages:
   accepts@2.0.0:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
     engines: {node: '>= 0.6'}
-
-  acorn@8.11.3:
-    resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
 
   acorn@8.14.1:
     resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
@@ -1695,9 +1687,6 @@ packages:
   immer@10.1.1:
     resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
 
-  immutable@5.0.3:
-    resolution: {integrity: sha512-P8IdPQHq3lA1xVeBRi5VPqUm5HDgKnx0Ru51wZz5mjxHr5n3RWhjIpOFU7ybkUxfB+5IToy+OLaHYDBIWsv+uw==}
-
   immutable@5.1.2:
     resolution: {integrity: sha512-qHKXW1q6liAk1Oys6umoaZbDRqjcjgSrbnrifHsfsttza7zcvRAsL7mMV6xWcyhwQy7Xj5v4hhbr6b+iDYwlmQ==}
 
@@ -2180,8 +2169,8 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  nanoid@3.3.8:
-    resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
+  nanoid@3.3.11:
+    resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -2375,8 +2364,8 @@ packages:
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
-  postcss@8.5.3:
-    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
+  postcss@8.5.4:
+    resolution: {integrity: sha512-QSa9EBe+uwlGTFmHsPKokv3B/oEMQZxfqW0QqNCyhpa6mB1afzulwn8hihglqAb2pOw+BJgNlmXQ8la2VeHB7w==}
     engines: {node: ^10 || ^12 || >=14}
 
   prettier-plugin-svelte@3.4.0:
@@ -2511,8 +2500,8 @@ packages:
   sander@0.5.1:
     resolution: {integrity: sha512-3lVqBir7WuKDHGrKRDn/1Ye3kwpXaDOMsiRP1wd6wpZW56gJhsbp5RqQpA6JG/P+pkXizygnr1dKR8vzWaVsfA==}
 
-  sass@1.88.0:
-    resolution: {integrity: sha512-sF6TWQqjFvr4JILXzG4ucGOLELkESHL+I5QJhh7CNaE+Yge0SI+ehCatsXhJ7ymU1hAFcIS3/PBpjdIbXoyVbg==}
+  sass@1.89.1:
+    resolution: {integrity: sha512-eMLLkl+qz7tx/0cJ9wI+w09GQ2zodTkcE/aVfywwdlRcI3EO19xGnbmJwg/JMIm+5MxVJ6outddLZ4Von4E++Q==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -2747,8 +2736,8 @@ packages:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
 
-  svelte@4.2.19:
-    resolution: {integrity: sha512-IY1rnGr6izd10B0A8LqsBfmlT5OILVuZ7XsI0vdGPEvuonFV7NYEUK4dAkm9Zg2q0Um92kYjTpS1CAP3Nh/KWw==}
+  svelte@4.2.20:
+    resolution: {integrity: sha512-eeEgGc2DtiUil5ANdtd8vPwt9AgaMdnuUFnPft9F5oMvU/FHu5IHFic+p1dR/UOB7XU2mX2yHW+NcTch4DCh5Q==}
     engines: {node: '>=16'}
 
   swagger-ui-dist@5.21.0:
@@ -2867,8 +2856,8 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
-  unplugin-auto-import@19.2.0:
-    resolution: {integrity: sha512-DGRHg86nUDKEYpny1p2kFZjeLg7kHQmknsPQ8krAshvpeypps7dFxNBsAqhBaxYINjetbgQilF8wbjuZxpdomg==}
+  unplugin-auto-import@19.3.0:
+    resolution: {integrity: sha512-iIi0u4Gq2uGkAOGqlPJOAMI8vocvjh1clGTfSK4SOrJKrt+tirrixo/FjgBwXQNNdS7ofcr7OxzmOb/RjWxeEQ==}
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2
@@ -2883,8 +2872,8 @@ packages:
     resolution: {integrity: sha512-8U/MtpkPkkk3Atewj1+RcKIjb5WBimZ/WSLhhR3w6SsIj8XJuKTacSP8g+2JhfSGw0Cb125Y+2zA/IzJZDVbhA==}
     engines: {node: '>=18.12.0'}
 
-  unplugin@2.3.2:
-    resolution: {integrity: sha512-3n7YA46rROb3zSj8fFxtxC/PqoyvYQ0llwz9wtUPUutr9ig09C8gGo5CWCwHrUzlqC1LLR43kxp5vEIyH1ac1w==}
+  unplugin@2.3.5:
+    resolution: {integrity: sha512-RyWSb5AHmGtjjNQ6gIlA67sHOsWpsbWpwDokLwTcejVdOjEkJZh7QKu14J00gDDVSh8kGH4KYC/TNBceXFZhtw==}
     engines: {node: '>=18.12.0'}
 
   update-browserslist-db@1.1.1:
@@ -3655,12 +3644,12 @@ snapshots:
       '@material/theme': 14.0.0
       tslib: 2.8.1
 
-  '@modyfi/vite-plugin-yaml@1.1.1(rollup@4.40.2)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))':
+  '@modyfi/vite-plugin-yaml@1.1.1(rollup@4.40.2)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))':
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.40.2)
       js-yaml: 4.1.0
       tosource: 2.0.0-alpha.3
-      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)
+      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)
     transitivePeerDependencies:
       - rollup
 
@@ -3806,7 +3795,7 @@ snapshots:
 
   '@scarf/scarf@1.4.0': {}
 
-  '@smui-extra/accordion@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui-extra/accordion@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/animation': 14.0.0
       '@material/elevation': 14.0.0
@@ -3814,60 +3803,60 @@ snapshots:
       '@material/ripple': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/paper': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/paper': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui-extra/autocomplete@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui-extra/autocomplete@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/list': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/menu': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/menu-surface': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/textfield': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/list': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/menu': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/menu-surface': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/textfield': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui-extra/badge@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui-extra/badge@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/rtl': 14.0.0
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui-extra/bottom-app-bar@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui-extra/bottom-app-bar@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/theme': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/paper': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/paper': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/banner@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/banner@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/banner': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/button@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/button@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/button': 14.0.0
       '@material/elevation': 14.0.0
@@ -3875,405 +3864,405 @@ snapshots:
       '@material/ripple': 14.0.0
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/card@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/card@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/card': 14.0.0
-      '@smui/button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/icon-button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/icon-button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/checkbox@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/checkbox@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/checkbox': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/chips@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/chips@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/chips': 14.0.0
       '@material/dom': 14.0.0
       '@material/rtl': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/circular-progress@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/circular-progress@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/circular-progress': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/common@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/common@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/data-table@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/data-table@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/data-table': 14.0.0
       '@material/dom': 14.0.0
-      '@smui/checkbox': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/icon-button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/select': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/checkbox': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/icon-button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/select': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/dialog@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/dialog@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/button': 14.0.0
       '@material/dialog': 14.0.0
       '@material/dom': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/drawer@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/drawer@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/drawer': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/fab@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/fab@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/fab': 14.0.0
       '@material/feature-targeting': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/floating-label@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/floating-label@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/floating-label': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/form-field@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/form-field@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/form-field': 14.0.0
       '@material/rtl': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/icon-button@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/icon-button@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/density': 14.0.0
       '@material/icon-button': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/image-list@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/image-list@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/image-list': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/layout-grid@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/layout-grid@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/layout-grid': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/line-ripple@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/line-ripple@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/line-ripple': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/linear-progress@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/linear-progress@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/linear-progress': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/list@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/list@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/feature-targeting': 14.0.0
       '@material/list': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/menu-surface@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/menu-surface@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/animation': 14.0.0
       '@material/menu-surface': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/menu@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/menu@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/menu': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/list': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/menu-surface': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/list': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/menu-surface': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/notched-outline@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/notched-outline@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/notched-outline': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/floating-label': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/floating-label': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/paper@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/paper@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/elevation': 14.0.0
       '@material/feature-targeting': 14.0.0
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/radio@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/radio@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/radio': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/ripple@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/ripple@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/ripple': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/segmented-button@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/segmented-button@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/base': 14.0.0
       '@material/ripple': 14.0.0
       '@material/segmented-button': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/select@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/select@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/ripple': 14.0.0
       '@material/rtl': 14.0.0
       '@material/select': 14.0.0
       '@material/theme': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/floating-label': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/line-ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/list': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/menu': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/menu-surface': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/notched-outline': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/floating-label': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/line-ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/list': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/menu': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/menu-surface': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/notched-outline': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/slider@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/slider@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/slider': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/snackbar@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/snackbar@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/feature-targeting': 14.0.0
       '@material/snackbar': 14.0.0
-      '@smui/button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/icon-button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/icon-button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/switch@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/switch@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/switch': 14.0.0
       '@material/theme': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/tab-bar@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/tab-bar@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/tab-bar': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tab': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tab-scroller': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tab': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tab-scroller': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/tab-indicator@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/tab-indicator@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/tab-indicator': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/tab-scroller@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/tab-scroller@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/tab-scroller': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/tab@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/tab@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/tab': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tab-indicator': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tab-indicator': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/textfield@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/textfield@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/dom': 14.0.0
       '@material/feature-targeting': 14.0.0
       '@material/ripple': 14.0.0
       '@material/rtl': 14.0.0
       '@material/textfield': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/floating-label': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/line-ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/notched-outline': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/floating-label': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/line-ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/notched-outline': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/tooltip@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/tooltip@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/tooltip': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/top-app-bar@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/top-app-bar@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/top-app-bar': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  '@smui/touch-target@7.0.0(svelte@4.2.19)(typescript@5.8.3)':
+  '@smui/touch-target@7.0.0(svelte@4.2.20)(typescript@5.8.3)':
     dependencies:
       '@material/touch-target': 14.0.0
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      svelte2tsx: 0.7.21(svelte@4.2.19)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      svelte2tsx: 0.7.21(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
@@ -4282,26 +4271,26 @@ snapshots:
 
   '@sveltejs/svelte-virtual-list@3.0.1': {}
 
-  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)))(svelte@4.2.19)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.20)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)))(svelte@4.2.20)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 3.1.2(svelte@4.2.19)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))
+      '@sveltejs/vite-plugin-svelte': 3.1.2(svelte@4.2.20)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))
       debug: 4.3.4
-      svelte: 4.2.19
-      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)
+      svelte: 4.2.20
+      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))':
+  '@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.20)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)))(svelte@4.2.19)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.20)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)))(svelte@4.2.20)(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))
       debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.10
-      svelte: 4.2.19
-      svelte-hmr: 0.16.0(svelte@4.2.19)
-      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)
-      vitefu: 0.2.5(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0))
+      svelte: 4.2.20
+      svelte-hmr: 0.16.0(svelte@4.2.20)
+      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)
+      vitefu: 0.2.5(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1))
     transitivePeerDependencies:
       - supports-color
 
@@ -4362,7 +4351,7 @@ snapshots:
       '@tauri-apps/cli-win32-ia32-msvc': 2.5.0
       '@tauri-apps/cli-win32-x64-msvc': 2.5.0
 
-  '@tauri-apps/plugin-dialog@2.2.1':
+  '@tauri-apps/plugin-dialog@2.2.2':
     dependencies:
       '@tauri-apps/api': 2.5.0
 
@@ -4420,8 +4409,6 @@ snapshots:
   '@types/estree-jsx@1.0.5':
     dependencies:
       '@types/estree': 1.0.7
-
-  '@types/estree@1.0.5': {}
 
   '@types/estree@1.0.6': {}
 
@@ -4511,8 +4498,6 @@ snapshots:
       mime-types: 3.0.1
       negotiator: 1.0.0
 
-  acorn@8.11.3: {}
-
   acorn@8.14.1: {}
 
   animate.css@4.1.1: {}
@@ -4572,14 +4557,14 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  autoprefixer@10.4.21(postcss@8.5.3):
+  autoprefixer@10.4.21(postcss@8.5.4):
     dependencies:
       browserslist: 4.24.4
       caniuse-lite: 1.0.30001707
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.1
-      postcss: 8.5.3
+      postcss: 8.5.4
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -4695,9 +4680,9 @@ snapshots:
 
   code-red@1.0.4:
     dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.15
-      '@types/estree': 1.0.5
-      acorn: 8.11.3
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@types/estree': 1.0.7
+      acorn: 8.14.1
       estree-walker: 3.0.3
       periscopic: 3.1.0
 
@@ -4747,9 +4732,9 @@ snapshots:
 
   cookie@0.7.2: {}
 
-  cooltipz-css@2.3.1(sass@1.88.0):
+  cooltipz-css@2.3.1(sass@1.89.1):
     optionalDependencies:
-      sass: 1.88.0
+      sass: 1.89.1
 
   cors@2.8.5:
     dependencies:
@@ -4778,12 +4763,12 @@ snapshots:
 
   culori@3.3.0: {}
 
-  daisyui@4.12.10(postcss@8.5.3):
+  daisyui@4.12.10(postcss@8.5.4):
     dependencies:
       css-selector-tokenizer: 0.8.0
       culori: 3.3.0
       picocolors: 1.0.0
-      postcss-js: 4.0.1(postcss@8.5.3)
+      postcss-js: 4.0.1(postcss@8.5.4)
     transitivePeerDependencies:
       - postcss
 
@@ -5014,7 +4999,7 @@ snapshots:
 
   estree-walker@3.0.3:
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.7
 
   etag@1.8.1: {}
 
@@ -5252,8 +5237,6 @@ snapshots:
 
   immer@10.1.1: {}
 
-  immutable@5.0.3: {}
-
   immutable@5.1.2: {}
 
   inflight@1.0.6:
@@ -5366,7 +5349,7 @@ snapshots:
 
   is-reference@3.0.2:
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.7
 
   is-regex@1.2.1:
     dependencies:
@@ -5503,9 +5486,9 @@ snapshots:
 
   lru-cache@10.2.2: {}
 
-  lucide-svelte@0.485.0(svelte@4.2.19):
+  lucide-svelte@0.485.0(svelte@4.2.20):
     dependencies:
-      svelte: 4.2.19
+      svelte: 4.2.20
 
   magic-string@0.30.10:
     dependencies:
@@ -5835,7 +5818,7 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.8: {}
+  nanoid@3.3.11: {}
 
   negotiator@0.6.4: {}
 
@@ -5956,7 +5939,7 @@ snapshots:
 
   periscopic@3.1.0:
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.7
       estree-walker: 3.0.3
       is-reference: 3.0.2
 
@@ -5990,28 +5973,28 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss-import@15.1.0(postcss@8.5.3):
+  postcss-import@15.1.0(postcss@8.5.4):
     dependencies:
-      postcss: 8.5.3
+      postcss: 8.5.4
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-js@4.0.1(postcss@8.5.3):
+  postcss-js@4.0.1(postcss@8.5.4):
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.5.3
+      postcss: 8.5.4
 
-  postcss-load-config@4.0.2(postcss@8.5.3):
+  postcss-load-config@4.0.2(postcss@8.5.4):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.4.2
     optionalDependencies:
-      postcss: 8.5.3
+      postcss: 8.5.4
 
-  postcss-nested@6.2.0(postcss@8.5.3):
+  postcss-nested@6.2.0(postcss@8.5.4):
     dependencies:
-      postcss: 8.5.3
+      postcss: 8.5.4
       postcss-selector-parser: 6.1.2
 
   postcss-selector-parser@6.0.10:
@@ -6026,16 +6009,16 @@ snapshots:
 
   postcss-value-parser@4.2.0: {}
 
-  postcss@8.5.3:
+  postcss@8.5.4:
     dependencies:
-      nanoid: 3.3.8
+      nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prettier-plugin-svelte@3.4.0(prettier@3.5.3)(svelte@4.2.19):
+  prettier-plugin-svelte@3.4.0(prettier@3.5.3)(svelte@4.2.20):
     dependencies:
       prettier: 3.5.3
-      svelte: 4.2.19
+      svelte: 4.2.20
 
   prettier@3.5.3: {}
 
@@ -6227,10 +6210,10 @@ snapshots:
       mkdirp: 0.5.6
       rimraf: 2.7.1
 
-  sass@1.88.0:
+  sass@1.89.1:
     dependencies:
       chokidar: 4.0.1
-      immutable: 5.0.3
+      immutable: 5.1.2
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.4.1
@@ -6439,14 +6422,14 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@3.8.6(postcss-load-config@4.0.2(postcss@8.5.3))(postcss@8.5.3)(sass@1.88.0)(svelte@4.2.19):
+  svelte-check@3.8.6(postcss-load-config@4.0.2(postcss@8.5.4))(postcss@8.5.4)(sass@1.89.1)(svelte@4.2.20):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 3.6.0
       picocolors: 1.0.0
       sade: 1.8.1
-      svelte: 4.2.19
-      svelte-preprocess: 5.1.4(postcss-load-config@4.0.2(postcss@8.5.3))(postcss@8.5.3)(sass@1.88.0)(svelte@4.2.19)(typescript@5.8.3)
+      svelte: 4.2.20
+      svelte-preprocess: 5.1.4(postcss-load-config@4.0.2(postcss@8.5.4))(postcss@8.5.4)(sass@1.89.1)(svelte@4.2.20)(typescript@5.8.3)
       typescript: 5.8.3
     transitivePeerDependencies:
       - '@babel/core'
@@ -6459,113 +6442,113 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-copy@1.4.2(svelte@4.2.19):
+  svelte-copy@1.4.2(svelte@4.2.20):
     dependencies:
-      svelte: 4.2.19
+      svelte: 4.2.20
 
   svelte-flatlist@0.2.6: {}
 
-  svelte-hmr@0.16.0(svelte@4.2.19):
+  svelte-hmr@0.16.0(svelte@4.2.20):
     dependencies:
-      svelte: 4.2.19
+      svelte: 4.2.20
 
-  svelte-material-ui@7.0.0(svelte@4.2.19)(typescript@5.8.3):
+  svelte-material-ui@7.0.0(svelte@4.2.20)(typescript@5.8.3):
     dependencies:
-      '@smui-extra/accordion': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui-extra/autocomplete': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui-extra/badge': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui-extra/bottom-app-bar': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/banner': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/card': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/checkbox': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/chips': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/circular-progress': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/common': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/data-table': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/dialog': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/drawer': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/fab': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/floating-label': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/form-field': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/icon-button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/image-list': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/layout-grid': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/line-ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/linear-progress': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/list': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/menu': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/menu-surface': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/notched-outline': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/paper': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/radio': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/ripple': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/segmented-button': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/select': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/slider': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/snackbar': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/switch': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tab': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tab-bar': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tab-indicator': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tab-scroller': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/textfield': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/tooltip': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/top-app-bar': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
-      '@smui/touch-target': 7.0.0(svelte@4.2.19)(typescript@5.8.3)
+      '@smui-extra/accordion': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui-extra/autocomplete': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui-extra/badge': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui-extra/bottom-app-bar': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/banner': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/card': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/checkbox': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/chips': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/circular-progress': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/common': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/data-table': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/dialog': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/drawer': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/fab': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/floating-label': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/form-field': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/icon-button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/image-list': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/layout-grid': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/line-ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/linear-progress': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/list': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/menu': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/menu-surface': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/notched-outline': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/paper': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/radio': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/ripple': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/segmented-button': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/select': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/slider': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/snackbar': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/switch': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tab': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tab-bar': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tab-indicator': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tab-scroller': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/textfield': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/tooltip': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/top-app-bar': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
+      '@smui/touch-target': 7.0.0(svelte@4.2.20)(typescript@5.8.3)
     transitivePeerDependencies:
       - svelte
       - typescript
 
-  svelte-persisted-store@0.12.0(svelte@4.2.19):
+  svelte-persisted-store@0.12.0(svelte@4.2.20):
     dependencies:
-      svelte: 4.2.19
+      svelte: 4.2.20
 
-  svelte-plotly.js@1.0.0(plotly.js-dist@2.35.2)(svelte@4.2.19):
+  svelte-plotly.js@1.0.0(plotly.js-dist@2.35.2)(svelte@4.2.20):
     dependencies:
       '@types/lodash-es': 4.17.12
       '@types/plotly.js': 2.33.4
       lodash-es: 4.17.21
       plotly.js-dist: 2.35.2
-      svelte: 4.2.19
+      svelte: 4.2.20
 
-  svelte-preprocess@5.1.4(postcss-load-config@4.0.2(postcss@8.5.3))(postcss@8.5.3)(sass@1.88.0)(svelte@4.2.19)(typescript@5.8.3):
+  svelte-preprocess@5.1.4(postcss-load-config@4.0.2(postcss@8.5.4))(postcss@8.5.4)(sass@1.89.1)(svelte@4.2.20)(typescript@5.8.3):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
       magic-string: 0.30.10
       sorcery: 0.11.0
       strip-indent: 3.0.0
-      svelte: 4.2.19
+      svelte: 4.2.20
     optionalDependencies:
-      postcss: 8.5.3
-      postcss-load-config: 4.0.2(postcss@8.5.3)
-      sass: 1.88.0
+      postcss: 8.5.4
+      postcss-load-config: 4.0.2(postcss@8.5.4)
+      sass: 1.89.1
       typescript: 5.8.3
 
-  svelte-sonner@0.3.28(svelte@4.2.19):
+  svelte-sonner@0.3.28(svelte@4.2.20):
     dependencies:
-      svelte: 4.2.19
+      svelte: 4.2.20
 
-  svelte-splitpanes@8.0.9(svelte@4.2.19):
+  svelte-splitpanes@8.0.9(svelte@4.2.20):
     dependencies:
       esm-env-robust: 0.0.3
-      svelte: 4.2.19
+      svelte: 4.2.20
 
-  svelte2tsx@0.7.21(svelte@4.2.19)(typescript@5.8.3):
+  svelte2tsx@0.7.21(svelte@4.2.20)(typescript@5.8.3):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 4.2.19
+      svelte: 4.2.20
       typescript: 5.8.3
 
-  svelte@4.2.19:
+  svelte@4.2.20:
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@jridgewell/sourcemap-codec': 1.4.15
+      '@jridgewell/sourcemap-codec': 1.5.0
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/estree': 1.0.5
-      acorn: 8.11.3
+      '@types/estree': 1.0.7
+      acorn: 8.14.1
       aria-query: 5.3.0
       axobject-query: 4.0.0
       code-red: 1.0.4
@@ -6573,7 +6556,7 @@ snapshots:
       estree-walker: 3.0.3
       is-reference: 3.0.2
       locate-character: 3.0.0
-      magic-string: 0.30.10
+      magic-string: 0.30.17
       periscopic: 3.1.0
 
   swagger-ui-dist@5.21.0:
@@ -6596,11 +6579,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.1.1
-      postcss: 8.5.3
-      postcss-import: 15.1.0(postcss@8.5.3)
-      postcss-js: 4.0.1(postcss@8.5.3)
-      postcss-load-config: 4.0.2(postcss@8.5.3)
-      postcss-nested: 6.2.0(postcss@8.5.3)
+      postcss: 8.5.4
+      postcss-import: 15.1.0(postcss@8.5.4)
+      postcss-js: 4.0.1(postcss@8.5.4)
+      postcss-load-config: 4.0.2(postcss@8.5.4)
+      postcss-nested: 6.2.0(postcss@8.5.4)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -6720,7 +6703,7 @@ snapshots:
       scule: 1.3.0
       strip-literal: 3.0.0
       tinyglobby: 0.2.13
-      unplugin: 2.3.2
+      unplugin: 2.3.5
       unplugin-utils: 0.2.4
 
   unist-util-is@6.0.0:
@@ -6748,13 +6731,13 @@ snapshots:
 
   unpipe@1.0.0: {}
 
-  unplugin-auto-import@19.2.0:
+  unplugin-auto-import@19.3.0:
     dependencies:
       local-pkg: 1.1.1
       magic-string: 0.30.17
       picomatch: 4.0.2
       unimport: 4.2.0
-      unplugin: 2.3.2
+      unplugin: 2.3.5
       unplugin-utils: 0.2.4
 
   unplugin-utils@0.2.4:
@@ -6762,7 +6745,7 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.2
 
-  unplugin@2.3.2:
+  unplugin@2.3.5:
     dependencies:
       acorn: 8.14.1
       picomatch: 4.0.2
@@ -6803,20 +6786,20 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0):
+  vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.5.3
+      postcss: 8.5.4
       rollup: 4.40.2
     optionalDependencies:
       '@types/node': 22.0.2
       fsevents: 2.3.3
       lightningcss: 1.30.1
-      sass: 1.88.0
+      sass: 1.89.1
 
-  vitefu@0.2.5(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)):
+  vitefu@0.2.5(vite@5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)):
     optionalDependencies:
-      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.88.0)
+      vite: 5.4.19(@types/node@22.0.2)(lightningcss@1.30.1)(sass@1.89.1)
 
   webidl-conversions@3.0.1: {}
 
