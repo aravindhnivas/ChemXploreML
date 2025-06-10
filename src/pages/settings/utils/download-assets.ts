@@ -24,9 +24,9 @@ let assets_installing = false;
 
 export const asset_name_prefix = import.meta.env.VITE_pypackage;
 
-export const remove_asset_folder = async () => {
+export const remove_asset_folder = async (filename: string) => {
     try {
-        const asset_folder = await path.join(await path.appLocalDataDir(), asset_name_prefix);
+        const asset_folder = await path.join(await path.appLocalDataDir(), filename);
         if (!(await fs.exists(asset_folder))) return;
         outputbox.warn(`Deleting the existing folder: ${asset_folder}`);
         await fs.remove(asset_folder, { recursive: true });
@@ -34,7 +34,7 @@ export const remove_asset_folder = async () => {
         return Promise.resolve(asset_folder + ' folder deleted');
     } catch (error) {
         if (error instanceof Error) Alert.error(error);
-        return Promise.reject(`Could not delete the existing ${asset_name_prefix} folder\n ${JSON.stringify(error)}`);
+        return Promise.reject(`Could not delete the existing ${filename} folder\n ${JSON.stringify(error)}`);
     }
 };
 
@@ -126,7 +126,9 @@ export function unZIP(installation_request = true) {
             await stopServer({ update_info: false });
         }
 
-        await remove_asset_folder();
+        await remove_asset_folder('umdapy');
+        await remove_asset_folder(asset_name_prefix);
+
         const cmd = shell.Command.create('tar', ['-xf', asset_zipfile, '-C', localdir]);
 
         let err: string;
