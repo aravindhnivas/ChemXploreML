@@ -26,6 +26,7 @@
     import CustomInput from '$lib/components/CustomInput.svelte';
     import Loadingbtn from '$lib/components/Loadingbtn.svelte';
     import { asset_download_required } from '$settings/utils/stores';
+    import CustomSelect from '$lib/components/CustomSelect.svelte';
 
     onMount(async () => {
         console.log('Mounting Configuration');
@@ -89,7 +90,14 @@
 {/if}
 
 <div class="flex items-end gap-1">
-    <CustomInput bind:value={$pyPackage} label="Python program" lock />
+    <CustomSelect
+        bind:value={$pyPackage}
+        label="Python program"
+        items={[import.meta.env.VITE_pypackage, import.meta.env.VITE_pypackage + '-dev']}
+        enabled_lock_mode
+        lock={import.meta.env.PROD || $pyServerReady}
+    />
+
     <Loadingbtn
         name="get PyVersion"
         callback={() => {
