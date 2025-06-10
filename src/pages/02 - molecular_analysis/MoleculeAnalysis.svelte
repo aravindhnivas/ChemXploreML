@@ -24,7 +24,6 @@
 
     const compute_molecular_analysis = async () => {
         if (!smiles) return toast.error('Please provide a SMILES string');
-        // console.log('Analyse', smiles);
         return {
             pyfile: 'molecule_analysis.generate_analysis',
             args: {
@@ -56,11 +55,7 @@
     <CustomPanel title="Molecular structure" open={true}>
         <Molecule bind:smiles />
     </CustomPanel>
-    <!-- <div class="divider"></div> -->
-    <!-- <div class="m-auto">
-        <Loadingbtn bind:btn={compute_btn} name="Analyse" callback={compute_molecular_analysis} on:result={onResult} />
-    </div> -->
-    <!-- <div class="divider"></div> -->
+
     <CustomPanel title="Basic properties">
         <div class="m-auto">
             <Loadingbtn
@@ -78,6 +73,7 @@
         </Set>
 
         <div class="divider"></div>
+
         {#if !isEmpty(full_analysis)}
             <PropertiesBox {selected_properties} {full_analysis} {all_properties} />
         {:else}
