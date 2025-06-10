@@ -91,7 +91,7 @@
         },
         {
           "args": true,
-          "cmd": "/Users/aravindhnivas/Documents/GitHub/cxml_py/scripts/dist/cxml_py/cxml_py",
+          "cmd": "/Volumes/DataDock2TB/Documents/GitHub/cxml_py/scripts/dist/cxml_py/cxml_py",
           "name": "cxml_py-dev",
           "sidecar": false
         },
