@@ -2,7 +2,7 @@
     export let title: string = 'Title';
     export let label: string = 'Open';
     export let open: boolean = false;
-
+    export let show_button: boolean = true;
     let dialog_element: HTMLDialogElement;
 
     const openModal = () => {
@@ -12,16 +12,21 @@
     };
 
     $: if (dialog_element && open) dialog_element.showModal();
+    // $: console.log({ open });
 </script>
 
 <slot name="button-slot" {openModal} {label}>
-    <button class="flex btn btn-sm btn-outline" on:click={openModal}>{label}</button>
+    {#if show_button}
+        <button class="flex btn btn-sm btn-outline" on:click={openModal}>{label}</button>
+    {/if}
 </slot>
 
 <dialog bind:this={dialog_element} class="modal">
     <div class="modal-box w-11/12 max-w-5xl">
         <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" on:click={() => (open = false)}>
+                ✕
+            </button>
         </form>
         <h3 class="text-lg font-bold">{title}</h3>
         <p class="py-4"><slot /></p>

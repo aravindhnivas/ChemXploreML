@@ -159,19 +159,13 @@
             <span class="loading loading-dots loading-sm"></span>
         {/if}
         {name}
-        <!-- {#if $redis_server_mode && subprocess}
-            <CalendarCheck size="20" />
-        {/if} -->
 
-        <!-- {#if $redis_server_mode && redis_process_count > 0}
-            <div class="badge">{redis_process_count}</div>
-        {:else if process_count > 0}
-            <div class="badge">{process_count}</div>
-        {/if} -->
         {#if process_count > 0}
             <div class="badge">{process_count}</div>
         {/if}
     </button>
+
+    <slot name="button-slot" />
 
     {#if $redis_server_mode && subprocess}
         <SchedularTrack bind:job_id />

@@ -1,8 +1,11 @@
 <script lang="ts">
-    import { RotateCcw } from 'lucide-svelte/icons';
+    import { RotateCcw, Settings } from 'lucide-svelte/icons';
     import { Stage } from 'ngl';
     import Loadingbtn from './Loadingbtn.svelte';
     import type { Component } from 'ngl';
+    import Modal from './modal/Modal.svelte';
+    import CustomInput from './CustomInput.svelte';
+    import CustomSelect from './CustomSelect.svelte';
 
     export let smiles = '';
     export let width = 700;
@@ -112,9 +115,17 @@
 
     const optimize_3d_structure = async () => {
         if (!smiles) return toast.error('Please provide a SMILES string');
+        const config = {
+            max_attempts: Number(max_attempts),
+            random_seed: Number(random_seed),
+            optimization_steps: Number(optimization_steps),
+            energy_threshold: Number(energy_threshold),
+            force_field,
+        };
+
         return {
             pyfile: 'molecule_analysis.optimize_3d_structure',
-            args: { smiles },
+            args: { smiles, config },
         };
     };
 
@@ -123,6 +134,13 @@
         const { dataFromPython } = e.detail;
         optimized_pdb = dataFromPython.optimized_pdb;
     };
+
+    let settings_modal_open = false;
+    let max_attempts = 10;
+    let random_seed = 42;
+    let force_field: 'MMFF94s' | 'MMFF94' | 'UFF' = 'MMFF94s';
+    let optimization_steps = 1000;
+    let energy_threshold = 1e-4;
 </script>
 
 <div class="flex">
@@ -152,5 +170,21 @@
         name="Optimize-3D"
         callback={optimize_3d_structure}
         on:result={on_optimize_result}
-    />
+    >
+        <svelte:fragment slot="button-slot">
+            <button class="btn btn-sm btn-outline join-item" on:click={() => (settings_modal_open = true)}>
+                <Settings size="20" />
+            </button>
+        </svelte:fragment>
+    </Loadingbtn>
+
+    <Modal title="Optimize parameters" bind:open={settings_modal_open} show_button={false}>
+        <div class="grid grid-cols-2 gap-2">
+            <CustomInput label="Max Attempts" bind:value={max_attempts} />
+            <CustomInput label="Random Seed" bind:value={random_seed} />
+            <CustomInput label="Optimization Steps" bind:value={optimization_steps} />
+            <CustomInput label="Energy Threshold" bind:value={energy_threshold} />
+            <CustomSelect label="Force Field" bind:value={force_field} items={['MMFF94s', 'MMFF94', 'UFF']} />
+        </div>
+    </Modal>
 </div>
