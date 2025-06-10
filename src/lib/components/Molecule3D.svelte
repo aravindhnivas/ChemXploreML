@@ -141,6 +141,35 @@
     let force_field: 'MMFF94s' | 'MMFF94' | 'UFF' = 'MMFF94s';
     let optimization_steps = 1000;
     let energy_threshold = 1e-4;
+
+    const save_settings = () => {
+        console.log({ max_attempts, random_seed, force_field, optimization_steps, energy_threshold });
+
+        localStorage.setItem(
+            'molecule_3d_optimize_settings',
+            JSON.stringify({ max_attempts, random_seed, force_field, optimization_steps, energy_threshold }),
+        );
+    };
+
+    const reset_settings = () => {
+        max_attempts = 10;
+        random_seed = 42;
+        force_field = 'MMFF94s';
+        optimization_steps = 1000;
+        energy_threshold = 1e-4;
+    };
+
+    onMount(() => {
+        const settings = localStorage.getItem('molecule_3d_optimize_settings');
+        if (settings) {
+            const parsed_settings = JSON.parse(settings);
+            max_attempts = parsed_settings.max_attempts;
+            random_seed = parsed_settings.random_seed;
+            force_field = parsed_settings.force_field;
+            optimization_steps = parsed_settings.optimization_steps;
+            energy_threshold = parsed_settings.energy_threshold;
+        }
+    });
 </script>
 
 <div class="flex">
@@ -178,13 +207,27 @@
         </svelte:fragment>
     </Loadingbtn>
 
-    <Modal title="Optimize parameters" bind:open={settings_modal_open} show_button={false}>
+    <Modal title="Optimize parameters" bind:open={settings_modal_open} show_button={false} let:closeModal>
         <div class="grid grid-cols-2 gap-2">
             <CustomInput label="Max Attempts" bind:value={max_attempts} />
             <CustomInput label="Random Seed" bind:value={random_seed} />
             <CustomInput label="Optimization Steps" bind:value={optimization_steps} />
             <CustomInput label="Energy Threshold" bind:value={energy_threshold} />
             <CustomSelect label="Force Field" bind:value={force_field} items={['MMFF94s', 'MMFF94', 'UFF']} />
+        </div>
+
+        <div class="flex justify-end gap-2">
+            <button class="btn btn-sm btn-error" on:click={reset_settings}>Reset</button>
+            <button
+                class="btn btn-sm btn-primary"
+                on:click={() => {
+                    save_settings();
+                    closeModal();
+                    optimize_btn?.click();
+                }}
+            >
+                Save
+            </button>
         </div>
     </Modal>
 </div>
