@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { safeJsonParse } from './../utils/index.ts';
     import { RotateCcw, Settings } from 'lucide-svelte/icons';
     import { Stage } from 'ngl';
     import Loadingbtn from './Loadingbtn.svelte';
@@ -162,7 +163,19 @@
     onMount(() => {
         const settings = localStorage.getItem('molecule_3d_optimize_settings');
         if (settings) {
-            const parsed_settings = JSON.parse(settings);
+            const parsed_settings = safeJsonParse<{
+                max_attempts: number;
+                random_seed: number;
+                force_field: 'MMFF94s' | 'MMFF94' | 'UFF';
+                optimization_steps: number;
+                energy_threshold: number;
+            }>(settings);
+            if (!parsed_settings) {
+                reset_settings();
+                toast.error('Invalid settings. Resetting to default.');
+                return;
+            }
+
             max_attempts = parsed_settings.max_attempts;
             random_seed = parsed_settings.random_seed;
             force_field = parsed_settings.force_field;
