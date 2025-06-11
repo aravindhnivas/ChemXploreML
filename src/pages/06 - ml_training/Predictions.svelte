@@ -349,7 +349,7 @@
                     </span>
                 </div>
 
-                <PredictionTable {prediction_table_data} />
+                <PredictionTable bind:prediction_table_data />
             </div>
         </div>
     {/if}
