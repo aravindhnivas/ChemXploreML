@@ -10,7 +10,7 @@
     } from '$pages/03 - load_file/plot-analysis/stores';
     import { embedder_model_filepath } from '$pages/04 - embedd_molecule/stores';
     import { HelpCircle, RefreshCcw } from 'lucide-svelte/icons';
-    import { find } from 'lodash-es';
+    import { find, uniqBy } from 'lodash-es';
     import PredictionTable from './PredictionTable.svelte';
 
     const predict = async () => {
@@ -69,7 +69,7 @@
             predicted_value = 'Error';
         } else {
             predicted_value = dataFromPython.predicted_value;
-            prediction_table_data = [
+            const table_data = [
                 {
                     id: getID(),
                     smiles: dataFromPython.smiles,
@@ -80,6 +80,12 @@
                 },
                 ...prediction_table_data,
             ];
+
+            const uniq_table_data = uniqBy(
+                table_data,
+                item => `${item.smiles}-${item.model}-${item.embedder}-${item.pre_trained_model}`,
+            );
+            prediction_table_data = uniq_table_data;
         }
     };
 
