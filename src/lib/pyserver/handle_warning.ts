@@ -7,7 +7,7 @@ export default function handle_warning(pyfile: string, warnings: string[]) {
     if (!warnings || warnings.length === 0) return;
     if (!get(suppress_py_warnings)) {
         Alert.warn(warnings.join('\n'));
-        return;
+        // return;
     }
 
     suppressed_warnings.update(w => {
