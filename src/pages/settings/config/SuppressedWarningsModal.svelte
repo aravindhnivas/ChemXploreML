@@ -2,19 +2,6 @@
     import Modal from '$lib/components/modal/Modal.svelte';
     import { suppressed_warnings } from '$lib/pyserver/stores';
     import { Trash2, AlertTriangle } from 'lucide-svelte/icons';
-
-    onMount(() => {
-        if (!import.meta.env.DEV) return;
-        const test_size = 5;
-        for (let i = 0; i < test_size; i++) {
-            $suppressed_warnings[`test${i}`] = Array.from({ length: test_size }, () => ({
-                timestamp: new Date().toLocaleString(),
-                warnings: ['This is a warning message', 'This is another warning message'],
-                id: getID(5),
-            }));
-        }
-        $suppressed_warnings = $suppressed_warnings;
-    });
 </script>
 
 {#if $suppressed_warnings && Object.keys($suppressed_warnings).length > 0}

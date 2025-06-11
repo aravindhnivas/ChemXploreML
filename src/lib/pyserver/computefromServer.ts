@@ -1,5 +1,6 @@
 import { pyServerURL, get, server_timeout_in_minutes } from './stores';
-import axios, { Axios, type AxiosResponse, type CancelToken } from 'axios';
+import axios, { type AxiosResponse, type CancelToken } from 'axios';
+import handle_warning from './handle_warning';
 
 interface ComputeFromServerType {
     pyfile: string;
@@ -14,7 +15,9 @@ export default async function <T>({ pyfile, args, cancelToken, scheduler }: Comp
 
         const URL = get(pyServerURL) + (scheduler ? '/enqueue_job' : '/compute');
         const timeout = get(server_timeout_in_minutes) ? Number(get(server_timeout_in_minutes)) : 5;
-        const response = await axios.post<T>(
+        const response = await axios.post<
+            T & { done: boolean; error: boolean; computed_time: string; warnings: string[] }
+        >(
             URL,
             { pyfile, args: { ...args } },
             {
@@ -35,6 +38,11 @@ export default async function <T>({ pyfile, args, cancelToken, scheduler }: Comp
             return Promise.reject('could not get file from python. check the output json file');
         }
         console.warn(dataFromPython);
+
+        if (dataFromPython?.warnings) {
+            handle_warning(pyfile, dataFromPython.warnings);
+        }
+
         return Promise.resolve(dataFromPython);
     } catch (err) {
         if (axios.isAxiosError(err)) {

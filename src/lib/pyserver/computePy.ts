@@ -1,8 +1,7 @@
-import { suppress_py_warnings } from '$pages/settings/stores';
 import computefromServer from './computefromServer';
 import computefromSubprocess from './computefromSubprocess';
 import { fetchServerROOT, start_and_check_pypackage_with_toast } from '$lib/pyserver';
-import { pyServerReady, get, developerMode, pyProgram, suppressed_warnings } from './stores';
+import { pyServerReady, get, developerMode, pyProgram } from './stores';
 import { Alert } from '$utils/stores';
 
 interface ComputePyType<T extends object = Record<string, string>> {
@@ -53,29 +52,7 @@ export default async function <T extends Record<string, any>>({
         });
 
         if (!response) return Promise.reject('error occured in server');
-        dataFromPython = response;
-        if ((dataFromPython as any)?.warnings) {
-            if (get(suppress_py_warnings)) {
-                const warnings = (dataFromPython as any).warnings as string[];
-                suppressed_warnings.update(w => {
-                    const timestamp = new Date().toLocaleString();
-                    const currnet_warning = { timestamp, warnings, id: getID(5) };
-                    if (w[pyfile]) {
-                        w[pyfile] = [...w[pyfile], currnet_warning];
-                    } else {
-                        w[pyfile] = [currnet_warning];
-                    }
-                    if (w[pyfile].length > 5) {
-                        w[pyfile].shift();
-                    }
-                    return w;
-                });
-
-                console.warn(get(suppressed_warnings));
-            } else {
-                Alert.warn(dataFromPython.warnings);
-            }
-        }
+        dataFromPython = response as T & { done: boolean; error: boolean; computed_time: string; warnings: string[] };
         return Promise.resolve(dataFromPython);
     } catch (error) {
         Alert.error(error);

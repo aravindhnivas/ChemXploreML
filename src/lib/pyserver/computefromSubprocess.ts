@@ -1,8 +1,11 @@
-import { pyProgram, pythonscript, get, pyVersion, pyServerReady, developerMode } from './stores';
+import { pyProgram, pythonscript, get, pyVersion, developerMode } from './stores';
 import { running_processes } from '$settings/utils/stores';
 import { terminal_log } from '$settings/utils/stores';
 import { Alert } from '$utils/stores';
 import { tryF } from 'ts-try';
+import { suppressed_warnings } from './stores';
+import { suppress_py_warnings } from '$pages/settings/stores';
+import handle_warning from './handle_warning';
 
 export const dispatchEvent = (target: HTMLButtonElement, detail: Object, eventName: string) => {
     if (!target) return console.warn('No target to dispatch event');
@@ -90,7 +93,9 @@ export default async function <T>({ target, pyfile, args }: ComputeFromSubproces
                 done: boolean;
                 error: boolean;
                 computed_time: string;
+                warnings: string[];
             };
+
             if (dataFromPython instanceof Error) {
                 console.warn('Error parsing data from python', dataFromPython);
                 resolve(undefined);
@@ -102,6 +107,11 @@ export default async function <T>({ target, pyfile, args }: ComputeFromSubproces
             toast.success(`${pyfile} completed in ${dataFromPython.computed_time}`);
             dispatchEvent(target, { py, pyfile, dataFromPython }, 'pyEventSuccess');
             console.warn('Process completed and returning data');
+
+            if (dataFromPython?.warnings) {
+                handle_warning(pyfile, dataFromPython.warnings);
+            }
+
             return resolve(dataFromPython);
         });
 
