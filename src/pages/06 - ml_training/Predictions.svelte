@@ -9,9 +9,9 @@
         current_training_processed_data_directory,
     } from '$pages/03 - load_file/plot-analysis/stores';
     import { embedder_model_filepath } from '$pages/04 - embedd_molecule/stores';
-    import { ExternalLink, HelpCircle, RefreshCcw } from 'lucide-svelte/icons';
+    import { HelpCircle, RefreshCcw } from 'lucide-svelte/icons';
     import { find } from 'lodash-es';
-    import { training_file } from '$pages/03 - load_file/stores';
+    import PredictionTable from './PredictionTable.svelte';
 
     const predict = async () => {
         if (!(await fs.exists($pretrained_model_file))) {
@@ -45,6 +45,9 @@
             prediction_file: test_mode ? null : $prediction_file,
             embedder_name: embedder,
             embedder_loc,
+            choosen_model: $choosen_model,
+            choosen_embedder: $choosen_embedder,
+            choosen_pkl_key: $choosen_pkl_key,
         };
         const pyfile = 'ml_training.ml_prediction';
         return { pyfile, args };
@@ -66,6 +69,17 @@
             predicted_value = 'Error';
         } else {
             predicted_value = dataFromPython.predicted_value;
+            prediction_table_data = [
+                {
+                    id: getID(),
+                    smiles: dataFromPython.smiles,
+                    model: dataFromPython.choosen_model,
+                    embedder: dataFromPython.choosen_embedder,
+                    pre_trained_model: dataFromPython.choosen_pkl_key,
+                    prediction: dataFromPython.predicted_value,
+                },
+                ...prediction_table_data,
+            ];
         }
     };
 
@@ -219,8 +233,6 @@
             const pkl_files = await fetch_all_pkl_files(embeddings_dir);
             all_pkl_files[child.name.replace('_embeddings', '')] = pkl_files;
         }
-        // console.log({ model_dir, all_pkl_files });
-        // return result_names;
         fetched_pkl_files = structuredClone(all_pkl_files);
         return all_pkl_files;
     };
@@ -232,9 +244,9 @@
         return all_dirs;
     };
 
-    const choosen_model = localWritable('choosen_model', 'lgbm');
-    const choosen_embedder = localWritable('choosen_embedder', 'mol2vec');
-    const choosen_pkl_key = localWritable('choosen_pkl_key', '');
+    const choosen_model = writable('lgbm');
+    const choosen_embedder = writable('mol2vec');
+    const choosen_pkl_key = writable('default');
 
     $: if (!isEmpty(fetched_pkl_files) && $choosen_model && $choosen_embedder && $choosen_pkl_key) {
         $pretrained_model_file =
@@ -242,91 +254,103 @@
     }
 
     let refresh_state = false;
+    let prediction_table_data = [] as {
+        id: string;
+        smiles: string;
+        model: string;
+        embedder: string;
+        pre_trained_model: string;
+        prediction: string;
+    }[];
 </script>
 
-<div class="flex items-center gap-2 justify-between">
-    <div class="flex-gap">
-        {#await get_file_metadata($current_training_data_file) then value}
-            <pre class="text-sm p-1 rounded-lg bg-base-100">{value?.basename}</pre>
-            <span aria-label={value?.filename} data-cooltipz-dir="bottom" data-cooltipz-size="medium">
-                <HelpCircle size="20" />
-            </span>
-        {/await}
-    </div>
-    <Checkbox class="ml-auto" label="Test mode" bind:value={test_mode} />
-</div>
-<div class="divider"></div>
-
-<div class="flex-gap items-end">
-    <button class="btn btn-sm btn-outline" on:click={() => (refresh_state = !refresh_state)}>
-        <RefreshCcw size="20" />
-    </button>
-    {#key refresh_state}
-        {#await get_all_available_models($current_training_processed_data_directory) then items}
-            <CustomSelect bind:value={$choosen_model} {items} label="model" />
-        {/await}
-
-        {#await get_valid_dirs($current_training_processed_data_directory, $choosen_model) then all_pkl_files}
-            <CustomSelect bind:value={$choosen_embedder} items={Object.keys(all_pkl_files)} label="embedder" />
-            {#if $choosen_embedder}
-                <CustomSelect
-                    bind:value={$choosen_pkl_key}
-                    items={all_pkl_files[$choosen_embedder].map(f => f.name)}
-                    label="pre-trained model"
-                />
-            {/if}
-        {/await}
-    {/key}
-</div>
-
-<div class="divider"></div>
-
-<BrowseFile enable_lock lock bind:filename={$pretrained_model_file} label="pretrained_model_file" />
-
-{#if !test_mode}
-    <BrowseFile
-        bind:filename={$prediction_file}
-        label="upload file to predict"
-        filters={[{ name: 'SMILES files', extensions: ['smi', 'csv'] }]}
-    />
-{/if}
-
-<div class="grid grid-cols-5 items-end gap-2" transition:fade>
-    {#if test_mode}
-        <CustomInput class="col-span-3" bind:value={$smiles} label="Enter molecular SMILES" />
-    {/if}
-    <Loadingbtn
-        callback={predict}
-        on:result={onResult}
-        on:close={() => {
-            if (predicted_value === 'Computing...') {
-                predicted_value = '';
-            }
-        }}
-        subprocess={!test_mode}
-    />
-</div>
-
-{#if test_mode}
-    <div class="flex items-start gap-4">
-        <Molecule bind:smiles={$smiles} bind:width={$width} bind:height={$height} />
-        <CustomInput
-            bind:value={predicted_value_significance}
-            label="Significance"
-            type="number"
-            disabled={!isNumber(predicted_value)}
-            min="0"
-            max="10"
-        />
-        <div class="grid gap-2">
-            <div class="text-sm">Predicted value</div>
-            <div class="rounded-1 p-1" style="background-color: antiquewhite;">
-                <span class="select-text">
-                    {isNumber(predicted_value)
-                        ? predicted_value.toFixed(predicted_value_significance)
-                        : predicted_value}
+<div class="grid gap-2 mb-2">
+    <div class="flex items-center gap-2 justify-between">
+        <div class="flex-gap">
+            {#await get_file_metadata($current_training_data_file) then value}
+                <pre class="text-sm p-1 rounded-lg bg-base-100">{value?.basename}</pre>
+                <span aria-label={value?.filename} data-cooltipz-dir="bottom" data-cooltipz-size="medium">
+                    <HelpCircle size="20" />
                 </span>
+            {/await}
+        </div>
+        <Checkbox class="ml-auto" label="Test mode" bind:value={test_mode} />
+    </div>
+    <div class="divider"></div>
+
+    <div class="flex-gap items-end">
+        <button class="btn btn-sm btn-outline" on:click={() => (refresh_state = !refresh_state)}>
+            <RefreshCcw size="20" />
+        </button>
+        {#key refresh_state}
+            {#await get_all_available_models($current_training_processed_data_directory) then items}
+                <CustomSelect bind:value={$choosen_model} {items} label="model" />
+            {/await}
+
+            {#await get_valid_dirs($current_training_processed_data_directory, $choosen_model) then all_pkl_files}
+                <CustomSelect bind:value={$choosen_embedder} items={Object.keys(all_pkl_files)} label="embedder" />
+                {#if $choosen_embedder}
+                    <CustomSelect
+                        bind:value={$choosen_pkl_key}
+                        items={all_pkl_files[$choosen_embedder].map(f => f.name)}
+                        label="pre-trained model"
+                    />
+                {/if}
+            {/await}
+        {/key}
+    </div>
+
+    <div class="divider"></div>
+
+    <BrowseFile enable_lock lock bind:filename={$pretrained_model_file} label="pretrained_model_file" />
+
+    {#if !test_mode}
+        <BrowseFile
+            bind:filename={$prediction_file}
+            label="upload file to predict"
+            filters={[{ name: 'SMILES files', extensions: ['smi', 'csv'] }]}
+        />
+    {/if}
+
+    <div class="grid grid-cols-5 items-end gap-2">
+        {#if test_mode}
+            <CustomInput class="col-span-3" bind:value={$smiles} label="Enter molecular SMILES" />
+        {/if}
+        <Loadingbtn
+            callback={predict}
+            on:result={onResult}
+            on:close={() => {
+                if (predicted_value === 'Computing...') {
+                    predicted_value = '';
+                }
+            }}
+            subprocess={!test_mode}
+        />
+    </div>
+
+    {#if test_mode}
+        <div class="flex items-start gap-4">
+            <Molecule bind:smiles={$smiles} bind:width={$width} bind:height={$height} />
+            <CustomInput
+                bind:value={predicted_value_significance}
+                label="Significance"
+                type="number"
+                disabled={!isNumber(predicted_value)}
+                min="0"
+                max="10"
+            />
+            <div class="grid gap-2">
+                <div class="text-sm">Predicted value</div>
+                <div class="rounded-1 p-1" style="background-color: antiquewhite;">
+                    <span class="select-text">
+                        {isNumber(predicted_value)
+                            ? predicted_value.toFixed(predicted_value_significance)
+                            : predicted_value}
+                    </span>
+                </div>
+
+                <PredictionTable {prediction_table_data} />
             </div>
         </div>
-    </div>
-{/if}
+    {/if}
+</div>
