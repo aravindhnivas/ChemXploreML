@@ -5,10 +5,7 @@ import { getID } from '$lib/utils/initialise';
 
 export default function handle_warning(pyfile: string, warnings: string[]) {
     if (!warnings || warnings.length === 0) return;
-    if (!get(suppress_py_warnings)) {
-        Alert.warn(warnings.join('\n'));
-        // return;
-    }
+    if (!get(suppress_py_warnings)) Alert.warn(warnings.join('\n'));
 
     suppressed_warnings.update(w => {
         const timestamp = new Date().toLocaleString();
@@ -23,6 +20,4 @@ export default function handle_warning(pyfile: string, warnings: string[]) {
         }
         return w;
     });
-
-    console.warn(get(suppressed_warnings));
 }
