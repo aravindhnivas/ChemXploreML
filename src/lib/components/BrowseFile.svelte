@@ -56,7 +56,7 @@
     };
 </script>
 
-<div class="flex flex-col gap-1 w-full {className}" transition:fade>
+<div class="flex flex-col gap-1 w-full {className}">
     <div class="flex">
         {#if label}
             <span class="text-sm pl-1"

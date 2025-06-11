@@ -37,7 +37,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div on:click={toggle_select} transition:fade>
+<div on:click={toggle_select}>
     {#if enable_use_input && use_input}
         <CustomInput
             bind:value
