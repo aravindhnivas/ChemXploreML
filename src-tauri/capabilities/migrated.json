@@ -71,6 +71,12 @@
           "cmd": "kill",
           "name": "taskkill-macos",
           "sidecar": false
+        },
+        {
+          "cmd": "rq",
+          "name": "rq",
+          "args": true,
+          "sidecar": false
         }
       ]
     },
@@ -105,6 +111,12 @@
           "args": true,
           "cmd": "tar",
           "name": "tar",
+          "sidecar": false
+        },
+        {
+          "cmd": "rq",
+          "name": "rq",
+          "args": true,
           "sidecar": false
         }
       ]
