@@ -8,6 +8,7 @@
     import StartStopServerControl from '$lib/start_stop_server/StartStopServerControl.svelte';
     import TerminalBox from '$lib/components/TerminalBox.svelte';
     import { redis_worker_log } from '$lib/start_stop_server/index';
+    import { startRqWorker, stopRqWorker } from '$lib/pyserver/rq_worker';
 
     $: if ($socket_connection_status !== 'connected' && $pyServerReady && $redis_server_mode) {
         initializeSocket();
@@ -58,12 +59,17 @@
 {/if}
 
 {#if import.meta.env.DEV}
-    <StartStopServerControl
+    <!-- <StartStopServerControl
         id="start-stop-server-control-redis"
         pyfile="start_redis_worker"
         args={{ listen: ['default'] }}
         port={6379}
-    />
+    /> -->
+
+    <div class="flex-gap">
+        <button class="btn btn-sm btn-outline" on:click={startRqWorker}>Start RQ Worker</button>
+        <button class="btn btn-sm btn-error" on:click={stopRqWorker}>Stop RQ Worker</button>
+    </div>
 
     <TerminalBox bind:terminal={$redis_worker_log} />
 {/if}
