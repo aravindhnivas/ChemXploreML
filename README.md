@@ -8,10 +8,11 @@ ChemXploreML is a user-friendly desktop application specifically designed to bri
 
 The field of machine learning in chemistry has experienced explosive growth, particularly since 2015, with over half of all AI-related chemistry papers published in the four years leading up to 2020. ChemXploreML aims to facilitate this trend by providing an intuitive platform for exploring and predicting molecular properties.
 
-![ChemXploreML](images/icon.png){width=200px}
+<img src="images/icon.png" alt="ChemXploreML" width="200">
+
 _[Marimuthu, A. N. & McGuire, B. A. Machine Learning Pipeline for Molecular Property Prediction Using ChemXploreML. J. Chem. Inf. Model. 65, 5424-5437 (2025).](https://pubs.acs.org/doi/10.1021/acs.jcim.5c00516)_
 
-![Home page](images/cxml-home.png){width=600px}
+<img src="images/cxml-home.png" alt="Home page" width="600">
 
 **Key Use Cases and Capabilities**
 
