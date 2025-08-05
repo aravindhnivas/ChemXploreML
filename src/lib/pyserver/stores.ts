@@ -20,7 +20,7 @@ export const pyServerFailed = writable(false);
 
 export const pyVersion = writable('');
 export const pyPackageVersion = writable('');
-export const pyServerPORT = localWritable('pyServerPORT', 5051);
+export const pyServerPORT = localWritable('pyServerPORT', 18704);
 export const use_server = writable(false);
 export const cloudServerURL = localWritable('cloudServerURL', 'http://herzberg.mit.edu');
 export const cloudServerPORT = localWritable('cloudServerPORT', 18704);
