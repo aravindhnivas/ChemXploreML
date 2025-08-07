@@ -19,6 +19,32 @@
     let html: HTMLElement;
 
     onMount(async () => {
+        // Force light mode theme
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.classList.remove('dark');
+        document.documentElement.style.colorScheme = 'light';
+
+        // Prevent dark mode from being applied
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                    if (document.documentElement.getAttribute('data-theme') !== 'light') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+                }
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                    }
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme', 'class'],
+        });
+
         const [total_memory, cpu_count] = await invoke<[number, number]>('get_sysinfo');
         RAM_SIZE.set(total_memory / 1024 / 1024 / 1024);
         CPU_COUNT.set(cpu_count);
