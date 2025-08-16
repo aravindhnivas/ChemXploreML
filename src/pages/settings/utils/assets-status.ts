@@ -1,5 +1,6 @@
 import { python_asset_ready, outputbox, python_asset_ready_to_install, serverInfo } from './stores';
 import { asset_name_prefix, download_assets } from './download-assets';
+import { get_assets_zip_name } from './assets-zip-name';
 
 export const check_pypackage_assets_status = async ({ installation_request = false } = {}) => {
     try {
@@ -34,15 +35,8 @@ export const auto_download_and_install_assets = async ({
     download_request = false,
 } = {}) => {
     outputbox.warn('Starting auto download python assets');
-    const platformName = (await platform()) as 'windows' | 'macos' | 'linux';
-    const old_names = {
-        macos: 'darwin',
-        linux: 'linux',
-        windows: 'win32',
-    };
-    const currentplatform = old_names[platformName];
     if (
-        !(await fs.exists(`${asset_name_prefix}-${currentplatform}.zip`, {
+        !(await fs.exists(await get_assets_zip_name(), {
             baseDir: fs.BaseDirectory.AppLocalData,
         }))
     ) {

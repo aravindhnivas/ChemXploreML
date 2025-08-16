@@ -1,4 +1,4 @@
-import { pyVersion, pyServerReady, pyPackageVersion } from '$lib/pyserver/stores';
+import { pyVersion, pyServerReady, pyPackageVersion, pyPackageName, pyPackageArch } from '$lib/pyserver/stores';
 import computefromServer from '$lib/pyserver/computefromServer';
 import { asset_download_required } from './stores';
 
@@ -8,7 +8,12 @@ export async function getPyVersion(e?: MouseEvent) {
         return Promise.reject('start python server first!');
     }
 
-    const dataFromPython = await computefromServer<{ python: string; pyPackageVersion: string }>({
+    const dataFromPython = await computefromServer<{
+        python: string;
+        pyPackageVersion: string;
+        pyPackageName: string;
+        pyPackageArch: string;
+    }>({
         pyfile: 'getVersion',
         args: [''],
         scheduler: false,
@@ -21,6 +26,8 @@ export async function getPyVersion(e?: MouseEvent) {
     console.log(dataFromPython);
     pyVersion.set(dataFromPython.python);
     pyPackageVersion.set(dataFromPython.pyPackageVersion);
+    pyPackageName.set(dataFromPython.pyPackageName);
+    pyPackageArch.set(dataFromPython.pyPackageArch);
 
     if (get(pyPackageVersion) < import.meta.env.VITE_PY_MIN_VERSION) {
         asset_download_required.set(true);

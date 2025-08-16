@@ -18,6 +18,7 @@ import { sleep } from '$lib/utils/initialise';
 import { Alert } from '$utils/stores';
 import { git_url } from '$lib/utils';
 import { download_url } from '$lib/utils/download';
+import { get_assets_zip_name } from './assets-zip-name';
 
 let assets_downloading = false;
 let assets_installing = false;
@@ -45,14 +46,7 @@ export async function downloadZIP() {
             return;
         }
         if (assets_downloading) return outputbox.warn('already downloading assets...');
-        const platformName = (await platform()) as 'windows' | 'macos' | 'linux';
-        const old_names = {
-            macos: 'darwin',
-            linux: 'linux',
-            windows: 'win32',
-        };
-        const currentplatform = old_names[platformName];
-        const asset_name = `${asset_name_prefix}-${currentplatform}.zip`;
+        const asset_zip_name = await get_assets_zip_name();
         let browser_download_url = '';
 
         assets_downloading = true;
@@ -63,7 +57,7 @@ export async function downloadZIP() {
         }
 
         const { assets } = current_release_data;
-        const asset_ind = assets.findIndex(e => e.name === asset_name);
+        const asset_ind = assets.findIndex(e => e.name === asset_zip_name);
 
         if (asset_ind === -1) {
             outputbox.error('Could not find the assets in the release data');
@@ -100,15 +94,8 @@ export function unZIP(installation_request = true) {
 
     return new Promise(async (resolve, reject) => {
         const localdir = await path.appLocalDataDir();
-        const platformName = (await platform()) as 'windows' | 'macos' | 'linux';
-        const old_names = {
-            macos: 'darwin',
-            linux: 'linux',
-            windows: 'win32',
-        };
-        const currentplatform = old_names[platformName];
-        const asset_name = `${asset_name_prefix}-${currentplatform}.zip`;
-        const asset_zipfile = await path.join(localdir, asset_name);
+        const asset_zip_name = await get_assets_zip_name();
+        const asset_zipfile = await path.join(localdir, asset_zip_name);
 
         footerMsg.set({ msg: 'installing assets...', status: 'running' });
 
@@ -126,7 +113,7 @@ export function unZIP(installation_request = true) {
             await stopServer({ update_info: false });
         }
 
-        await remove_asset_folder('umdapy');
+        await remove_asset_folder('umdapy'); // old name
         await remove_asset_folder(asset_name_prefix);
 
         const cmd = shell.Command.create('tar', ['-xf', asset_zipfile, '-C', localdir]);
@@ -150,7 +137,7 @@ export function unZIP(installation_request = true) {
                 assets_installation_required.set(false);
                 resolve('UNZIP success');
                 await sleep(1000);
-                await fs.remove(asset_name, { baseDir: fs.BaseDirectory.AppLocalData });
+                await fs.remove(asset_zip_name, { baseDir: fs.BaseDirectory.AppLocalData });
             }
             installing_python_assets.set(false);
 
@@ -270,16 +257,10 @@ export const install_pypackage_from_zipfile = async () => {
         if (!result) return;
 
         serverInfo.warn(result);
-        const platformName = (await platform()) as 'windows' | 'macos' | 'linux';
-        const old_names = {
-            macos: 'darwin',
-            linux: 'linux',
-            windows: 'win32',
-        };
-        const currentplatform = old_names[platformName];
-        const asset_name = `${asset_name_prefix}-${currentplatform}.zip`;
+
+        const asset_zip_name = await get_assets_zip_name();
         const localdir = await path.appLocalDataDir();
-        const asset_zipfile = await path.join(localdir, asset_name);
+        const asset_zipfile = await path.join(localdir, asset_zip_name);
 
         await fs.copyFile(result, asset_zipfile);
         serverInfo.warn('file copied');

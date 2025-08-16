@@ -11,6 +11,8 @@
         redis_server_mode,
         server_timeout_in_minutes,
         pyPackage,
+        pyPackageName,
+        pyPackageArch,
     } from '$lib/pyserver/stores';
     import { fontSize, defaultFontSize } from '$lib/stores/system';
     import { Checkbox } from '$components/index';
@@ -67,7 +69,7 @@
     <div class="">
         {#if $pyServerReady && $pyVersion}
             <div class="badge badge-success">
-                Python: {$pyVersion} ({import.meta.env.VITE_pypackage}: {$pyPackageVersion})
+                {$pyPackageName}-{$pyPackageArch}_v{$pyPackageVersion} (python_v{$pyVersion} )
             </div>
         {:else}
             <div class="badge badge-error">Invalid python</div>
