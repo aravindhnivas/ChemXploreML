@@ -1,6 +1,5 @@
 {
-	"name": "chemxploreml",
-	"private": true,
+	"name": "docs",
 	"type": "module",
 	"scripts": {
 		"docs:dev": "vitepress dev",

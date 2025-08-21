@@ -1,6 +1,7 @@
 packages:
-  - .
+    - .
+    - 'docs'
 onlyBuiltDependencies:
-  - '@scarf/scarf'
-  - esbuild
-  - svelte-preprocess
+    - '@scarf/scarf'
+    - esbuild
+    - svelte-preprocess
