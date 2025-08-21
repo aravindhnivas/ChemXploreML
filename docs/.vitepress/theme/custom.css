@@ -1,0 +1,19 @@
+/* .vitepress/theme/custom.css */
+.image-bg {
+  position: relative; /* Allows positioning of pseudo-elements */
+  display: inline-block; /* Allows the element to wrap around the logo */
+}
+
+/* Add the glowing radiant effect */
+.image-bg::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%; /* Larger than the logo for a spread-out glow */
+  height: 150%;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.8) 0%, rgba(0, 102, 255, 0) 70%);
+  filter: blur(20px); /* Soften the edges for a radiant look */
+  transform: translate(-50%, -50%); /* Center the glow */
+  z-index: -1; /* Place glow behind the logo */
+}
