@@ -1,4 +1,4 @@
-You are an expert in developing desktop applications using Tauri with Svelte and TypeScript for the frontend.
+You are an expert in developing desktop applications using Tauri with Svelte and TypeScript for the frontend, specifically for the ChemXploreML project.
 
 Key Principles:
 
@@ -6,24 +6,46 @@ Key Principles:
 - Prioritize type safety and utilize TypeScript features effectively.
 - Follow best practices for Tauri application development, including security considerations.
 - Implement responsive and efficient UIs using Svelte's reactive paradigm.
-- Ensure smooth communication between the Tauri frontend and external backend services.
+- Ensure smooth communication between the Tauri frontend and external Python backend services.
+
+Project Overview:
+ChemXploreML is a desktop application for chemistry research and machine learning, featuring:
+
+- Molecular property prediction using ML algorithms
+- Chemical space exploration and visualization
+- Molecular representation (Mol2Vec, VICGAE embeddings)
+- Data preprocessing and analysis tools
+- Model training with hyperparameter optimization
 
 Frontend (Tauri + Svelte + TypeScript):
 
 - Use Svelte's component-based architecture for modular and reusable UI elements.
 - Leverage TypeScript for strong typing and improved code quality.
 - Utilize Tauri's APIs for native desktop integration (file system access, system tray, etc.).
-- Implement proper state management using Svelte stores or other state management solutions if needed.
+- Implement proper state management using Svelte stores (svelte-persisted-store for persistence).
 - Use Svelte's built-in reactivity for efficient UI updates.
 - Follow Svelte's naming conventions (PascalCase for components, camelCase for variables and functions).
+- Use Tailwind CSS with DaisyUI for styling and responsive design.
+- Implement Material Design components using Svelte Material UI (SMUI).
 
-Communication with Backend:
+Communication with Python Backend:
 
-- Use Axios for HTTP requests from the Tauri frontend to the external backend.
+- Use Axios for HTTP requests from the Tauri frontend to the Flask backend.
+- Implement WebSocket communication using Socket.IO for real-time updates.
+- Use Redis-based task queue (RQ) for long-running computations.
 - Implement proper error handling for network requests and responses.
 - Use TypeScript interfaces to define the structure of data sent and received.
-- Consider implementing a simple API versioning strategy for future-proofing.
 - Handle potential CORS issues when communicating with the backend.
+- Support both direct subprocess execution and server-based communication modes.
+
+Backend Integration Patterns:
+
+- Flask server with Flask-SocketIO for real-time communication
+- Redis for task queuing and job management
+- RQ (Redis Queue) for asynchronous job processing
+- Support for both development mode (direct Python execution) and production mode (packaged executable)
+- Job status tracking and cancellation capabilities
+- Real-time progress updates via WebSocket
 
 Security:
 
@@ -32,6 +54,7 @@ Security:
 - Use HTTPS for all communications with external services.
 - Implement proper authentication and authorization mechanisms if required.
 - Be cautious when using Tauri's allowlist feature, only exposing necessary APIs.
+- Validate all data received from the Python backend before processing.
 
 Performance Optimization:
 
@@ -39,6 +62,8 @@ Performance Optimization:
 - Use lazy loading for components and routes where appropriate.
 - Implement proper caching strategies for frequently accessed data.
 - Utilize Tauri's performance features, such as resource optimization and app size reduction.
+- Use virtual scrolling for large datasets (svelte-virtual-list).
+- Implement efficient state management to minimize unnecessary re-renders.
 
 Testing:
 
@@ -46,34 +71,57 @@ Testing:
 - Implement end-to-end tests for critical user flows using tools like Playwright or Cypress.
 - Test Tauri-specific features and APIs thoroughly.
 - Implement proper mocking for API calls and external dependencies in tests.
+- Test both frontend and backend integration points.
 
 Build and Deployment:
 
 - Use Vite for fast development and optimized production builds of the Svelte app.
 - Leverage Tauri's built-in updater for seamless application updates.
+- Use PyInstaller for packaging the Python backend as executable.
 - Implement proper environment configuration for development, staging, and production.
 - Use Tauri's CLI tools for building and packaging the application for different platforms.
+- Support both development mode (source code) and production mode (packaged assets).
 
 Key Conventions:
 
-1. Follow a consistent code style across the project (e.g., use Prettier).
+1. Follow a consistent code style across the project (use Prettier with prettier-plugin-svelte).
 2. Use meaningful and descriptive names for variables, functions, and components.
 3. Write clear and concise comments, focusing on why rather than what.
 4. Maintain a clear project structure separating UI components, state management, and API communication.
+5. Use Svelte stores for global state management and persistence.
+6. Implement proper error boundaries and user feedback mechanisms.
 
 Dependencies:
 
-- Tauri
-- Svelte
-- TypeScript
-- Vite
-- Axios
+Frontend:
 
-Refer to official documentation for Tauri, Svelte, and TypeScript for best practices and up-to-date APIs.
+- Tauri v2 with plugins (dialog, fs, log, os, process, shell, updater, websocket)
+- Svelte 4 with SMUI components
+- TypeScript 5.8+
+- Vite for build tooling
+- Axios for HTTP requests
+- Socket.IO client for WebSocket communication
+- Tailwind CSS with DaisyUI for styling
+- Plotly.js for scientific visualizations
+- RDKit for molecular structure handling
+
+Backend:
+
+- Python 3.12+ with scientific computing stack (NumPy, SciPy, Pandas)
+- Machine learning libraries (scikit-learn, XGBoost, LightGBM, CatBoost)
+- Chemical informatics (RDKit, SELFIES, mol2vec)
+- Web framework (Flask with Flask-SocketIO)
+- Task queue (Redis + RQ)
+- Visualization (Matplotlib, Seaborn, UMAP, PHATE)
+
+Refer to official documentation for Tauri, Svelte, TypeScript, and the specific Python libraries for best practices and up-to-date APIs.
 
 Note on Backend Communication:
-When working with the external Python backend:
+When working with the Python backend:
 
 - Ensure proper error handling for potential backend failures or slow responses.
 - Consider implementing retry mechanisms for failed requests.
 - Use appropriate data serialization methods when sending/receiving complex data structures.
+- Handle both synchronous (direct compute) and asynchronous (job queue) execution modes.
+- Implement proper job status tracking and user feedback for long-running operations.
+- Support both development (source code) and production (packaged executable) backend modes.
