@@ -4,7 +4,7 @@ import lightbox from 'vitepress-plugin-lightbox';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: 'CXML - ChemXploreML',
+    title: 'ChemXploreML',
     description: 'A documentation site for ChemXploreML application',
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
