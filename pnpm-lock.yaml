@@ -11,9 +11,6 @@ importers:
       '@tauri-apps/api':
         specifier: ^2.5.0
         version: 2.5.0
-      '@tauri-apps/cli':
-        specifier: ^2.5.0
-        version: 2.5.0
       '@tauri-apps/plugin-dialog':
         specifier: ~2.2.2
         version: 2.2.2
@@ -38,6 +35,9 @@ importers:
       '@tauri-apps/plugin-websocket':
         specifier: 2.3.0
         version: 2.3.0
+      axios:
+        specifier: ^1.9.0
+        version: 1.9.0
       lucide-svelte:
         specifier: 0.485.0
         version: 0.485.0(svelte@4.2.20)
@@ -45,7 +45,7 @@ importers:
         specifier: 3.0.1
         version: 3.0.1
       smiles-drawer:
-        specifier: ^2.1.7
+        specifier: 2.1.7
         version: 2.1.7
     devDependencies:
       '@loadingio/loading.css':
@@ -81,6 +81,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
+      '@tauri-apps/cli':
+        specifier: ^2.5.0
+        version: 2.5.0
       '@tsconfig/svelte':
         specifier: ^5.0.4
         version: 5.0.4
@@ -99,9 +102,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.4)
-      axios:
-        specifier: ^1.9.0
-        version: 1.9.0
       cooltipz-css:
         specifier: ^2.3.1
         version: 2.3.1(sass@1.89.1)
