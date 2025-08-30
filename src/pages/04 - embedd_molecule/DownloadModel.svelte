@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Download } from 'lucide-svelte/icons';
+    import { shell } from '$lib/utils';
     import {
         embedding,
         embedding_file_download_url,
