@@ -15,29 +15,14 @@
         "skipLibCheck": true, // Skip type checking of declaration files
         "resolveJsonModule": true, // Allows importing JSON files as modules
         "paths": {
-            "$lib/*": [
-                "./src/lib/*"
-            ],
-            "$pages/*": [
-                "./src/pages/*"
-            ],
-            "$components/*": [
-                "./src/lib/components/*"
-            ],
-            "$utils/*": [
-                "./src/utils/*"
-            ],
-            "$settings/*": [
-                "./src/pages/settings/*"
-            ]
+            "$lib/*": ["./src/lib/*"],
+            "$pages/*": ["./src/pages/*"],
+            "$components/*": ["./src/lib/components/*"],
+            "$utils/*": ["./src/utils/*"],
+            "$settings/*": ["./src/pages/settings/*"]
         }
     },
-    "include": [
-        "src/**/*.d.ts",
-        "src/**/*.ts",
-        "src/**/*.js",
-        "src/**/*.svelte",
-    ],
+    "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
     "references": [
         {
             "path": "./tsconfig.node.json"

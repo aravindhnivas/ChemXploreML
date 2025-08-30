@@ -9,21 +9,11 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "esModuleInterop": true,
-        "lib": [
-            "ES2020",
-            "DOM"
-        ],
+        "lib": ["ES2020", "DOM"],
         "skipLibCheck": true
     },
-    "include": [
-        ".vitepress/**/*.mts",
-        ".vitepress/**/*.ts",
-        ".vitepress/**/*.vue",
-        ".vitepress/**/*.md"
-    ],
+    "include": [".vitepress/**/*.mts", ".vitepress/**/*.ts", ".vitepress/**/*.vue", ".vitepress/**/*.md"],
     "vueCompilerOptions": {
-        "vitePressExtensions": [
-            ".md"
-        ]
+        "vitePressExtensions": [".md"]
     }
 }

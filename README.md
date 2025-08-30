@@ -20,10 +20,9 @@ ChemXploreML is a versatile tool that supports various stages of a machine learn
 
 **Molecular Property Prediction:** The application is built to predict fundamental molecular properties of organic compounds, such as melting point (MP), boiling point (BP), vapor pressure (VP), critical temperature (CT), and critical pressure (CP).
 
-**Molecular Representation (Embedding):** A core challenge in applying machine learning to chemistry is converting molecular structures into numerical representations that algorithms can understand.  ChemXploreML supports state-of-the-art molecular embedding techniques, including:
+**Molecular Representation (Embedding):** A core challenge in applying machine learning to chemistry is converting molecular structures into numerical representations that algorithms can understand. ChemXploreML supports state-of-the-art molecular embedding techniques, including:
 
 - Mol2Vec: An unsupervised method inspired by natural language processing that translates molecular fragments into fixed-length vectors (typically 300 dimensions).
-  
 - VICGAE (Variance-Invariance-Covariance regularized GRU Auto-Encoder): A sophisticated deep generative model that produces compact (32-dimensional) molecular embeddings, capable of capturing both global structural features and subtle chemical variations.
 
 The modular design allows for the seamless integration of new embedding methods like ChemBERTa and MoLFormer for future benchmarking.

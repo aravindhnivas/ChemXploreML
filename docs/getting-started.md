@@ -16,9 +16,9 @@ For other versions, please visit the [**GitHub releases page**](https://github.c
 
 1. Download the appropriate installer for your system.
 2. Run the installer:
-   - On **macOS**, open the `.dmg` file and drag the ChemXploreML app into your `Applications` folder.
-   - On **Windows**, run the `.exe` installer and follow the on-screen instructions.
-   - On **Linux**, you can download the `.AppImage`, `.deb`, or `.rpm` file from the releases page.
+    - On **macOS**, open the `.dmg` file and drag the ChemXploreML app into your `Applications` folder.
+    - On **Windows**, run the `.exe` installer and follow the on-screen instructions.
+    - On **Linux**, you can download the `.AppImage`, `.deb`, or `.rpm` file from the releases page.
 
 ### macOS Installation
 

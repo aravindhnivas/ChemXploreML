@@ -35,11 +35,11 @@ Here, you configure the fundamental aspects of the training and validation proce
 - **Train/Test Split**: Set the percentage of data to be used for the test set.
 - **Cross-Validation**: Enable k-fold cross-validation and specify the number of folds. This is highly recommended for robust model evaluation.
 - **Hyperparameter Tuning**: Choose a strategy for optimizing your model's hyperparameters:
-  - **None**: Train the model with the manually specified parameters.
-  - **Grid Search**: Exhaustively search over a specified subset of the hyperparameter space.
-  - **Randomized Grid Search**: Samples a fixed number of parameter settings from the specified distributions.
-  - **Halving Grid Search**: An efficient method that successively prunes underperforming parameter combinations.
-  - **Optuna**: A powerful Bayesian optimization framework that intelligently searches for the best hyperparameters. You can monitor Optuna's progress using the built-in dashboard.
+    - **None**: Train the model with the manually specified parameters.
+    - **Grid Search**: Exhaustively search over a specified subset of the hyperparameter space.
+    - **Randomized Grid Search**: Samples a fixed number of parameter settings from the specified distributions.
+    - **Halving Grid Search**: An efficient method that successively prunes underperforming parameter combinations.
+    - **Optuna**: A powerful Bayesian optimization framework that intelligently searches for the best hyperparameters. You can monitor Optuna's progress using the built-in dashboard.
 
 ---
 
@@ -48,12 +48,12 @@ Here, you configure the fundamental aspects of the training and validation proce
 Select the machine learning algorithm and configure its parameters.
 
 - **Model**: Choose from a wide range of models, including:
-  - **Linear Models**: Linear Regression, Ridge, Lasso, ElasticNet
-  - **Support Vector Machines**: SVR
-  - **Neighbors**: KNN
-  - **Gaussian Process**: GPR
-  - **Ensemble Methods**: Random Forest (RFR), Gradient Boosting (GBR)
-  - **Advanced Gradient Boosting**: XGBoost, LightGBM, CatBoost
+    - **Linear Models**: Linear Regression, Ridge, Lasso, ElasticNet
+    - **Support Vector Machines**: SVR
+    - **Neighbors**: KNN
+    - **Gaussian Process**: GPR
+    - **Ensemble Methods**: Random Forest (RFR), Gradient Boosting (GBR)
+    - **Advanced Gradient Boosting**: XGBoost, LightGBM, CatBoost
 - **Parameters**: For each model, you can manually set its parameters or define a search space for hyperparameter tuning.
 
 ---
@@ -64,8 +64,8 @@ This panel contains advanced features for improving your model and gaining deepe
 
 - **Y-Transformation and Scaling**: Apply transformations (e.g., log, Box-Cox, Yeo-Johnson) and scaling (e.g., StandardScaler, MinMaxScaler) to the target variable. This can be very effective for models that assume a normal distribution of the target.
 - **Data Augmentation**:
-  - **Bootstrap**: Create a larger training set by resampling the existing data with replacement.
-  - **Noise Injection**: Add random noise to the target variable in the bootstrapped samples to improve model robustness.
+    - **Bootstrap**: Create a larger training set by resampling the existing data with replacement.
+    - **Noise Injection**: Add random noise to the target variable in the bootstrapped samples to improve model robustness.
 - **Cleanlab**: Use the Cleanlab algorithm to automatically detect and remove mislabeled data points from your dataset before training.
 - **Learning Curve**: Generate a learning curve plot to diagnose whether your model is suffering from high bias or high variance.
 - **SHAP Analysis**: Compute SHAP (SHapley Additive exPlanations) values to understand the importance of each feature in the model's predictions.
